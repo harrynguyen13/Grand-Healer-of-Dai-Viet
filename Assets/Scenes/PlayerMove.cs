@@ -5,7 +5,7 @@ public class PlayerMove : BaseMove
 {
     [Header("Run")]
     [SerializeField] private float walkSpeed = 2f;
-    [SerializeField] private float runSpeed = 5f;
+    [SerializeField] private float runSpeed = 4f;
 
     private bool isRunning;
 
