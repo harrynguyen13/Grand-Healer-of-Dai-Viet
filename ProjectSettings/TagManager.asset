@@ -39,23 +39,29 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: water
-    uniqueID: 2792948063
-    locked: 0
   - name: ground
     uniqueID: 2616590637
     locked: 0
-  - name: Default
-    uniqueID: 0
+  - name: object
+    uniqueID: 2405275541
     locked: 0
   - name: player
     uniqueID: 4219003645
+    locked: 0
+  - name: water
+    uniqueID: 2792948063
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
   - name: walkbehind
     uniqueID: 1893013161
     locked: 0
   - name: deco
     uniqueID: 1862335725
+    locked: 0
+  - name: front
+    uniqueID: 1179826417
     locked: 0
   m_RenderingLayers:
   - Default
