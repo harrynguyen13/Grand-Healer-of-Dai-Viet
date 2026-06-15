@@ -45,6 +45,9 @@ TagManager:
   - name: object
     uniqueID: 2405275541
     locked: 0
+  - name: plant
+    uniqueID: 1896084153
+    locked: 0
   - name: player
     uniqueID: 4219003645
     locked: 0
@@ -55,10 +58,13 @@ TagManager:
     uniqueID: 0
     locked: 0
   - name: walkbehind
-    uniqueID: 1893013161
+    uniqueID: 3340888293
     locked: 0
   - name: deco
-    uniqueID: 1862335725
+    uniqueID: 2882028583
+    locked: 0
+  - name: tree
+    uniqueID: 3414707761
     locked: 0
   - name: front
     uniqueID: 1179826417

@@ -7,17 +7,27 @@ public class DoorToScene : MonoBehaviour
     [Header("Scene Settings")]
     [SerializeField] private string sceneToLoad = "ClinicInterior";
 
+    [Header("Spawn Settings")]
+    [SerializeField] private string targetSpawnPointName = "Spawn_From_Outside";
+
     [Header("Player Settings")]
     [SerializeField] private string playerTag = "Player";
 
     private bool playerInside = false;
+    private bool isLoading = false;
 
     private void Update()
     {
         if (!playerInside) return;
+        if (isLoading) return;
 
         if (Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
         {
+            isLoading = true;
+
+            SceneTransitionData.isChangingScene = true;
+            SceneTransitionData.targetSpawnPointName = targetSpawnPointName;
+
             SceneManager.LoadScene(sceneToLoad);
         }
     }

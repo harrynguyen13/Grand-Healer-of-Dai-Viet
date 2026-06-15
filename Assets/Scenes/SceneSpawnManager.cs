@@ -2,15 +2,39 @@ using UnityEngine;
 
 public class SceneSpawnManager : MonoBehaviour
 {
-    [SerializeField] private Transform defaultSpawnPoint;
-
     private void Start()
     {
-        if (PlayerSceneKeeper.Instance == null) return;
-
-        if (defaultSpawnPoint != null)
+        if (!SceneTransitionData.isChangingScene)
         {
-            PlayerSceneKeeper.Instance.transform.position = defaultSpawnPoint.position;
+            Debug.Log("Không phải chuyển scene, không spawn lại Player");
+            return;
         }
+
+        if (PlayerSceneKeeper.Instance == null)
+        {
+            Debug.LogWarning("Không tìm thấy PlayerSceneKeeper");
+            return;
+        }
+
+        if (string.IsNullOrEmpty(SceneTransitionData.targetSpawnPointName))
+        {
+            Debug.LogWarning("Chưa có tên spawn point");
+            return;
+        }
+
+        GameObject spawnPoint = GameObject.Find(SceneTransitionData.targetSpawnPointName);
+
+        if (spawnPoint == null)
+        {
+            Debug.LogWarning("Không tìm thấy spawn point: " + SceneTransitionData.targetSpawnPointName);
+            return;
+        }
+
+        PlayerSceneKeeper.Instance.transform.position = spawnPoint.transform.position;
+
+        SceneTransitionData.isChangingScene = false;
+        SceneTransitionData.targetSpawnPointName = "";
+
+        Debug.Log("Đã đưa Player tới spawn point");
     }
 }

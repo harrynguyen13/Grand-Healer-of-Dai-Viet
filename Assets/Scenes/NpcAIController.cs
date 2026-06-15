@@ -22,7 +22,7 @@ public class NpcAIController : BaseMove
     {
         if (isBusy)
         {
-            moveInput = Vector2.zero;
+            StopMoving();
             UpdateAnimation();
             return;
         }
@@ -43,6 +43,7 @@ public class NpcAIController : BaseMove
         if (animator == null) return;
 
         bool isMoving = moveInput.sqrMagnitude > 0.01f;
+
         animator.SetBool("isMoving", isMoving);
 
         if (isMoving)
@@ -59,7 +60,7 @@ public class NpcAIController : BaseMove
     {
         if (Random.value < idleChance)
         {
-            moveInput = Vector2.zero;
+            StopMoving();
             return;
         }
 
@@ -95,7 +96,7 @@ public class NpcAIController : BaseMove
             }
         }
 
-        currentVelocity = Vector2.zero;
+        StopMoving();
         moveInput = GetRandomDirection();
         timer = directionChangeTime;
     }
@@ -104,7 +105,7 @@ public class NpcAIController : BaseMove
     {
         if (isBusy) return;
 
-        currentVelocity = Vector2.zero;
+        StopMoving();
         moveInput = GetRandomDirection();
         timer = directionChangeTime;
     }
@@ -114,11 +115,8 @@ public class NpcAIController : BaseMove
         isBusy = true;
         otherNpc.isBusy = true;
 
-        currentVelocity = Vector2.zero;
-        otherNpc.currentVelocity = Vector2.zero;
-
-        moveInput = Vector2.zero;
-        otherNpc.moveInput = Vector2.zero;
+        StopMoving();
+        otherNpc.StopMoving();
 
         FaceTarget(otherNpc.transform.position);
         otherNpc.FaceTarget(transform.position);
@@ -143,8 +141,23 @@ public class NpcAIController : BaseMove
         if (dir.sqrMagnitude > 0.01f)
         {
             lastFacingDirection = dir;
-            animator.SetFloat("x", dir.x);
-            animator.SetFloat("y", dir.y);
+
+            if (animator != null)
+            {
+                animator.SetFloat("x", dir.x);
+                animator.SetFloat("y", dir.y);
+            }
+        }
+    }
+
+    private void StopMoving()
+    {
+        moveInput = Vector2.zero;
+
+        if (rb2d != null)
+        {
+            rb2d.linearVelocity = Vector2.zero;
+            rb2d.angularVelocity = 0f;
         }
     }
 }

@@ -5,44 +5,46 @@ public class BaseMove : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] protected float moveSpeed = 2f;
-    [SerializeField] protected float acceleration = 35f;
 
-    protected Rigidbody2D rb;
+    protected Rigidbody2D rb2d;
     protected Animator animator;
 
     protected Vector2 moveInput;
-    protected Vector2 currentVelocity;
+    protected Vector2 lastDirection = Vector2.down;
 
     protected virtual void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
-        rb.gravityScale = 0f;
-        rb.freezeRotation = true;
-        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-        rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+        if (rb2d != null)
+        {
+            rb2d.gravityScale = 0f;
+            rb2d.freezeRotation = true;
+            rb2d.linearVelocity = Vector2.zero;
+            rb2d.angularVelocity = 0f;
+
+            rb2d.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+
+            // Để None trước để test hết giật.
+            rb2d.interpolation = RigidbodyInterpolation2D.None;
+        }
     }
 
     protected virtual void FixedUpdate()
     {
-        if (rb == null) return;
+        if (rb2d == null) return;
 
-        Vector2 targetVelocity = moveInput.normalized * moveSpeed;
-
-        float currentAcc = moveInput == Vector2.zero
-            ? acceleration * 2f
-            : acceleration;
-
-        currentVelocity = Vector2.Lerp(
-            currentVelocity,
-            targetVelocity,
-            Time.fixedDeltaTime * currentAcc
-        );
-
-        Vector2 nextPosition = rb.position + currentVelocity * Time.fixedDeltaTime;
-
-        rb.MovePosition(nextPosition);
+        if (moveInput.sqrMagnitude > 0.01f)
+        {
+            Vector2 direction = moveInput.normalized;
+            rb2d.linearVelocity = direction * moveSpeed;
+        }
+        else
+        {
+            moveInput = Vector2.zero;
+            rb2d.linearVelocity = Vector2.zero;
+        }
     }
 
     protected virtual void UpdateAnimation()
@@ -56,11 +58,29 @@ public class BaseMove : MonoBehaviour
         if (isMoving)
         {
             Vector2 dir = moveInput.normalized;
+            lastDirection = dir;
 
             animator.SetFloat("x", dir.x);
             animator.SetFloat("y", dir.y);
         }
+        else
+        {
+            animator.SetFloat("x", lastDirection.x);
+            animator.SetFloat("y", lastDirection.y);
+        }
 
         animator.SetFloat("speed", isMoving ? moveSpeed : 0f);
+    
+    
+    }
+    
+
+    protected virtual void OnDisable()
+    {
+        if (rb2d != null)
+        {
+            rb2d.linearVelocity = Vector2.zero;
+            rb2d.angularVelocity = 0f;
+        }
     }
 }
