@@ -11,5 +11,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ClinicInterior.unity
     guid: 381b3736508c4b74780c28fb0bf72a18
+  - enabled: 1
+    path: Assets/Scenes/Government.unity
+    guid: 9518dc8e1e021104bb2e57960faff310
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

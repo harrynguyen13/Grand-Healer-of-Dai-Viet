@@ -4,8 +4,8 @@ using UnityEngine.InputSystem;
 public class PlayerMove : BaseMove
 {
     [Header("Run")]
-    [SerializeField] private float walkSpeed = 2f;
-    [SerializeField] private float runSpeed = 4f;
+    [SerializeField] private float walkSpeed = 4f;
+    [SerializeField] private float runSpeed = 8f;
 
     private bool isRunning;
 
