@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -26,8 +27,17 @@ public class LoginUIController : MonoBehaviour
     [SerializeField] private TMP_Text registerPasswordErrorText;
     [SerializeField] private TMP_Text registerConfirmPasswordErrorText;
 
+    [Header("Loading UI")]
+    [SerializeField] private GameObject loadingPanel;
+    [SerializeField] private TMP_Text loadingText;
+    [SerializeField] private RectTransform loadingSpinner;
+    [SerializeField] private float spinnerRotateSpeed = 400f;
+
     [Header("Scene")]
     [SerializeField] private string gameSceneName = "SampleScene";
+    [SerializeField] private string introSceneName = "IntroScene";
+
+    private bool isLoading = false;
 
     private void Awake()
     {
@@ -37,7 +47,20 @@ public class LoginUIController : MonoBehaviour
         ClearRegisterInputs();
         ClearAllErrors();
 
+        if (loadingPanel != null)
+            loadingPanel.SetActive(false);
+
         ShowLoginPanel();
+    }
+
+    private void Update()
+    {
+        if (!isLoading) return;
+
+        if (loadingSpinner != null)
+        {
+            loadingSpinner.Rotate(0f, 0f, -spinnerRotateSpeed * Time.deltaTime);
+        }
     }
 
     private void OnEnable()
@@ -112,6 +135,8 @@ public class LoginUIController : MonoBehaviour
 
     public void OnLoginClicked()
     {
+        if (isLoading) return;
+
         ClearLoginErrors();
 
         if (AuthManager.Instance == null)
@@ -147,16 +172,21 @@ public class LoginUIController : MonoBehaviour
             return;
         }
 
-        SceneManager.LoadScene(gameSceneName);
+        // Đăng nhập tài khoản cũ thì vào game luôn
+        StartCoroutine(LoadSceneWithLoading(gameSceneName, "Đang vào game..."));
     }
 
     public void OnRegisterClicked()
     {
+        if (isLoading) return;
+
         ShowRegisterPanel();
     }
 
     public void OnRegisterSubmitClicked()
     {
+        if (isLoading) return;
+
         ClearRegisterErrors();
 
         if (AuthManager.Instance == null)
@@ -210,14 +240,62 @@ public class LoginUIController : MonoBehaviour
         }
 
         PlayerPrefs.SetString("PlayerName", username);
+        PlayerPrefs.SetInt("HasSeenIntro", 0);
         PlayerPrefs.Save();
 
-        SceneManager.LoadScene(gameSceneName);
+        // Đăng ký lần đầu thì vào IntroScene để chạy cốt truyện
+        StartCoroutine(LoadSceneWithLoading(introSceneName, "Đang mở cốt truyện..."));
     }
 
     public void OnBackToLoginClicked()
     {
+        if (isLoading) return;
+
         ShowLoginPanel();
+    }
+
+    private IEnumerator LoadSceneWithLoading(string sceneName, string loadingMessage)
+    {
+        if (isLoading) yield break;
+
+        isLoading = true;
+
+        SetInputsInteractable(false);
+        ClearAllErrors();
+
+        ShowLoading(loadingMessage);
+
+        yield return null;
+
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+        asyncLoad.allowSceneActivation = true;
+    }
+
+    private void ShowLoading(string message)
+    {
+        if (loadingPanel != null)
+            loadingPanel.SetActive(true);
+
+        if (loadingText != null)
+            loadingText.text = message;
+    }
+
+    private void SetInputsInteractable(bool value)
+    {
+        if (usernameInput != null)
+            usernameInput.interactable = value;
+
+        if (passwordInput != null)
+            passwordInput.interactable = value;
+
+        if (registerUsernameInput != null)
+            registerUsernameInput.interactable = value;
+
+        if (registerPasswordInput != null)
+            registerPasswordInput.interactable = value;
+
+        if (registerConfirmPasswordInput != null)
+            registerConfirmPasswordInput.interactable = value;
     }
 
     private void ShowLoginPanel()
@@ -272,8 +350,6 @@ public class LoginUIController : MonoBehaviour
     private void OnLoginUsernameChanged(string value)
     {
         ClearUsernameError();
-
-        // Nếu đang báo "sai tài khoản/mật khẩu", sửa username thì xóa luôn lỗi password.
         ClearPasswordError();
     }
 
@@ -293,9 +369,6 @@ public class LoginUIController : MonoBehaviour
     private void OnRegisterPasswordChanged(string value)
     {
         ClearRegisterPasswordError();
-
-        // Nếu trước đó lỗi "mật khẩu nhập lại không khớp",
-        // sửa mật khẩu chính thì lỗi nhập lại cũng nên biến mất.
         ClearRegisterConfirmPasswordError();
 
         if (registerPasswordInput != null)
