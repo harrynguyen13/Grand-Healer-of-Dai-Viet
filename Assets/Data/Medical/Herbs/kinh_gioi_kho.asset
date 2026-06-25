@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
+  m_Name: kinh_gioi_kho
+  m_EditorClassIdentifier: Assembly-CSharp::HerbData
+  herbName: Kinh Gioi Kho
+  description: 
+  category: 0
+  rarity: 0
+  unlockClinicLevel: 1
+  price: 5
+  icon: {fileID: -9062579630759644846, guid: c8b4771455dab5244a5a5c421cc67c48, type: 3}

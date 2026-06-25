@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
+  m_Name: xuyen_khung
+  m_EditorClassIdentifier: Assembly-CSharp::HerbData
+  herbName: "Xuy\xEAn khung"
+  description: 
+  category: 5
+  rarity: 1
+  unlockClinicLevel: 2
+  price: 30
+  icon: {fileID: -7125837359044574411, guid: 822e51d5da730a5449183bcfa4d7c2fc, type: 3}

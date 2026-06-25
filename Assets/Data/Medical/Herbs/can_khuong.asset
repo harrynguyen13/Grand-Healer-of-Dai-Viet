@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
+  m_Name: can_khuong
+  m_EditorClassIdentifier: Assembly-CSharp::HerbData
+  herbName: "Can kh\u01B0\u01A1ng"
+  description: 
+  category: 11
+  rarity: 0
+  unlockClinicLevel: 1
+  price: 5
+  icon: {fileID: 8786896270756904374, guid: 21cbc7891f9bda042ac97f5d0318a09c, type: 3}
