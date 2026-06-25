@@ -4981,6 +4981,7 @@ MonoBehaviour:
   loadingSpinner: {fileID: 2070383819}
   spinnerRotateSpeed: 400
   gameSceneName: SampleScene
+  introSceneName: IntroScene
 --- !u!114 &1971906168
 MonoBehaviour:
   m_ObjectHideFlags: 0
