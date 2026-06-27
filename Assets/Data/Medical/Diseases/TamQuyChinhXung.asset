@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ded8839ef4e41c4fab5e54d933081c2, type: 3}
+  m_Name: TamQuyChinhXung
+  m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
+  diseaseName: "T\xE2m qu\xFD / Ch\xEDnh xung"
+  diseaseLevel: 2
+  diseaseGroup: 9
+  description: "Tim \u0111\u1EADp th\xECnh th\u1ECBch, ho\u1EA3ng h\u1ED1t lo s\u1EE3
+    kh\xF4ng y\xEAn, d\u1EC5 gi\u1EADt m\xECnh."
+  patientDialogue: "D\u1EA1o n\xE0y tim con c\u1EE9 \u0111\u1EADp th\xECnh th\u1ECBch
+    li\xEAn h\u1ED3i trong l\u1ED3ng ng\u1EF1c, hay ho\u1EA3ng h\u1ED1t lo s\u1EE3,
+    r\u1EA5t d\u1EC5 b\u1ECB gi\u1EADt m\xECnh."
+  symptoms:
+  - symptomText: "Tim \u0111\u1EADp th\xECnh th\u1ECBch li\xEAn h\u1ED3i."
+    showAtStep: 0
+  - symptomText: "Hay ho\u1EA3ng h\u1ED1t lo s\u1EE3."
+    showAtStep: 0
+  - symptomText: "D\u1EC5 gi\u1EADt m\xECnh v\xF4 c\u1EDB."
+    showAtStep: 1
+  correctHerbs:
+  - {fileID: 11400000, guid: 666cd74e5756f9d468dbac22430dbcaf, type: 2}
+  - {fileID: 11400000, guid: 4e72f419fdcdec6409fe81067b3b1c32, type: 2}
+  medicineCorrectRate: 0.7
+  perfectReputation: 20
+  perfectMoney: 30
+  rightDiseaseWrongMedicineReputation: 5
+  rightDiseaseWrongMedicineMoney: 10
+  wrongDiseaseRightMedicinePenalty: 5
+  failedPenalty: 15
+  resultDelaySeconds: 20

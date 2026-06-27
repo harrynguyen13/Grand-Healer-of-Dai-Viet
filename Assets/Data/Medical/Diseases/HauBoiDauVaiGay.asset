@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ded8839ef4e41c4fab5e54d933081c2, type: 3}
+  m_Name: HauBoiDauVaiGay
+  m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
+  diseaseName: "H\u1EADu b\u1ED1i (\u0110au vai g\xE1y)"
+  diseaseLevel: 2
+  diseaseGroup: 2
+  description: "Vung c\u1ED5, vai, g\xE1y c\u1EE9ng \u0111\u1EDD sau khi nhi\u1EC5m
+    l\u1EA1nh, xoay \u0111\u1EA7u kh\xF3 kh\u0103n."
+  patientDialogue: "H\xF4m qua n\u1EB1m ng\u1EE7 tr\xFAng gi\xF3 l\u1EA1nh, s\xE1ng
+    ra v\xF9ng c\u1ED5 vai g\xE1y c\u1EE7a t\xF4i c\u1EE9ng \u0111\u1EDD, kh\xF4ng
+    t\xE0i n\xE0o xoay \u0111\u1EA7u \u0111\u01B0\u1EE3c."
+  symptoms:
+  - symptomText: "C\u1ED5 vai g\xE1y c\u1EE9ng \u0111\u1EDD."
+    showAtStep: 0
+  - symptomText: "Xoay \u0111\u1EA7u kh\xF3 kh\u0103n."
+    showAtStep: 0
+  - symptomText: "\u0110au lan xu\u1ED1ng b\u1EA3 vai."
+    showAtStep: 1
+  correctHerbs:
+  - {fileID: 11400000, guid: 5e7d73b057a5f614abf98862ef6ca724, type: 2}
+  medicineCorrectRate: 0.7
+  perfectReputation: 20
+  perfectMoney: 30
+  rightDiseaseWrongMedicineReputation: 5
+  rightDiseaseWrongMedicineMoney: 10
+  wrongDiseaseRightMedicinePenalty: 5
+  failedPenalty: 15
+  resultDelaySeconds: 20

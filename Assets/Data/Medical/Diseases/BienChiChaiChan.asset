@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ded8839ef4e41c4fab5e54d933081c2, type: 3}
+  m_Name: BienChiChaiChan
+  m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
+  diseaseName: "Bi\u1EC1n chi (Chai ch\xE2n)"
+  diseaseLevel: 1
+  diseaseGroup: 7
+  description: "L\u1EDBp da l\xF2ng b\xE0n ch\xE2n d\xE0y c\u1EE9ng th\xE0nh c\u1EE5c
+    s\u1EEBng, \u1EA5n v\xE0o \u0111au nh\xF3i khi \u0111i."
+  patientDialogue: "L\xF2ng b\xE0n ch\xE2n con n\u1ED5i l\xEAn m\u1EA5y c\u1EE5c
+    da d\xE0y c\u1EE9ng ng\u1EAFc, v\xE0ng nh\u1EA1t, m\u1ED7i l\u1EA7n gi\u1EABm
+    ch\xE2n xu\u1ED1ng \u0111\u1EA5t \u0111au nh\xF3i."
+  symptoms:
+  - symptomText: "Da l\xF2ng b\xE0n ch\xE2n d\xE0y c\u1EE9ng."
+    showAtStep: 0
+  - symptomText: "\u1EA4n v\xE0o \u0111au nh\xF3i."
+    showAtStep: 0
+  - symptomText: "C\u1EE5c s\u1EEBng v\xE0ng nh\u1EA1t."
+    showAtStep: 1
+  correctHerbs:
+  - {fileID: 11400000, guid: 2fe366f1a6d81fd40a7aeff25bce2dbf, type: 2}
+  - {fileID: 11400000, guid: bb445db3d4f4d4c44b650d6507db81c7, type: 2}
+  - {fileID: 11400000, guid: 8d4d5f67b180d3743bc13166514ad855, type: 2}
+  medicineCorrectRate: 0.7
+  perfectReputation: 20
+  perfectMoney: 30
+  rightDiseaseWrongMedicineReputation: 5
+  rightDiseaseWrongMedicineMoney: 10
+  wrongDiseaseRightMedicinePenalty: 5
+  failedPenalty: 15
+  resultDelaySeconds: 20

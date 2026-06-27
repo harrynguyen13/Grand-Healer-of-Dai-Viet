@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ded8839ef4e41c4fab5e54d933081c2, type: 3}
+  m_Name: KhaiThauPhongHan
+  m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
+  diseaseName: "Kh\xE1i th\u1EA5u phong h\xE0n"
+  diseaseLevel: 1
+  diseaseGroup: 0
+  description: "Ho ti\u1EBFng n\u1EB7ng, \u0111\u1EDDm l\u1ECFng tr\u1EAFng lo\xE3ng,
+    ng\u1EA1t m\u0169i, s\u1EE3 l\u1EA1nh."
+  patientDialogue: "Con b\u1ECB ho li\xEAn t\u1EE5c, ti\u1EBFng ho n\u1EB7ng n\u1EC1,
+    kh\u1EA1c ra \u0111\u1EDDm l\u1ECFng tr\u1EAFng d\xEDnh, ng\u01B0\u1EDDi s\u1EE3
+    l\u1EA1nh."
+  symptoms:
+  - symptomText: "Ho ti\u1EBFng n\u1EB7ng."
+    showAtStep: 0
+  - symptomText: "S\u1EE3 l\u1EA1nh."
+    showAtStep: 0
+  - symptomText: "\u0110\u1EDDm l\u1ECFng tr\u1EAFng lo\xE3ng."
+    showAtStep: 1
+  - symptomText: "Ng\u1EA1t m\u0169i."
+    showAtStep: 1
+  correctHerbs:
+  - {fileID: 11400000, guid: 66bc6bb16f8e55a41a191de2815f9208, type: 2}
+  - {fileID: 11400000, guid: b859e97737aeede43a79ac8d60d5a5bc, type: 2}
+  - {fileID: 11400000, guid: a3a51709ce0c90947b99a1ea3bb9b6c2, type: 2}
+  medicineCorrectRate: 0.7
+  perfectReputation: 20
+  perfectMoney: 30
+  rightDiseaseWrongMedicineReputation: 5
+  rightDiseaseWrongMedicineMoney: 10
+  wrongDiseaseRightMedicinePenalty: 5
+  failedPenalty: 15
+  resultDelaySeconds: 20

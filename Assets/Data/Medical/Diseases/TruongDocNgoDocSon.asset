@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ded8839ef4e41c4fab5e54d933081c2, type: 3}
+  m_Name: TruongDocNgoDocSon
+  m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
+  diseaseName: "Tr\u01B0\u01A1ng \u0111\u1ED9c (Ng\u1ED9 \u0111\u1ED9c s\u01A1n)"
+  diseaseLevel: 2
+  diseaseGroup: 7
+  description: "Da ti\u1EBFp x\xFAc nh\u1EF1a c\xE2y s\u01B0ng ph\u1ED3ng \u0111\u1ECF
+    r\u1EF1c, n\u1ED5i b\u1ECDng n\u01B0\u1EDBc, ng\u1EE9a r\xE1t nh\u01B0 b\u1ECFng."
+  patientDialogue: "Con \u0111i r\u1EEBng l\u1EE1 qu\u1EC7t ph\u1EA3i nh\u1EF1a c\xE2y
+    s\u01A1n, gi\u1EDD da s\u01B0ng ph\u1ED3ng \u0111\u1ECF r\u1EF1c l\xEAn, n\u1ED5i
+    b\u1ECDng n\u01B0\u1EDBc ng\u1EE9a r\xE1t nh\u01B0 b\u1ECFng l\u1EEDa."
+  symptoms:
+  - symptomText: "Da s\u01B0ng ph\u1ED3ng \u0111\u1ECF r\u1EF1c."
+    showAtStep: 0
+  - symptomText: "N\u1ED5i b\u1ECDng n\u01B0\u1EDBc l\u1EDBn."
+    showAtStep: 0
+  - symptomText: "Ng\u1EE9a r\xE1t nh\u01B0 b\u1ECFng l\u1EEDa."
+    showAtStep: 1
+  correctHerbs:
+  - {fileID: 11400000, guid: 2fe366f1a6d81fd40a7aeff25bce2dbf, type: 2}
+  - {fileID: 11400000, guid: 9c7b7ad2cd7bc964283bc5e1cc2da488, type: 2}
+  - {fileID: 11400000, guid: 42917dffbf4cc7046841dd612dba2419, type: 2}
+  medicineCorrectRate: 0.7
+  perfectReputation: 20
+  perfectMoney: 30
+  rightDiseaseWrongMedicineReputation: 5
+  rightDiseaseWrongMedicineMoney: 10
+  wrongDiseaseRightMedicinePenalty: 5
+  failedPenalty: 15
+  resultDelaySeconds: 20

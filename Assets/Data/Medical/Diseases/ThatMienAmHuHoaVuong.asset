@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ded8839ef4e41c4fab5e54d933081c2, type: 3}
+  m_Name: ThatMienAmHuHoaVuong
+  m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
+  diseaseName: "Th\u1EA5t mi\xEAn (\xC2m h\u01B0 h\u1ECFa v\u01B0\u1EE3ng)"
+  diseaseLevel: 3
+  diseaseGroup: 9
+  description: "Kh\xF3 v\xE0o gi\u1EA5c ng\u1EE7, t\xE2m phi\u1EC1n b\u1EE9t r\u1EE9t,
+    l\xF2ng b\xE0n tay ch\xE2n n\xF3ng r\xE1t."
+  patientDialogue: "C\u1EA3 \u0111\xEAm con tr\u1EB1n tr\u1ECDc kh\xF4ng t\xE0i n\xE0o
+    ng\u1EE7 \u0111\u01B0\u1EE3c, trong l\xF2ng b\u1EF1c d\u1ECDc b\u1EE9t r\u1EE9t,
+    l\xF2ng b\xE0n tay ch\xE2n n\xF3ng nh\u01B0 h\u01A1 l\u1EEDa."
+  symptoms:
+  - symptomText: "Tr\u1EB1n tr\u1ECDc kh\xF3 v\xE0o gi\u1EA5c ng\u1EE7."
+    showAtStep: 0
+  - symptomText: "T\xE2m phi\u1EC1n b\u1EE9t r\u1EE9t kh\xF4ng y\xEAn."
+    showAtStep: 0
+  - symptomText: "L\xF2ng b\xE0n tay ch\xE2n n\xF3ng r\xE1t."
+    showAtStep: 1
+  correctHerbs:
+  - {fileID: 11400000, guid: 666cd74e5756f9d468dbac22430dbcaf, type: 2}
+  - {fileID: 11400000, guid: 917b6ce0e960255439f939e1ec6b9c7d, type: 2}
+  - {fileID: 11400000, guid: 742b8263af9857f44be232f679e50744, type: 2}
+  medicineCorrectRate: 0.7
+  perfectReputation: 20
+  perfectMoney: 30
+  rightDiseaseWrongMedicineReputation: 5
+  rightDiseaseWrongMedicineMoney: 10
+  wrongDiseaseRightMedicinePenalty: 5
+  failedPenalty: 15
+  resultDelaySeconds: 20

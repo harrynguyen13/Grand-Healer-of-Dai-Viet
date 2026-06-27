@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ded8839ef4e41c4fab5e54d933081c2, type: 3}
+  m_Name: NhiMinhNhiLungDiec
+  m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
+  diseaseName: "Nh\u0129 minh / Nh\u0129 lung"
+  diseaseLevel: 4
+  diseaseGroup: 9
+  description: "Tai t\u1EF1 nghe ti\u1EBFng \xF9 \xF9 li\xEAn t\u1EE5c, l\xE2u ng\xE0y
+    th\xEDnh l\u1EF1c m\u1EA5t ho\xE0n to\xE0n kh\xF4ng nghe th\u1EA5y g\xEC (\u0111i\u1EBFc
+    h\u1EB3n)."
+  patientDialogue: "C\xE1i tai con n\xF3 c\u1EE9 t\u1EF1 \xF9 \xF9 inh \u1ECFi nh\u01B0
+    ti\u1EBFng ve k\xEAu su\u1ED1t ng\xE0y \u0111\xEAm, gi\u1EDD \u0111i\u1EBFc h\u1EB3n
+    ch\u1EB3ng nghe th\u1EA5y ng\u01B0\u1EDDi ta n\xF3i g\xEC."
+  symptoms:
+  - symptomText: "Tai t\u1EF1 nghe ti\u1EBFng \xF9 \xF9 inh \u1ECFi li\xEAn t\u1EE5c."
+    showAtStep: 0
+  - symptomText: "Ti\u1EBFng \xF9 tai vang l\xEAn nh\u01B0 s\xF3ng bi\u1EC3n ve k\xEAu."
+    showAtStep: 0
+  - symptomText: "Th\xEDnh l\u1EF1c m\u1EA5t ho\xE0n to\xE0n kh\xF4ng nghe th\u1EA5y
+      g\xEC."
+    showAtStep: 1
+  correctHerbs:
+  - {fileID: 11400000, guid: 742b8263af9857f44be232f679e50744, type: 2}
+  - {fileID: 11400000, guid: 65a1ebdbd37711149bd0de0c20b5056e, type: 2}
+  - {fileID: 11400000, guid: 00377b35af2267647ae70993533bb58f, type: 2}
+  medicineCorrectRate: 0.7
+  perfectReputation: 20
+  perfectMoney: 30
+  rightDiseaseWrongMedicineReputation: 5
+  rightDiseaseWrongMedicineMoney: 10
+  wrongDiseaseRightMedicinePenalty: 5
+  failedPenalty: 15
+  resultDelaySeconds: 20

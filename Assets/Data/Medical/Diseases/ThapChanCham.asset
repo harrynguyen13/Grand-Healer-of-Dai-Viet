@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ded8839ef4e41c4fab5e54d933081c2, type: 3}
+  m_Name: ThapChanCham
+  m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
+  diseaseName: "Th\u1EA5p ch\u1EA9n (Ch\xE0m/Eczema)"
+  diseaseLevel: 2
+  diseaseGroup: 7
+  description: "Da s\u01B0ng \u0111\u1ECF, n\u1ED5i m\u1EE5n n\u01B0\u1EDBc li ti
+    th\xE0nh \u0111\xE1m, ng\u1EE9a ng\xE1y, ch\u1EA3y n\u01B0\u1EDBc v\xE0ng."
+  patientDialogue: "Kh\u1EAFp v\xF9ng da tay con s\u01B0ng \u0111\u1ECF, n\u1ED5i
+    m\u1EE5n n\u01B0\u1EDBc li ti th\xE0nh \u0111\xE1m ng\u1EE9a ng\xE1y, g\xE3i
+    v\u1EE1 ch\u1EA3y n\u01B0\u1EDBc v\xE0ng d\xEDnh."
+  symptoms:
+  - symptomText: "Da s\u01B0ng \u0111\u1ECF n\u1ED5i m\u1EE5n n\u01B0\u1EDBc."
+    showAtStep: 0
+  - symptomText: "M\u1EE5n n\u01B0\u1EDBc m\u1ECDc th\xE0nh \u0111\xE1m ng\u1EE9a."
+    showAtStep: 0
+  - symptomText: "V\u1EE1 ch\u1EA3y d\u1ECBch n\u01B0\u1EDBc v\xE0ng d\xEDnh."
+    showAtStep: 1
+  correctHerbs:
+  - {fileID: 11400000, guid: 93aaaf4a59c9b664fa47a28feea0f21b, type: 2}
+  - {fileID: 11400000, guid: 2fe366f1a6d81fd40a7aeff25bce2dbf, type: 2}
+  - {fileID: 11400000, guid: 42917dffbf4cc7046841dd612dba2419, type: 2}
+  medicineCorrectRate: 0.7
+  perfectReputation: 20
+  perfectMoney: 30
+  rightDiseaseWrongMedicineReputation: 5
+  rightDiseaseWrongMedicineMoney: 10
+  wrongDiseaseRightMedicinePenalty: 5
+  failedPenalty: 15
+  resultDelaySeconds: 20

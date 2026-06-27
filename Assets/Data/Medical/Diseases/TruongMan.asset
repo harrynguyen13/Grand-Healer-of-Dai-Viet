@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ded8839ef4e41c4fab5e54d933081c2, type: 3}
+  m_Name: TruongMan
+  m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
+  diseaseName: "Tr\u01B0\u1EDBng m\xE3n"
+  diseaseLevel: 1
+  diseaseGroup: 1
+  description: "B\u1EE5ng to ph\xECnh ra nh\u01B0 c\xE1i tr\u1ED1ng, g\xF5 b\xF4m
+    b\u1ED1p, \u1EA5m \xE1ch kh\xF3 ch\u1ECBu."
+  patientDialogue: "B\u1EE5ng con to ph\xECnh ra nh\u01B0 c\xE1i tr\u1ED1ng, g\xF5
+    v\xE0o b\xF4m b\u1ED1p, n\u1EBFu \u0111\xE1nh r\u1EAFm \u0111\u01B0\u1EE3c th\xEC
+    m\u1EDBi nh\u1EB9 ng\u01B0\u1EDDi."
+  symptoms:
+  - symptomText: "B\u1EE5ng ph\xECnh to nh\u01B0 tr\u1ED1ng."
+    showAtStep: 0
+  - symptomText: "\u1EA4m \xE1ch kh\xF3 ch\u1ECBu."
+    showAtStep: 0
+  - symptomText: "G\xF5 b\u1EE5ng k\xEAu b\xF4m b\u1ED1p."
+    showAtStep: 1
+  - symptomText: "Trung ti\u1EC7n th\xEC \u0111\u1EE1."
+    showAtStep: 1
+  correctHerbs:
+  - {fileID: 11400000, guid: 8703952609057024182bc7cc7c3e61f1, type: 2}
+  - {fileID: 11400000, guid: ef583ea8b197b4e409c65b5a82c8833c, type: 2}
+  - {fileID: 11400000, guid: 80bb485434d3dce4fb137e42500ad664, type: 2}
+  medicineCorrectRate: 0.7
+  perfectReputation: 20
+  perfectMoney: 30
+  rightDiseaseWrongMedicineReputation: 5
+  rightDiseaseWrongMedicineMoney: 10
+  wrongDiseaseRightMedicinePenalty: 5
+  failedPenalty: 15
+  resultDelaySeconds: 20

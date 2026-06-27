@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ded8839ef4e41c4fab5e54d933081c2, type: 3}
+  m_Name: LongBeBiTieuCap
+  m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
+  diseaseName: "Long b\u1EBF (B\xED ti\u1EC3u c\u1EA5p)"
+  diseaseLevel: 4
+  diseaseGroup: 2
+  description: "N\u01B0\u1EDBc ti\u1EC3u \u1EE9 \u0111\u1ECDng b\xE0ng quang g\xE2y
+    c\u0103ng tr\u01B0\u1EDBng b\u1EE5ng d\u01B0\u1EDBi d\u1EEF d\u1ED9i, bu\u1ED3n
+    ti\u1EC3u nh\u01B0ng kh\xF4ng r\u1EB7n \u0111\u01B0\u1EE3c."
+  patientDialogue: "C\u1EE9u con th\u1EA7y \u01A1i, b\u1EE5ng d\u01B0\u1EDBi c\u0103ng
+    tr\u01B0\u1EDBng l\u1ED9n l\xEAn \u0111au \u0111\u1EDBn d\u1EEF d\u1ED9i, con
+    m\xF3t ti\u1EC3u ph\xE1t \u0111i\xEAn m\xE0 kh\xF4ng r\u1EB7n \u0111\u01B0\u1EE3c
+    gi\u1ECDt n\xE0o."
+  symptoms:
+  - symptomText: "B\u1EE5ng d\u01B0\u1EDBi c\u0103ng tr\u01B0\u1EDBng l\u1ED9n l\xEAn
+      \u0111au \u0111\u1EDBn."
+    showAtStep: 0
+  - symptomText: "M\xF3t ti\u1EC3u d\u1EEF d\u1ED9i ph\xE1t \u0111i\xEAn ph\xE1t
+      kh\xF3c."
+    showAtStep: 0
+  - symptomText: "Kh\xF4ng th\u1EC3 r\u1EB7n ra \u0111\u01B0\u1EE3c m\u1ED9t gi\u1ECDt
+      n\u01B0\u1EDBc ti\u1EC3u."
+    showAtStep: 1
+  correctHerbs:
+  - {fileID: 11400000, guid: 3820b3abb161a9340a9880f2db644422, type: 2}
+  - {fileID: 11400000, guid: 9761ae753acdd5f4995ba63d100426ee, type: 2}
+  medicineCorrectRate: 0.7
+  perfectReputation: 20
+  perfectMoney: 30
+  rightDiseaseWrongMedicineReputation: 5
+  rightDiseaseWrongMedicineMoney: 10
+  wrongDiseaseRightMedicinePenalty: 5
+  failedPenalty: 15
+  resultDelaySeconds: 20

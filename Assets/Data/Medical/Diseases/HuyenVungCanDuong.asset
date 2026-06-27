@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ded8839ef4e41c4fab5e54d933081c2, type: 3}
+  m_Name: HuyenVungCanDuong
+  m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
+  diseaseName: "Huy\u1EC5n v\u1EF1ng (Can d\u01B0\u01A1ng th\u01B0\u1EE3ng kh\xE1ng)"
+  diseaseLevel: 3
+  diseaseGroup: 9
+  description: "Ch\xF3ng m\u1EB7t, hoa m\u1EAFt, nh\xE0 c\u1EEDa \u0111\u1EA3o l\u1ED9n,
+    \u0111\u1EA7u n\u1EB7ng ch\xE2n nh\u1EB9, tai \xF9."
+  patientDialogue: "\u0110\u1EA7u \xF3c t\xF4i quay cu\u1ED3ng, hoa m\u1EAFt th\u1EA5y
+    nh\xE0 c\u1EEDa \u0111\u1EA3o l\u1ED9n h\u1EBFt l\xEAn, b\u01B0\u1EDBc \u0111i
+    h\u1EABng h\u1EE5t \u0111\u1EA7u n\u1EB7ng ch\xE2n nh\u1EB9, tai \xF9."
+  symptoms:
+  - symptomText: "Ch\xF3ng m\u1EB7t hoa m\u1EAFt nh\xE0 c\u1EEDa \u0111\u1EA3o l\u1ED9n."
+    showAtStep: 0
+  - symptomText: "\u0110\u1EA7u n\u1EB7ng ch\xE2n nh\u1EB9 b\u01B0\u1EDBc \u0111i
+      h\u1EABng."
+    showAtStep: 0
+  - symptomText: "Tai \xF9 li\xEAn t\u1EE5c hay c\xE1u g\u1EAFt."
+    showAtStep: 1
+  correctHerbs:
+  - {fileID: 11400000, guid: 00377b35af2267647ae70993533bb58f, type: 2}
+  - {fileID: 11400000, guid: 1fd9162dc82209548b1125e6858ad277, type: 2}
+  - {fileID: 11400000, guid: fa67c3efc835d254d99f1486b2959b3f, type: 2}
+  medicineCorrectRate: 0.7
+  perfectReputation: 20
+  perfectMoney: 30
+  rightDiseaseWrongMedicineReputation: 5
+  rightDiseaseWrongMedicineMoney: 10
+  wrongDiseaseRightMedicinePenalty: 5
+  failedPenalty: 15
+  resultDelaySeconds: 20

@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ded8839ef4e41c4fab5e54d933081c2, type: 3}
+  m_Name: TapSuongPhongLietMat
+  m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
+  diseaseName: "T\xE1p s\u01B0\u01A1ng phong (Li\u1EC7t m\u1EB7t)"
+  diseaseLevel: 2
+  diseaseGroup: 7
+  description: "Ng\u1EE7 \u0111\xEAm tr\xFAng gi\xF3 l\u1EA1nh, s\xE1ng d\u1EADy
+    m\u1ED9t b\xEAn m\u1EB7t li\u1EC7t \u0111\u1EDD, m\xE9o mi\u1EC7ng, m\u1EAFt
+    kh\xF4ng nh\u1EAFm \u0111\u01B0\u1EE3c."
+  patientDialogue: "S\xE1ng ng\u1EE7 d\u1EADy t\xF4i r\u1EE5ng r\u1EDDi th\u1EA5y
+    m\u1ED9t b\xEAn m\u1EB7t b\u1ECB li\u1EC7t \u0111\u1EDD, mi\u1EC7ng m\xE9o x\u1EBFch
+    sang m\u1ED9t b\xEAn, m\u1EAFt kh\xF4ng nh\u1EAFm \u0111\u01B0\u1EE3c."
+  symptoms:
+  - symptomText: "M\u1ED9t b\xEAn m\u1EB7t li\u1EC7t \u0111\u1EDD, m\xE9o mi\u1EC7ng."
+    showAtStep: 0
+  - symptomText: "M\u1EAFt kh\xF4ng nh\u1EAFm \u0111\u01B0\u1EE3c."
+    showAtStep: 0
+  - symptomText: "N\u1EBFp nh\u0103n tr\xE1n bi\u1EBFn m\u1EA5t."
+    showAtStep: 1
+  correctHerbs:
+  - {fileID: 11400000, guid: 8bc43412cf64002488e0d47577f6ed17, type: 2}
+  - {fileID: 11400000, guid: c874a978d29033845b4e5d43bfb025f2, type: 2}
+  medicineCorrectRate: 0.7
+  perfectReputation: 20
+  perfectMoney: 30
+  rightDiseaseWrongMedicineReputation: 5
+  rightDiseaseWrongMedicineMoney: 10
+  wrongDiseaseRightMedicinePenalty: 5
+  failedPenalty: 15
+  resultDelaySeconds: 20

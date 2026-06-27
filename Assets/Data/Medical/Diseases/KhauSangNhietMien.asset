@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ded8839ef4e41c4fab5e54d933081c2, type: 3}
+  m_Name: KhauSangNhietMien
+  m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
+  diseaseName: "Kh\u1EA9u sang (Nhi\u1EC7t mi\u1EC7ng)"
+  diseaseLevel: 1
+  diseaseGroup: 1
+  description: "Ni\xEAm m\u1EA1c mi\u1EC7ng ho\u1EB7c l\u01B0\u1EE1i xu\u1EA5t hi\u1EC7n
+    c\xE1c v\u1EBFt lo\xE9t \u0111\u1ECF, \u0111au r\xE1t."
+  patientDialogue: "Trong m\xE1 v\u1EDBi \u0111\u1EA7u l\u01B0\u1EE1i c\u1EE7a t\xF4i
+    m\u1ECDc m\u1EA5y v\u1EBFt lo\xE9t \u0111\u1ECF to b\u1EB1ng h\u1EA1t \u0111\u1EADu,
+    \u0103n \u0111\u1ED3 m\u1EB7n r\xE1t x\xF3t ph\xE1t kh\xF3c."
+  symptoms:
+  - symptomText: "Mi\u1EC7ng l\u01B0\u1EE1i lo\xE9t \u0111\u1ECF."
+    showAtStep: 0
+  - symptomText: "\u0110au r\xE1t khi \u0103n."
+    showAtStep: 0
+  - symptomText: "Ni\xEAm m\u1EA1c s\u01B0ng r\u1ED9p."
+    showAtStep: 1
+  correctHerbs:
+  - {fileID: 11400000, guid: e990df34207dedb409588788f2b106c1, type: 2}
+  - {fileID: 11400000, guid: b283ada7362c6e14fb5cdf92e0d5209f, type: 2}
+  - {fileID: 11400000, guid: a35368017e21aa84b8ce1a9059aef931, type: 2}
+  medicineCorrectRate: 0.7
+  perfectReputation: 20
+  perfectMoney: 30
+  rightDiseaseWrongMedicineReputation: 5
+  rightDiseaseWrongMedicineMoney: 10
+  wrongDiseaseRightMedicinePenalty: 5
+  failedPenalty: 15
+  resultDelaySeconds: 20

@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ded8839ef4e41c4fab5e54d933081c2, type: 3}
+  m_Name: DocXaCanRanCan
+  m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
+  diseaseName: "\u0110\u1ED9c x\xE0 c\u1EAFn (R\u1EAFn \u0111\u1ED9c c\u1EAFn)"
+  diseaseLevel: 4
+  diseaseGroup: 7
+  description: "V\u1EBFt c\u1EAFn s\u01B0ng t\u1EA5y \u0111en b\u1EA7m, \u0111au
+    nh\u1EE9c lan nhanh, kh\xF3 th\u1EDF, s\u1EE5p mi m\u1EAFt, l\u01A1 m\u01A1 s\u1EAFp
+    ch\u1EBFt."
+  patientDialogue: "Con \u0111i r\u1EEBng b\u1ECB r\u1EAFn \u0111\u1ED9c m\u1ED5
+    v\xE0o ch\xE2n, v\u1EBFt c\u1EAFn s\u01B0ng t\u1EA5y \u0111en b\u1EA7m \u0111au
+    bu\u1ED1t, gi\u1EDD m\u1EAFt s\u1EE5p xu\u1ED1ng kh\xF3 th\u1EDF l\u1EAFm."
+  symptoms:
+  - symptomText: "V\u1EBFt r\u0103ng c\u1EAFn s\u01B0ng t\u1EA5y \u0111en b\u1EA7m
+      huy\u1EBFt \u1EE9."
+    showAtStep: 0
+  - symptomText: "\u0110au nh\u1EE9c nh\u1ED1i lan nhanh l\xEAn \u0111\xF9i."
+    showAtStep: 0
+  - symptomText: "T\u1EE9c ng\u1EF1c kh\xF3 th\u1EDF, s\u1EE5p mi m\u1EAFt l\u01A1
+      m\u01A1."
+    showAtStep: 1
+  correctHerbs:
+  - {fileID: 11400000, guid: 70f8cee14eb94e84ca6d1791a604beb7, type: 2}
+  - {fileID: 11400000, guid: fde7743b3904d014b819bf0b7742a249, type: 2}
+  - {fileID: 11400000, guid: 9c7b7ad2cd7bc964283bc5e1cc2da488, type: 2}
+  medicineCorrectRate: 0.7
+  perfectReputation: 20
+  perfectMoney: 30
+  rightDiseaseWrongMedicineReputation: 5
+  rightDiseaseWrongMedicineMoney: 10
+  wrongDiseaseRightMedicinePenalty: 5
+  failedPenalty: 15
+  resultDelaySeconds: 20

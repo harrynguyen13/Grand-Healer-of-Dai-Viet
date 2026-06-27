@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ded8839ef4e41c4fab5e54d933081c2, type: 3}
+  m_Name: DinhSangMunDinhRau
+  m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
+  diseaseName: "\u0110inh sang (M\u1EE5n \u0111inh r\xE2u)"
+  diseaseLevel: 4
+  diseaseGroup: 7
+  description: "M\u1EE5n nh\u1ECF ch\xE2n s\xE2u c\u1EE9ng ng\u1EAFc \u1EDF m\u1EB7t,
+    \u0111au bu\u1ED1t th\u1EA5u x\u01B0\u01A1ng, s\u01B0ng t\u1EA5y lan nhanh, g\xE2y
+    s\u1ED1t cao nhi\u1EC5m tr\xF9ng m\xE1u."
+  patientDialogue: "Con m\u1ECDc c\xE1i m\u1EE5n nh\u1ECF \u1EDF m\xF4i m\xE0 ch\xE2n
+    n\xF3 s\xE2u c\u1EE9ng ng\u1EAFc, \u0111au bu\u1ED1t th\u1EA5u x\u01B0\u01A1ng
+    s\u01B0ng t\u1EA5y lan ra kh\u1EAFp m\u1EB7t, s\u1ED1t \u0111\xF9ng \u0111\xF9ng."
+  symptoms:
+  - symptomText: "M\u1EE5n nh\u1ECF m\u1ECDc \u1EDF m\u1EB7t ch\xE2n s\xE2u c\u1EE9ng
+      ng\u1EAFc."
+    showAtStep: 0
+  - symptomText: "\u0110au bu\u1ED1t th\u1EA5u x\u01B0\u01A1ng s\u01B0ng t\u1EA5y
+      lan nhanh."
+    showAtStep: 0
+  - symptomText: "Ph\xE1t s\u1ED1t cao \u0111\xF9ng \u0111\xF9ng m\xEA s\u1EA3ng."
+    showAtStep: 1
+  correctHerbs:
+  - {fileID: 11400000, guid: 9c7b7ad2cd7bc964283bc5e1cc2da488, type: 2}
+  - {fileID: 11400000, guid: 05f3d55ebca789d4fa260420a813ad62, type: 2}
+  - {fileID: 11400000, guid: 42917dffbf4cc7046841dd612dba2419, type: 2}
+  medicineCorrectRate: 0.7
+  perfectReputation: 20
+  perfectMoney: 30
+  rightDiseaseWrongMedicineReputation: 5
+  rightDiseaseWrongMedicineMoney: 10
+  wrongDiseaseRightMedicinePenalty: 5
+  failedPenalty: 15
+  resultDelaySeconds: 20

@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ded8839ef4e41c4fab5e54d933081c2, type: 3}
+  m_Name: KhaiThauPheAmHu
+  m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
+  diseaseName: "Kh\xE1i th\u1EA5u (Ph\u1EBF \xE2m h\u01B0)"
+  diseaseLevel: 3
+  diseaseGroup: 0
+  description: "Ho khan kh\xF4ng \u0111\u1EDDm ho\u1EB7c \u0111\u1EDDm \xEDt d\xEDnh
+    m\xE1u, s\u1ED1t v\u1EC1 chi\u1EC1u, g\xF2 m\xE1 \u0111\u1ECF."
+  patientDialogue: "T\xF4i b\u1ECB ho khan k\xE9o d\xE0i kh\xF4ng c\xF3 \u0111\u1EDDm,
+    ng\u01B0\u1EDDi c\u1EE9 s\u1ED1t h\xE2m h\u1EA5p v\u1EC1 chi\u1EC1u, hai g\xF2
+    m\xE1 \u0111\u1ECF r\u1EF1c l\xEAn."
+  symptoms:
+  - symptomText: "Ho khan kh\xF4ng \u0111\u1EDDm l\xE2u ng\xE0y."
+    showAtStep: 0
+  - symptomText: "S\u1ED1t h\xE2m h\u1EA5p v\u1EC1 chi\u1EC1u."
+    showAtStep: 0
+  - symptomText: "G\xF2 m\xE1 \u0111\u1ECF r\u1EF1c."
+    showAtStep: 1
+  - symptomText: "\u0110\u1EDDm d\xEDnh s\u1EE3i m\xE1u."
+    showAtStep: 1
+  correctHerbs:
+  - {fileID: 11400000, guid: 917b6ce0e960255439f939e1ec6b9c7d, type: 2}
+  - {fileID: 11400000, guid: 90717d269012a674d9f4ee3bdd2b90f5, type: 2}
+  - {fileID: 11400000, guid: b859e97737aeede43a79ac8d60d5a5bc, type: 2}
+  medicineCorrectRate: 0.7
+  perfectReputation: 20
+  perfectMoney: 30
+  rightDiseaseWrongMedicineReputation: 5
+  rightDiseaseWrongMedicineMoney: 10
+  wrongDiseaseRightMedicinePenalty: 5
+  failedPenalty: 15
+  resultDelaySeconds: 20
