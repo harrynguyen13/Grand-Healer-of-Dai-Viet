@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: bach_truat
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: "B\u1EA1ch tru\u1EADt"
+  herbName: bach_truat
   description: 
-  category: 7
-  rarity: 1
-  unlockClinicLevel: 2
-  price: 30
+  category: 11
+  rarity: 0
+  unlockClinicLevel: 1
+  price: 5
   icon: {fileID: 5568313090194773566, guid: 1902089168b45c34fbe4717cf60a0b61, type: 3}

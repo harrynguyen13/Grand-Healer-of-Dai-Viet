@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: cau_tich
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: "C\u1EA9u t\xEDch"
+  herbName: cau_tich
   description: 
   category: 11
   rarity: 0
   unlockClinicLevel: 1
   price: 5
-  icon: {fileID: -7396111155835005520, guid: f0c6a9255d74f5b4abee5de956013d0e, type: 3}
+  icon: {fileID: -7396111155835005520, guid: befbcf7db4f27e144b28390934089cc8, type: 3}

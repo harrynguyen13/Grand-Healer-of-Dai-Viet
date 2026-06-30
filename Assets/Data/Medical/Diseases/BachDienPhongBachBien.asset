@@ -29,9 +29,9 @@ MonoBehaviour:
   - symptomText: "Kh\xF4ng \u0111au kh\xF4ng ng\u1EE9a da d\u1EBB b\xECnh th\u01B0\u1EDDng."
     showAtStep: 1
   correctHerbs:
+  - {fileID: 11400000, guid: aee6e655ff249c849a00beab4b1342f7, type: 2}
   - {fileID: 11400000, guid: bb445db3d4f4d4c44b650d6507db81c7, type: 2}
   - {fileID: 11400000, guid: 2fe366f1a6d81fd40a7aeff25bce2dbf, type: 2}
-  - {fileID: 11400000, guid: 1fa1a4005a6363a4baa32ddeee222b31, type: 2}
   medicineCorrectRate: 0.7
   perfectReputation: 20
   perfectMoney: 30

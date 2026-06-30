@@ -29,6 +29,7 @@ MonoBehaviour:
   - symptomText: "S\u1EE3 gi\xF3 l\u1EA1nh."
     showAtStep: 1
   correctHerbs:
+  - {fileID: 11400000, guid: f91856cf265a58847bf766dfa7783490, type: 2}
   - {fileID: 11400000, guid: 8bc43412cf64002488e0d47577f6ed17, type: 2}
   - {fileID: 11400000, guid: bb445db3d4f4d4c44b650d6507db81c7, type: 2}
   medicineCorrectRate: 0.7

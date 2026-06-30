@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: nhuc_thung_dung
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: "Nh\u1EE5c thung dung"
+  herbName: nhuc_thung_dung
   description: 
-  category: 8
-  rarity: 2
-  unlockClinicLevel: 3
-  price: 90
-  icon: {fileID: -7912843343118723433, guid: 8615f50e270f85c4988a25a6a5726504, type: 3}
+  category: 11
+  rarity: 0
+  unlockClinicLevel: 1
+  price: 5
+  icon: {fileID: -7912843343118723433, guid: 005ec4139321e8340a9c7487f9c061fc, type: 3}

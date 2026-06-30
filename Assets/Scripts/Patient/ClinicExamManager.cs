@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,6 +8,9 @@ public class ClinicExamManager : MonoBehaviour
     [Header("Điểm trong phòng khám")]
     [SerializeField] private Transform npcExamPoint;
     [SerializeField] private Transform playerExamPoint;
+
+    [Header("Điểm NPC rời phòng")]
+    [SerializeField] private Transform[] npcLeavePoints;
 
     [Header("Player")]
     [SerializeField] private string playerTag = "Player";
@@ -24,6 +28,12 @@ public class ClinicExamManager : MonoBehaviour
     [Header("UI bốc thuốc")]
     [SerializeField] private PrescriptionUIController prescriptionUIController;
 
+    [Header("Hiển thị thuốc trên quầy")]
+    [SerializeField] private MedicineCounterDisplay medicineCounterDisplay;
+
+    [Header("Thời gian bệnh nhân nhận thuốc")]
+    [SerializeField] private float receiveMedicineTime = 0.8f;
+
     [Header("Cấp y quán")]
     [SerializeField] private int clinicLevel = 1;
 
@@ -34,6 +44,11 @@ public class ClinicExamManager : MonoBehaviour
 
     private void Start()
     {
+        if (medicineCounterDisplay != null)
+        {
+            medicineCounterDisplay.Hide();
+        }
+
         GameObject playerObject = GameObject.FindGameObjectWithTag(playerTag);
 
         if (playerObject != null)
@@ -105,6 +120,7 @@ public class ClinicExamManager : MonoBehaviour
         currentPatient.FaceToPosition(playerExamPoint.position);
 
         canStartExam = true;
+        isExamRunning = false;
 
         Debug.Log("NPC bệnh nhân đã đứng đúng điểm khám.");
         Debug.Log("Player hãy đứng vào PlayerExamPoint rồi bấm " + examineKey + " để hỏi bệnh.");
@@ -228,7 +244,78 @@ public class ClinicExamManager : MonoBehaviour
 
         Debug.Log("Mở UI bốc thuốc.");
 
-        prescriptionUIController.Show();
+        prescriptionUIController.Show(OnPrescriptionConfirmed);
+    }
+
+    private void OnPrescriptionConfirmed(Dictionary<HerbData, int> selectedPrescription)
+    {
+        Debug.Log("===== CLINIC NHẬN ĐƠN THUỐC =====");
+
+        foreach (KeyValuePair<HerbData, int> pair in selectedPrescription)
+        {
+            if (pair.Key == null)
+                continue;
+
+            Debug.Log("Thuốc đã kê: " + pair.Key.herbName + " x" + pair.Value);
+        }
+
+        StartCoroutine(PatientReceiveMedicineAndLeave());
+    }
+
+    private IEnumerator PatientReceiveMedicineAndLeave()
+    {
+        if (currentPatient == null)
+        {
+            Debug.LogWarning("Không có NPC bệnh nhân để nhận thuốc.");
+            yield break;
+        }
+
+        DiseaseData diseaseForIcon = GetDiseaseForMedicineIcon();
+
+        if (medicineCounterDisplay != null)
+        {
+            medicineCounterDisplay.ShowForDisease(diseaseForIcon);
+        }
+        else
+        {
+            Debug.LogWarning("Chưa kéo MedicineCounterDisplay vào ClinicExamManager.");
+        }
+
+        Debug.Log("Bệnh nhân đang nhận thuốc.");
+
+        yield return new WaitForSeconds(receiveMedicineTime);
+
+        if (medicineCounterDisplay != null)
+        {
+            medicineCounterDisplay.Hide();
+        }
+
+        currentPatient.LeaveClinic(npcLeavePoints, FinishCurrentPatient);
+    }
+
+    private DiseaseData GetDiseaseForMedicineIcon()
+    {
+        if (currentPatient == null)
+            return null;
+
+        PatientCase patientCase = currentPatient.PatientCase;
+
+        if (patientCase == null)
+            return null;
+
+        if (patientCase.selectedDisease != null)
+            return patientCase.selectedDisease;
+
+        return patientCase.realDisease;
+    }
+
+    private void FinishCurrentPatient()
+    {
+        currentPatient = null;
+        canStartExam = false;
+        isExamRunning = false;
+
+        Debug.Log("Ca khám đã kết thúc. Sẵn sàng nhận bệnh nhân tiếp theo.");
     }
 
     private void OnDrawGizmosSelected()
@@ -243,6 +330,19 @@ public class ClinicExamManager : MonoBehaviour
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(npcExamPoint.position, 0.35f);
+        }
+
+        if (npcLeavePoints != null)
+        {
+            Gizmos.color = Color.cyan;
+
+            foreach (Transform point in npcLeavePoints)
+            {
+                if (point != null)
+                {
+                    Gizmos.DrawWireSphere(point.position, 0.15f);
+                }
+            }
         }
     }
 }

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: thuc_dia
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: "Th\u1EE5c \u0111\u1ECBa"
+  herbName: thuc_dia
   description: 
-  category: 8
-  rarity: 2
-  unlockClinicLevel: 3
-  price: 90
+  category: 11
+  rarity: 0
+  unlockClinicLevel: 1
+  price: 5
   icon: {fileID: -8603295085591793123, guid: 13f228ffad9740a4bb2711c630982688, type: 3}

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class LocalSaveManager : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class LocalSaveManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F5))
+        if (Keyboard.current != null && Keyboard.current.f5Key.wasPressedThisFrame)
         {
             SaveGame();
         }

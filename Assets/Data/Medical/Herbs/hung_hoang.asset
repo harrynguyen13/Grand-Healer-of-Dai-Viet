@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: hung_hoang
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: "H\xF9ng ho\xE0ng"
+  herbName: hung_hoang
   description: 
-  category: 10
-  rarity: 3
-  unlockClinicLevel: 4
-  price: 220
+  category: 11
+  rarity: 0
+  unlockClinicLevel: 1
+  price: 5
   icon: {fileID: -3656281071035936724, guid: 8caa2e072faf3ee4ebfca5a6395cbfb5, type: 3}

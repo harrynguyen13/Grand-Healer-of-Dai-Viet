@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: lien_kieu
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: "Li\xEAn ki\u1EC1u"
+  herbName: lien_kieu
   description: 
-  category: 1
+  category: 11
   rarity: 0
   unlockClinicLevel: 1
   price: 5

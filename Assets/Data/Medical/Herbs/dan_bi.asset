@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: dan_bi
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: "\u0110an b\xEC"
+  herbName: dan_bi
   description: 
-  category: 1
-  rarity: 4
-  unlockClinicLevel: 4
-  price: 180
-  icon: {fileID: -6964194862053134600, guid: 12ebcc15656c83e4a8da075898d478fd, type: 3}
+  category: 11
+  rarity: 0
+  unlockClinicLevel: 1
+  price: 5
+  icon: {fileID: -6964194862053134600, guid: 55ad2d5d7a20e7b4d82e8856718c9602, type: 3}

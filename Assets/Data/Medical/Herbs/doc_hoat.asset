@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
-  m_Name: bac_ha_kho
+  m_Name: doc_hoat
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: Bac Ha Kho
+  herbName: doc_hoat
   description: 
-  category: 0
+  category: 11
   rarity: 0
   unlockClinicLevel: 1
   price: 5
-  icon: {fileID: -8295457850732599700, guid: 2b3a6f18ad87705469d1a716eabdc8d2, type: 3}
+  icon: {fileID: -2260819593577225537, guid: c247a4f0f0600ac40a1b8a3af04360af, type: 3}

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: than_khuc
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: "Th\u1EA7n kh\xFAc"
+  herbName: than_khuc
   description: 
-  category: 4
+  category: 11
   rarity: 0
   unlockClinicLevel: 1
   price: 5
-  icon: {fileID: 3687822105624471745, guid: 15d3a0f404e2d3242b9d3aac4936dc45, type: 3}
+  icon: {fileID: 3687822105624471745, guid: bc3e9a33777a76644a1dc17c692b6f7b, type: 3}

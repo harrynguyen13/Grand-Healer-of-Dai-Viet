@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: thien_ma
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: "Thi\xEAn ma"
+  herbName: thien_ma
   description: 
   category: 11
-  rarity: 2
-  unlockClinicLevel: 3
-  price: 90
+  rarity: 0
+  unlockClinicLevel: 1
+  price: 5
   icon: {fileID: -5847199433785834637, guid: 5e7f68b8cec888b4e8debe1156aef4da, type: 3}

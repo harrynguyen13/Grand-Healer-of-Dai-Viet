@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: mach_mon
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: Mach Mon
+  herbName: mach_mon
   description: 
   category: 11
   rarity: 0

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
-  m_Name: ngu_tinh_thao_diep_ca
+  m_Name: khuong_hoat
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: Ngu Tinh Thao Diep Ca
+  herbName: khuong_hoat
   description: 
   category: 11
   rarity: 0
   unlockClinicLevel: 1
   price: 5
-  icon: {fileID: -1724757316077904299, guid: 62bd4745d1747c341940fcb48f1d6f92, type: 3}
+  icon: {fileID: 7740695883349371093, guid: 7447e5d0287447141a4257a86fb69a80, type: 3}

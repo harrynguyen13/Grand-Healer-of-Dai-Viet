@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: xuyen_khung
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: "Xuy\xEAn khung"
+  herbName: xuyen_khung
   description: 
-  category: 5
-  rarity: 1
-  unlockClinicLevel: 2
-  price: 30
+  category: 11
+  rarity: 0
+  unlockClinicLevel: 1
+  price: 5
   icon: {fileID: -7125837359044574411, guid: 822e51d5da730a5449183bcfa4d7c2fc, type: 3}

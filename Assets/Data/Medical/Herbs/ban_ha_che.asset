@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: ban_ha_che
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: Ban Ha Che
+  herbName: ban_ha_che
   description: 
-  category: 3
-  rarity: 1
-  unlockClinicLevel: 2
-  price: 30
+  category: 11
+  rarity: 0
+  unlockClinicLevel: 1
+  price: 5
   icon: {fileID: -8490128988495716247, guid: c19c438bca1f27a4c82475e0677ea275, type: 3}

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -31,6 +32,8 @@ public class PrescriptionUIController : MonoBehaviour
     private readonly Dictionary<HerbData, int> selectedHerbs = new Dictionary<HerbData, int>();
     private readonly Dictionary<HerbData, HerbItemUI> leftHerbItems = new Dictionary<HerbData, HerbItemUI>();
 
+    private Action<Dictionary<HerbData, int>> onPrescriptionConfirmed;
+
     private void Awake()
     {
         if (confirmPrescriptionButton != null)
@@ -44,6 +47,13 @@ public class PrescriptionUIController : MonoBehaviour
 
     public void Show()
     {
+        Show(null);
+    }
+
+    public void Show(Action<Dictionary<HerbData, int>> onConfirmed)
+    {
+        onPrescriptionConfirmed = onConfirmed;
+
         if (prescriptionPanel != null)
             prescriptionPanel.SetActive(true);
 
@@ -203,9 +213,15 @@ public class PrescriptionUIController : MonoBehaviour
             Debug.Log("- " + herb.herbName + " x" + quantity);
         }
 
+        Dictionary<HerbData, int> selectedSnapshot = new Dictionary<HerbData, int>(selectedHerbs);
+
         Debug.Log("Đã kê đơn xong.");
 
         Hide();
+
+        onPrescriptionConfirmed?.Invoke(selectedSnapshot);
+
+        onPrescriptionConfirmed = null;
     }
 
     private void UpdateLeftHerbItem(HerbData herb)

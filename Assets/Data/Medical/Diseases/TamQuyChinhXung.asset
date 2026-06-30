@@ -30,6 +30,7 @@ MonoBehaviour:
   correctHerbs:
   - {fileID: 11400000, guid: 666cd74e5756f9d468dbac22430dbcaf, type: 2}
   - {fileID: 11400000, guid: 4e72f419fdcdec6409fe81067b3b1c32, type: 2}
+  - {fileID: 11400000, guid: eeaf131d53e824f4eb20c30f29b595e5, type: 2}
   medicineCorrectRate: 0.7
   perfectReputation: 20
   perfectMoney: 30

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
-  m_Name: phuc_linh_phuc_than
+  m_Name: phuc_linh
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: Phuc Linh Phuc Than
+  herbName: phuc_linh
   description: 
   category: 11
-  rarity: 1
-  unlockClinicLevel: 2
-  price: 30
+  rarity: 0
+  unlockClinicLevel: 1
+  price: 5
   icon: {fileID: 3992765433998350734, guid: f5466f2967d46d74fb9ae94f76fb1f6e, type: 3}

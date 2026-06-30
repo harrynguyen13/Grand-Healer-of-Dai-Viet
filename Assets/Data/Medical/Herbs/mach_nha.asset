@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: mach_nha
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: "M\u1EA1ch nha"
+  herbName: mach_nha
   description: 
-  category: 4
+  category: 11
   rarity: 0
   unlockClinicLevel: 1
   price: 5

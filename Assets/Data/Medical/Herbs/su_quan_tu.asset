@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: su_quan_tu
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: Su Quan Tu
+  herbName: su_quan_tu
   description: 
   category: 11
   rarity: 0

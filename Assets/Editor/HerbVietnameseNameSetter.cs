@@ -29,66 +29,106 @@ public class HerbVietnameseNameSetter : EditorWindow
     {
         Dictionary<string, string> nameMap = new Dictionary<string, string>
         {
-            { "gung", "Gừng" },
-            { "tia_to", "Tía tô" },
-            { "cam_thao", "Cam thảo" },
-            { "tran_bi", "Trần bì" },
-            { "bach_truat", "Bạch truật" },
-            { "kim_ngan_hoa", "Kim ngân hoa" },
-            { "lien_kieu", "Liên kiều" },
-            { "bac_ha", "Bạc hà" },
-            { "kinh_gioi", "Kinh giới" },
-            { "mach_nha", "Mạch nha" },
-            { "son_tra", "Sơn tra" },
-            { "than_khuc", "Thần khúc" },
-            { "xa_tien_tu", "Xa tiền tử" },
-            { "kim_tien_thao", "Kim tiền thảo" },
-            { "nhan_tran", "Nhân trần" },
-
-            { "ba_kich", "Ba kích" },
-            { "dam_duong_hoac", "Dâm dương hoắc" },
-            { "nhuc_thung_dung", "Nhục thung dung" },
-            { "son_thu_du", "Sơn thù du" },
-            { "thuc_dia", "Thục địa" },
-            { "ha_thu_o", "Hà thủ ô" },
-            { "thien_ma", "Thiên ma" },
-
-            { "dang_quy", "Đương quy" },
-            { "dang_sam", "Đẳng sâm" },
-            { "dan_sam", "Đan sâm" },
-            { "hoang_ky", "Hoàng kỳ" },
-            { "xuyen_khung", "Xuyên khung" },
+            // =========================
+            // THÂN GỖ / CỦ / RỄ CỨNG
+            // =========================
+            { "bach_bo", "Bạch bộ" },
             { "bach_thuoc", "Bạch thược" },
-            { "phuc_linh", "Phục linh" },
+            { "bach_tien_bi", "Bạch tiền bì" },
+            { "bach_truat", "Bạch truật" },
             { "ban_ha", "Bán hạ" },
-
-            { "phu_tu", "Phụ tử" },
-            { "chu_sa", "Chu sa" },
-            { "tam_that", "Tam thất" },
-            { "thach_quyet_minh", "Thạch quyết minh" },
-            { "thuyen_thoai", "Thuyền thoái" },
-            { "dan_bi", "Đan bì" },
-
-            { "binh_lang", "Binh lang" },
-            { "hai_kim_sa", "Hải kim sa" },
-            { "bo_cong_anh_kho", "Bồ công anh khô" },
-            { "dai_hoang", "Đại hoàng" },
+            { "ban_ha_che", "Bán hạ chế" },
+            { "cam_thao", "Cam thảo" },
             { "can_khuong", "Can khương" },
             { "cat_canh", "Cát cánh" },
-            { "cau_dang", "Câu đằng" },
-            { "cau_tich", "Cẩu tích" },
-            { "chi_tu", "Chi tử" },
-            { "chi_thuc", "Chỉ thực" },
-            { "do_trong", "Đỗ trọng" },
+            { "dai_hoang", "Đại hoàng" },
+            { "dan_bi", "Đan bì" },
+            { "dan_sam", "Đan sâm" },
+            { "dang_sam", "Đẳng sâm" },
+            { "dang_quy", "Đương quy" },
             { "duong_quy", "Đương quy" },
+            { "do_trong", "Đỗ trọng" },
+            { "doc_hoat", "Độc hoạt" },
+            { "hau_phac", "Hậu phác" },
             { "hoai_son", "Hoài sơn" },
+            { "huong_phu", "Hương phụ" },
+            { "kho_sam", "Khổ sâm" },
+            { "khuong_hoat", "Khương hoạt" },
+            { "mach_mon", "Mạch môn" },
+            { "moc_huong", "Mộc hương" },
+            { "nguu_tat", "Ngưu tất" },
+            { "nhuc_que", "Nhục quế" },
+            { "phu_tu", "Phụ tử" },
+            { "phu_tu_che", "Phụ tử chế" },
+            { "sa_sam", "Sa sâm" },
+            { "sinh_dia", "Sinh địa" },
+            { "sinh_khuong", "Sinh khương" },
+            { "tam_that", "Tam thất" },
+            { "tang_bach_bi", "Tang bạch bì" },
+            { "thang_ma", "Thăng ma" },
+            { "thien_ma", "Thiên ma" },
+            { "tho_phuc_linh", "Thổ phục linh" },
+            { "thuc_dia", "Thục địa" },
+            { "tran_bi", "Trần bì" },
+            { "tuc_doan", "Tục đoạn" },
+            { "uat_kim", "Uất kim" },
+            { "xuyen_khung", "Xuyên khung" },
+            { "xuong_bo", "Xương bồ" },
+
+            // =========================
+            // HẠT / HOA / QUẢ
+            // =========================
+            { "binh_lang", "Binh lang" },
+            { "cau_dang", "Câu đằng" },
+            { "chi_thuc", "Chỉ thực" },
+            { "chi_tu", "Chi tử" },
+            { "dao_nhan", "Đào nhân" },
             { "hong_hoa", "Hồng hoa" },
-            { "hung_hoang", "Hùng hoàng" }
+            { "kim_ngan_hoa", "Kim ngân hoa" },
+            { "lien_kieu", "Liên kiều" },
+            { "lien_tam", "Liên tâm" },
+            { "long_nhan", "Long nhãn" },
+            { "mach_nha", "Mạch nha" },
+            { "son_thu_du", "Sơn thù du" },
+            { "son_tra", "Sơn tra" },
+            { "su_quan_tu", "Sử quân tử" },
+            { "toan_tao_nhan", "Toan táo nhân" },
+            { "xa_tien_tu", "Xa tiền tử" },
+            { "xuyen_boi_mau", "Xuyên bối mẫu" },
+
+            // =========================
+            // THÂN / CỎ / LÁ
+            // =========================
+            { "bac_ha", "Bạc hà" },
+            { "bo_cong_anh", "Bồ công anh" },
+            { "dam_duong_hoac", "Dâm dương hoắc" },
+            { "kim_tien_thao", "Kim tiền thảo" },
+            { "kinh_gioi", "Kinh giới" },
+            { "ngu_tinh_thao", "Ngư tinh thảo" },
+            { "nhan_tran", "Nhân trần" },
+            { "phong_phong", "Phòng phong" },
+            { "sai_dat", "Sài đất" },
+            { "tang_ky_sinh", "Tang ký sinh" },
+            { "tia_to", "Tía tô" },
+
+            // =========================
+            // ĐẶC BIỆT
+            // =========================
+            { "cau_tich", "Cẩu tích" },
+            { "hai_kim_sa", "Hải kim sa" },
+            { "hung_hoang", "Hùng hoàng" },
+            { "nhuc_thung_dung", "Nhục thung dung" },
+            { "phuc_linh", "Phục linh" },
+            { "thach_quyet_minh", "Thạch quyết minh" },
+            { "than_khuc", "Thần khúc" },
+            { "thuyen_thoai", "Thuyền thoái" },
+
         };
 
         string[] guids = AssetDatabase.FindAssets("t:HerbData", new[] { herbFolderPath });
 
         int updatedCount = 0;
+        int fallbackCount = 0;
 
         foreach (string guid in guids)
         {
@@ -98,7 +138,7 @@ public class HerbVietnameseNameSetter : EditorWindow
             if (herb == null)
                 continue;
 
-            string key = herb.name.ToLower();
+            string key = NormalizeKey(herb.name);
 
             if (nameMap.ContainsKey(key))
             {
@@ -107,6 +147,9 @@ public class HerbVietnameseNameSetter : EditorWindow
             else
             {
                 herb.herbName = ConvertFileNameToDisplayName(key);
+                fallbackCount++;
+
+                Debug.LogWarning("Chưa có tên tiếng Việt trong nameMap: " + key);
             }
 
             EditorUtility.SetDirty(herb);
@@ -116,12 +159,31 @@ public class HerbVietnameseNameSetter : EditorWindow
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
 
-        Debug.Log("Đã đổi tên tiếng Việt cho " + updatedCount + " vị thuốc.");
+        Debug.Log("Đã đổi tên tiếng Việt cho " + updatedCount + " vị thuốc. Fallback: " + fallbackCount);
+    }
+
+    private string NormalizeKey(string rawName)
+    {
+        if (string.IsNullOrEmpty(rawName))
+            return "";
+
+        string key = rawName.Trim().ToLowerInvariant();
+
+        key = key.Replace(" ", "_");
+        key = key.Replace("-", "_");
+
+        while (key.Contains("__"))
+        {
+            key = key.Replace("__", "_");
+        }
+
+        return key;
     }
 
     private string ConvertFileNameToDisplayName(string fileName)
     {
         string text = fileName.Replace("_", " ");
+
         TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
         return textInfo.ToTitleCase(text);
     }

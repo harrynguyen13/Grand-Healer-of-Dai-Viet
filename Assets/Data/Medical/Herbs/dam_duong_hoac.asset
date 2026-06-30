@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: dam_duong_hoac
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: "D\xE2m d\u01B0\u01A1ng ho\u1EAFc"
+  herbName: dam_duong_hoac
   description: 
-  category: 8
-  rarity: 2
-  unlockClinicLevel: 3
-  price: 90
+  category: 11
+  rarity: 0
+  unlockClinicLevel: 1
+  price: 5
   icon: {fileID: 3251059584400084529, guid: cb6564b9ef536a341a2e35d18f64c09a, type: 3}
