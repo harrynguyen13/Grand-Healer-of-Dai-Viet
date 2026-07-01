@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: chi_tu
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: chi_tu
+  herbName: "Chi t\u1EED"
   description: 
-  category: 11
-  rarity: 0
-  unlockClinicLevel: 1
-  price: 5
+  category: 1
+  rarity: 1
+  unlockClinicLevel: 2
+  price: 25
+  buyPrice: 22
+  sellPrice: 25
+  startQuantity: 40
+  autoCalculateBalance: 1
   icon: {fileID: 3410537482516193368, guid: d622d2b4f3d8a22459005f496aed45bb, type: 3}

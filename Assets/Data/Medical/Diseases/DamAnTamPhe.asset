@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DamAnTamPhe
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
   diseaseName: "\u0110\xE0m \u1EA9m t\u1EA9m ph\u1EBF"
-  diseaseLevel: 3
+  diseaseLevel: 2
   diseaseGroup: 0
   description: "Ho kh\u1EA1c ra r\u1EA5t nhi\u1EC1u \u0111\u1EDDm l\u1ECFng, tr\u1EAFng,
     ng\u1EF1c b\u1EE9t r\u1EE9t, bu\u1ED3n n\xF4n."

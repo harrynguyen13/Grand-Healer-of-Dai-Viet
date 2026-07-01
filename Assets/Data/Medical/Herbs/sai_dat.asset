@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: sai_dat
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: sai_dat
+  herbName: "S\xE0i \u0111\u1EA5t"
   description: 
-  category: 11
+  category: 1
   rarity: 0
   unlockClinicLevel: 1
-  price: 5
+  price: 11
+  buyPrice: 10
+  sellPrice: 11
+  startQuantity: 50
+  autoCalculateBalance: 1
   icon: {fileID: -976823123538063873, guid: 78012bda8c8f32540a467fbcf58999f6, type: 3}

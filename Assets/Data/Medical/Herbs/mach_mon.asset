@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: mach_mon
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: mach_mon
+  herbName: "M\u1EA1ch m\xF4n"
   description: 
-  category: 11
-  rarity: 0
-  unlockClinicLevel: 1
-  price: 5
+  category: 7
+  rarity: 1
+  unlockClinicLevel: 2
+  price: 32
+  buyPrice: 29
+  sellPrice: 32
+  startQuantity: 40
+  autoCalculateBalance: 1
   icon: {fileID: 2919676120489451721, guid: fd502a799c153cf4cba3f18cdddd3560, type: 3}

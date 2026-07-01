@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: thuc_dia
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: thuc_dia
+  herbName: "Th\u1EE5c \u0111\u1ECBa"
   description: 
-  category: 11
-  rarity: 0
-  unlockClinicLevel: 1
-  price: 5
+  category: 8
+  rarity: 2
+  unlockClinicLevel: 3
+  price: 58
+  buyPrice: 50
+  sellPrice: 58
+  startQuantity: 30
+  autoCalculateBalance: 1
   icon: {fileID: -8603295085591793123, guid: 13f228ffad9740a4bb2711c630982688, type: 3}

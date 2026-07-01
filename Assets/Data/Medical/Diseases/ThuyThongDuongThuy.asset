@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: ThuyThongDuongThuy
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
   diseaseName: "Th\u1EE7y th\u0169ng (D\u01B0\u01A1ng th\u1EE7y)"
-  diseaseLevel: 4
+  diseaseLevel: 3
   diseaseGroup: 2
   description: "Ph\xF9 th\u0169ng b\u1EAFt \u0111\u1EA7u t\u1EEB mi m\u1EAFt/m\u1EB7t
     r\u1ED3i lan nhanh ra to\xE0n th\xE2n, da c\u0103ng b\xF3ng \u1EA5n l\xF5m."
-  patientDialogue: "M\u1EB7t v\xE0 mi m\u1EAFt con s\u01B0ng h\xFAp l\xEAn r\u1ED3i
+  patientDialogue: "M\u1EB7t v\xE0 mi m\u1EAFt t\xF4i s\u01B0ng h\xFAp l\xEAn r\u1ED3i
     lan nhanh ra ph\xF9 th\u0169ng to\xE0n th\xE2n, da c\u0103ng b\xF3ng \u1EA5n
     v\xE0o l\xF5m s\xE2u xu\u1ED1ng."
   symptoms:

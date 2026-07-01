@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: toan_tao_nhan
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: toan_tao_nhan
+  herbName: "Toan t\xE1o nh\xE2n"
   description: 
-  category: 11
-  rarity: 0
-  unlockClinicLevel: 1
-  price: 5
+  category: 9
+  rarity: 1
+  unlockClinicLevel: 2
+  price: 32
+  buyPrice: 29
+  sellPrice: 32
+  startQuantity: 40
+  autoCalculateBalance: 1
   icon: {fileID: 6679277406208962589, guid: 2a1493695c7f44944adc7c8b164739b4, type: 3}

@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: khuong_hoat
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: khuong_hoat
+  herbName: "Kh\u01B0\u01A1ng ho\u1EA1t"
   description: 
-  category: 11
-  rarity: 0
-  unlockClinicLevel: 1
-  price: 5
+  category: 0
+  rarity: 2
+  unlockClinicLevel: 3
+  price: 44
+  buyPrice: 38
+  sellPrice: 44
+  startQuantity: 30
+  autoCalculateBalance: 1
   icon: {fileID: 7740695883349371093, guid: 7447e5d0287447141a4257a86fb69a80, type: 3}

@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: AnChanMeDay
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
   diseaseName: "\u1EA8n ch\u1EA9n (M\u1EC1 \u0111ay)"
-  diseaseLevel: 1
+  diseaseLevel: 4
   diseaseGroup: 7
   description: "C\xE1c n\u1ED1t s\u1EA9n c\u1EE5c s\u01B0ng \u0111\u1ECF n\u1ED5i
     g\u1ED3 tr\xEAn da th\xE0nh \u0111\xE1m, ng\u1EE9a ng\xE1y d\u1EEF d\u1ED9i."
-  patientDialogue: "Kh\u1EAFp ng\u01B0\u1EDDi con n\u1ED5i l\xEAn t\u1EEBng \u0111\xE1m
+  patientDialogue: "Kh\u1EAFp ng\u01B0\u1EDDi t\xF4i n\u1ED5i l\xEAn t\u1EEBng \u0111\xE1m
     s\u1EA9n c\u1EE5c \u0111\u1ECF r\u1EF1c g\u1ED3 l\xEAn m\u1EB7t da, ng\u1EE9a
     \u0111i\xEAn cu\u1ED3ng, c\xE0ng g\xE3i c\xE0ng lan."
   symptoms:

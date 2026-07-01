@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: tang_bach_bi
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: tang_bach_bi
+  herbName: "Tang b\u1EA1ch b\xEC"
   description: 
-  category: 11
-  rarity: 0
-  unlockClinicLevel: 1
-  price: 5
+  category: 2
+  rarity: 1
+  unlockClinicLevel: 2
+  price: 26
+  buyPrice: 23
+  sellPrice: 26
+  startQuantity: 40
+  autoCalculateBalance: 1
   icon: {fileID: -6490823363657164841, guid: e6523fd83ae4b144c83a3567aed73f4c, type: 3}

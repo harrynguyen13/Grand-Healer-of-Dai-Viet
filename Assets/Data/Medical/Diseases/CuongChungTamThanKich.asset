@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CuongChungTamThanKich
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
   diseaseName: "Cu\u1ED3ng ch\u1EE9ng"
-  diseaseLevel: 4
+  diseaseLevel: 3
   diseaseGroup: 9
   description: "Th\u1EA7n tr\xED k\xEDch \u0111\u1ED9ng d\u1EEF d\u1ED9i, n\xF3i
     n\u0103ng b\u1EEBa b\xE3i, g\xE0o th\xE9t, m\u1EAFng ch\u1EEDi ng\u01B0\u1EDDi,

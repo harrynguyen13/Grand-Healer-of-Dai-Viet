@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: "DaoHanMoHoiTr\u1ED9m"
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
   diseaseName: "\u0110\u1EA1o h\xE3n (M\u1ED3 h\xF4i tr\u1ED9m)"
-  diseaseLevel: 2
+  diseaseLevel: 3
   diseaseGroup: 9
   description: "M\u1ED3 h\xF4i t\u1EF1 ch\u1EA3y ra \u0111\u1EA7m \u0111\xECa trong
     l\xFAc ng\u1EE7, t\u1EC9nh gi\u1EA5c th\xEC ng\u01B0ng."
-  patientDialogue: "\u0110\xEAm ng\u1EE7 m\u1ED3 h\xF4i con c\u1EE9 t\u1EF1 ch\u1EA3y
+  patientDialogue: "\u0110\xEAm ng\u1EE7 m\u1ED3 h\xF4i t\xF4i c\u1EE9 t\u1EF1 ch\u1EA3y
     ra \u0111\u1EA7m \u0111\xECa \u01B0\u1EDBt s\u0169ng l\u01B0ng \xE1o, nh\u01B0ng
     c\u1EE9 t\u1EC9nh gi\u1EA5c m\u1EDF m\u1EAFt ra l\xE0 n\xF3 l\u1EA1i ng\u1EEBng."
   symptoms:
   - symptomText: "M\u1ED3 h\xF4i ch\u1EA3y \u0111\u1EA7m \u0111\xECa khi ng\u1EE7."
     showAtStep: 0
-  - symptomText: "\u01AF\u1EDBc s\u0169ng l\u01B0ng \xE1o."
+  - symptomText: "\u01AF\u1EDBt s\u0169ng l\u01B0ng \xE1o."
     showAtStep: 0
   - symptomText: "T\u1EC9nh gi\u1EA5c th\xEC m\u1ED3 h\xF4i t\u1EF1 ng\u01B0ng."
     showAtStep: 1

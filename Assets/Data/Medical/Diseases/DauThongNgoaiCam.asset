@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: DauThongNgoaiCam
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
   diseaseName: "\u0110\u1EA7u th\u1ED1ng (Ngo\u1EA1i c\u1EA3m)"
-  diseaseLevel: 1
+  diseaseLevel: 2
   diseaseGroup: 9
   description: "\u0110au \u0111\u1EA7u d\u1EEF d\u1ED9i gi\u1EADt theo c\u01A1n do
     \u0111i m\u01B0a n\u1EAFng, s\u1EE3 gi\xF3 l\u1EA1nh."
-  patientDialogue: "H\xF4m qua \u0111i m\u01B0a v\u1EC1 xong \u0111\u1EA7u con \u0111au
-    nh\u01B0 b\xFAa b\u1ED5, \u0111au gi\u1EADt l\xEAn th\xE1i d\u01B0\u01A1ng theo
-    t\u1EEBng c\u01A1n, s\u1EE3 gi\xF3 l\u1EAFm."
+  patientDialogue: "H\xF4m qua \u0111i m\u01B0a v\u1EC1 xong \u0111\u1EA7u t\xF4i
+    \u0111au nh\u01B0 b\xFAa b\u1ED5, \u0111au gi\u1EADt l\xEAn th\xE1i d\u01B0\u01A1ng
+    theo t\u1EEBng c\u01A1n, s\u1EE3 gi\xF3 l\u1EAFm."
   symptoms:
   - symptomText: "\u0110au \u0111\u1EA7u nh\u01B0 b\xFAa b\u1ED5."
     showAtStep: 0

@@ -74,6 +74,7 @@ public class HerbVietnameseNameSetter : EditorWindow
             { "uat_kim", "Uất kim" },
             { "xuyen_khung", "Xuyên khung" },
             { "xuong_bo", "Xương bồ" },
+            {"hoang_lien", "Hoàng liên"},
 
             // =========================
             // HẠT / HOA / QUẢ

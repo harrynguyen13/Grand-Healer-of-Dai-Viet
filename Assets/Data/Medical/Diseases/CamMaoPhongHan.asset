@@ -17,7 +17,7 @@ MonoBehaviour:
   diseaseGroup: 0
   description: "S\u1EE3 l\u1EA1nh, ph\xE1t s\u1ED1t nh\u1EB9, kh\xF4ng m\u1ED3 h\xF4i,
     \u0111au \u0111\u1EA7u, ch\u1EA3y n\u01B0\u1EDBc m\u0169i trong."
-  patientDialogue: "Th\u01B0a th\u1EA7y, con b\u1ECB s\u1EE3 l\u1EA1nh, \u0111au
+  patientDialogue: "Th\u01B0a th\u1EA7y,t\xF4i b\u1ECB s\u1EE3 l\u1EA1nh, \u0111au
     \u0111\u1EA7u, ng\u01B0\u1EDDi gai r\xE9t, n\u01B0\u1EDBc m\u0169i c\u1EE9 ch\u1EA3y
     trong."
   symptoms:

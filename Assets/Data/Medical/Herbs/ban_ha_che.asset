@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: ban_ha_che
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: ban_ha_che
+  herbName: "B\xE1n h\u1EA1 ch\u1EBF"
   description: 
-  category: 11
+  category: 2
   rarity: 0
   unlockClinicLevel: 1
-  price: 5
+  price: 12
+  buyPrice: 11
+  sellPrice: 12
+  startQuantity: 50
+  autoCalculateBalance: 1
   icon: {fileID: -8490128988495716247, guid: c19c438bca1f27a4c82475e0677ea275, type: 3}

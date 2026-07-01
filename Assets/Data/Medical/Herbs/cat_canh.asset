@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: cat_canh
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: cat_canh
+  herbName: "C\xE1t c\xE1nh"
   description: 
-  category: 11
-  rarity: 0
-  unlockClinicLevel: 1
-  price: 5
+  category: 2
+  rarity: 1
+  unlockClinicLevel: 2
+  price: 26
+  buyPrice: 23
+  sellPrice: 26
+  startQuantity: 40
+  autoCalculateBalance: 1
   icon: {fileID: -4972105754331821843, guid: 96d7a5940903fd445afa1f30022ccb34, type: 3}

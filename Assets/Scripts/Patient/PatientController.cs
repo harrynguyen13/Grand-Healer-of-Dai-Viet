@@ -17,11 +17,14 @@ public class PatientController : BaseMove
     [SerializeField] private float collisionRepathCooldown = 0.25f;
     [SerializeField] private float pushBackDistance = 0.3f;
 
+    [Header("Prefab gốc của NPC")]
+    [SerializeField] private GameObject sourcePrefab;
+
     private MedicalDatabase medicalDatabase;
     private AStarPathfinder2D pathfinder;
     private Transform clinicDoorPoint;
 
-    private PatientCase patientCase;
+    [SerializeField] private PatientCase patientCase;
     private PatientState currentState = PatientState.Done;
 
     private List<Vector2> currentPath = new List<Vector2>();
@@ -39,6 +42,42 @@ public class PatientController : BaseMove
         get { return patientCase; }
     }
 
+    public void SetSourcePrefab(GameObject prefab)
+    {
+        sourcePrefab = prefab;
+    }
+
+    public void SetPatientCase(PatientCase newPatientCase)
+    {
+        patientCase = newPatientCase;
+    }
+
+    public void PrepareForClinicExam(PatientCase newPatientCase)
+    {
+        SetPatientCase(newPatientCase);
+
+        currentState = PatientState.Done;
+
+        currentPath.Clear();
+        currentPathIndex = 0;
+
+        leavePath.Clear();
+        leavePathIndex = 0;
+        onLeaveFinished = null;
+        leaveStartTime = 0f;
+
+        StopMoving();
+
+        if (patientCase != null && patientCase.realDisease != null)
+        {
+            Debug.Log("NPC trong phòng khám đã nhận PatientCase: " + patientCase.realDisease.diseaseName);
+        }
+        else
+        {
+            Debug.LogWarning("NPC trong phòng khám chưa có PatientCase hợp lệ.");
+        }
+    }
+
     public void InitPatient(
         MedicalDatabase database,
         AStarPathfinder2D astarPathfinder,
@@ -49,6 +88,9 @@ public class PatientController : BaseMove
         medicalDatabase = database;
         pathfinder = astarPathfinder;
         clinicDoorPoint = targetClinicDoorPoint;
+
+        currentPath.Clear();
+        currentPathIndex = 0;
 
         leavePath.Clear();
         leavePathIndex = 0;
@@ -159,6 +201,51 @@ public class PatientController : BaseMove
         }
 
         moveInput = direction.normalized;
+    }
+
+    private void ArriveAtClinicDoor()
+    {
+        StopMoving();
+
+        currentState = PatientState.WaitingAtClinicDoor;
+
+        Debug.Log("NPC bệnh nhân đã tới cửa nhà thuốc.");
+
+        AddToClinicWaitingQueueAndDisappear();
+    }
+
+    private void AddToClinicWaitingQueueAndDisappear()
+    {
+        if (PatientVisitManager.Instance == null)
+        {
+            Debug.LogWarning("Chưa có PatientVisitManager trong scene.");
+            return;
+        }
+
+        if (sourcePrefab == null)
+        {
+            Debug.LogWarning("NPC chưa có sourcePrefab. Cần set sourcePrefab trong script spawn NPC.");
+            return;
+        }
+
+        if (patientCase == null || patientCase.realDisease == null)
+        {
+            Debug.LogWarning("NPC chưa có PatientCase hoặc chưa có bệnh thật.");
+            return;
+        }
+
+        bool added = PatientVisitManager.Instance.AddWaitingPatient(sourcePrefab, patientCase);
+
+        if (!added)
+        {
+            Debug.LogWarning("Không thêm được NPC vào hàng đợi bệnh nhân.");
+            return;
+        }
+
+        Debug.Log("NPC đã được đưa vào hàng đợi phòng khám: " + patientCase.realDisease.diseaseName);
+        Debug.Log("NPC ngoài map sẽ bị xóa để tránh lỗi khi chuyển scene.");
+
+        Destroy(gameObject);
     }
 
     public void LeaveClinic(Transform[] leavePoints, Action finishedCallback)
@@ -306,26 +393,6 @@ public class PatientController : BaseMove
     private bool IsLayerInMask(int layer, LayerMask mask)
     {
         return (mask.value & (1 << layer)) != 0;
-    }
-
-    private void ArriveAtClinicDoor()
-    {
-        StopMoving();
-
-        currentState = PatientState.WaitingAtClinicDoor;
-
-        Debug.Log("NPC bệnh nhân đã tới cửa nhà thuốc.");
-
-        if (PatientVisitManager.Instance != null)
-        {
-            PatientVisitManager.Instance.SetWaitingPatient(this);
-        }
-        else
-        {
-            Debug.LogWarning("Chưa có PatientVisitManager trong scene.");
-        }
-
-        Debug.Log("NPC bệnh nhân đã đi vào phòng thuốc và tạm ẩn khỏi map ngoài.");
     }
 
     private void StopMoving()

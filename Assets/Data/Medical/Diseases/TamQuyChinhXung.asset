@@ -17,7 +17,7 @@ MonoBehaviour:
   diseaseGroup: 9
   description: "Tim \u0111\u1EADp th\xECnh th\u1ECBch, ho\u1EA3ng h\u1ED1t lo s\u1EE3
     kh\xF4ng y\xEAn, d\u1EC5 gi\u1EADt m\xECnh."
-  patientDialogue: "D\u1EA1o n\xE0y tim con c\u1EE9 \u0111\u1EADp th\xECnh th\u1ECBch
+  patientDialogue: "D\u1EA1o n\xE0y tim t\xF4i c\u1EE9 \u0111\u1EADp th\xECnh th\u1ECBch
     li\xEAn h\u1ED3i trong l\u1ED3ng ng\u1EF1c, hay ho\u1EA3ng h\u1ED1t lo s\u1EE3,
     r\u1EA5t d\u1EC5 b\u1ECB gi\u1EADt m\xECnh."
   symptoms:

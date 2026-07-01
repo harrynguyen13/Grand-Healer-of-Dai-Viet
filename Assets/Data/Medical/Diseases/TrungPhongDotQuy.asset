@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TrungPhongDotQuy
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
   diseaseName: "Trung phong (\u0110\u1ED9t qu\u1EF5)"
-  diseaseLevel: 4
+  diseaseLevel: 3
   diseaseGroup: 9
   description: "\u0110\u1ED9t ng\u1ED9t h\xF4n m\xEA ng\xE3 g\u1EE5c, b\xE1n th\xE2n
     b\u1EA5t to\u1EA1i (li\u1EC7t n\u1EEDa ng\u01B0\u1EDDi), m\xE9o mi\u1EC7ng, n\xF3i

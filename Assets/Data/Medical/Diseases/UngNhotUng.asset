@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: UngNhotUng
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
   diseaseName: "Ung nh\u1ECDt (Ung)"
-  diseaseLevel: 3
+  diseaseLevel: 2
   diseaseGroup: 7
   description: "Kh\u1ED1i s\u01B0ng \u0111\u1ECF \u0111\u1ED9c l\u1EDBn tr\xEAn da,
     s\u01B0ng n\xF3ng r\xE1t d\u1EEF d\u1ED9i, \u0111au nh\u1EE9c s\xE2u, h\xF3a

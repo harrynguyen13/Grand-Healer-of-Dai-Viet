@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: son_tra
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: son_tra
+  herbName: "S\u01A1n tra"
   description: 
-  category: 11
+  category: 4
   rarity: 0
   unlockClinicLevel: 1
-  price: 5
+  price: 13
+  buyPrice: 12
+  sellPrice: 13
+  startQuantity: 50
+  autoCalculateBalance: 1
   icon: {fileID: -5562887302694267003, guid: 0325600e5c6b32245af4d6b1aab14eb4, type: 3}

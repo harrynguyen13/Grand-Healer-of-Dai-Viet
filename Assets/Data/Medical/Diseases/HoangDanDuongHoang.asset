@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HoangDanDuongHoang
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
   diseaseName: "Ho\xE0ng \u0111\u1EA3n (D\u01B0\u01A1ng ho\xE0ng)"
-  diseaseLevel: 4
+  diseaseLevel: 3
   diseaseGroup: 1
   description: "Da v\xE0 m\u1EAFt nhu\u1ED9m m\xE0u v\xE0ng r\u1EF1c nh\u01B0 qu\u1EA3
     qu\xFDt ch\xEDn, s\u1ED1t cao, n\u01B0\u1EDBc ti\u1EC3u v\xE0ng \u0111\u1EADm."

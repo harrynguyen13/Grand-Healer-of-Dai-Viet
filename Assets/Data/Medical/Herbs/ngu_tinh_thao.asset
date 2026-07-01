@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: ngu_tinh_thao
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: ngu_tinh_thao
+  herbName: "Ng\u01B0 tinh th\u1EA3o"
   description: 
-  category: 11
+  category: 1
   rarity: 0
   unlockClinicLevel: 1
-  price: 5
+  price: 11
+  buyPrice: 10
+  sellPrice: 11
+  startQuantity: 50
+  autoCalculateBalance: 1
   icon: {fileID: -1724757316077904299, guid: 62bd4745d1747c341940fcb48f1d6f92, type: 3}

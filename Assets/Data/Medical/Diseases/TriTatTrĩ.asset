@@ -17,7 +17,7 @@ MonoBehaviour:
   diseaseGroup: 7
   description: "C\xE1c b\xFAi tr\u0129 s\u01B0ng to sa ra ngo\xE0i h\u1EADu m\xF4n,
     \u0111au r\xE1t khi ng\u1ED3i, \u0111\u1EA1i ti\u1EC7n ra m\xE1u nh\u1ECF gi\u1ECDt."
-  patientDialogue: "H\u1EADu m\xF4n con c\xF3 b\xFAi th\u1ECBt d\u01B0 sa ra ngo\xE0i
+  patientDialogue: "H\u1EADu m\xF4n t\xF4i c\xF3 b\xFAi th\u1ECBt d\u01B0 sa ra ngo\xE0i
     s\u01B0ng to \u0111au r\xE1t kh\xF4ng ng\u1ED3i n\u1ED5i, \u0111i ngo\xE0i m\xE1u
     ch\u1EA3y nh\u1ECF gi\u1ECDt."
   symptoms:

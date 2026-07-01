@@ -18,7 +18,7 @@ MonoBehaviour:
   description: "Kh\u1ED1i m\u1EE5n \u0111\u1ED9c b\u1ECDc \u1EA9n s\xE2u d\u01B0\u1EDBi
     c\u01A1, \u0111au \xE2m \u1EC9 c\u1ED1t t\u1EE7y, lo\xE9t s\xE2u ho\u1EA1i t\u1EED
     ph\xE1 h\u1EE7y to\xE0n b\u1ED9 l\u1EDBp th\u1ECBt."
-  patientDialogue: "Con c\xF3 m\u1ED9t kh\u1ED1i m\u1EE5n b\u1ECDc \u1EA9n s\xE2u
+  patientDialogue: "T\xF4i c\xF3 m\u1ED9t kh\u1ED1i m\u1EE5n b\u1ECDc \u1EA9n s\xE2u
     d\u01B0\u1EDBi th\u1ECBt, kh\xF4ng \u0111\u1ECF kh\xF4ng n\xF3ng nh\u01B0ng \u0111au
     \xE2m \u1EC9 t\u1EADn x\u01B0\u01A1ng, gi\u1EDD lo\xE9t ho\u1EA1i t\u1EED s\xE2u."
   symptoms:

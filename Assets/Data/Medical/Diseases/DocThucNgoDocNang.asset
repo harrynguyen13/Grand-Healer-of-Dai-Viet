@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
   diseaseName: "\u0110\u1ED9c th\u1EF1c (Ng\u1ED9 \u0111\u1ED9c th\u1EE9c \u0103n
     n\u1EB7ng)"
-  diseaseLevel: 4
+  diseaseLevel: 3
   diseaseGroup: 1
   description: "B\u1EE5ng \u0111au d\u1EEF d\u1ED9i, n\xF4n m\u1EEDa li\xEAn t\u1EE5c
     k\xE8m ti\xEAu ch\u1EA3y c\u1EA5p, v\xE3 m\u1ED3 h\xF4i l\u1EA1nh, m\u1EA1ch
     tr\u1EA7m mu\u1ED1n tr\u1EE5y tai."
-  patientDialogue: "Sau khi \u0103n c\u01A1m xong b\u1EE5ng con \u0111au l\u1ED9n
+  patientDialogue: "Sau khi \u0103n c\u01A1m xong b\u1EE5ng t\xF4i \u0111au l\u1ED9n
     l\xEAn d\u1EEF d\u1ED9i, n\xF4n m\u1EEDa li\xEAn t\u1EE5c k\xE8m ti\xEAu ch\u1EA3y
     c\u1EA5p, ng\u01B0\u1EDDi v\xE3 m\u1ED3 h\xF4i l\u1EA1nh."
   symptoms:

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: "DienChungTamThanTr\u1EA7m"
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
   diseaseName: "\u0110i\xEAn ch\u1EE9ng"
-  diseaseLevel: 4
+  diseaseLevel: 2
   diseaseGroup: 9
   description: "Tinh th\u1EA7n u u\u1EA5t, l\u1EA7m l\u1EF3, t\u1EF1 n\xF3i m\u1ED9t
     m\xECnh, ng\u01A1 ng\xE1c, kh\xF4ng mu\u1ED1n \u0103n u\u1ED1ng ti\u1EBFp x\xFAc."

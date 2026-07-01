@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CamMaoThuThap
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
   diseaseName: "C\u1EA3m m\u1EA1o th\u1EED th\u1EA5p"
-  diseaseLevel: 1
+  diseaseLevel: 2
   diseaseGroup: 0
   description: "S\u1ED1t m\xF9a h\xE8, \u0111au \u0111\u1EA7u, ng\u1EF1c b\u1EE5ng
     \u0111\u1EA7y tr\u01B0\u1EDBng, m\u1EC7t m\u1ECFi n\u1EB7ng n\u1EC1."

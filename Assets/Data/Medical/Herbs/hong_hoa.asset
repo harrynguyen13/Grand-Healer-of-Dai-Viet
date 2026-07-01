@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: hong_hoa
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: hong_hoa
+  herbName: "H\u1ED3ng hoa"
   description: 
-  category: 11
+  category: 5
   rarity: 0
   unlockClinicLevel: 1
-  price: 5
+  price: 16
+  buyPrice: 15
+  sellPrice: 16
+  startQuantity: 50
+  autoCalculateBalance: 1
   icon: {fileID: -1006488089990722646, guid: b38f4dccb99ec9e428a54ba3ec110f68, type: 3}

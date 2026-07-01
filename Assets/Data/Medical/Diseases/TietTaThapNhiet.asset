@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: TietTaThapNhiet
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
   diseaseName: "Ti\u1EBFt t\u1EA3 th\u1EA5p nhi\u1EC7t"
-  diseaseLevel: 2
+  diseaseLevel: 3
   diseaseGroup: 1
   description: "\u0110i ngo\xE0i ph\xE2n kh\u1EAFm th\u1ED1i, m\xF3t r\u1EB7n, h\u1EADu
     m\xF4n n\xF3ng r\xE1t."
-  patientDialogue: "B\u1EE5ng con \u0111au qu\u1EB7n, \u0111i ngo\xE0i li\xEAn t\u1EE5c
-    ra ph\xE2n kh\u1EAFm th\u1ED1i n\u1ED3ng n\u1EB7c, c\xE1i h\u1EADu m\xF4n n\xF3ng
-    r\xE1t nh\u01B0 l\u1EEDa."
+  patientDialogue: "B\u1EE5ng t\xF4i \u0111au qu\u1EB7n, \u0111i ngo\xE0i li\xEAn
+    t\u1EE5c ra ph\xE2n kh\u1EAFm th\u1ED1i n\u1ED3ng n\u1EB7c, c\xE1i h\u1EADu m\xF4n
+    n\xF3ng r\xE1t nh\u01B0 l\u1EEDa."
   symptoms:
   - symptomText: "Ph\xE2n kh\u1EAFm th\u1ED1i n\u1ED3ng n\u1EB7c."
     showAtStep: 0

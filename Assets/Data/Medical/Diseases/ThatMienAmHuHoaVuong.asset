@@ -17,9 +17,9 @@ MonoBehaviour:
   diseaseGroup: 9
   description: "Kh\xF3 v\xE0o gi\u1EA5c ng\u1EE7, t\xE2m phi\u1EC1n b\u1EE9t r\u1EE9t,
     l\xF2ng b\xE0n tay ch\xE2n n\xF3ng r\xE1t."
-  patientDialogue: "C\u1EA3 \u0111\xEAm con tr\u1EB1n tr\u1ECDc kh\xF4ng t\xE0i n\xE0o
-    ng\u1EE7 \u0111\u01B0\u1EE3c, trong l\xF2ng b\u1EF1c d\u1ECDc b\u1EE9t r\u1EE9t,
-    l\xF2ng b\xE0n tay ch\xE2n n\xF3ng nh\u01B0 h\u01A1 l\u1EEDa."
+  patientDialogue: "C\u1EA3 \u0111\xEAm t\xF4i tr\u1EB1n tr\u1ECDc kh\xF4ng t\xE0i
+    n\xE0o ng\u1EE7 \u0111\u01B0\u1EE3c, trong l\xF2ng b\u1EF1c d\u1ECDc b\u1EE9t
+    r\u1EE9t, l\xF2ng b\xE0n tay ch\xE2n n\xF3ng nh\u01B0 h\u01A1 l\u1EEDa."
   symptoms:
   - symptomText: "Tr\u1EB1n tr\u1ECDc kh\xF3 v\xE0o gi\u1EA5c ng\u1EE7."
     showAtStep: 0

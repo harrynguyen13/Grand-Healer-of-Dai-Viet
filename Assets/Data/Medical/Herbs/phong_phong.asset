@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: phong_phong
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: phong_phong
+  herbName: "Ph\xF2ng phong"
   description: 
-  category: 11
+  category: 0
   rarity: 0
   unlockClinicLevel: 1
-  price: 5
+  price: 9
+  buyPrice: 8
+  sellPrice: 9
+  startQuantity: 50
+  autoCalculateBalance: 1
   icon: {fileID: -5662499612088303600, guid: 96bb7282e9db44542b60412447d3c4a6, type: 3}

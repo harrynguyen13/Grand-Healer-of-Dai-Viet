@@ -25,8 +25,8 @@ public class PrescriptionUIController : MonoBehaviour
     [Header("Nút kê đơn")]
     [SerializeField] private Button confirmPrescriptionButton;
 
-    [Header("Số lượng test ban đầu")]
-    [SerializeField] private int defaultHerbQuantity = 5;
+    [Header("Số lượng test nếu chưa có HerbInventory")]
+    [SerializeField] private int fallbackHerbQuantity = 5;
 
     private readonly Dictionary<HerbData, int> herbQuantities = new Dictionary<HerbData, int>();
     private readonly Dictionary<HerbData, int> selectedHerbs = new Dictionary<HerbData, int>();
@@ -90,6 +90,8 @@ public class PrescriptionUIController : MonoBehaviour
         }
 
         ClearChildren(herbListContent);
+
+        herbQuantities.Clear();
         leftHerbItems.Clear();
 
         List<HerbData> unlockedHerbs = medicalDatabase.GetUnlockedHerbs(clinicLevel);
@@ -99,17 +101,32 @@ public class PrescriptionUIController : MonoBehaviour
             if (herb == null)
                 continue;
 
-            if (!herbQuantities.ContainsKey(herb))
-                herbQuantities.Add(herb, defaultHerbQuantity);
+            int quantity = GetRealHerbQuantity(herb);
+
+            herbQuantities.Add(herb, quantity);
 
             HerbItemUI item = Instantiate(herbItemPrefab, herbListContent);
-            item.Setup(herb, herbQuantities[herb], OnClickHerbFromStorage);
+            item.Setup(herb, quantity, OnClickHerbFromStorage);
 
             if (!leftHerbItems.ContainsKey(herb))
                 leftHerbItems.Add(herb, item);
         }
 
         Debug.Log("Đã tạo danh sách dược liệu: " + unlockedHerbs.Count);
+    }
+
+    private int GetRealHerbQuantity(HerbData herb)
+    {
+        if (herb == null)
+            return 0;
+
+        if (HerbInventory.Instance != null)
+        {
+            return HerbInventory.Instance.GetQuantity(herb);
+        }
+
+        Debug.LogWarning("Không có HerbInventory. Dùng số lượng test cho: " + herb.herbName);
+        return fallbackHerbQuantity;
     }
 
     private void OnClickHerbFromStorage(HerbData herb)
@@ -200,9 +217,22 @@ public class PrescriptionUIController : MonoBehaviour
             return;
         }
 
+        Dictionary<HerbData, int> selectedSnapshot = new Dictionary<HerbData, int>(selectedHerbs);
+
+        if (HerbInventory.Instance != null)
+        {
+            if (!HerbInventory.Instance.HasEnoughPrescription(selectedSnapshot))
+            {
+                Debug.LogWarning("Kho thuốc không đủ để kê đơn.");
+                BuildHerbList();
+                RefreshSelectedHerbs();
+                return;
+            }
+        }
+
         Debug.Log("===== KÊ ĐƠN =====");
 
-        foreach (KeyValuePair<HerbData, int> pair in selectedHerbs)
+        foreach (KeyValuePair<HerbData, int> pair in selectedSnapshot)
         {
             HerbData herb = pair.Key;
             int quantity = pair.Value;
@@ -212,8 +242,6 @@ public class PrescriptionUIController : MonoBehaviour
 
             Debug.Log("- " + herb.herbName + " x" + quantity);
         }
-
-        Dictionary<HerbData, int> selectedSnapshot = new Dictionary<HerbData, int>(selectedHerbs);
 
         Debug.Log("Đã kê đơn xong.");
 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HuyenVungCanDuong
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
   diseaseName: "Huy\u1EC5n v\u1EF1ng (Can d\u01B0\u01A1ng th\u01B0\u1EE3ng kh\xE1ng)"
-  diseaseLevel: 3
+  diseaseLevel: 4
   diseaseGroup: 9
   description: "Ch\xF3ng m\u1EB7t, hoa m\u1EAFt, nh\xE0 c\u1EEDa \u0111\u1EA3o l\u1ED9n,
     \u0111\u1EA7u n\u1EB7ng ch\xE2n nh\u1EB9, tai \xF9."

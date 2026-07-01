@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: nguu_tat
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: nguu_tat
+  herbName: "Ng\u01B0u t\u1EA5t"
   description: 
-  category: 11
-  rarity: 0
-  unlockClinicLevel: 1
-  price: 5
+  category: 5
+  rarity: 2
+  unlockClinicLevel: 3
+  price: 52
+  buyPrice: 45
+  sellPrice: 52
+  startQuantity: 30
+  autoCalculateBalance: 1
   icon: {fileID: 9100387015408375947, guid: 9298ee43446ed304fa72d17842bd052b, type: 3}

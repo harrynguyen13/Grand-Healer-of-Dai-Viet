@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: xuyen_boi_mau
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: xuyen_boi_mau
+  herbName: "Xuy\xEAn b\u1ED1i m\u1EABu"
   description: 
-  category: 11
-  rarity: 0
-  unlockClinicLevel: 1
-  price: 5
+  category: 1
+  rarity: 2
+  unlockClinicLevel: 3
+  price: 46
+  buyPrice: 40
+  sellPrice: 46
+  startQuantity: 30
+  autoCalculateBalance: 1
   icon: {fileID: -7490036997682764912, guid: 3c181ff8533c281408dabb0a0e44debb, type: 3}

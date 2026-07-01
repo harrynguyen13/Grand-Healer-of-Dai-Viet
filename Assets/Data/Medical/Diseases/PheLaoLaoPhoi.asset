@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PheLaoLaoPhoi
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
   diseaseName: "Ph\u1EBF lao (Lao ph\u1ED5i n\u1EB7ng)"
-  diseaseLevel: 4
+  diseaseLevel: 2
   diseaseGroup: 0
   description: "Ho l\xE2u ng\xE0y g\u1EA7y r\u1ED9c tr\u01A1 x\u01B0\u01A1ng, kh\u1EA1c
     r\xF2ng r\u1ECDc ra m\xE1u t\u01B0\u01A1i, m\u1ED3 h\xF4i tr\u1ED9m \u0111\u1EA7m

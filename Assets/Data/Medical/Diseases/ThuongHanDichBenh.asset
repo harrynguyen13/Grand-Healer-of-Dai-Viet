@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ThuongHanDichBenh
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
   diseaseName: "Th\u01B0\u01A1ng h\xE0n"
-  diseaseLevel: 4
+  diseaseLevel: 3
   diseaseGroup: 0
   description: "S\u1ED1t cao li\xEAn t\u1EE5c kh\xF4ng l\xF9i, m\xF4i kh\xF4 l\u01B0\u1EE1i
     \u0111en n\u1EE9t n\u1EBB, th\u1EA7n tr\xED m\xEA s\u1EA3ng, b\u1EE5ng tr\u01B0\u1EDBng

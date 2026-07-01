@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: kim_tien_thao
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: kim_tien_thao
+  herbName: "Kim ti\u1EC1n th\u1EA3o"
   description: 
-  category: 11
+  category: 6
   rarity: 0
   unlockClinicLevel: 1
-  price: 5
+  price: 14
+  buyPrice: 13
+  sellPrice: 14
+  startQuantity: 50
+  autoCalculateBalance: 1
   icon: {fileID: -3675918408292191727, guid: f8c898a648dfd0541b7581fb59c091d9, type: 3}

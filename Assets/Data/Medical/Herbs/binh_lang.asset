@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: binh_lang
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: binh_lang
+  herbName: Binh lang
   description: 
-  category: 11
-  rarity: 0
-  unlockClinicLevel: 1
-  price: 5
+  category: 4
+  rarity: 1
+  unlockClinicLevel: 2
+  price: 27
+  buyPrice: 24
+  sellPrice: 27
+  startQuantity: 40
+  autoCalculateBalance: 1
   icon: {fileID: 570948605876698972, guid: e59e869ea7f8c554a8857c5a96a30fef, type: 3}

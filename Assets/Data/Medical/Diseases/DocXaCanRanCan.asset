@@ -18,7 +18,7 @@ MonoBehaviour:
   description: "V\u1EBFt c\u1EAFn s\u01B0ng t\u1EA5y \u0111en b\u1EA7m, \u0111au
     nh\u1EE9c lan nhanh, kh\xF3 th\u1EDF, s\u1EE5p mi m\u1EAFt, l\u01A1 m\u01A1 s\u1EAFp
     ch\u1EBFt."
-  patientDialogue: "Con \u0111i r\u1EEBng b\u1ECB r\u1EAFn \u0111\u1ED9c m\u1ED5
+  patientDialogue: "T\xF4i \u0111i r\u1EEBng b\u1ECB r\u1EAFn \u0111\u1ED9c m\u1ED5
     v\xE0o ch\xE2n, v\u1EBFt c\u1EAFn s\u01B0ng t\u1EA5y \u0111en b\u1EA7m \u0111au
     bu\u1ED1t, gi\u1EDD m\u1EAFt s\u1EE5p xu\u1ED1ng kh\xF3 th\u1EDF l\u1EAFm."
   symptoms:

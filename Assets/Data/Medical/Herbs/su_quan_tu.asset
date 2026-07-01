@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: su_quan_tu
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: su_quan_tu
+  herbName: "S\u1EED qu\xE2n t\u1EED"
   description: 
-  category: 11
-  rarity: 0
-  unlockClinicLevel: 1
-  price: 5
+  category: 4
+  rarity: 1
+  unlockClinicLevel: 2
+  price: 27
+  buyPrice: 24
+  sellPrice: 27
+  startQuantity: 40
+  autoCalculateBalance: 1
   icon: {fileID: -5005169474466185053, guid: c974797dbfd08cc47abfea367c824f18, type: 3}

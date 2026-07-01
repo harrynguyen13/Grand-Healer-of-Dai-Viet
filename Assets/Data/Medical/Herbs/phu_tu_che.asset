@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: phu_tu_che
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: phu_tu_che
+  herbName: "Ph\u1EE5 t\u1EED ch\u1EBF"
   description: 
-  category: 11
-  rarity: 0
-  unlockClinicLevel: 1
-  price: 5
+  category: 10
+  rarity: 3
+  unlockClinicLevel: 4
+  price: 76
+  buyPrice: 64
+  sellPrice: 76
+  startQuantity: 15
+  autoCalculateBalance: 1
   icon: {fileID: 7081824367046064604, guid: e15650f474fed9345abb07b3fbd3d1f0, type: 3}

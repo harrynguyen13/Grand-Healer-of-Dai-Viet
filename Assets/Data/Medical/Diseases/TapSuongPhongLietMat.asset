@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TapSuongPhongLietMat
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
   diseaseName: "T\xE1p s\u01B0\u01A1ng phong (Li\u1EC7t m\u1EB7t)"
-  diseaseLevel: 2
+  diseaseLevel: 3
   diseaseGroup: 7
   description: "Ng\u1EE7 \u0111\xEAm tr\xFAng gi\xF3 l\u1EA1nh, s\xE1ng d\u1EADy
     m\u1ED9t b\xEAn m\u1EB7t li\u1EC7t \u0111\u1EDD, m\xE9o mi\u1EC7ng, m\u1EAFt

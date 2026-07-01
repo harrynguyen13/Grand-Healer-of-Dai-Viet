@@ -30,6 +30,7 @@ MonoBehaviour:
   - symptomText: "Ti\u1EC3u ti\u1EC7n ng\u1EAFn \u0111\u1ECF r\xE1t."
     showAtStep: 1
   correctHerbs:
+  - {fileID: 11400000, guid: d6128ee02d59f234ba4dfb8bfd3ccc5e, type: 2}
   - {fileID: 11400000, guid: e990df34207dedb409588788f2b106c1, type: 2}
   - {fileID: 11400000, guid: b283ada7362c6e14fb5cdf92e0d5209f, type: 2}
   medicineCorrectRate: 0.7

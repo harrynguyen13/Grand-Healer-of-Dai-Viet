@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: xuong_bo
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: xuong_bo
+  herbName: "X\u01B0\u01A1ng b\u1ED3"
   description: 
-  category: 11
-  rarity: 0
-  unlockClinicLevel: 1
-  price: 5
+  category: 3
+  rarity: 1
+  unlockClinicLevel: 2
+  price: 27
+  buyPrice: 24
+  sellPrice: 27
+  startQuantity: 40
+  autoCalculateBalance: 1
   icon: {fileID: -5466270026625841271, guid: 7f2a95d9274a5e84fb5a748274298991, type: 3}

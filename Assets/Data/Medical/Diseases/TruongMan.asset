@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: TruongMan
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
   diseaseName: "Tr\u01B0\u1EDBng m\xE3n"
-  diseaseLevel: 1
+  diseaseLevel: 2
   diseaseGroup: 1
   description: "B\u1EE5ng to ph\xECnh ra nh\u01B0 c\xE1i tr\u1ED1ng, g\xF5 b\xF4m
     b\u1ED1p, \u1EA5m \xE1ch kh\xF3 ch\u1ECBu."
-  patientDialogue: "B\u1EE5ng con to ph\xECnh ra nh\u01B0 c\xE1i tr\u1ED1ng, g\xF5
+  patientDialogue: "B\u1EE5ng t\xF4i to ph\xECnh ra nh\u01B0 c\xE1i tr\u1ED1ng, g\xF5
     v\xE0o b\xF4m b\u1ED1p, n\u1EBFu \u0111\xE1nh r\u1EAFm \u0111\u01B0\u1EE3c th\xEC
     m\u1EDBi nh\u1EB9 ng\u01B0\u1EDDi."
   symptoms:

@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: hai_kim_sa
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: hai_kim_sa
+  herbName: "H\u1EA3i kim sa"
   description: 
-  category: 11
-  rarity: 0
-  unlockClinicLevel: 1
-  price: 5
+  category: 6
+  rarity: 4
+  unlockClinicLevel: 4
+  price: 85
+  buyPrice: 70
+  sellPrice: 85
+  startQuantity: 5
+  autoCalculateBalance: 1
   icon: {fileID: -2980531408088474634, guid: 7b9fbabacd904d143ab16b1510c24834, type: 3}

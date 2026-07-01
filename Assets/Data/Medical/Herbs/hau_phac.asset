@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: hau_phac
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: hau_phac
+  herbName: "H\u1EADu ph\xE1c"
   description: 
-  category: 11
-  rarity: 0
-  unlockClinicLevel: 1
-  price: 5
+  category: 3
+  rarity: 1
+  unlockClinicLevel: 2
+  price: 27
+  buyPrice: 24
+  sellPrice: 27
+  startQuantity: 40
+  autoCalculateBalance: 1
   icon: {fileID: 1313945142156207472, guid: 6a15a95b2b946f544969f2f613e4c241, type: 3}

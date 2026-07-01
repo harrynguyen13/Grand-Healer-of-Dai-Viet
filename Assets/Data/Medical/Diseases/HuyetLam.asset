@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HuyetLam
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
   diseaseName: "Huy\u1EBFt l\xE2m"
-  diseaseLevel: 3
+  diseaseLevel: 4
   diseaseGroup: 2
   description: "\u0110i ti\u1EC3u ra m\xE1u t\u01B0\u01A1i ho\u1EB7c m\xE1u c\u1EE5c
     k\xE8m c\u1EA3m gi\xE1c n\xF3ng r\xE1t \u0111\u01B0\u1EDDng ti\u1EC3u d\u1EEF

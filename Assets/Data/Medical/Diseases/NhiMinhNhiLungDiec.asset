@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: NhiMinhNhiLungDiec
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
   diseaseName: "Nh\u0129 minh / Nh\u0129 lung"
-  diseaseLevel: 4
+  diseaseLevel: 3
   diseaseGroup: 9
   description: "Tai t\u1EF1 nghe ti\u1EBFng \xF9 \xF9 li\xEAn t\u1EE5c, l\xE2u ng\xE0y
     th\xEDnh l\u1EF1c m\u1EA5t ho\xE0n to\xE0n kh\xF4ng nghe th\u1EA5y g\xEC (\u0111i\u1EBFc
     h\u1EB3n)."
-  patientDialogue: "C\xE1i tai con n\xF3 c\u1EE9 t\u1EF1 \xF9 \xF9 inh \u1ECFi nh\u01B0
-    ti\u1EBFng ve k\xEAu su\u1ED1t ng\xE0y \u0111\xEAm, gi\u1EDD \u0111i\u1EBFc h\u1EB3n
-    ch\u1EB3ng nghe th\u1EA5y ng\u01B0\u1EDDi ta n\xF3i g\xEC."
+  patientDialogue: "C\xE1i tai t\xF4i n\xF3 c\u1EE9 t\u1EF1 \xF9 \xF9 inh \u1ECFi
+    nh\u01B0 ti\u1EBFng ve k\xEAu su\u1ED1t ng\xE0y \u0111\xEAm, gi\u1EDD \u0111i\u1EBFc
+    h\u1EB3n ch\u1EB3ng nghe th\u1EA5y ng\u01B0\u1EDDi ta n\xF3i g\xEC."
   symptoms:
   - symptomText: "Tai t\u1EF1 nghe ti\u1EBFng \xF9 \xF9 inh \u1ECFi li\xEAn t\u1EE5c."
     showAtStep: 0

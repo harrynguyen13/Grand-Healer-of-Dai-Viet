@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: KhiHuyetLuongHu
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
   diseaseName: "Kh\xED huy\u1EBFt l\u01B0\u1EE1ng h\u01B0"
-  diseaseLevel: 2
+  diseaseLevel: 3
   diseaseGroup: 9
   description: "S\u1EAFc m\u1EB7t b\u1EC7ch \xFAa, h\u1EE5t h\u01A1i l\u01B0\u1EDDi
     n\xF3i, hoa m\u1EAFt tai \xF9, m\xF3ng tay t\xE1i."

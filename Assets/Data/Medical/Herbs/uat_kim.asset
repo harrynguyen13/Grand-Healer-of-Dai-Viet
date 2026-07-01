@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: uat_kim
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: uat_kim
+  herbName: "U\u1EA5t kim"
   description: 
-  category: 11
-  rarity: 0
-  unlockClinicLevel: 1
-  price: 5
+  category: 5
+  rarity: 1
+  unlockClinicLevel: 2
+  price: 30
+  buyPrice: 27
+  sellPrice: 30
+  startQuantity: 40
+  autoCalculateBalance: 1
   icon: {fileID: 8343413925871069257, guid: ff3221ca6cd883c4ebefe86b12e445d2, type: 3}

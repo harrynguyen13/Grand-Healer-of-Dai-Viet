@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: son_thu_du
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: son_thu_du
+  herbName: "S\u01A1n th\xF9 du"
   description: 
-  category: 11
-  rarity: 0
-  unlockClinicLevel: 1
-  price: 5
+  category: 8
+  rarity: 2
+  unlockClinicLevel: 3
+  price: 58
+  buyPrice: 50
+  sellPrice: 58
+  startQuantity: 30
+  autoCalculateBalance: 1
   icon: {fileID: -5062451376333293553, guid: 7965da792c908134aa835e946fe3a3cf, type: 3}

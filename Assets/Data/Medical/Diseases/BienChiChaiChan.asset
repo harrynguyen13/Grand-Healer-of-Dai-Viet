@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: BienChiChaiChan
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
   diseaseName: "Bi\u1EC1n chi (Chai ch\xE2n)"
-  diseaseLevel: 1
+  diseaseLevel: 2
   diseaseGroup: 7
   description: "L\u1EDBp da l\xF2ng b\xE0n ch\xE2n d\xE0y c\u1EE9ng th\xE0nh c\u1EE5c
     s\u1EEBng, \u1EA5n v\xE0o \u0111au nh\xF3i khi \u0111i."
-  patientDialogue: "L\xF2ng b\xE0n ch\xE2n con n\u1ED5i l\xEAn m\u1EA5y c\u1EE5c
+  patientDialogue: "L\xF2ng b\xE0n ch\xE2n t\xF4i n\u1ED5i l\xEAn m\u1EA5y c\u1EE5c
     da d\xE0y c\u1EE9ng ng\u1EAFc, v\xE0ng nh\u1EA1t, m\u1ED7i l\u1EA7n gi\u1EABm
     ch\xE2n xu\u1ED1ng \u0111\u1EA5t \u0111au nh\xF3i."
   symptoms:

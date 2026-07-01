@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PatientSpawnManager : MonoBehaviour
@@ -21,20 +23,81 @@ public class PatientSpawnManager : MonoBehaviour
     [SerializeField] private Transform clinicDoorPoint;
 
     [Header("Thời gian sinh bệnh nhân")]
-    [SerializeField] private float firstSpawnDelay = 3f;
+    [SerializeField] private float firstSpawnDelay = 5f;
 
-    private PatientController currentPatient;
+    [Tooltip("Thời gian ngắn nhất giữa 2 lần sinh NPC.")]
+    [SerializeField] private float minSpawnInterval = 15f;
+
+    [Tooltip("Thời gian dài nhất giữa 2 lần sinh NPC.")]
+    [SerializeField] private float maxSpawnInterval = 25f;
+
+    [Header("Giới hạn NPC ngoài map")]
+    [SerializeField] private int maxActivePatientsOnMap = 2;
+
+    [Header("Giới hạn hàng chờ")]
+    [Tooltip("Nếu hàng chờ đã có số bệnh nhân này thì tạm dừng sinh thêm.")]
+    [SerializeField] private int targetWaitingPatients = 2;
+
+    private readonly List<PatientController> activePatients = new List<PatientController>();
+    private Coroutine spawnCoroutine;
 
     private void Start()
     {
-        Invoke(nameof(SpawnPatient), firstSpawnDelay);
+        spawnCoroutine = StartCoroutine(SpawnLoop());
+    }
+
+    private void OnDisable()
+    {
+        if (spawnCoroutine != null)
+        {
+            StopCoroutine(spawnCoroutine);
+            spawnCoroutine = null;
+        }
+    }
+
+    private IEnumerator SpawnLoop()
+    {
+        yield return new WaitForSeconds(firstSpawnDelay);
+
+        while (true)
+        {
+            TrySpawnPatient();
+
+            float waitTime = Random.Range(minSpawnInterval, maxSpawnInterval);
+            yield return new WaitForSeconds(waitTime);
+        }
+    }
+
+    private void TrySpawnPatient()
+    {
+        CleanupDestroyedPatients();
+
+        if (PatientVisitManager.Instance != null)
+        {
+            if (PatientVisitManager.Instance.WaitingCount >= targetWaitingPatients)
+            {
+                Debug.Log("Hàng chờ đã có " + PatientVisitManager.Instance.WaitingCount + " bệnh nhân, tạm dừng sinh thêm.");
+                return;
+            }
+
+            if (!PatientVisitManager.Instance.CanAcceptMorePatients)
+            {
+                Debug.Log("Hàng đợi bệnh nhân đã đầy, tạm dừng sinh NPC.");
+                return;
+            }
+        }
+
+        if (activePatients.Count >= maxActivePatientsOnMap)
+        {
+            Debug.Log("Đang có " + activePatients.Count + " NPC bệnh nhân ngoài map, tạm dừng sinh thêm.");
+            return;
+        }
+
+        SpawnPatient();
     }
 
     private void SpawnPatient()
     {
-        if (currentPatient != null)
-            return;
-
         if (patientPrefabs == null || patientPrefabs.Length == 0)
         {
             Debug.LogError("Chưa kéo danh sách prefab NPC bệnh nhân vào PatientSpawnManager.");
@@ -81,21 +144,43 @@ public class PatientSpawnManager : MonoBehaviour
             return;
         }
 
-        currentPatient = Instantiate(
+        PatientController newPatient = Instantiate(
             randomPatientPrefab,
             randomSpawnPoint.position,
             Quaternion.identity
         );
 
-        currentPatient.InitPatient(
+        if (newPatient == null)
+        {
+            Debug.LogError("Sinh NPC bệnh nhân thất bại.");
+            return;
+        }
+
+        newPatient.SetSourcePrefab(randomPatientPrefab.gameObject);
+
+        newPatient.InitPatient(
             medicalDatabase,
             pathfinder,
             clinicLevel,
             clinicDoorPoint
         );
 
+        activePatients.Add(newPatient);
+
         Debug.Log("Đã sinh NPC bệnh nhân loại: " + randomPatientPrefab.name);
         Debug.Log("Vị trí sinh: " + randomSpawnPoint.name);
+        Debug.Log("Số NPC bệnh nhân đang đi ngoài map: " + activePatients.Count);
+    }
+
+    private void CleanupDestroyedPatients()
+    {
+        for (int i = activePatients.Count - 1; i >= 0; i--)
+        {
+            if (activePatients[i] == null)
+            {
+                activePatients.RemoveAt(i);
+            }
+        }
     }
 
     private PatientController GetRandomPatientPrefab()

@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: UyChungLietTeoCo
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
   diseaseName: "\u1EE6y ch\u1EE9ng (Li\u1EC7t/Teo c\u01A1)"
-  diseaseLevel: 4
+  diseaseLevel: 3
   diseaseGroup: 2
   description: "Ch\xE2n tay b\u1EE7n r\u1EE7n m\u1EC1m nh\u0169n kh\xF4ng c\xF3 l\u1EF1c,
     l\xE2u ng\xE0y c\u01A1 b\u1EAFp ti\xEAu teo t\xF3p ho\xE0n to\xE0n."
-  patientDialogue: "Hai ch\xE2n hai tay con b\u1EE7n r\u1EE7n m\u1EC1m nh\u0169n
+  patientDialogue: "Hai ch\xE2n hai tay t\xF4i b\u1EE7n r\u1EE7n m\u1EC1m nh\u0169n
     kh\xF4ng c\xF3 t\xED l\u1EF1c n\xE0o, m\u1EA5y th\xE1ng nay c\u01A1 b\u1EAFp
     c\u1EE9 ti\xEAu teo t\xF3p h\u1EB3n l\u1EA1i."
   symptoms:

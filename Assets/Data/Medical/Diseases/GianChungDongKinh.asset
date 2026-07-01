@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GianChungDongKinh
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
   diseaseName: "Gi\u1EA3n ch\u1EE9ng (\u0110\u1ED9ng kinh)"
-  diseaseLevel: 4
+  diseaseLevel: 3
   diseaseGroup: 9
   description: "\u0110\u1ED9t ng\u1ED9t ng\xE3 l\u0103n h\xF4n m\xEA, co qu\u1EADt
     ch\xE2n tay, s\xF9i b\u1ECDt m\xE9p, mi\u1EC7ng k\xEAu nh\u01B0 g\xE0 v\u1ECBt."

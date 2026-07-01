@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: nhan_tran
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: nhan_tran
+  herbName: "Nh\xE2n tr\u1EA7n"
   description: 
-  category: 11
+  category: 1
   rarity: 0
   unlockClinicLevel: 1
-  price: 5
+  price: 11
+  buyPrice: 10
+  sellPrice: 11
+  startQuantity: 50
+  autoCalculateBalance: 1
   icon: {fileID: 2902761377913038641, guid: 9660775e31d96a24893a1fb867b3faa2, type: 3}

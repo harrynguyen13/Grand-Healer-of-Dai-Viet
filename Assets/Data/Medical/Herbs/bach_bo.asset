@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: bach_bo
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: bach_bo
+  herbName: "B\u1EA1ch b\u1ED9"
   description: 
-  category: 11
+  category: 2
   rarity: 0
   unlockClinicLevel: 1
-  price: 5
+  price: 12
+  buyPrice: 11
+  sellPrice: 12
+  startQuantity: 50
+  autoCalculateBalance: 1
   icon: {fileID: 2032649052142502528, guid: 150414b6b2b937d42a14f9a75293ceb1, type: 3}

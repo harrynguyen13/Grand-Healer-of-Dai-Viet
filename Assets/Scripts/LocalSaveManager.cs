@@ -36,24 +36,39 @@ public class LocalSaveManager : MonoBehaviour
 
     private void OnDisable()
     {
-        if (!hasStarted) return;
+        if (!hasStarted)
+            return;
 
         SaveGame();
     }
 
     public void SaveGame()
     {
-        // Không lưu ở menu và scene cốt truyện
         string currentScene = SceneManager.GetActiveScene().name;
 
+        // Không lưu ở menu và scene cốt truyện
         if (currentScene == "LoginScene" || currentScene == "IntroScene")
             return;
 
+        // Lưu kho thuốc trước
+        // Kể cả không tìm thấy Player thì kho thuốc vẫn được lưu
+        if (HerbInventory.Instance != null)
+        {
+            HerbInventory.Instance.SaveInventory();
+        }
+        else
+        {
+            Debug.LogWarning("Không tìm thấy HerbInventory để lưu kho thuốc.");
+        }
+
         FindPlayerIfMissing();
 
-        // Không có Player thì bỏ qua, không báo lỗi nữa
         if (player == null)
+        {
+            PlayerPrefs.Save();
+            Debug.Log("Đã lưu dữ liệu hệ thống, nhưng không tìm thấy Player để lưu vị trí.");
             return;
+        }
 
         PlayerPrefs.SetInt(HasLocalSaveKey, 1);
         PlayerPrefs.SetString(PlayerSceneKey, currentScene);
@@ -89,16 +104,45 @@ public class LocalSaveManager : MonoBehaviour
 
         player.position = new Vector3(x, y, z);
 
+        Rigidbody2D rb2d = player.GetComponent<Rigidbody2D>();
+
+        if (rb2d != null)
+        {
+            rb2d.position = player.position;
+            rb2d.linearVelocity = Vector2.zero;
+            rb2d.angularVelocity = 0f;
+        }
+
         Debug.Log("Đã load vị trí người chơi từ local save: " + player.position);
     }
 
     private void FindPlayerIfMissing()
     {
-        if (player != null) return;
+        if (player != null)
+            return;
 
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
 
         if (playerObj != null)
             player = playerObj.transform;
+    }
+
+    [ContextMenu("Save Game Now")]
+    public void SaveGameNow()
+    {
+        SaveGame();
+    }
+
+    [ContextMenu("Delete Local Player Save")]
+    public void DeleteLocalPlayerSave()
+    {
+        PlayerPrefs.DeleteKey(HasLocalSaveKey);
+        PlayerPrefs.DeleteKey(PlayerSceneKey);
+        PlayerPrefs.DeleteKey(PlayerXKey);
+        PlayerPrefs.DeleteKey(PlayerYKey);
+        PlayerPrefs.DeleteKey(PlayerZKey);
+        PlayerPrefs.Save();
+
+        Debug.Log("Đã xóa local save vị trí Player.");
     }
 }

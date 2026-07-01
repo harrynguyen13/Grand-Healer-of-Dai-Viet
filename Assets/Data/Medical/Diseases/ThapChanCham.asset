@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: ThapChanCham
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
   diseaseName: "Th\u1EA5p ch\u1EA9n (Ch\xE0m/Eczema)"
-  diseaseLevel: 2
+  diseaseLevel: 3
   diseaseGroup: 7
   description: "Da s\u01B0ng \u0111\u1ECF, n\u1ED5i m\u1EE5n n\u01B0\u1EDBc li ti
     th\xE0nh \u0111\xE1m, ng\u1EE9a ng\xE1y, ch\u1EA3y n\u01B0\u1EDBc v\xE0ng."
-  patientDialogue: "Kh\u1EAFp v\xF9ng da tay con s\u01B0ng \u0111\u1ECF, n\u1ED5i
+  patientDialogue: "Kh\u1EAFp v\xF9ng da tay t\xF4i s\u01B0ng \u0111\u1ECF, n\u1ED5i
     m\u1EE5n n\u01B0\u1EDBc li ti th\xE0nh \u0111\xE1m ng\u1EE9a ng\xE1y, g\xE3i
     v\u1EE1 ch\u1EA3y n\u01B0\u1EDBc v\xE0ng d\xEDnh."
   symptoms:

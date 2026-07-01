@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: hoai_son
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: hoai_son
+  herbName: "Ho\xE0i s\u01A1n"
   description: 
-  category: 11
+  category: 7
   rarity: 0
   unlockClinicLevel: 1
-  price: 5
+  price: 19
+  buyPrice: 17
+  sellPrice: 19
+  startQuantity: 50
+  autoCalculateBalance: 1
   icon: {fileID: -1153199771476960816, guid: bd5754efe8a297e4eb4b12f7d943c82f, type: 3}

@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: can_khuong
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: can_khuong
+  herbName: "Can kh\u01B0\u01A1ng"
   description: 
-  category: 11
+  category: 0
   rarity: 0
   unlockClinicLevel: 1
-  price: 5
+  price: 9
+  buyPrice: 8
+  sellPrice: 9
+  startQuantity: 50
+  autoCalculateBalance: 1
   icon: {fileID: 8786896270756904374, guid: 21cbc7891f9bda042ac97f5d0318a09c, type: 3}

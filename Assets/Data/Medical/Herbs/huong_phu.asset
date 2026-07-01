@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: huong_phu
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: huong_phu
+  herbName: "H\u01B0\u01A1ng ph\u1EE5"
   description: 
-  category: 11
+  category: 3
   rarity: 0
   unlockClinicLevel: 1
-  price: 5
+  price: 13
+  buyPrice: 12
+  sellPrice: 13
+  startQuantity: 50
+  autoCalculateBalance: 1
   icon: {fileID: 1491748096059270082, guid: 3619e35becbdde7478d9bf5d4e67920d, type: 3}

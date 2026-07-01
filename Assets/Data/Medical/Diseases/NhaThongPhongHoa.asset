@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: NhaThongPhongHoa
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
   diseaseName: "Nha th\u1ED1ng (Phong h\u1ECFa)"
-  diseaseLevel: 1
+  diseaseLevel: 3
   diseaseGroup: 1
   description: "\u0110au nh\u1EE9c r\u0103ng d\u1EEF d\u1ED9i, l\u1EE3i s\u01B0ng
     \u0111\u1ECF m\u1ECDng, m\xE1 s\u01B0ng to."
-  patientDialogue: "R\u0103ng con nh\u1EE9c bu\u1ED1t th\u1EA5u x\u01B0\u01A1ng,
+  patientDialogue: "R\u0103ng t\xF4i nh\u1EE9c bu\u1ED1t th\u1EA5u x\u01B0\u01A1ng,
     v\xF9ng l\u1EE3i s\u01B0ng \u0111\u1ECF m\u1ECDng l\xEAn, m\u1ED9t b\xEAn m\xE1
     s\u01B0ng v\xF9 r\u1ED3i."
   symptoms:

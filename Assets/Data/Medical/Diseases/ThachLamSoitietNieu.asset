@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: ThachLamSoitietNieu
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
   diseaseName: "Th\u1EA1ch l\xE2m (S\u1ECFi ti\u1EBFt ni\u1EC7u)"
-  diseaseLevel: 3
+  diseaseLevel: 4
   diseaseGroup: 2
   description: "\u0110i ti\u1EC3u \u0111au bu\u1ED1t \u0111\u1ED9t ng\u1ED9t, n\u01B0\u1EDBc
     ti\u1EC3u t\u1EAFc gi\u1EEFa ch\u1EEBng, ti\u1EC3u ra s\u1ECFi ho\u1EB7c m\xE1u."
   patientDialogue: "\u0110ang \u0111i ti\u1EC3u th\xEC d\xF2ng ti\u1EC3u c\u1EE7a
-    con b\u1ECB t\u1EAFc ngh\u1EB9n n\u1EEDa ch\u1EEBng \u0111au bu\u1ED1t th\u1EA5u
+    t\xF4i b\u1ECB t\u1EAFc ngh\u1EB9n n\u1EEDa ch\u1EEBng \u0111au bu\u1ED1t th\u1EA5u
     ru\u1ED9t, c\xF3 h\xF4m ti\u1EC3u ra c\u1EA3 h\u1EA1t s\u1ECFi nh\u1ECF."
   symptoms:
   - symptomText: "Ti\u1EC3u bu\u1ED1t \u0111au qu\u1EB7n th\u1EAFt th\u1EAFt l\u01B0ng."

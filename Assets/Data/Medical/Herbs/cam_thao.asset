@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
   m_Name: cam_thao
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
-  herbName: cam_thao
+  herbName: "Cam th\u1EA3o"
   description: 
-  category: 11
+  category: 7
   rarity: 0
   unlockClinicLevel: 1
-  price: 5
+  price: 19
+  buyPrice: 17
+  sellPrice: 19
+  startQuantity: 50
+  autoCalculateBalance: 1
   icon: {fileID: -658071884309529756, guid: 3e2ca817520856f44b3685a11dbafd6e, type: 3}

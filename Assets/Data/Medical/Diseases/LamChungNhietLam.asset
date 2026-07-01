@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: LamChungNhietLam
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
   diseaseName: "L\xE2m ch\u1EE9ng (Nhi\u1EC7t l\xE2m)"
-  diseaseLevel: 2
+  diseaseLevel: 4
   diseaseGroup: 2
   description: "Ti\u1EC3u ti\u1EC7n \u0111au bu\u1ED1t, ti\u1EC3u r\u1EAFt, \u0111i
     l\u1EAFt nh\u1EAFt nhi\u1EC1u l\u1EA7n, n\u01B0\u1EDBc ti\u1EC3u \u0111\u1EE5c
     \u0111\u1ECF."
-  patientDialogue: "M\u1ED7i l\u1EA7n \u0111i ti\u1EC3u con \u0111au bu\u1ED1t \u0111\u1EBFn
-    ph\xE1t kh\xF3c, \u0111i r\u1EAFt l\u1EAFt nh\u1EAFt nhi\u1EC1u l\u1EA7n m\xE0
-    n\u01B0\u1EDBc ti\u1EC3u c\u1EE9 \u0111\u1ECF \u0111\u1EB7c u t\u1ED1i."
+  patientDialogue: "M\u1ED7i l\u1EA7n \u0111i ti\u1EC3u t\xF4i \u0111au bu\u1ED1t
+    \u0111\u1EBFn ph\xE1t kh\xF3c, \u0111i r\u1EAFt l\u1EAFt nh\u1EAFt nhi\u1EC1u
+    l\u1EA7n m\xE0 n\u01B0\u1EDBc ti\u1EC3u c\u1EE9 \u0111\u1ECF \u0111\u1EB7c u
+    t\u1ED1i."
   symptoms:
   - symptomText: "Ti\u1EC3u ti\u1EC7n \u0111au bu\u1ED1t, ti\u1EC3u r\u1EAFt."
     showAtStep: 0
