@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NguuBiNganVayNen
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
   diseaseName: "Ng\u01B0u b\xEC ng\xE2n (V\u1EA3y n\u1EBFn)"
-  diseaseLevel: 3
+  diseaseLevel: 4
   diseaseGroup: 7
   description: "Da d\xE0y th\xF4 r\xE1p nh\u01B0 da tr\xE2u, bong tr\xF3c ra t\u1EEBng
     l\u1EDBp v\u1EA3y tr\u1EAFng nh\u01B0 n\u1EBFn v\u1EE5n, r\u1EDBm m\xE1u khi
@@ -34,6 +34,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e3a42ffe01ed57a4898f9a19564894d3, type: 2}
   - {fileID: 11400000, guid: 2fe366f1a6d81fd40a7aeff25bce2dbf, type: 2}
   - {fileID: 11400000, guid: aee6e655ff249c849a00beab4b1342f7, type: 2}
+  - {fileID: 11400000, guid: bb445db3d4f4d4c44b650d6507db81c7, type: 2}
+  - {fileID: 11400000, guid: 93aaaf4a59c9b664fa47a28feea0f21b, type: 2}
+  - {fileID: 11400000, guid: a35368017e21aa84b8ce1a9059aef931, type: 2}
   medicineCorrectRate: 0.7
   perfectReputation: 20
   perfectMoney: 30

@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ded8839ef4e41c4fab5e54d933081c2, type: 3}
+  m_Name: ThatDietTrungDocDich
+  m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
+  diseaseName: "Th\u1EA5t di\u1EC7t tr\xF9ng \u0111\u1ED9c (D\u1ECBch h\u1EA1ch th\u1EC3
+    ph\u1ED5i nan y)"
+  diseaseLevel: 5
+  diseaseGroup: 0
+  description: "D\u1ECBch \u0111\u1ED9c \u0103n s\xE2u v\xE0o ph\u1EBF t\u1EA1ng,
+    ho ra m\xE1u \u0111en \u0111\u1EB7c, h\u1EA1ch c\u1ED5 s\u01B0ng to h\xF3a m\u1EE7,
+    s\u1ED1t cao co gi\u1EADt, tinh th\u1EA7n h\u1ED7n lo\u1EA1n s\u1EAFp ch\u1EBFt."
+  patientDialogue: "Th\u1EA7y \u01A1i c\u1EE9u m\u1EA1ng... trong l\xE0ng t\xF4i
+    ng\u01B0\u1EDDi ch\u1EBFt la li\u1EC7t r\u1ED3i... t\xF4i th\u1EDF kh\xF4ng ra
+    h\u01A1i, ng\u1EF1c \u0111au nh\u01B0 l\u1EEDa \u0111\u1ED1t, kh\u1EA1c to\xE0n
+    m\xE1u \u0111en tanh h\xF4i, h\u1EA1ch c\u1ED5 s\u01B0ng to c\u1EE9ng ng\u1EAFc
+    s\u1EAFp v\u1EE1 r\u1ED3i!"
+  symptoms:
+  - symptomText: "S\u1ED1t cao \u0111\xF9ng \u0111\xF9ng, co gi\u1EADt to\xE0n th\xE2n."
+    showAtStep: 0
+  - symptomText: "Ho li\xEAn t\u1EE5c tr\xE0o m\xE1u \u0111en \u0111\u1EB7c h\xF4i
+      th\u1ED1i."
+    showAtStep: 0
+  - symptomText: "H\u1EA1ch c\u1ED5 v\xF9ng d\u01B0\u1EDBi tai s\u01B0ng to d\xEDnh
+      th\xE0nh ch\xF9m."
+    showAtStep: 1
+  - symptomText: "Th\u1EA7n tr\xED m\xEA s\u1EA3ng, h\u01A1i th\u1EDF \u0111\u1EE9t
+      qu\xE3ng s\u1EAFp tuy\u1EC7t."
+    showAtStep: 1
+  correctHerbs:
+  - {fileID: 11400000, guid: 70f8cee14eb94e84ca6d1791a604beb7, type: 2}
+  - {fileID: 11400000, guid: 54c7982d30dd92f48aca79b82948968c, type: 2}
+  - {fileID: 11400000, guid: 9c7b7ad2cd7bc964283bc5e1cc2da488, type: 2}
+  - {fileID: 11400000, guid: fde7743b3904d014b819bf0b7742a249, type: 2}
+  - {fileID: 11400000, guid: c322e3188908a024196d7ca2260bc282, type: 2}
+  - {fileID: 11400000, guid: 0a8a10a57503ae4488eb40640b3b0b94, type: 2}
+  - {fileID: 11400000, guid: a35368017e21aa84b8ce1a9059aef931, type: 2}
+  medicineCorrectRate: 0.7
+  perfectReputation: 20
+  perfectMoney: 30
+  rightDiseaseWrongMedicineReputation: 5
+  rightDiseaseWrongMedicineMoney: 10
+  wrongDiseaseRightMedicinePenalty: 5
+  failedPenalty: 15
+  resultDelaySeconds: 20

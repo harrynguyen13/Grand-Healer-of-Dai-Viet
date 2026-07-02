@@ -76,6 +76,6 @@ public class PlayerEconomy : MonoBehaviour
 
     public void SetReputation(int newReputation)
     {
-        reputation = Mathf.Max(0, newReputation);
+        reputation = Mathf.Max(50, newReputation);
     }
 }

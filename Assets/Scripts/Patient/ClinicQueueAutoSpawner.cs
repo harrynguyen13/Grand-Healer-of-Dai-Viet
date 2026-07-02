@@ -16,16 +16,30 @@ public class ClinicQueueAutoSpawner : MonoBehaviour
     [Header("Cấp y quán hiện tại")]
     [SerializeField] private int clinicLevel = 1;
 
-    [Header("Thời gian tạo bệnh nhân")]
-    [SerializeField] private float firstSpawnDelay = 6f;
-    [SerializeField] private float minSpawnInterval = 12f;
-    [SerializeField] private float maxSpawnInterval = 20f;
+    [Header("Clinic Exam Manager")]
+    [SerializeField] private ClinicExamManager clinicExamManager;
 
-    [Header("Giới hạn hàng chờ")]
-    [Tooltip("Trong phòng khám chỉ giữ khoảng từng này bệnh nhân đang chờ.")]
-    [SerializeField] private int targetWaitingPatients = 1;
+    [Header("Điều kiện Player")]
+    [SerializeField] private bool requirePlayerInClinic = true;
+    [SerializeField] private string playerTag = "Player";
+
+    [Header("Nhịp kiểm tra hàng chờ")]
+    [SerializeField] private float firstCheckDelay = 5f;
+    [SerializeField] private float checkInterval = 3f;
+
+    [Header("Số NPC muốn giữ trong hàng chờ")]
+    [Tooltip("Khi đang có bệnh nhân ở quầy khám, giữ từng này NPC đứng xếp hàng.")]
+    [SerializeField] private int targetWaitingWhileExam = 2;
+
+    [Tooltip("Khi quầy khám đang trống, giữ từng này NPC trong hàng chờ để gọi vào.")]
+    [SerializeField] private int targetWaitingWhenIdle = 3;
+
+    [Header("Delay trước khi tự bổ sung bệnh nhân")]
+    [Tooltip("Khi hàng chờ thiếu người, chờ từng này giây rồi mới tự bổ sung.")]
+    [SerializeField] private float refillDelay = 8f;
 
     private Coroutine spawnCoroutine;
+    private float queueBelowTargetStartTime = -1f;
 
     private void OnEnable()
     {
@@ -39,46 +53,100 @@ public class ClinicQueueAutoSpawner : MonoBehaviour
             StopCoroutine(spawnCoroutine);
             spawnCoroutine = null;
         }
+
+        ResetRefillTimer();
     }
 
     private IEnumerator SpawnLoop()
     {
-        yield return new WaitForSeconds(firstSpawnDelay);
+        yield return new WaitForSeconds(firstCheckDelay);
 
         while (true)
         {
-            TryAddPatientToQueue();
+            TryRefillWaitingQueue();
 
-            float waitTime = Random.Range(minSpawnInterval, maxSpawnInterval);
-            yield return new WaitForSeconds(waitTime);
+            yield return new WaitForSeconds(checkInterval);
         }
     }
 
-    private void TryAddPatientToQueue()
+    private void TryRefillWaitingQueue()
     {
-        string currentSceneName = SceneManager.GetActiveScene().name;
-
-        if (currentSceneName != clinicSceneName)
+        if (SceneManager.GetActiveScene().name != clinicSceneName)
             return;
+
+        if (requirePlayerInClinic && !IsPlayerInClinicScene())
+        {
+            ResetRefillTimer();
+            return;
+        }
 
         if (PatientVisitManager.Instance == null)
         {
             Debug.LogWarning("Không có PatientVisitManager để thêm bệnh nhân vào hàng chờ.");
+            ResetRefillTimer();
             return;
         }
 
-        if (PatientVisitManager.Instance.WaitingCount >= targetWaitingPatients)
+        if (clinicExamManager == null)
         {
-            Debug.Log("Hàng chờ phòng khám đã có " + PatientVisitManager.Instance.WaitingCount + " bệnh nhân, chưa thêm bệnh nhân mới.");
+            clinicExamManager = FindAnyObjectByType<ClinicExamManager>();
+        }
+
+        int targetWaitingCount = GetTargetWaitingCount();
+
+        int currentWaitingCount = PatientVisitManager.Instance.WaitingCount;
+
+        if (currentWaitingCount >= targetWaitingCount)
+        {
+            ResetRefillTimer();
             return;
         }
 
         if (!PatientVisitManager.Instance.CanAcceptMorePatients)
         {
-            Debug.Log("Hàng đợi bệnh nhân đã đầy, không thể thêm bệnh nhân mới.");
+            ResetRefillTimer();
             return;
         }
 
+        if (queueBelowTargetStartTime < 0f)
+        {
+            queueBelowTargetStartTime = Time.time;
+
+            Debug.Log("Hàng chờ đang thiếu người: "
+                + currentWaitingCount
+                + "/"
+                + targetWaitingCount
+                + ". Bắt đầu đếm thời gian bổ sung bệnh nhân.");
+
+            return;
+        }
+
+        float waitingTime = Time.time - queueBelowTargetStartTime;
+
+        if (waitingTime < refillDelay)
+        {
+            return;
+        }
+
+        RefillQueueToTarget(targetWaitingCount);
+
+        ResetRefillTimer();
+    }
+
+    private int GetTargetWaitingCount()
+    {
+        bool hasCurrentPatient = clinicExamManager != null && clinicExamManager.HasCurrentPatient;
+
+        if (hasCurrentPatient)
+        {
+            return Mathf.Max(0, targetWaitingWhileExam);
+        }
+
+        return Mathf.Max(0, targetWaitingWhenIdle);
+    }
+
+    private void RefillQueueToTarget(int targetWaitingCount)
+    {
         if (patientPrefabs == null || patientPrefabs.Length == 0)
         {
             Debug.LogError("ClinicQueueAutoSpawner chưa kéo danh sách Patient Prefabs.");
@@ -91,12 +159,36 @@ public class ClinicQueueAutoSpawner : MonoBehaviour
             return;
         }
 
+        int addedCount = 0;
+
+        while (PatientVisitManager.Instance.WaitingCount < targetWaitingCount &&
+               PatientVisitManager.Instance.CanAcceptMorePatients)
+        {
+            bool added = AddOneBackupPatientToQueue();
+
+            if (!added)
+                break;
+
+            addedCount++;
+        }
+
+        if (addedCount > 0)
+        {
+            Debug.Log("Đã bổ sung " + addedCount + " bệnh nhân vào hàng chờ. Hiện có: "
+                + PatientVisitManager.Instance.WaitingCount
+                + "/"
+                + PatientVisitManager.Instance.MaxWaitingPatients);
+        }
+    }
+
+    private bool AddOneBackupPatientToQueue()
+    {
         PatientController randomPrefab = GetRandomPatientPrefab();
 
         if (randomPrefab == null)
         {
             Debug.LogError("Không tìm được prefab bệnh nhân hợp lệ.");
-            return;
+            return false;
         }
 
         DiseaseData randomDisease = medicalDatabase.GetRandomDisease(clinicLevel);
@@ -104,7 +196,7 @@ public class ClinicQueueAutoSpawner : MonoBehaviour
         if (randomDisease == null)
         {
             Debug.LogError("Không random được bệnh cho bệnh nhân trong phòng khám.");
-            return;
+            return false;
         }
 
         PatientCase patientCase = new PatientCase(randomDisease);
@@ -116,10 +208,23 @@ public class ClinicQueueAutoSpawner : MonoBehaviour
 
         if (added)
         {
-            Debug.Log("Đã tự thêm bệnh nhân mới vào hàng chờ trong phòng khám.");
+            Debug.Log("Đã thêm bệnh nhân vào hàng chờ trong phòng khám.");
             Debug.Log("NPC prefab: " + randomPrefab.name);
             Debug.Log("Bệnh thật: " + randomDisease.diseaseName);
         }
+
+        return added;
+    }
+
+    private void ResetRefillTimer()
+    {
+        queueBelowTargetStartTime = -1f;
+    }
+
+    private bool IsPlayerInClinicScene()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag(playerTag);
+        return player != null && player.activeInHierarchy;
     }
 
     private PatientController GetRandomPatientPrefab()

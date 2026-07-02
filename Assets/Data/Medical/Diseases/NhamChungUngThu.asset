@@ -34,6 +34,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fde7743b3904d014b819bf0b7742a249, type: 2}
   - {fileID: 11400000, guid: bf4e0a757fddcf4458b2aa94a5287658, type: 2}
   - {fileID: 11400000, guid: 05f3d55ebca789d4fa260420a813ad62, type: 2}
+  - {fileID: 11400000, guid: bb445db3d4f4d4c44b650d6507db81c7, type: 2}
+  - {fileID: 11400000, guid: f59986e305176f84d9987f28d904a57e, type: 2}
+  - {fileID: 11400000, guid: 9c7b7ad2cd7bc964283bc5e1cc2da488, type: 2}
   medicineCorrectRate: 0.7
   perfectReputation: 20
   perfectMoney: 30

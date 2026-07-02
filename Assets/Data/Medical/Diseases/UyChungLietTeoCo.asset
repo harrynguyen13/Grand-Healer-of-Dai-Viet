@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: UyChungLietTeoCo
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
   diseaseName: "\u1EE6y ch\u1EE9ng (Li\u1EC7t/Teo c\u01A1)"
-  diseaseLevel: 3
+  diseaseLevel: 4
   diseaseGroup: 2
   description: "Ch\xE2n tay b\u1EE7n r\u1EE7n m\u1EC1m nh\u0169n kh\xF4ng c\xF3 l\u1EF1c,
     l\xE2u ng\xE0y c\u01A1 b\u1EAFp ti\xEAu teo t\xF3p ho\xE0n to\xE0n."
@@ -33,6 +33,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 742b8263af9857f44be232f679e50744, type: 2}
   - {fileID: 11400000, guid: bb445db3d4f4d4c44b650d6507db81c7, type: 2}
   - {fileID: 11400000, guid: bccb0c4af43d765409640cc9a14fd299, type: 2}
+  - {fileID: 11400000, guid: 25fab37b539c8e142a0d5c00ec613d67, type: 2}
+  - {fileID: 11400000, guid: 3ba4c21b7b5f4e645a1cb94809b6871f, type: 2}
+  - {fileID: 11400000, guid: ef6996b7576fa6949942811f625c4b8e, type: 2}
   medicineCorrectRate: 0.7
   perfectReputation: 20
   perfectMoney: 30

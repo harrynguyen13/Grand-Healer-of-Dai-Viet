@@ -13,7 +13,10 @@ public enum DiseaseLevel
     Level3 = 3,
 
     [InspectorName("Mức 4 - Cực khó")]
-    Level4 = 4
+    Level4 = 4,
+
+    [InspectorName("Mức 5 - Nhiệm vụ đặc biệt")]
+    Level5 = 5
 }
 
 public enum DiseaseGroup
