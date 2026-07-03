@@ -63,6 +63,8 @@ public partial class ClinicExamManager
 
         Debug.Log("ĐÃ TRỪ THUỐC TRONG KHO THẬT.");
 
+        RecordQuestProgress(patientCase.realDisease);
+
         ApplyMoneyAndReputation(selectedPrescription);
 
         shouldReturnCurrentPatientToQueueOnExit = false;
@@ -72,6 +74,38 @@ public partial class ClinicExamManager
         restoredClinicUiNeedsReopen = false;
 
         StartCoroutine(PatientReceiveMedicineAndLeave());
+    }
+
+    private void RecordQuestProgress(DiseaseData realDisease)
+    {
+        if (realDisease == null)
+        {
+            Debug.LogWarning("Không ghi nhiệm vụ được vì realDisease bị null.");
+            return;
+        }
+
+        if (QuestProgressManager.Instance == null)
+        {
+            Debug.LogWarning("Không tìm thấy QuestProgressManager để ghi tiến độ nhiệm vụ.");
+            return;
+        }
+
+        QuestProgressManager.Instance.RecordTreatmentResult(
+            realDisease,
+            isCurrentDiagnosisCorrect,
+            isCurrentPrescriptionCorrect
+        );
+
+        Debug.Log(
+            "Đã ghi tiến độ nhiệm vụ: "
+            + realDisease.diseaseName
+            + " | Cấp bệnh: "
+            + (int)realDisease.diseaseLevel
+            + " | Chẩn đoán đúng: "
+            + isCurrentDiagnosisCorrect
+            + " | Kê đơn đúng: "
+            + isCurrentPrescriptionCorrect
+        );
     }
 
     private void ApplyMoneyAndReputation(Dictionary<HerbData, int> prescription)

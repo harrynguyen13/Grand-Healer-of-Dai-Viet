@@ -29,6 +29,18 @@ public class MainMenuUIController : MonoBehaviour
 
     private const string LoadFromSaveKey = "LoadFromSave";
 
+    private const string OfficialQuestCompletedKey = "OfficialQuestCompleted";
+
+    private const string QuestPanelActiveStageKey = "QuestPanel_ActiveStage";
+    private const string QuestPanelActiveQuest0Key = "QuestPanel_ActiveQuest_0";
+    private const string QuestPanelActiveQuest1Key = "QuestPanel_ActiveQuest_1";
+
+    private const string CorrectDiagnosisCountKey = "Quest_CorrectDiagnosisCount";
+    private const string CorrectTreatmentCountKey = "Quest_CorrectTreatmentCount";
+    private const string GatheredHerbTotalKey = "Quest_GatheredHerbTotal";
+    private const string BoughtHerbTotalKey = "Quest_BoughtHerbTotal";
+    private const string MoneySpentOnHerbsKey = "Quest_MoneySpentOnHerbs";
+
     private bool isLoading = false;
 
     private void Start()
@@ -138,9 +150,9 @@ public class MainMenuUIController : MonoBehaviour
 
         ClearPlayerPrefsSave();
 
-        ResetRuntimeData();
-
         DeleteAllJsonSaveFiles();
+
+        ResetRuntimeData();
 
         PlayerPrefs.Save();
 
@@ -157,7 +169,66 @@ public class MainMenuUIController : MonoBehaviour
         PlayerPrefs.DeleteKey(HasSeenIntroKey);
         PlayerPrefs.DeleteKey(LoadFromSaveKey);
 
+        ClearQuestPlayerPrefsSave();
+
         Debug.Log("Đã xóa PlayerPrefs save.");
+    }
+
+    private void ClearQuestPlayerPrefsSave()
+    {
+        PlayerPrefs.DeleteKey(OfficialQuestCompletedKey);
+
+        PlayerPrefs.DeleteKey(QuestPanelActiveStageKey);
+        PlayerPrefs.DeleteKey(QuestPanelActiveQuest0Key);
+        PlayerPrefs.DeleteKey(QuestPanelActiveQuest1Key);
+
+        PlayerPrefs.DeleteKey(CorrectDiagnosisCountKey);
+        PlayerPrefs.DeleteKey(CorrectTreatmentCountKey);
+        PlayerPrefs.DeleteKey(GatheredHerbTotalKey);
+        PlayerPrefs.DeleteKey(BoughtHerbTotalKey);
+        PlayerPrefs.DeleteKey(MoneySpentOnHerbsKey);
+
+        for (int i = 1; i <= 5; i++)
+        {
+            PlayerPrefs.DeleteKey("Quest_CuredLevel_" + i);
+        }
+
+        string[] diseaseKeys =
+        {
+            "AchNghichAnNac",
+            "KhaiThauPhongNhiet",
+            "TamHoaVuong",
+            "ThanDuongHu",
+            "ThatDietTrungDocDich"
+        };
+
+        for (int i = 0; i < diseaseKeys.Length; i++)
+        {
+            PlayerPrefs.DeleteKey("Quest_CuredDisease_" + diseaseKeys[i]);
+        }
+
+        string[] herbKeys =
+        {
+            "bac_ha",
+            "sinh_khuong",
+            "tia_to",
+            "kinh_gioi",
+            "cam_thao",
+            "tran_bi",
+            "bach_truat",
+            "tam_that",
+            "nhuc_que",
+            "hung_hoang",
+            "hoang_lien"
+        };
+
+        for (int i = 0; i < herbKeys.Length; i++)
+        {
+            PlayerPrefs.DeleteKey("Quest_GatheredHerb_" + herbKeys[i]);
+            PlayerPrefs.DeleteKey("Quest_BoughtHerb_" + herbKeys[i]);
+        }
+
+        Debug.Log("Đã xóa toàn bộ PlayerPrefs nhiệm vụ.");
     }
 
     private void ResetRuntimeData()
@@ -178,6 +249,13 @@ public class MainMenuUIController : MonoBehaviour
             );
 
             Debug.Log("Đã gọi reset kho thuốc nếu HerbInventory có hàm ResetInventoryForNewGame.");
+        }
+
+        if (QuestProgressManager.Instance != null)
+        {
+            QuestProgressManager.Instance.ResetQuestProgressForNewGame();
+
+            Debug.Log("Đã reset tiến độ nhiệm vụ trong RAM.");
         }
 
         if (PatientVisitManager.Instance != null)

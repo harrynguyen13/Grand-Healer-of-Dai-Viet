@@ -17,6 +17,8 @@ public class QuestPanelUI : MonoBehaviour
 
     private void Start()
     {
+        AutoBindReferences();
+
         if (questPanel != null)
             questPanel.SetActive(false);
 
@@ -27,21 +29,51 @@ public class QuestPanelUI : MonoBehaviour
 
     private void Update()
     {
+        AutoBindReferences();
+
         if (Keyboard.current != null &&
             Keyboard.current[toggleKey].wasPressedThisFrame)
         {
             ToggleQuestPanel();
         }
 
-        if (!isOpen)
-            return;
+        if (questPanel != null)
+            isOpen = questPanel.activeSelf;
 
-        RefreshQuestContent();
+        if (isOpen)
+            RefreshQuestContent();
 
-        if (Keyboard.current != null &&
+        if (isOpen &&
+            Keyboard.current != null &&
             Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             CloseQuestPanel();
+        }
+    }
+
+    private void AutoBindReferences()
+    {
+        if (questPanel == null)
+        {
+            Transform panelTransform = transform.Find("QuestPanel");
+
+            if (panelTransform != null)
+                questPanel = panelTransform.gameObject;
+        }
+
+        if (questContentText == null && questPanel != null)
+        {
+            TMP_Text[] texts = questPanel.GetComponentsInChildren<TMP_Text>(true);
+
+            for (int i = 0; i < texts.Length; i++)
+            {
+                if (texts[i].name == "QuestContent_Text" ||
+                    texts[i].name == "QuestContentText")
+                {
+                    questContentText = texts[i];
+                    break;
+                }
+            }
         }
     }
 
@@ -50,7 +82,7 @@ public class QuestPanelUI : MonoBehaviour
         if (questPanel == null)
             return;
 
-        isOpen = !isOpen;
+        isOpen = !questPanel.activeSelf;
         questPanel.SetActive(isOpen);
 
         if (isOpen)
@@ -70,58 +102,31 @@ public class QuestPanelUI : MonoBehaviour
         if (questContentText == null)
             return;
 
-        int reputation = GetReputation();
+        SetupTextStyle();
 
-        if (reputation < 50)
+        if (QuestRuntimeManager.Instance == null)
         {
             questContentText.text =
-                "Nhiệm vụ hiện tại:\n\n" +
-                "- Chữa bệnh cho dân làng.\n" +
-                "- Đạt 50 điểm tín nhiệm.\n\n" +
-                "Tiến độ: " + reputation + " / 50";
+                "<b>Nhiệm vụ</b>\n\n" +
+                "Chưa tìm thấy QuestRuntimeManager trong scene.";
+
+            return;
         }
-        else if (reputation < 150)
-        {
-            questContentText.text =
-                "Nhiệm vụ hiện tại:\n\n" +
-                "- Nâng danh tiếng y quán.\n" +
-                "- Chữa thêm các bệnh cấp thấp.\n" +
-                "- Đạt 150 điểm tín nhiệm.\n\n" +
-                "Tiến độ: " + reputation + " / 150";
-        }
-        else if (reputation < 300)
-        {
-            questContentText.text =
-                "Nhiệm vụ hiện tại:\n\n" +
-                "- Chữa các bệnh khó hơn.\n" +
-                "- Mở rộng danh tiếng trong vùng.\n" +
-                "- Đạt 300 điểm tín nhiệm.\n\n" +
-                "Tiến độ: " + reputation + " / 300";
-        }
-        else if (reputation < 500)
-        {
-            questContentText.text =
-                "Nhiệm vụ hiện tại:\n\n" +
-                "- Trở thành danh y được dân làng tin tưởng.\n" +
-                "- Đạt 500 điểm tín nhiệm.\n\n" +
-                "Tiến độ: " + reputation + " / 500";
-        }
-        else
-        {
-            questContentText.text =
-                "Nhiệm vụ hiện tại:\n\n" +
-                "- Tiếp tục chữa bệnh cho dân làng.\n" +
-                "- Mở rộng y quán.\n" +
-                "- Truyền lại y đạo cho học trò.\n\n" +
-                "Bạn đã đạt danh tiếng cao nhất.";
-        }
+
+        questContentText.text = QuestRuntimeManager.Instance.GetQuestPanelText();
     }
 
-    private int GetReputation()
+    private void SetupTextStyle()
     {
-        if (PlayerEconomy.Instance != null)
-            return PlayerEconomy.Instance.Reputation;
+        questContentText.richText = true;
+        questContentText.alignment = TextAlignmentOptions.TopLeft;
+        questContentText.textWrappingMode = TextWrappingModes.Normal;
+        questContentText.overflowMode = TextOverflowModes.Overflow;
+        questContentText.color = Color.black;
+    }
 
-        return 0;
+    public void RefreshNow()
+    {
+        RefreshQuestContent();
     }
 }

@@ -6123,12 +6123,10 @@ MonoBehaviour:
   medicineCounterDisplay: {fileID: 211007266}
   receiveMedicineTime: 0.8
   firstPatientEnterDelay: 2
+  queuedPatientEnterDelay: 1
   minNextPatientDelay: 12
   maxNextPatientDelay: 20
   clinicLevel: 1
-  correctDiagnosisReputationReward: 10
-  wrongDiagnosisReputationPenalty: -5
-  wrongDiagnosisPaymentMultiplier: 0.5
 --- !u!4 &211007264
 Transform:
   m_ObjectHideFlags: 0
@@ -27502,6 +27500,51 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.83608, y: 25.0106, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &515743864
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 515743866}
+  - component: {fileID: 515743865}
+  m_Layer: 0
+  m_Name: HUD_Bootstrap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &515743865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515743864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16cfbd3b305f6984a95f4a3790f1ffee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HUDBootstrap
+  hudPrefab: {fileID: 523370529558051726, guid: 308d75b77c5face4aaefc9d4c7022060, type: 3}
+--- !u!4 &515743866
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515743864}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 102.81728, y: 168.87662, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -77613,3 +77656,4 @@ SceneRoots:
   - {fileID: 347072462}
   - {fileID: 512738615}
   - {fileID: 1900974071}
+  - {fileID: 515743866}
