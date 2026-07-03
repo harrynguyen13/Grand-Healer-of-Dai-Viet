@@ -441,6 +441,29 @@ public class HerbInventory : MonoBehaviour
         }
     }
 
+    public void ResetInventoryForNewGame()
+    {
+        Debug.Log("===== RESET KHO THUỐC VỀ BAN ĐẦU =====");
+
+        clinicLevel = 1;
+
+        herbStocks.Clear();
+        stockLookup.Clear();
+
+        DeleteInventorySave();
+
+        if (initializeOnAwake)
+        {
+            UnlockHerbsForLevel(clinicLevel, false);
+        }
+
+        SyncAllListValues();
+
+        SaveInventory();
+
+        Debug.Log("Đã reset kho thuốc về mặc định cấp " + clinicLevel + ". Tổng vị: " + herbStocks.Count);
+    }
+
     private void SetHerbQuantity(HerbData herb, int quantity)
     {
         if (herb == null)

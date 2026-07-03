@@ -1,4 +1,5 @@
 using System.Collections;
+using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -21,6 +22,13 @@ public class MainMenuUIController : MonoBehaviour
     private const string HasLocalSaveKey = "HasLocalSave";
     private const string HasSeenIntroKey = "HasSeenIntro";
 
+    private const string PlayerSceneKey = "PlayerScene";
+    private const string PlayerXKey = "PlayerX";
+    private const string PlayerYKey = "PlayerY";
+    private const string PlayerZKey = "PlayerZ";
+
+    private const string LoadFromSaveKey = "LoadFromSave";
+
     private bool isLoading = false;
 
     private void Start()
@@ -34,7 +42,8 @@ public class MainMenuUIController : MonoBehaviour
 
     private void Update()
     {
-        if (!isLoading) return;
+        if (!isLoading)
+            return;
 
         if (loadingSpinner != null)
         {
@@ -44,7 +53,8 @@ public class MainMenuUIController : MonoBehaviour
 
     public void OnPlayNowClicked()
     {
-        if (isLoading) return;
+        if (isLoading)
+            return;
 
         ClearOldSave();
 
@@ -56,7 +66,8 @@ public class MainMenuUIController : MonoBehaviour
 
     public void OnContinueClicked()
     {
-        if (isLoading) return;
+        if (isLoading)
+            return;
 
         if (!HasSave())
         {
@@ -64,12 +75,23 @@ public class MainMenuUIController : MonoBehaviour
             return;
         }
 
-        StartCoroutine(LoadSceneWithLoading(gameSceneName, "Đang tải dữ liệu..."));
+        string savedSceneName = PlayerPrefs.GetString(PlayerSceneKey, gameSceneName);
+
+        if (string.IsNullOrWhiteSpace(savedSceneName))
+            savedSceneName = gameSceneName;
+
+        PlayerPrefs.SetInt(LoadFromSaveKey, 1);
+        PlayerPrefs.Save();
+
+        Debug.Log("Tiếp tục game tại scene đã save: " + savedSceneName);
+
+        StartCoroutine(LoadSceneWithLoading(savedSceneName, "Đang tải dữ liệu..."));
     }
 
     public void OnExitClicked()
     {
-        if (isLoading) return;
+        if (isLoading)
+            return;
 
         Application.Quit();
 
@@ -98,18 +120,99 @@ public class MainMenuUIController : MonoBehaviour
 
     private bool HasSave()
     {
-        return PlayerPrefs.GetInt(HasLocalSaveKey, 0) == 1;
+        if (PlayerPrefs.GetInt(HasLocalSaveKey, 0) == 1)
+            return true;
+
+        if (File.Exists(GetJsonSavePath("player_economy_save.json")))
+            return true;
+
+        if (File.Exists(GetJsonSavePath("herb_inventory_save.json")))
+            return true;
+
+        return false;
     }
 
     private void ClearOldSave()
     {
-        PlayerPrefs.DeleteKey(HasLocalSaveKey);
-        PlayerPrefs.DeleteKey("PlayerScene");
-        PlayerPrefs.DeleteKey("PlayerX");
-        PlayerPrefs.DeleteKey("PlayerY");
-        PlayerPrefs.DeleteKey("PlayerZ");
-        PlayerPrefs.DeleteKey(HasSeenIntroKey);
+        Debug.Log("===== RESET TOÀN BỘ SAVE ĐỂ BẮT ĐẦU GAME MỚI =====");
+
+        ClearPlayerPrefsSave();
+
+        ResetRuntimeData();
+
+        DeleteAllJsonSaveFiles();
+
         PlayerPrefs.Save();
+
+        Debug.Log("Đã reset dữ liệu save cũ.");
+    }
+
+    private void ClearPlayerPrefsSave()
+    {
+        PlayerPrefs.DeleteKey(HasLocalSaveKey);
+        PlayerPrefs.DeleteKey(PlayerSceneKey);
+        PlayerPrefs.DeleteKey(PlayerXKey);
+        PlayerPrefs.DeleteKey(PlayerYKey);
+        PlayerPrefs.DeleteKey(PlayerZKey);
+        PlayerPrefs.DeleteKey(HasSeenIntroKey);
+        PlayerPrefs.DeleteKey(LoadFromSaveKey);
+
+        Debug.Log("Đã xóa PlayerPrefs save.");
+    }
+
+    private void ResetRuntimeData()
+    {
+        if (PlayerEconomy.Instance != null)
+        {
+            PlayerEconomy.Instance.SetMoney(200);
+            PlayerEconomy.Instance.SetReputation(0);
+
+            Debug.Log("Đã reset tiền/tín nhiệm trong RAM.");
+        }
+
+        if (HerbInventory.Instance != null)
+        {
+            HerbInventory.Instance.SendMessage(
+                "ResetInventoryForNewGame",
+                SendMessageOptions.DontRequireReceiver
+            );
+
+            Debug.Log("Đã gọi reset kho thuốc nếu HerbInventory có hàm ResetInventoryForNewGame.");
+        }
+
+        if (PatientVisitManager.Instance != null)
+        {
+            PatientVisitManager.Instance.SendMessage(
+                "ClearAllPatientsForNewGame",
+                SendMessageOptions.DontRequireReceiver
+            );
+
+            Debug.Log("Đã gọi reset hàng chờ bệnh nhân nếu PatientVisitManager có hàm ClearAllPatientsForNewGame.");
+        }
+    }
+
+    private void DeleteAllJsonSaveFiles()
+    {
+        string folderPath = Application.persistentDataPath;
+
+        if (!Directory.Exists(folderPath))
+        {
+            Debug.Log("Không tìm thấy thư mục save: " + folderPath);
+            return;
+        }
+
+        string[] jsonFiles = Directory.GetFiles(folderPath, "*.json");
+
+        foreach (string file in jsonFiles)
+        {
+            File.Delete(file);
+            Debug.Log("Đã xóa file save: " + file);
+        }
+    }
+
+    private string GetJsonSavePath(string fileName)
+    {
+        return Path.Combine(Application.persistentDataPath, fileName);
     }
 
     private void ShowMessage(string message)
