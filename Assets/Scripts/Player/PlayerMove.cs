@@ -11,35 +11,62 @@ public class PlayerMove : BaseMove
 
     private void Update()
     {
-        if (Keyboard.current != null)
-        {
-            isRunning = Keyboard.current.leftShiftKey.isPressed;
-        }
+        ReadMoveInput();
+        ReadRunInput();
 
         moveSpeed = isRunning ? runSpeed : walkSpeed;
 
         UpdateAnimation();
     }
 
-    public void OnMove(InputValue value)
+    private void ReadMoveInput()
     {
-        moveInput = value.Get<Vector2>();
-
-        if (Mathf.Abs(moveInput.x) < 0.1f)
-            moveInput.x = 0f;
-
-        if (Mathf.Abs(moveInput.y) < 0.1f)
-            moveInput.y = 0f;
-
-        if (moveInput.sqrMagnitude > 1f)
-            moveInput.Normalize();
-
-        if (moveInput.sqrMagnitude <= 0.01f)
+        if (Keyboard.current == null)
+        {
             moveInput = Vector2.zero;
+            return;
+        }
+
+        Vector2 input = Vector2.zero;
+
+        if (Keyboard.current.wKey.isPressed || Keyboard.current.upArrowKey.isPressed)
+        {
+            input.y += 1f;
+        }
+
+        if (Keyboard.current.sKey.isPressed || Keyboard.current.downArrowKey.isPressed)
+        {
+            input.y -= 1f;
+        }
+
+        if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed)
+        {
+            input.x -= 1f;
+        }
+
+        if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
+        {
+            input.x += 1f;
+        }
+
+        if (input.sqrMagnitude > 1f)
+        {
+            input.Normalize();
+        }
+
+        moveInput = input;
     }
 
-    public void OnRun(InputValue value)
+    private void ReadRunInput()
     {
-        isRunning = value.isPressed;
+        if (Keyboard.current == null)
+        {
+            isRunning = false;
+            return;
+        }
+
+        isRunning =
+            Keyboard.current.leftShiftKey.isPressed ||
+            Keyboard.current.rightShiftKey.isPressed;
     }
 }

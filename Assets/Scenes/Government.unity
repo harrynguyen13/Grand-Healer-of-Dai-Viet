@@ -25989,7 +25989,7 @@ GameObject:
   - component: {fileID: 1907797794}
   - component: {fileID: 1907797793}
   m_Layer: 0
-  m_Name: CameraBounds_Government
+  m_Name: CameraBounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

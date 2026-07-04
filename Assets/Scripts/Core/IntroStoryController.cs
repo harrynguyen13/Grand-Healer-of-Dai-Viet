@@ -12,6 +12,9 @@ public class IntroStoryController : MonoBehaviour
     [TextArea(3, 6)]
     [SerializeField] private string[] storyLines;
 
+    [Header("Voice")]
+    [SerializeField] private IntroVoice introVoice;
+
     [Header("Typing")]
     [SerializeField] private float typingSpeed = 0.035f;
 
@@ -28,13 +31,17 @@ public class IntroStoryController : MonoBehaviour
         {
             storyLines = new string[]
             {
-                "Cuối thế kỷ XIX, Đại Việt chìm trong những ngày tháng rối ren. Dịch bệnh lan khắp thôn làng, người dân khốn khó, y quán dần vắng bóng lương y.",
-                "Ngươi là truyền nhân trẻ tuổi của một dòng y gia lâu đời, được thầy truyền dạy y thuật, dược lý và đạo làm thầy thuốc.",
-                "Sau một biến cố lớn, ngươi trở về quê hương, mang theo y thư cũ và lời dặn cuối cùng của sư phụ: cứu người trước, danh lợi theo sau.",
-                "Từ hôm nay, con đường hành y cứu dân, phục hưng y đạo Đại Việt của ngươi chính thức bắt đầu."
+                "Vào thế kỷ XIX, đất Việt chìm trong những ngày tháng rối ren. Dịch bệnh lan khắp thôn làng, dân chúng lầm than, còn những y quán xưa dần vắng bóng lương y.",
+
+                "Ngươi là truyền nhân trẻ tuổi của một dòng y gia lâu đời, được sư phụ truyền dạy y thuật, dược lý và đạo làm thầy thuốc.",
+
+                "Sau một biến cố lớn, ngươi trở về quê hương, mang theo cuốn y thư cũ cùng lời dặn cuối cùng của thầy: cứu người trước, danh lợi hãy để sau.",
+
+                "Từ hôm nay, con đường hành y cứu dân, gây dựng lại y quán và phục hưng y đạo đất Việt của ngươi chính thức bắt đầu."
             };
         }
 
+        currentLineIndex = 0;
         ShowCurrentLine();
     }
 
@@ -65,7 +72,14 @@ public class IntroStoryController : MonoBehaviour
     private void ShowCurrentLine()
     {
         if (typingCoroutine != null)
+        {
             StopCoroutine(typingCoroutine);
+        }
+
+        if (introVoice != null)
+        {
+            introVoice.PlayVoiceByIndex(currentLineIndex);
+        }
 
         typingCoroutine = StartCoroutine(TypeLine(storyLines[currentLineIndex]));
     }
@@ -87,7 +101,9 @@ public class IntroStoryController : MonoBehaviour
     private void FinishTypingCurrentLine()
     {
         if (typingCoroutine != null)
+        {
             StopCoroutine(typingCoroutine);
+        }
 
         storyText.text = storyLines[currentLineIndex];
         isTyping = false;
@@ -95,6 +111,16 @@ public class IntroStoryController : MonoBehaviour
 
     private void FinishIntro()
     {
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+        }
+
+        if (introVoice != null)
+        {
+            introVoice.StopVoice();
+        }
+
         PlayerPrefs.SetInt("HasSeenIntro", 1);
         PlayerPrefs.Save();
 

@@ -47500,7 +47500,7 @@ GameObject:
   - component: {fileID: 1016088652}
   - component: {fileID: 1016088653}
   m_Layer: 0
-  m_Name: CameraBround_Clinic
+  m_Name: CameraBounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
