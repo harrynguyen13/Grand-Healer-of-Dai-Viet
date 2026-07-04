@@ -34,12 +34,16 @@ public class MainMenuUIController : MonoBehaviour
     private const string QuestPanelActiveStageKey = "QuestPanel_ActiveStage";
     private const string QuestPanelActiveQuest0Key = "QuestPanel_ActiveQuest_0";
     private const string QuestPanelActiveQuest1Key = "QuestPanel_ActiveQuest_1";
+    private const string QuestPanelRewardRunIdKey = "QuestPanel_RewardRunId";
 
     private const string CorrectDiagnosisCountKey = "Quest_CorrectDiagnosisCount";
     private const string CorrectTreatmentCountKey = "Quest_CorrectTreatmentCount";
     private const string GatheredHerbTotalKey = "Quest_GatheredHerbTotal";
     private const string BoughtHerbTotalKey = "Quest_BoughtHerbTotal";
     private const string MoneySpentOnHerbsKey = "Quest_MoneySpentOnHerbs";
+
+    private const string HomeGardenReadyKey = "HerbGarden_HomeGarden_01_Ready";
+    private const string HomeGardenNextReadyKey = "HerbGarden_HomeGarden_01_NextReadyUtcTicks";
 
     private bool isLoading = false;
 
@@ -170,6 +174,7 @@ public class MainMenuUIController : MonoBehaviour
         PlayerPrefs.DeleteKey(LoadFromSaveKey);
 
         ClearQuestPlayerPrefsSave();
+        ClearGardenPlayerPrefsSave();
 
         Debug.Log("Đã xóa PlayerPrefs save.");
     }
@@ -181,6 +186,7 @@ public class MainMenuUIController : MonoBehaviour
         PlayerPrefs.DeleteKey(QuestPanelActiveStageKey);
         PlayerPrefs.DeleteKey(QuestPanelActiveQuest0Key);
         PlayerPrefs.DeleteKey(QuestPanelActiveQuest1Key);
+        PlayerPrefs.DeleteKey(QuestPanelRewardRunIdKey);
 
         PlayerPrefs.DeleteKey(CorrectDiagnosisCountKey);
         PlayerPrefs.DeleteKey(CorrectTreatmentCountKey);
@@ -231,6 +237,14 @@ public class MainMenuUIController : MonoBehaviour
         Debug.Log("Đã xóa toàn bộ PlayerPrefs nhiệm vụ.");
     }
 
+    private void ClearGardenPlayerPrefsSave()
+    {
+        PlayerPrefs.DeleteKey(HomeGardenReadyKey);
+        PlayerPrefs.DeleteKey(HomeGardenNextReadyKey);
+
+        Debug.Log("Đã xóa PlayerPrefs vườn thuốc.");
+    }
+
     private void ResetRuntimeData()
     {
         if (PlayerEconomy.Instance != null)
@@ -256,6 +270,20 @@ public class MainMenuUIController : MonoBehaviour
             QuestProgressManager.Instance.ResetQuestProgressForNewGame();
 
             Debug.Log("Đã reset tiến độ nhiệm vụ trong RAM.");
+        }
+
+        if (QuestRuntimeManager.Instance != null)
+        {
+            QuestRuntimeManager.Instance.ResetQuestRuntimeForNewGame();
+
+            Debug.Log("Đã reset nhiệm vụ đang nhận trong RAM.");
+        }
+
+        if (QuestRewardManager.Instance != null)
+        {
+            QuestRewardManager.Instance.ResetRewardForNewGame();
+
+            Debug.Log("Đã reset phần thưởng nhiệm vụ trong RAM.");
         }
 
         if (PatientVisitManager.Instance != null)
