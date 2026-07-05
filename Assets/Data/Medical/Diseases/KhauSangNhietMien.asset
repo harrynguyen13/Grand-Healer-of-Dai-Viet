@@ -27,11 +27,15 @@ MonoBehaviour:
     showAtStep: 0
   - symptomText: "Ni\xEAm m\u1EA1c s\u01B0ng r\u1ED9p."
     showAtStep: 1
-  correctHerbs:
-  - {fileID: 11400000, guid: e990df34207dedb409588788f2b106c1, type: 2}
-  - {fileID: 11400000, guid: b283ada7362c6e14fb5cdf92e0d5209f, type: 2}
-  - {fileID: 11400000, guid: a35368017e21aa84b8ce1a9059aef931, type: 2}
-  - {fileID: 11400000, guid: 3ba4c21b7b5f4e645a1cb94809b6871f, type: 2}
+  requiredHerbs:
+  - herb: {fileID: 11400000, guid: e990df34207dedb409588788f2b106c1, type: 2}
+    amount: 6
+  - herb: {fileID: 11400000, guid: b283ada7362c6e14fb5cdf92e0d5209f, type: 2}
+    amount: 5
+  - herb: {fileID: 11400000, guid: a35368017e21aa84b8ce1a9059aef931, type: 2}
+    amount: 3
+  - herb: {fileID: 11400000, guid: 3ba4c21b7b5f4e645a1cb94809b6871f, type: 2}
+    amount: 2
   medicineCorrectRate: 0.7
   perfectReputation: 20
   perfectMoney: 30

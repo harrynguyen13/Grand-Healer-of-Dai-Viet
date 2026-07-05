@@ -18,7 +18,7 @@ MonoBehaviour:
   diseaseGroup: 1
   description: "B\u1EE5ng \u0111au d\u1EEF d\u1ED9i, n\xF4n m\u1EEDa li\xEAn t\u1EE5c
     k\xE8m ti\xEAu ch\u1EA3y c\u1EA5p, v\xE3 m\u1ED3 h\xF4i l\u1EA1nh, m\u1EA1ch
-    tr\u1EA7m mu\u1ED1n tr\u1EE5y tai."
+    tr\u1EA7m mu\u1ED1n tr\u1EE5y."
   patientDialogue: "Sau khi \u0103n c\u01A1m xong b\u1EE5ng t\xF4i \u0111au l\u1ED9n
     l\xEAn d\u1EEF d\u1ED9i, n\xF4n m\u1EEDa li\xEAn t\u1EE5c k\xE8m ti\xEAu ch\u1EA3y
     c\u1EA5p, ng\u01B0\u1EDDi v\xE3 m\u1ED3 h\xF4i l\u1EA1nh."
@@ -31,13 +31,19 @@ MonoBehaviour:
   - symptomText: "Ng\u01B0\u1EDDi v\xE3 m\u1ED3 h\xF4i l\u1EA1nh, m\u1EA1ch tr\u1EA7m
       y\u1EBFu."
     showAtStep: 1
-  correctHerbs:
-  - {fileID: 11400000, guid: 54c7982d30dd92f48aca79b82948968c, type: 2}
-  - {fileID: 11400000, guid: 0411930fad7e131488370c122340778d, type: 2}
-  - {fileID: 11400000, guid: a35368017e21aa84b8ce1a9059aef931, type: 2}
-  - {fileID: 11400000, guid: 41544b55360f41442965fa81733f815c, type: 2}
-  - {fileID: 11400000, guid: 8703952609057024182bc7cc7c3e61f1, type: 2}
-  - {fileID: 11400000, guid: eeaf131d53e824f4eb20c30f29b595e5, type: 2}
+  requiredHerbs:
+  - herb: {fileID: 11400000, guid: 54c7982d30dd92f48aca79b82948968c, type: 2}
+    amount: 6
+  - herb: {fileID: 11400000, guid: 0411930fad7e131488370c122340778d, type: 2}
+    amount: 8
+  - herb: {fileID: 11400000, guid: a35368017e21aa84b8ce1a9059aef931, type: 2}
+    amount: 3
+  - herb: {fileID: 11400000, guid: 41544b55360f41442965fa81733f815c, type: 2}
+    amount: 3
+  - herb: {fileID: 11400000, guid: 8703952609057024182bc7cc7c3e61f1, type: 2}
+    amount: 4
+  - herb: {fileID: 11400000, guid: eeaf131d53e824f4eb20c30f29b595e5, type: 2}
+    amount: 2
   medicineCorrectRate: 0.7
   perfectReputation: 20
   perfectMoney: 30

@@ -23,16 +23,21 @@ MonoBehaviour:
   symptoms:
   - symptomText: "\u0110au d\u1ECDc t\u1EEB th\u1EAFt l\u01B0ng xu\u1ED1ng m\xF4ng."
     showAtStep: 0
-  - symptomText: "\u0110au m\u1EB7t sau \u0111\xF9i v\xE0 b\u1EAFp ch\xE2n."
+  - symptomText: "\u0110au m\u1EB7t sau \u0111\xF9i and b\u1EAFp ch\xE2n."
     showAtStep: 0
   - symptomText: "\u0110au bu\u1ED1t t\u1EADn xu\u1ED1ng g\xF3t ch\xE2n."
     showAtStep: 1
-  correctHerbs:
-  - {fileID: 11400000, guid: 82a0009a11d9ecd42ba1813168312666, type: 2}
-  - {fileID: 11400000, guid: 448163128aabb9844a03e99afb287c8e, type: 2}
-  - {fileID: 11400000, guid: bccb0c4af43d765409640cc9a14fd299, type: 2}
-  - {fileID: 11400000, guid: bb445db3d4f4d4c44b650d6507db81c7, type: 2}
-  - {fileID: 11400000, guid: c874a978d29033845b4e5d43bfb025f2, type: 2}
+  requiredHerbs:
+  - herb: {fileID: 11400000, guid: 82a0009a11d9ecd42ba1813168312666, type: 2}
+    amount: 6
+  - herb: {fileID: 11400000, guid: 448163128aabb9844a03e99afb287c8e, type: 2}
+    amount: 6
+  - herb: {fileID: 11400000, guid: bccb0c4af43d765409640cc9a14fd299, type: 2}
+    amount: 5
+  - herb: {fileID: 11400000, guid: bb445db3d4f4d4c44b650d6507db81c7, type: 2}
+    amount: 3
+  - herb: {fileID: 11400000, guid: c874a978d29033845b4e5d43bfb025f2, type: 2}
+    amount: 2
   medicineCorrectRate: 0.7
   perfectReputation: 20
   perfectMoney: 30

@@ -27,12 +27,17 @@ MonoBehaviour:
     showAtStep: 0
   - symptomText: "M\xF3t r\u1EB7n \u0111i ngo\xE0i nhi\u1EC1u l\u1EA7n."
     showAtStep: 1
-  correctHerbs:
-  - {fileID: 11400000, guid: 509c65ca8c40566439f353bb8b857707, type: 2}
-  - {fileID: 11400000, guid: 93aaaf4a59c9b664fa47a28feea0f21b, type: 2}
-  - {fileID: 11400000, guid: 43ae4ac10b0448849bdb0013e0dba078, type: 2}
-  - {fileID: 11400000, guid: b6ff94f16ea5df84792e053824367e44, type: 2}
-  - {fileID: 11400000, guid: eeaf131d53e824f4eb20c30f29b595e5, type: 2}
+  requiredHerbs:
+  - herb: {fileID: 11400000, guid: 509c65ca8c40566439f353bb8b857707, type: 2}
+    amount: 7
+  - herb: {fileID: 11400000, guid: 93aaaf4a59c9b664fa47a28feea0f21b, type: 2}
+    amount: 6
+  - herb: {fileID: 11400000, guid: 43ae4ac10b0448849bdb0013e0dba078, type: 2}
+    amount: 5
+  - herb: {fileID: 11400000, guid: b6ff94f16ea5df84792e053824367e44, type: 2}
+    amount: 4
+  - herb: {fileID: 11400000, guid: eeaf131d53e824f4eb20c30f29b595e5, type: 2}
+    amount: 2
   medicineCorrectRate: 0.7
   perfectReputation: 20
   perfectMoney: 30

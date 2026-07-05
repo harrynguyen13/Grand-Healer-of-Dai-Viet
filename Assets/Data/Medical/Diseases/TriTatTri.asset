@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ded8839ef4e41c4fab5e54d933081c2, type: 3}
   m_Name: TriTatTri
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
-  diseaseName: "Tr\u0129 t\u1EADt (Tr\u0129 n\u1ED9i/ngo\u1EA1i)"
+  diseaseName: "Tr\u0129 t\u1EADt"
   diseaseLevel: 3
   diseaseGroup: 7
   description: "C\xE1c b\xFAi tr\u0129 s\u01B0ng to sa ra ngo\xE0i h\u1EADu m\xF4n,
@@ -27,12 +27,17 @@ MonoBehaviour:
     showAtStep: 0
   - symptomText: "\u0110\u1EA1i ti\u1EC7n ra m\xE1u t\u01B0\u01A1i nh\u1ECF gi\u1ECDt."
     showAtStep: 1
-  correctHerbs:
-  - {fileID: 11400000, guid: bb445db3d4f4d4c44b650d6507db81c7, type: 2}
-  - {fileID: 11400000, guid: 3b233dc066306cc43a6f25775db65c38, type: 2}
-  - {fileID: 11400000, guid: 54c7982d30dd92f48aca79b82948968c, type: 2}
-  - {fileID: 11400000, guid: fde7743b3904d014b819bf0b7742a249, type: 2}
-  - {fileID: 11400000, guid: 3ba4c21b7b5f4e645a1cb94809b6871f, type: 2}
+  requiredHerbs:
+  - herb: {fileID: 11400000, guid: bb445db3d4f4d4c44b650d6507db81c7, type: 2}
+    amount: 7
+  - herb: {fileID: 11400000, guid: 3b233dc066306cc43a6f25775db65c38, type: 2}
+    amount: 5
+  - herb: {fileID: 11400000, guid: 54c7982d30dd92f48aca79b82948968c, type: 2}
+    amount: 3
+  - herb: {fileID: 11400000, guid: fde7743b3904d014b819bf0b7742a249, type: 2}
+    amount: 1
+  - herb: {fileID: 11400000, guid: 3ba4c21b7b5f4e645a1cb94809b6871f, type: 2}
+    amount: 2
   medicineCorrectRate: 0.7
   perfectReputation: 20
   perfectMoney: 30

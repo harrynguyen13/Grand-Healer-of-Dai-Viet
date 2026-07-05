@@ -28,11 +28,15 @@ MonoBehaviour:
   - symptomText: "Ng\u01B0\u1EDDi m\u1EC7t m\u1ECFi h\u1EE5t h\u01A1i l\u01B0\u1EDDi
       n\xF3i."
     showAtStep: 1
-  correctHerbs:
-  - {fileID: 11400000, guid: ef6996b7576fa6949942811f625c4b8e, type: 2}
-  - {fileID: 11400000, guid: b6ff94f16ea5df84792e053824367e44, type: 2}
-  - {fileID: 11400000, guid: bdc1ce7011cd7c44ab288245d2114349, type: 2}
-  - {fileID: 11400000, guid: a35368017e21aa84b8ce1a9059aef931, type: 2}
+  requiredHerbs:
+  - herb: {fileID: 11400000, guid: ef6996b7576fa6949942811f625c4b8e, type: 2}
+    amount: 6
+  - herb: {fileID: 11400000, guid: b6ff94f16ea5df84792e053824367e44, type: 2}
+    amount: 6
+  - herb: {fileID: 11400000, guid: bdc1ce7011cd7c44ab288245d2114349, type: 2}
+    amount: 3
+  - herb: {fileID: 11400000, guid: a35368017e21aa84b8ce1a9059aef931, type: 2}
+    amount: 2
   medicineCorrectRate: 0.7
   perfectReputation: 20
   perfectMoney: 30

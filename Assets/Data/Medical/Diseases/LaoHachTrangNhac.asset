@@ -29,12 +29,19 @@ MonoBehaviour:
   - symptomText: "V\u1EE1 lo\xE9t m\u1EE7 r\xF2 d\u1ECBch ho\u1EA1i t\u1EED quanh
       n\u0103m kh\xF3 l\xE0nh."
     showAtStep: 1
-  correctHerbs:
-  - {fileID: 11400000, guid: bf4e0a757fddcf4458b2aa94a5287658, type: 2}
-  - {fileID: 11400000, guid: 70f8cee14eb94e84ca6d1791a604beb7, type: 2}
-  - {fileID: 11400000, guid: f59986e305176f84d9987f28d904a57e, type: 2}
-  - {fileID: 11400000, guid: b7e8d46687b89124c84cf893cf99a438, type: 2}
-  - {fileID: 11400000, guid: a35368017e21aa84b8ce1a9059aef931, type: 2}
+  requiredHerbs:
+  - herb: {fileID: 11400000, guid: bf4e0a757fddcf4458b2aa94a5287658, type: 2}
+    amount: 8
+  - herb: {fileID: 11400000, guid: 70f8cee14eb94e84ca6d1791a604beb7, type: 2}
+    amount: 4
+  - herb: {fileID: 11400000, guid: f59986e305176f84d9987f28d904a57e, type: 2}
+    amount: 6
+  - herb: {fileID: 11400000, guid: b7e8d46687b89124c84cf893cf99a438, type: 2}
+    amount: 5
+  - herb: {fileID: 11400000, guid: 536615dde1f1c8b4d90c8658c9dc87ea, type: 2}
+    amount: 3
+  - herb: {fileID: 11400000, guid: a35368017e21aa84b8ce1a9059aef931, type: 2}
+    amount: 2
   medicineCorrectRate: 0.7
   perfectReputation: 20
   perfectMoney: 30

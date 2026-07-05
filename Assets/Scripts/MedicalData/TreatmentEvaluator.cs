@@ -12,10 +12,16 @@ public static class TreatmentEvaluator
 {
     public static TreatmentResultType Evaluate(PatientCase patientCase)
     {
+        if (patientCase == null)
+            return TreatmentResultType.Failed;
+
+        if (patientCase.realDisease == null)
+            return TreatmentResultType.Failed;
+
         bool isDiseaseCorrect = patientCase.selectedDisease == patientCase.realDisease;
 
         bool isMedicineCorrect = IsMedicineCorrect(
-            patientCase.realDisease.correctHerbs,
+            patientCase.realDisease.requiredHerbs,
             patientCase.selectedHerbs,
             patientCase.realDisease.medicineCorrectRate
         );
@@ -32,23 +38,50 @@ public static class TreatmentEvaluator
         return TreatmentResultType.Failed;
     }
 
-    private static bool IsMedicineCorrect(List<HerbData> correctHerbs, List<HerbData> selectedHerbs, float requiredRate)
+    private static bool IsMedicineCorrect(
+        List<RequiredHerbAmount> requiredHerbs,
+        List<HerbData> selectedHerbs,
+        float requiredRate
+    )
     {
-        if (correctHerbs == null || correctHerbs.Count == 0)
+        if (requiredHerbs == null || requiredHerbs.Count == 0)
             return false;
 
-        int correctCount = 0;
+        if (selectedHerbs == null || selectedHerbs.Count == 0)
+            return false;
 
-        foreach (HerbData herb in correctHerbs)
+        int correctRequiredCount = 0;
+
+        foreach (RequiredHerbAmount required in requiredHerbs)
         {
-            if (selectedHerbs.Contains(herb))
+            if (required == null || required.herb == null)
+                continue;
+
+            int selectedAmount = CountSelectedHerb(selectedHerbs, required.herb);
+
+            if (selectedAmount >= required.amount)
             {
-                correctCount++;
+                correctRequiredCount++;
             }
         }
 
-        float currentRate = (float)correctCount / correctHerbs.Count;
+        float currentRate = (float)correctRequiredCount / requiredHerbs.Count;
 
         return currentRate >= requiredRate;
+    }
+
+    private static int CountSelectedHerb(List<HerbData> selectedHerbs, HerbData targetHerb)
+    {
+        int count = 0;
+
+        foreach (HerbData selectedHerb in selectedHerbs)
+        {
+            if (selectedHerb == targetHerb)
+            {
+                count++;
+            }
+        }
+
+        return count;
     }
 }

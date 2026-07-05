@@ -18,9 +18,9 @@ MonoBehaviour:
   description: "Da s\u01B0ng \u0111\u1ECF r\u1EF1c m\u1ED9t m\u1EA3ng l\u1EDBn nh\u01B0
     l\u1EEDa ch\xE1y, n\xF3ng b\u1EEBng, t\u1EA5y \u0111au k\xE8m s\u1ED1t cao m\xEA
     s\u1EA3ng."
-  patientDialogue: "M\u1ED9t m\u1EA3ng da ch\xE2n t\xF4i t\u1EF1 d\u01B0ng s\u01B0ng
-    \u0111\u1ECF r\u1EF1c l\xEAn nh\u01B0 l\u1EEDa ch\xE1y, s\u1EDD v\xE0o n\xF3ng
-    b\u1EEBng t\u1EA5y \u0111au, ng\u01B0\u1EDDi s\u1ED1t m\xEA s\u1EA3ng."
+  patientDialogue: "M\u1ED9t m\u1EA3ng da ch\xE2n t\xF4i t\u1EF1 dung s\u01B0ng \u0111\u1ECF
+    r\u1EF1c l\xEAn nh\u01B0 l\u1EEDa ch\xE1y, s\u1EDD v\xE0o n\xF3ng b\u1EEBng t\u1EA5y
+    \u0111au, ng\u01B0\u1EDDi s\u1ED1t m\xEA s\u1EA3ng."
   symptoms:
   - symptomText: "Da s\u01B0ng \u0111\u1ECF r\u1EF1c m\u1ED9t m\u1EA3ng l\u1EDBn
       nh\u01B0 l\u1EEDa ch\xE1y."
@@ -31,11 +31,15 @@ MonoBehaviour:
   - symptomText: "Ng\u01B0\u1EDDi ph\xE1t s\u1ED1t cao \u0111\xF9ng \u0111\xF9ng
       m\xEA s\u1EA3ng."
     showAtStep: 1
-  correctHerbs:
-  - {fileID: 11400000, guid: 9c7b7ad2cd7bc964283bc5e1cc2da488, type: 2}
-  - {fileID: 11400000, guid: b7e8d46687b89124c84cf893cf99a438, type: 2}
-  - {fileID: 11400000, guid: 42917dffbf4cc7046841dd612dba2419, type: 2}
-  - {fileID: 11400000, guid: 54c7982d30dd92f48aca79b82948968c, type: 2}
+  requiredHerbs:
+  - herb: {fileID: 11400000, guid: 9c7b7ad2cd7bc964283bc5e1cc2da488, type: 2}
+    amount: 7
+  - herb: {fileID: 11400000, guid: b7e8d46687b89124c84cf893cf99a438, type: 2}
+    amount: 6
+  - herb: {fileID: 11400000, guid: 42917dffbf4cc7046841dd612dba2419, type: 2}
+    amount: 4
+  - herb: {fileID: 11400000, guid: 54c7982d30dd92f48aca79b82948968c, type: 2}
+    amount: 1
   medicineCorrectRate: 0.7
   perfectReputation: 20
   perfectMoney: 30

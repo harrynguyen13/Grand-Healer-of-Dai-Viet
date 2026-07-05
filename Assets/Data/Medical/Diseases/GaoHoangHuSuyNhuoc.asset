@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ded8839ef4e41c4fab5e54d933081c2, type: 3}
   m_Name: GaoHoangHuSuyNhuoc
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
-  diseaseName: "Gao hoang h\u01B0 (Suy nh\u01B0\u1EE3c t\u1ED9t \u0111\u1ED9)"
+  diseaseName: "Cao hoang h\u01B0 (Suy nh\u01B0\u1EE3c t\u1ED9t \u0111\u1ED9)"
   diseaseLevel: 4
-  diseaseGroup: 9
+  diseaseGroup: 3
   description: "B\u1EC7nh l\xE2u ng\xE0y \u0103n s\xE2u v\xE0o v\xF9ng cao hoang,
     g\u1EA7y tr\u01A1 x\u01B0\u01A1ng, ki\u1EC7t qu\u1EC7 \u0111o\u1EA3n h\u01A1i
     (v\xF4 ph\u01B0\u01A1ng c\u1EE9u ch\u1EEFa)."
@@ -25,19 +25,25 @@ MonoBehaviour:
   - symptomText: "B\u1EC7nh t\u1EADt l\xE2u ng\xE0y \u0103n s\xE2u v\xE0o t\u1EA1ng
       ph\u1EE7."
     showAtStep: 0
-  - symptomText: "C\u01A1 th\u1EC3 ki\u1EC7t qu\u1EC7 g\u1EA7y tr\u01A1 x\u01B0\u01A1ng
-      h\xE0nh t\u1EE7y."
+  - symptomText: "C\u01A1 th\u1EC3 ki\u1EC7t qu\u1EC7, g\u1EA7y tr\u01A1 x\u01B0\u01A1ng,
+      hao t\u1ED5n t\u1EE7y."
     showAtStep: 0
   - symptomText: "H\u01A1i th\u1EDF \u0111o\u1EA3n h\u1EE5t y\u1EBFu \u1EDBt, m\u1EA1ch
       mu\u1ED1n tuy\u1EC7t."
     showAtStep: 1
-  correctHerbs:
-  - {fileID: 11400000, guid: ef6996b7576fa6949942811f625c4b8e, type: 2}
-  - {fileID: 11400000, guid: 742b8263af9857f44be232f679e50744, type: 2}
-  - {fileID: 11400000, guid: 0a8a10a57503ae4488eb40640b3b0b94, type: 2}
-  - {fileID: 11400000, guid: b6ff94f16ea5df84792e053824367e44, type: 2}
-  - {fileID: 11400000, guid: eeaf131d53e824f4eb20c30f29b595e5, type: 2}
-  - {fileID: 11400000, guid: a35368017e21aa84b8ce1a9059aef931, type: 2}
+  requiredHerbs:
+  - herb: {fileID: 11400000, guid: ef6996b7576fa6949942811f625c4b8e, type: 2}
+    amount: 8
+  - herb: {fileID: 11400000, guid: 742b8263af9857f44be232f679e50744, type: 2}
+    amount: 7
+  - herb: {fileID: 11400000, guid: 0a8a10a57503ae4488eb40640b3b0b94, type: 2}
+    amount: 3
+  - herb: {fileID: 11400000, guid: b6ff94f16ea5df84792e053824367e44, type: 2}
+    amount: 4
+  - herb: {fileID: 11400000, guid: eeaf131d53e824f4eb20c30f29b595e5, type: 2}
+    amount: 3
+  - herb: {fileID: 11400000, guid: a35368017e21aa84b8ce1a9059aef931, type: 2}
+    amount: 2
   medicineCorrectRate: 0.7
   perfectReputation: 20
   perfectMoney: 30

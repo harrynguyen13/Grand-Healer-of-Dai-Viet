@@ -25,6 +25,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1701fd84993f36644941978c6631d934, type: 2}
   - {fileID: 11400000, guid: bce5db0107b624d4ca6dd85be9b39001, type: 2}
   - {fileID: 11400000, guid: 1b8358c15c94dcb4ea3f0b0b49b43f02, type: 2}
+  - {fileID: 11400000, guid: dacd8e0e4cfd24643887a51c73169126, type: 2}
   - {fileID: 11400000, guid: 018e0d1945cf890429d3a57d6c6db858, type: 2}
   - {fileID: 11400000, guid: 3d5f591830075eb47bbd327942dd0d12, type: 2}
   - {fileID: 11400000, guid: 54256813745ef4d4ab8fbfa866913730, type: 2}
@@ -115,6 +116,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c0eb1792f3032d9419aadec27d39a640, type: 2}
   - {fileID: 11400000, guid: 8521c61c4cafbc0488c13a38f99f78ba, type: 2}
   herbs:
+  - {fileID: 11400000, guid: bb1e0343812eadb4a8213d1b13ea1970, type: 2}
   - {fileID: 11400000, guid: c8fa5553c15447048bfd8b3cfce238ac, type: 2}
   - {fileID: 11400000, guid: b859e97737aeede43a79ac8d60d5a5bc, type: 2}
   - {fileID: 11400000, guid: 3ba4c21b7b5f4e645a1cb94809b6871f, type: 2}
@@ -139,6 +141,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 25fab37b539c8e142a0d5c00ec613d67, type: 2}
   - {fileID: 11400000, guid: 82a0009a11d9ecd42ba1813168312666, type: 2}
   - {fileID: 11400000, guid: bb445db3d4f4d4c44b650d6507db81c7, type: 2}
+  - {fileID: 11400000, guid: 536615dde1f1c8b4d90c8658c9dc87ea, type: 2}
   - {fileID: 11400000, guid: 5b078c974b34e9948a3f4b7651e0c077, type: 2}
   - {fileID: 11400000, guid: 80bb485434d3dce4fb137e42500ad664, type: 2}
   - {fileID: 11400000, guid: 66427de9ffdfabe4caf9c70133fb408a, type: 2}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DiseaseData
   diseaseName: "T\xE2m th\u1EADn b\u1EA5t giao"
   diseaseLevel: 3
-  diseaseGroup: 9
+  diseaseGroup: 3
   description: "M\u1EA5t ng\u1EE7 kinh ni\xEAn, b\u1ED3n ch\u1ED3n, \xF9 tai, hay
     qu\xEAn, \u0111au l\u01B0ng m\u1ECFi g\u1ED1i, di tinh."
   patientDialogue: "T\xF4i m\u1EA5t ng\u1EE7 kinh ni\xEAn n\u1EEDa n\u0103m nay,
@@ -27,12 +27,17 @@ MonoBehaviour:
     showAtStep: 0
   - symptomText: "\u0110au l\u01B0ng m\u1ECFi g\u1ED1i, di tinh."
     showAtStep: 1
-  correctHerbs:
-  - {fileID: 11400000, guid: 742b8263af9857f44be232f679e50744, type: 2}
-  - {fileID: 11400000, guid: 666cd74e5756f9d468dbac22430dbcaf, type: 2}
-  - {fileID: 11400000, guid: b283ada7362c6e14fb5cdf92e0d5209f, type: 2}
-  - {fileID: 11400000, guid: 917b6ce0e960255439f939e1ec6b9c7d, type: 2}
-  - {fileID: 11400000, guid: 65a1ebdbd37711149bd0de0c20b5056e, type: 2}
+  requiredHerbs:
+  - herb: {fileID: 11400000, guid: 742b8263af9857f44be232f679e50744, type: 2}
+    amount: 7
+  - herb: {fileID: 11400000, guid: 666cd74e5756f9d468dbac22430dbcaf, type: 2}
+    amount: 6
+  - herb: {fileID: 11400000, guid: b283ada7362c6e14fb5cdf92e0d5209f, type: 2}
+    amount: 5
+  - herb: {fileID: 11400000, guid: 917b6ce0e960255439f939e1ec6b9c7d, type: 2}
+    amount: 3
+  - herb: {fileID: 11400000, guid: 65a1ebdbd37711149bd0de0c20b5056e, type: 2}
+    amount: 2
   medicineCorrectRate: 0.7
   perfectReputation: 20
   perfectMoney: 30

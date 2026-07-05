@@ -27,10 +27,13 @@ MonoBehaviour:
     showAtStep: 0
   - symptomText: "B\u1EE5ng tr\u01B0\u1EDBng kh\xF4ng \u0111\xF3i."
     showAtStep: 1
-  correctHerbs:
-  - {fileID: 11400000, guid: b6ff94f16ea5df84792e053824367e44, type: 2}
-  - {fileID: 11400000, guid: 66427de9ffdfabe4caf9c70133fb408a, type: 2}
-  - {fileID: 11400000, guid: 5ab1c3461f11e76478bef2f77d38bff1, type: 2}
+  requiredHerbs:
+  - herb: {fileID: 11400000, guid: b6ff94f16ea5df84792e053824367e44, type: 2}
+    amount: 6
+  - herb: {fileID: 11400000, guid: 66427de9ffdfabe4caf9c70133fb408a, type: 2}
+    amount: 4
+  - herb: {fileID: 11400000, guid: 5ab1c3461f11e76478bef2f77d38bff1, type: 2}
+    amount: 3
   medicineCorrectRate: 0.7
   perfectReputation: 20
   perfectMoney: 30

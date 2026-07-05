@@ -27,11 +27,15 @@ MonoBehaviour:
     showAtStep: 0
   - symptomText: "\u1EA4m \xE1ch kh\xF4ng mu\u1ED1n \u0103n."
     showAtStep: 1
-  correctHerbs:
-  - {fileID: 11400000, guid: 8703952609057024182bc7cc7c3e61f1, type: 2}
-  - {fileID: 11400000, guid: ef583ea8b197b4e409c65b5a82c8833c, type: 2}
-  - {fileID: 11400000, guid: b6ff94f16ea5df84792e053824367e44, type: 2}
-  - {fileID: 11400000, guid: 41544b55360f41442965fa81733f815c, type: 2}
+  requiredHerbs:
+  - herb: {fileID: 11400000, guid: 8703952609057024182bc7cc7c3e61f1, type: 2}
+    amount: 7
+  - herb: {fileID: 11400000, guid: ef583ea8b197b4e409c65b5a82c8833c, type: 2}
+    amount: 5
+  - herb: {fileID: 11400000, guid: b6ff94f16ea5df84792e053824367e44, type: 2}
+    amount: 4
+  - herb: {fileID: 11400000, guid: 41544b55360f41442965fa81733f815c, type: 2}
+    amount: 1
   medicineCorrectRate: 0.7
   perfectReputation: 20
   perfectMoney: 30

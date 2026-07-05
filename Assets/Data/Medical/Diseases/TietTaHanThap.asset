@@ -27,10 +27,13 @@ MonoBehaviour:
     showAtStep: 0
   - symptomText: "Th\xEDch ch\u01B0\u1EDDm \u1EA5m."
     showAtStep: 1
-  correctHerbs:
-  - {fileID: 11400000, guid: a3a51709ce0c90947b99a1ea3bb9b6c2, type: 2}
-  - {fileID: 11400000, guid: 8703952609057024182bc7cc7c3e61f1, type: 2}
-  - {fileID: 11400000, guid: b6ff94f16ea5df84792e053824367e44, type: 2}
+  requiredHerbs:
+  - herb: {fileID: 11400000, guid: a3a51709ce0c90947b99a1ea3bb9b6c2, type: 2}
+    amount: 5
+  - herb: {fileID: 11400000, guid: 8703952609057024182bc7cc7c3e61f1, type: 2}
+    amount: 5
+  - herb: {fileID: 11400000, guid: b6ff94f16ea5df84792e053824367e44, type: 2}
+    amount: 3
   medicineCorrectRate: 0.7
   perfectReputation: 20
   perfectMoney: 30

@@ -27,12 +27,17 @@ MonoBehaviour:
     showAtStep: 0
   - symptomText: "\u0110au lan xu\u1ED1ng b\u1EA3 vai."
     showAtStep: 1
-  correctHerbs:
-  - {fileID: 11400000, guid: 82a0009a11d9ecd42ba1813168312666, type: 2}
-  - {fileID: 11400000, guid: f91856cf265a58847bf766dfa7783490, type: 2}
-  - {fileID: 11400000, guid: 5e7d73b057a5f614abf98862ef6ca724, type: 2}
-  - {fileID: 11400000, guid: 8bc43412cf64002488e0d47577f6ed17, type: 2}
-  - {fileID: 11400000, guid: bb445db3d4f4d4c44b650d6507db81c7, type: 2}
+  requiredHerbs:
+  - herb: {fileID: 11400000, guid: 82a0009a11d9ecd42ba1813168312666, type: 2}
+    amount: 6
+  - herb: {fileID: 11400000, guid: f91856cf265a58847bf766dfa7783490, type: 2}
+    amount: 5
+  - herb: {fileID: 11400000, guid: 5e7d73b057a5f614abf98862ef6ca724, type: 2}
+    amount: 5
+  - herb: {fileID: 11400000, guid: 8bc43412cf64002488e0d47577f6ed17, type: 2}
+    amount: 3
+  - herb: {fileID: 11400000, guid: bb445db3d4f4d4c44b650d6507db81c7, type: 2}
+    amount: 2
   medicineCorrectRate: 0.7
   perfectReputation: 20
   perfectMoney: 30

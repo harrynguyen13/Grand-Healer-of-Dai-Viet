@@ -191,26 +191,31 @@ public partial class ClinicExamManager
         Dictionary<HerbData, int> selectedPrescription
     )
     {
-        if (disease == null || disease.correctHerbs == null)
+        if (disease == null || disease.requiredHerbs == null)
             return false;
 
         if (selectedPrescription == null)
             return false;
 
-        HashSet<string> requiredHerbs = new HashSet<string>();
+        Dictionary<string, int> requiredHerbs = new Dictionary<string, int>();
 
-        foreach (HerbData herb in disease.correctHerbs)
+        foreach (RequiredHerbAmount required in disease.requiredHerbs)
         {
-            if (herb == null)
+            if (required == null || required.herb == null)
                 continue;
 
-            string herbKey = GetHerbKey(herb);
+            string herbKey = GetHerbKey(required.herb);
 
-            if (!string.IsNullOrEmpty(herbKey))
-                requiredHerbs.Add(herbKey);
+            if (string.IsNullOrEmpty(herbKey))
+                continue;
+
+            if (!requiredHerbs.ContainsKey(herbKey))
+                requiredHerbs.Add(herbKey, 0);
+
+            requiredHerbs[herbKey] += Mathf.Max(1, required.amount);
         }
 
-        HashSet<string> selectedHerbs = new HashSet<string>();
+        Dictionary<string, int> selectedHerbs = new Dictionary<string, int>();
 
         foreach (KeyValuePair<HerbData, int> pair in selectedPrescription)
         {
@@ -222,19 +227,24 @@ public partial class ClinicExamManager
 
             string herbKey = GetHerbKey(herb);
 
-            if (!string.IsNullOrEmpty(herbKey))
-                selectedHerbs.Add(herbKey);
+            if (string.IsNullOrEmpty(herbKey))
+                continue;
+
+            if (!selectedHerbs.ContainsKey(herbKey))
+                selectedHerbs.Add(herbKey, 0);
+
+            selectedHerbs[herbKey] += quantity;
         }
 
         if (requiredHerbs.Count <= 0)
         {
-            Debug.LogWarning("Bệnh này chưa có correctHerbs.");
+            Debug.LogWarning("Bệnh này chưa có requiredHerbs.");
             return false;
         }
 
         if (selectedHerbs.Count != requiredHerbs.Count)
         {
-            Debug.Log("Sai số lượng vị thuốc. Cần: "
+            Debug.Log("Sai số vị thuốc. Cần: "
                 + requiredHerbs.Count
                 + ", đã kê: "
                 + selectedHerbs.Count);
@@ -242,11 +252,28 @@ public partial class ClinicExamManager
             return false;
         }
 
-        foreach (string requiredHerb in requiredHerbs)
+        foreach (KeyValuePair<string, int> requiredPair in requiredHerbs)
         {
-            if (!selectedHerbs.Contains(requiredHerb))
+            string requiredHerbKey = requiredPair.Key;
+            int requiredAmount = requiredPair.Value;
+
+            if (!selectedHerbs.TryGetValue(requiredHerbKey, out int selectedAmount))
             {
-                Debug.Log("Thiếu hoặc sai vị thuốc: " + requiredHerb);
+                Debug.Log("Thiếu vị thuốc: " + requiredHerbKey);
+                return false;
+            }
+
+            if (selectedAmount < requiredAmount)
+            {
+                Debug.Log(
+                    "Không đủ số lượng thuốc: "
+                    + requiredHerbKey
+                    + ". Cần: "
+                    + requiredAmount
+                    + ", đã kê: "
+                    + selectedAmount
+                );
+
                 return false;
             }
         }
@@ -264,18 +291,21 @@ public partial class ClinicExamManager
 
     private string GetRequiredHerbNames(DiseaseData disease)
     {
-        if (disease == null || disease.correctHerbs == null)
+        if (disease == null || disease.requiredHerbs == null)
             return "Không có dữ liệu thuốc.";
 
         List<string> herbNames = new List<string>();
 
-        foreach (HerbData herb in disease.correctHerbs)
+        foreach (RequiredHerbAmount required in disease.requiredHerbs)
         {
-            if (herb == null)
+            if (required == null || required.herb == null)
                 continue;
 
-            herbNames.Add(herb.herbName);
+            herbNames.Add(required.herb.herbName + " x" + required.amount);
         }
+
+        if (herbNames.Count <= 0)
+            return "Không có dữ liệu thuốc.";
 
         return string.Join(", ", herbNames);
     }

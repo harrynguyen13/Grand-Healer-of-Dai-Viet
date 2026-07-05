@@ -26,6 +26,13 @@ public class DiseaseDataImporter : EditorWindow
         diseaseOutputFolder = EditorGUILayout.TextField("Disease Output Folder", diseaseOutputFolder);
         herbFolder = EditorGUILayout.TextField("Herb Folder", herbFolder);
 
+        EditorGUILayout.HelpBox(
+            "Importer mới sẽ đọc cột requiredHerbs dạng:\n" +
+            "Sinh khương:5|Tía tô:4|Cam thảo:2\n\n" +
+            "Sau đó đổ vào DiseaseData.requiredHerbs.",
+            MessageType.Info
+        );
+
         if (GUILayout.Button("Import Disease Data"))
         {
             ImportDiseases();
@@ -60,6 +67,7 @@ public class DiseaseDataImporter : EditorWindow
 
         int createdCount = 0;
         int updatedCount = 0;
+        int missingHerbCount = 0;
 
         for (int i = 1; i < lines.Length; i++)
         {
@@ -106,26 +114,24 @@ public class DiseaseDataImporter : EditorWindow
             AddSymptoms(disease, GetValue(columns, headerIndex, "askSymptoms"), ExaminationStep.Ask);
             AddSymptoms(disease, GetValue(columns, headerIndex, "pulseSymptoms"), ExaminationStep.PulseCheck);
 
-            disease.correctHerbs.Clear();
+            disease.requiredHerbs.Clear();
 
-            string correctHerbsText = GetValue(columns, headerIndex, "correctHerbs");
-            string[] herbNames = correctHerbsText.Split('|');
+            string requiredHerbsText = GetValue(columns, headerIndex, "requiredHerbs");
 
-            foreach (string herbName in herbNames)
+            if (string.IsNullOrWhiteSpace(requiredHerbsText))
             {
-                string key = NormalizeKey(herbName);
+                Debug.LogWarning("Bệnh chưa có requiredHerbs: " + diseaseName + " | Dòng: " + (i + 1));
+            }
+            else
+            {
+                int missingInDisease = AddRequiredHerbs(
+                    disease,
+                    requiredHerbsText,
+                    herbLookup,
+                    diseaseName
+                );
 
-                if (string.IsNullOrWhiteSpace(key))
-                    continue;
-
-                if (herbLookup.TryGetValue(key, out HerbData herb))
-                {
-                    disease.correctHerbs.Add(herb);
-                }
-                else
-                {
-                    Debug.LogWarning("Không tìm thấy HerbData cho thuốc: " + herbName + " | Bệnh: " + diseaseName);
-                }
+                missingHerbCount += missingInDisease;
             }
 
             EditorUtility.SetDirty(disease);
@@ -139,7 +145,110 @@ public class DiseaseDataImporter : EditorWindow
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
 
-        Debug.Log("Import bệnh xong. Tạo mới: " + createdCount + " | Cập nhật: " + updatedCount);
+        Debug.Log(
+            "Import bệnh xong. Tạo mới: "
+            + createdCount
+            + " | Cập nhật: "
+            + updatedCount
+            + " | Thuốc không tìm thấy: "
+            + missingHerbCount
+        );
+    }
+
+    private int AddRequiredHerbs(
+        DiseaseData disease,
+        string requiredHerbsText,
+        Dictionary<string, HerbData> herbLookup,
+        string diseaseName
+    )
+    {
+        int missingCount = 0;
+
+        if (string.IsNullOrWhiteSpace(requiredHerbsText))
+            return missingCount;
+
+        string[] herbEntries = requiredHerbsText.Split('|');
+
+        foreach (string rawEntry in herbEntries)
+        {
+            if (string.IsNullOrWhiteSpace(rawEntry))
+                continue;
+
+            ParsedHerbAmount parsed = ParseHerbAmount(rawEntry);
+
+            if (string.IsNullOrWhiteSpace(parsed.herbName))
+                continue;
+
+            string key = NormalizeKey(parsed.herbName);
+
+            if (string.IsNullOrWhiteSpace(key))
+                continue;
+
+            if (herbLookup.TryGetValue(key, out HerbData herb))
+            {
+                RequiredHerbAmount required = new RequiredHerbAmount();
+                required.herb = herb;
+                required.amount = Mathf.Max(1, parsed.amount);
+
+                disease.requiredHerbs.Add(required);
+            }
+            else
+            {
+                missingCount++;
+                Debug.LogWarning(
+                    "Không tìm thấy HerbData cho thuốc: "
+                    + parsed.herbName
+                    + " | Bệnh: "
+                    + diseaseName
+                );
+            }
+        }
+
+        return missingCount;
+    }
+
+    private ParsedHerbAmount ParseHerbAmount(string rawEntry)
+    {
+        ParsedHerbAmount result = new ParsedHerbAmount();
+        result.herbName = "";
+        result.amount = 1;
+
+        if (string.IsNullOrWhiteSpace(rawEntry))
+            return result;
+
+        string entry = rawEntry.Trim();
+
+        string[] separators = new string[]
+        {
+            ":",
+            "：",
+            "x",
+            "X",
+            "*",
+            "×"
+        };
+
+        foreach (string separator in separators)
+        {
+            int separatorIndex = entry.LastIndexOf(separator, StringComparison.Ordinal);
+
+            if (separatorIndex <= 0)
+                continue;
+
+            string herbNamePart = entry.Substring(0, separatorIndex).Trim();
+            string amountPart = entry.Substring(separatorIndex + separator.Length).Trim();
+
+            if (int.TryParse(amountPart, out int parsedAmount))
+            {
+                result.herbName = herbNamePart;
+                result.amount = Mathf.Max(1, parsedAmount);
+                return result;
+            }
+        }
+
+        result.herbName = entry;
+        result.amount = 1;
+        return result;
     }
 
     private Dictionary<string, int> BuildHeaderIndex(string[] headers)
@@ -232,6 +341,9 @@ public class DiseaseDataImporter : EditorWindow
     {
         text = text.Trim().ToLower();
 
+        if (text.Contains("5"))
+            return DiseaseLevel.Level5;
+
         if (text.Contains("4"))
             return DiseaseLevel.Level4;
 
@@ -259,6 +371,7 @@ public class DiseaseDataImporter : EditorWindow
             case "thankinh":
                 return DiseaseGroup.ThanKinh;
 
+            case "tammach":
             case "timmach":
                 return DiseaseGroup.TimMach;
 
@@ -344,5 +457,11 @@ public class DiseaseDataImporter : EditorWindow
         }
 
         return builder.ToString().Normalize(NormalizationForm.FormC);
+    }
+
+    private struct ParsedHerbAmount
+    {
+        public string herbName;
+        public int amount;
     }
 }

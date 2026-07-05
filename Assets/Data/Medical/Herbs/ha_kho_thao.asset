@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 418e3d9e42fab5b468e2191ac07b70e2, type: 3}
+  m_Name: ha_kho_thao
+  m_EditorClassIdentifier: Assembly-CSharp::HerbData
+  herbName: Ha Kho Thao
+  description: 
+  category: 11
+  rarity: 0
+  unlockClinicLevel: 1
+  price: 9
+  buyPrice: 8
+  sellPrice: 9
+  startQuantity: 50
+  autoCalculateBalance: 1
+  icon: {fileID: -7153763881367415588, guid: 99f896ab7cad2f14e890af9b30752c7b, type: 3}

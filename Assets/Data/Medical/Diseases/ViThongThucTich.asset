@@ -27,10 +27,13 @@ MonoBehaviour:
     showAtStep: 0
   - symptomText: "\u1EE2 m\xF9i th\u1EE9c \u0103n chua kh\xFA."
     showAtStep: 1
-  correctHerbs:
-  - {fileID: 11400000, guid: 5e739483e2a8873439f0cb819f906d06, type: 2}
-  - {fileID: 11400000, guid: 0411930fad7e131488370c122340778d, type: 2}
-  - {fileID: 11400000, guid: 5ab1c3461f11e76478bef2f77d38bff1, type: 2}
+  requiredHerbs:
+  - herb: {fileID: 11400000, guid: 5e739483e2a8873439f0cb819f906d06, type: 2}
+    amount: 6
+  - herb: {fileID: 11400000, guid: 0411930fad7e131488370c122340778d, type: 2}
+    amount: 5
+  - herb: {fileID: 11400000, guid: 5ab1c3461f11e76478bef2f77d38bff1, type: 2}
+    amount: 3
   medicineCorrectRate: 0.7
   perfectReputation: 20
   perfectMoney: 30

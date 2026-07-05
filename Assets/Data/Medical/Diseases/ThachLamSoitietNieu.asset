@@ -21,19 +21,25 @@ MonoBehaviour:
     t\xF4i b\u1ECB t\u1EAFc ngh\u1EB9n n\u1EEDa ch\u1EEBng \u0111au bu\u1ED1t th\u1EA5u
     ru\u1ED9t, c\xF3 h\xF4m ti\u1EC3u ra c\u1EA3 h\u1EA1t s\u1ECFi nh\u1ECF."
   symptoms:
-  - symptomText: "Ti\u1EC3u bu\u1ED1t \u0111au qu\u1EB7n th\u1EAFt th\u1EAFt l\u01B0ng."
+  - symptomText: "Ti\u1EC3u bu\u1ED1t \u0111au qu\u1EB7n v\xF9ng th\u1EAFt l\u01B0ng."
     showAtStep: 0
   - symptomText: "D\xF2ng n\u01B0\u1EDBc ti\u1EC3u t\u1EAFc gi\u1EEFa ch\u1EEBng."
     showAtStep: 0
   - symptomText: "Ti\u1EC3u ra s\u1ECFi nh\u1ECF ho\u1EB7c l\u1EABn m\xE1u."
     showAtStep: 1
-  correctHerbs:
-  - {fileID: 11400000, guid: 463d8489ab7517b4193980620b26035b, type: 2}
-  - {fileID: 11400000, guid: 5b078c974b34e9948a3f4b7651e0c077, type: 2}
-  - {fileID: 11400000, guid: 9761ae753acdd5f4995ba63d100426ee, type: 2}
-  - {fileID: 11400000, guid: eeaf131d53e824f4eb20c30f29b595e5, type: 2}
-  - {fileID: 11400000, guid: e1875ebd0286ba44286efe8396dda785, type: 2}
-  - {fileID: 11400000, guid: ef583ea8b197b4e409c65b5a82c8833c, type: 2}
+  requiredHerbs:
+  - herb: {fileID: 11400000, guid: 463d8489ab7517b4193980620b26035b, type: 2}
+    amount: 8
+  - herb: {fileID: 11400000, guid: 5b078c974b34e9948a3f4b7651e0c077, type: 2}
+    amount: 6
+  - herb: {fileID: 11400000, guid: 9761ae753acdd5f4995ba63d100426ee, type: 2}
+    amount: 5
+  - herb: {fileID: 11400000, guid: eeaf131d53e824f4eb20c30f29b595e5, type: 2}
+    amount: 4
+  - herb: {fileID: 11400000, guid: e1875ebd0286ba44286efe8396dda785, type: 2}
+    amount: 3
+  - herb: {fileID: 11400000, guid: ef583ea8b197b4e409c65b5a82c8833c, type: 2}
+    amount: 2
   medicineCorrectRate: 0.7
   perfectReputation: 20
   perfectMoney: 30

@@ -33,6 +33,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c322e3188908a024196d7ca2260bc282, type: 2}
   - {fileID: 11400000, guid: 8d4d5f67b180d3743bc13166514ad855, type: 2}
   - {fileID: 11400000, guid: eeaf131d53e824f4eb20c30f29b595e5, type: 2}
+  requiredHerbs:
+  - herb: {fileID: 11400000, guid: c322e3188908a024196d7ca2260bc282, type: 2}
+    amount: 5
+  - herb: {fileID: 11400000, guid: 8d4d5f67b180d3743bc13166514ad855, type: 2}
+    amount: 4
+  - herb: {fileID: 11400000, guid: eeaf131d53e824f4eb20c30f29b595e5, type: 2}
+    amount: 3
   medicineCorrectRate: 0.7
   perfectReputation: 20
   perfectMoney: 30

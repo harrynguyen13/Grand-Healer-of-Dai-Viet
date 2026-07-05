@@ -73,6 +73,17 @@ public class SymptomData
     public ExaminationStep showAtStep = ExaminationStep.Ask;
 }
 
+[System.Serializable]
+public class RequiredHerbAmount
+{
+    [Header("Vị thuốc")]
+    public HerbData herb;
+
+    [Header("Số lượng cần")]
+    [Min(1)]
+    public int amount = 1;
+}
+
 [CreateAssetMenu(fileName = "NewDisease", menuName = "Đông Y/Dữ liệu bệnh")]
 public class DiseaseData : ScriptableObject
 {
@@ -91,8 +102,8 @@ public class DiseaseData : ScriptableObject
     [Header("Triệu chứng")]
     public List<SymptomData> symptoms = new List<SymptomData>();
 
-    [Header("Dược liệu đúng")]
-    public List<HerbData> correctHerbs = new List<HerbData>();
+    [Header("Đơn thuốc chuẩn - đúng vị và đúng số lượng")]
+    public List<RequiredHerbAmount> requiredHerbs = new List<RequiredHerbAmount>();
 
     [Header("Tỷ lệ thuốc đúng tối thiểu")]
     [Range(0f, 1f)]

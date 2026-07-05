@@ -30,13 +30,19 @@ MonoBehaviour:
   - symptomText: "T\u1EE9c ng\u1EF1c kh\xF3 th\u1EDF, s\u1EE5p mi m\u1EAFt l\u01A1
       m\u01A1."
     showAtStep: 1
-  correctHerbs:
-  - {fileID: 11400000, guid: 70f8cee14eb94e84ca6d1791a604beb7, type: 2}
-  - {fileID: 11400000, guid: fde7743b3904d014b819bf0b7742a249, type: 2}
-  - {fileID: 11400000, guid: 9c7b7ad2cd7bc964283bc5e1cc2da488, type: 2}
-  - {fileID: 11400000, guid: b7e8d46687b89124c84cf893cf99a438, type: 2}
-  - {fileID: 11400000, guid: 42917dffbf4cc7046841dd612dba2419, type: 2}
-  - {fileID: 11400000, guid: a35368017e21aa84b8ce1a9059aef931, type: 2}
+  requiredHerbs:
+  - herb: {fileID: 11400000, guid: 70f8cee14eb94e84ca6d1791a604beb7, type: 2}
+    amount: 5
+  - herb: {fileID: 11400000, guid: fde7743b3904d014b819bf0b7742a249, type: 2}
+    amount: 5
+  - herb: {fileID: 11400000, guid: 9c7b7ad2cd7bc964283bc5e1cc2da488, type: 2}
+    amount: 7
+  - herb: {fileID: 11400000, guid: b7e8d46687b89124c84cf893cf99a438, type: 2}
+    amount: 5
+  - herb: {fileID: 11400000, guid: 42917dffbf4cc7046841dd612dba2419, type: 2}
+    amount: 4
+  - herb: {fileID: 11400000, guid: a35368017e21aa84b8ce1a9059aef931, type: 2}
+    amount: 2
   medicineCorrectRate: 0.7
   perfectReputation: 20
   perfectMoney: 30
