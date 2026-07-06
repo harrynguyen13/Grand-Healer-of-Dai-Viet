@@ -73,18 +73,18 @@ public class HerbData : ScriptableObject
     public int unlockClinicLevel = 1;
 
     [Tooltip("Giữ lại để code cũ không lỗi. Giá này tự bằng sellPrice.")]
-    public int price = 5;
+    public int price = 3;
 
     [Header("Giá mua / giá kê thuốc")]
     [Tooltip("Giá người chơi mua dược liệu từ thương nhân.")]
-    public int buyPrice = 10;
+    public int buyPrice = 2;
 
     [Tooltip("Giá tính cho NPC bệnh nhân khi vị thuốc này nằm trong đơn.")]
-    public int sellPrice = 15;
+    public int sellPrice = 3;
 
     [Header("Kho thuốc")]
     [Tooltip("Số lượng ban đầu trong kho khi khởi tạo game.")]
-    public int startQuantity = 5;
+    public int startQuantity = 50;
 
     [Header("Tự cân bằng")]
     [Tooltip("Bật để tự tính giá và số lượng theo độ hiếm, nhóm thuốc, cấp mở khóa.")]
@@ -108,48 +108,49 @@ public class HerbData : ScriptableObject
         if (unlockClinicLevel < 1)
             unlockClinicLevel = 1;
 
-        int basePrice = GetBasePriceByRarity();
+        int baseBuyPrice = GetBaseBuyPriceByRarity();
         int categoryBonus = GetCategoryBonus();
-        int levelBonus = (unlockClinicLevel - 1) * 5;
+        int levelBonus = GetLevelBonus();
 
-        buyPrice = basePrice + categoryBonus + levelBonus;
+        buyPrice = baseBuyPrice + categoryBonus + levelBonus;
 
         if (buyPrice < 1)
             buyPrice = 1;
 
-        float sellMultiplier = GetSellMultiplierByRarity();
+        int profit = GetProfitByRarity();
 
-        sellPrice = Mathf.RoundToInt(buyPrice * sellMultiplier);
+        sellPrice = buyPrice + profit;
 
-        if (sellPrice <= buyPrice)
+        if (sellPrice < buyPrice + 1)
             sellPrice = buyPrice + 1;
 
         startQuantity = GetStartQuantityByRarity();
 
+        // Giữ lại cho code cũ nếu còn gọi price
         price = sellPrice;
     }
 
-    private int GetBasePriceByRarity()
+    private int GetBaseBuyPriceByRarity()
     {
         switch (rarity)
         {
             case HerbRarity.Common:
-                return 8;
+                return 2;
 
             case HerbRarity.Uncommon:
-                return 15;
+                return 4;
 
             case HerbRarity.Rare:
-                return 28;
+                return 7;
 
             case HerbRarity.Toxic:
-                return 35;
+                return 8;
 
             case HerbRarity.Precious:
-                return 50;
+                return 12;
 
             default:
-                return 8;
+                return 2;
         }
     }
 
@@ -161,34 +162,34 @@ public class HerbData : ScriptableObject
                 return 0;
 
             case HerbCategory.ThanhNhiet:
-                return 2;
+                return 0;
 
             case HerbCategory.HoaDamChiHo:
-                return 3;
+                return 1;
 
             case HerbCategory.LyKhi:
-                return 4;
+                return 1;
 
             case HerbCategory.TieuThuc:
-                return 4;
+                return 1;
 
             case HerbCategory.HoatHuyet:
-                return 7;
+                return 2;
 
             case HerbCategory.LoiThuy:
-                return 5;
+                return 1;
 
             case HerbCategory.BoKhiHuyet:
-                return 9;
+                return 2;
 
             case HerbCategory.BoThan:
-                return 12;
+                return 3;
 
             case HerbCategory.AnThan:
-                return 9;
+                return 2;
 
             case HerbCategory.DocTinh:
-                return 14;
+                return 3;
 
             case HerbCategory.Khac:
                 return 0;
@@ -198,27 +199,44 @@ public class HerbData : ScriptableObject
         }
     }
 
-    private float GetSellMultiplierByRarity()
+    private int GetLevelBonus()
+    {
+        if (unlockClinicLevel <= 1)
+            return 0;
+
+        if (unlockClinicLevel == 2)
+            return 1;
+
+        if (unlockClinicLevel == 3)
+            return 2;
+
+        if (unlockClinicLevel == 4)
+            return 3;
+
+        return 4;
+    }
+
+    private int GetProfitByRarity()
     {
         switch (rarity)
         {
             case HerbRarity.Common:
-                return 1.10f;
+                return 1;
 
             case HerbRarity.Uncommon:
-                return 1.12f;
+                return 2;
 
             case HerbRarity.Rare:
-                return 1.15f;
+                return 3;
 
             case HerbRarity.Toxic:
-                return 1.18f;
+                return 4;
 
             case HerbRarity.Precious:
-                return 1.22f;
+                return 5;
 
             default:
-                return 1.10f;
+                return 1;
         }
     }
 

@@ -625,6 +625,7 @@ GameObject:
   - component: {fileID: 541801305}
   - component: {fileID: 541801307}
   - component: {fileID: 541801306}
+  - component: {fileID: 541801308}
   m_Layer: 0
   m_Name: GameSystems
   m_TagString: Untagged
@@ -739,6 +740,21 @@ MonoBehaviour:
   daiPhuTarget: 300
   danhYTarget: 500
   dontDestroyOnLoad: 1
+--- !u!114 &541801308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 541801300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6ef3d0d88ea0564c8216470e11e6ead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MailboxManager
+  medicalDatabase: {fileID: 11400000, guid: b9cbad1ca04118e4f91cc0c62ce48933, type: 2}
+  logDebug: 1
+  mails: []
 --- !u!1 &573535201
 GameObject:
   m_ObjectHideFlags: 0

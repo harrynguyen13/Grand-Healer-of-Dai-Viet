@@ -17,9 +17,9 @@ MonoBehaviour:
   category: 4
   rarity: 1
   unlockClinicLevel: 2
-  price: 27
-  buyPrice: 24
-  sellPrice: 27
+  price: 8
+  buyPrice: 6
+  sellPrice: 8
   startQuantity: 40
   autoCalculateBalance: 1
   icon: {fileID: -5005169474466185053, guid: c974797dbfd08cc47abfea367c824f18, type: 3}

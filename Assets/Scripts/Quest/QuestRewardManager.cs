@@ -50,13 +50,31 @@ public class QuestRewardManager : MonoBehaviour
         if (PlayerPrefs.GetInt(claimedKey, 0) == 1)
             return "";
 
+        if (MailboxManager.Instance == null)
+        {
+            Debug.LogWarning("Không tìm thấy MailboxManager để gửi thưởng nhiệm vụ.");
+            return "";
+        }
+
         List<RewardType> rewardPair = GetRandomRewardPair();
         List<string> rewardTexts = new List<string>();
+
+        int moneyReward = 0;
+        int reputationReward = 0;
+        List<MailHerbReward> herbRewards = new List<MailHerbReward>();
+
         int successCount = 0;
 
         for (int i = 0; i < rewardPair.Count; i++)
         {
-            if (TryGiveReward(rewardPair[i], stage, out string rewardText))
+            if (TryPrepareReward(
+                rewardPair[i],
+                stage,
+                ref moneyReward,
+                ref reputationReward,
+                herbRewards,
+                out string rewardText
+            ))
             {
                 rewardTexts.Add(rewardText);
                 successCount++;
@@ -72,7 +90,14 @@ public class QuestRewardManager : MonoBehaviour
                 if (successCount >= 2)
                     break;
 
-                if (TryGiveReward(fallbackRewards[i], stage, out string rewardText))
+                if (TryPrepareReward(
+                    fallbackRewards[i],
+                    stage,
+                    ref moneyReward,
+                    ref reputationReward,
+                    herbRewards,
+                    out string rewardText
+                ))
                 {
                     rewardTexts.Add(rewardText);
                     successCount++;
@@ -82,19 +107,77 @@ public class QuestRewardManager : MonoBehaviour
 
         if (successCount <= 0)
         {
-            Debug.LogWarning("Không phát được phần thưởng nhiệm vụ: " + quest.Title);
+            Debug.LogWarning("Không tạo được phần thưởng nhiệm vụ: " + quest.Title);
             return "";
         }
+
+        LastRewardMessage = string.Join(", ", rewardTexts);
+
+        MailboxManager.Instance.AddQuestRewardMail(
+            quest.Title,
+            moneyReward,
+            reputationReward,
+            herbRewards
+        );
 
         PlayerPrefs.SetInt(claimedKey, 1);
         PlayerPrefs.Save();
 
-        LastRewardMessage = string.Join(", ", rewardTexts);
-
         Debug.Log("Hoàn thành nhiệm vụ: " + quest.Title);
-        Debug.Log("Phần thưởng nhận được: " + LastRewardMessage);
+        Debug.Log("Phần thưởng đã gửi vào hòm thư: " + LastRewardMessage);
 
         return LastRewardMessage;
+    }
+
+    private bool TryPrepareReward(
+        RewardType rewardType,
+        int stage,
+        ref int moneyReward,
+        ref int reputationReward,
+        List<MailHerbReward> herbRewards,
+        out string rewardText
+    )
+    {
+        rewardText = "";
+
+        if (rewardType == RewardType.Money)
+        {
+            int money = GetRewardMoney(stage);
+            moneyReward += money;
+
+            rewardText = "+" + money + " tiền";
+            return true;
+        }
+
+        if (rewardType == RewardType.Herb)
+        {
+            HerbData herb = GetRandomRewardHerb(stage);
+
+            if (herb == null)
+                return false;
+
+            int amount = GetRewardHerbAmount(stage);
+
+            MailHerbReward herbReward = new MailHerbReward();
+            herbReward.herbName = herb.herbName;
+            herbReward.amount = amount;
+
+            herbRewards.Add(herbReward);
+
+            rewardText = "+" + amount + " " + herb.herbName;
+            return true;
+        }
+
+        if (rewardType == RewardType.Reputation)
+        {
+            int reputation = GetRewardReputation(stage);
+            reputationReward += reputation;
+
+            rewardText = "+" + reputation + " tín nhiệm";
+            return true;
+        }
+
+        return false;
     }
 
     private List<RewardType> GetRandomRewardPair()
@@ -142,96 +225,6 @@ public class QuestRewardManager : MonoBehaviour
         }
 
         return fallbackRewards;
-    }
-
-    private bool TryGiveReward(RewardType rewardType, int stage, out string rewardText)
-    {
-        rewardText = "";
-
-        if (rewardType == RewardType.Money)
-        {
-            int money = GetRewardMoney(stage);
-
-            if (GiveMoneyReward(money))
-            {
-                rewardText = "+" + money + " tiền";
-                return true;
-            }
-
-            return false;
-        }
-
-        if (rewardType == RewardType.Herb)
-        {
-            HerbData herb = GetRandomRewardHerb(stage);
-
-            if (herb == null)
-                return false;
-
-            int amount = GetRewardHerbAmount(stage);
-
-            if (GiveHerbReward(herb, amount))
-            {
-                rewardText = "+" + amount + " " + herb.herbName;
-                return true;
-            }
-
-            return false;
-        }
-
-        if (rewardType == RewardType.Reputation)
-        {
-            int reputation = GetRewardReputation(stage);
-
-            if (GiveReputationReward(reputation))
-            {
-                rewardText = "+" + reputation + " tín nhiệm";
-                return true;
-            }
-
-            return false;
-        }
-
-        return false;
-    }
-
-    private bool GiveMoneyReward(int amount)
-    {
-        if (PlayerEconomy.Instance == null)
-        {
-            Debug.LogWarning("Không tìm thấy PlayerEconomy để cộng tiền thưởng nhiệm vụ.");
-            return false;
-        }
-
-        PlayerEconomy.Instance.AddMoney(amount);
-        return true;
-    }
-
-    private bool GiveReputationReward(int amount)
-    {
-        if (PlayerEconomy.Instance == null)
-        {
-            Debug.LogWarning("Không tìm thấy PlayerEconomy để cộng tín nhiệm thưởng nhiệm vụ.");
-            return false;
-        }
-
-        PlayerEconomy.Instance.AddReputation(amount);
-        return true;
-    }
-
-    private bool GiveHerbReward(HerbData herb, int amount)
-    {
-        if (HerbInventory.Instance == null)
-        {
-            Debug.LogWarning("Không tìm thấy HerbInventory để cộng dược liệu thưởng nhiệm vụ.");
-            return false;
-        }
-
-        if (herb == null || amount <= 0)
-            return false;
-
-        HerbInventory.Instance.AddHerb(herb, amount);
-        return true;
     }
 
     private HerbData GetRandomRewardHerb(int stage)

@@ -19,7 +19,7 @@ MonoBehaviour:
     nh\u1EE9c v\xF9ng tr\xE1n/g\xF2 m\xE1, \u0111\u1EA7u \xF3c n\u1EB7ng n\u1EC1."
   patientDialogue: "C\xE1i m\u0169i t\xF4i ch\u1EA3y d\u1ECBch \u0111\u1EB7c h\xF4i
     th\u1ED1i kinh kh\u1EE7ng, v\xF9ng tr\xE1n v\u1EDBi hai g\xF2 m\xE1 \u0111au
-    nh\u1EE9c nh\u1ED1i, \u0111\u1EA7u n\u1EB7ng ch\u1ECBch."
+    nh\u1EE9c nh\u1ED1i, \u0111\u1EA7u n\u1EB7ng tr\u1ECBch."
   symptoms:
   - symptomText: "Ch\u1EA3y n\u01B0\u1EDBc m\u0169i \u0111\u1EB7c h\xF4i th\u1ED1i."
     showAtStep: 0

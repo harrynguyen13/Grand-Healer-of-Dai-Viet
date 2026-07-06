@@ -202,12 +202,36 @@ public class MedicineShopController : MonoBehaviour
             }
 
             HerbInventory.Instance.AddHerb(herb, quantity);
+
+            NotifyQuestHerbBought(herb, quantity);
         }
 
         Debug.Log("Đã mua thuốc. Tổng tiền: " + totalCost);
 
         selectedHerbs.Clear();
         RefreshSelectedList();
+    }
+
+    private void NotifyQuestHerbBought(HerbData herb, int quantity)
+    {
+        if (herb == null || quantity <= 0)
+            return;
+
+        if (QuestProgressManager.Instance == null)
+        {
+            Debug.LogWarning("Không tìm thấy QuestProgressManager để ghi nhiệm vụ mua dược liệu.");
+            return;
+        }
+
+        int lineCost = herb.buyPrice * quantity;
+
+        QuestProgressManager.Instance.RecordHerbBought(
+            herb,
+            quantity,
+            lineCost
+        );
+
+        Debug.Log("Đã ghi nhiệm vụ mua dược liệu: " + herb.herbName + " x" + quantity);
     }
 
     private int CalculateTotalCost()

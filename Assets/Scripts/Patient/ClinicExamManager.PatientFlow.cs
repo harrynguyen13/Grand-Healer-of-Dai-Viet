@@ -4,6 +4,8 @@ using UnityEngine;
 
 public partial class ClinicExamManager
 {
+    private PendingPatientMailData pendingPatientMailData;
+
     private void OnPrescriptionConfirmed(Dictionary<HerbData, int> selectedPrescription)
     {
         Debug.Log("===== CLINIC NHẬN ĐƠN THUỐC =====");
@@ -36,7 +38,7 @@ public partial class ClinicExamManager
             Debug.Log("Thuốc đã kê: " + pair.Key.herbName + " x" + pair.Value);
         }
 
-        isCurrentPrescriptionCorrect = IsPrescriptionCorrectForDisease(
+        isCurrentPrescriptionCorrect = ClinicPrescriptionService.IsPrescriptionCorrectForDisease(
             patientCase.realDisease,
             selectedPrescription
         );
@@ -45,7 +47,7 @@ public partial class ClinicExamManager
         Debug.Log("Bệnh thật: " + patientCase.realDisease.diseaseName);
         Debug.Log("Chẩn đoán đúng: " + isCurrentDiagnosisCorrect);
         Debug.Log("Đơn thuốc đúng: " + isCurrentPrescriptionCorrect);
-        Debug.Log("Thuốc cần có: " + GetRequiredHerbNames(patientCase.realDisease));
+        Debug.Log("Thuốc cần có: " + ClinicPrescriptionService.GetRequiredHerbNames(patientCase.realDisease));
 
         if (HerbInventory.Instance == null)
         {
@@ -63,9 +65,19 @@ public partial class ClinicExamManager
 
         Debug.Log("ĐÃ TRỪ THUỐC TRONG KHO THẬT.");
 
-        RecordQuestProgress(patientCase.realDisease);
+        ClinicQuestProgressService.RecordTreatmentProgress(
+            patientCase.realDisease,
+            isCurrentDiagnosisCorrect,
+            isCurrentPrescriptionCorrect
+        );
 
-        ApplyMoneyAndReputation(selectedPrescription);
+        pendingPatientMailData = ClinicPatientMailService.PreparePatientMail(
+            currentPatient.gameObject,
+            patientCase.realDisease,
+            selectedPrescription,
+            isCurrentDiagnosisCorrect,
+            isCurrentPrescriptionCorrect
+        );
 
         shouldReturnCurrentPatientToQueueOnExit = false;
 
@@ -74,293 +86,6 @@ public partial class ClinicExamManager
         restoredClinicUiNeedsReopen = false;
 
         StartCoroutine(PatientReceiveMedicineAndLeave());
-    }
-
-    private void RecordQuestProgress(DiseaseData realDisease)
-    {
-        if (realDisease == null)
-        {
-            Debug.LogWarning("Không ghi nhiệm vụ được vì realDisease bị null.");
-            return;
-        }
-
-        if (QuestProgressManager.Instance == null)
-        {
-            Debug.LogWarning("Không tìm thấy QuestProgressManager để ghi tiến độ nhiệm vụ.");
-            return;
-        }
-
-        QuestProgressManager.Instance.RecordTreatmentResult(
-            realDisease,
-            isCurrentDiagnosisCorrect,
-            isCurrentPrescriptionCorrect
-        );
-
-        Debug.Log(
-            "Đã ghi tiến độ nhiệm vụ: "
-            + realDisease.diseaseName
-            + " | Cấp bệnh: "
-            + (int)realDisease.diseaseLevel
-            + " | Chẩn đoán đúng: "
-            + isCurrentDiagnosisCorrect
-            + " | Kê đơn đúng: "
-            + isCurrentPrescriptionCorrect
-        );
-    }
-
-    private void ApplyMoneyAndReputation(Dictionary<HerbData, int> prescription)
-    {
-        int payment = CalculatePrescriptionPayment(prescription);
-        int diseaseLevel = GetCurrentDiseaseLevel();
-
-        int reputationChange;
-        float paymentMultiplier;
-
-        if (isCurrentDiagnosisCorrect && isCurrentPrescriptionCorrect)
-        {
-            reputationChange = GetCorrectTreatmentReward(diseaseLevel);
-            paymentMultiplier = 1f;
-
-            Debug.Log("Kết quả: ĐÚNG BỆNH + ĐÚNG THUỐC.");
-        }
-        else if (isCurrentDiagnosisCorrect && !isCurrentPrescriptionCorrect)
-        {
-            reputationChange = -GetWrongPrescriptionPenalty(diseaseLevel);
-            paymentMultiplier = 0.4f;
-
-            Debug.Log("Kết quả: ĐÚNG BỆNH nhưng SAI THUỐC.");
-        }
-        else if (!isCurrentDiagnosisCorrect && isCurrentPrescriptionCorrect)
-        {
-            reputationChange = -GetWrongDiagnosisPenalty(diseaseLevel);
-            paymentMultiplier = 0.5f;
-
-            Debug.Log("Kết quả: SAI BỆNH nhưng THUỐC ĐÚNG BỆNH THẬT.");
-        }
-        else
-        {
-            reputationChange = -GetWrongTreatmentPenalty(diseaseLevel);
-            paymentMultiplier = 0.2f;
-
-            Debug.Log("Kết quả: SAI BỆNH + SAI THUỐC.");
-        }
-
-        payment = Mathf.RoundToInt(payment * paymentMultiplier);
-
-        if (payment < 1)
-            payment = 1;
-
-        if (PlayerEconomy.Instance != null)
-        {
-            PlayerEconomy.Instance.AddMoney(payment);
-            PlayerEconomy.Instance.AddReputation(reputationChange);
-
-            Debug.Log("Bệnh level: " + diseaseLevel);
-            Debug.Log("Nhận tiền: " + payment);
-            Debug.Log("Tín nhiệm thay đổi: " + reputationChange);
-        }
-        else
-        {
-            Debug.LogWarning("Không tìm thấy PlayerEconomy. Đã trừ thuốc nhưng chưa cộng tiền/tín nhiệm.");
-        }
-    }
-
-    private int CalculatePrescriptionPayment(Dictionary<HerbData, int> prescription)
-    {
-        if (prescription == null)
-            return 0;
-
-        int total = 0;
-
-        foreach (KeyValuePair<HerbData, int> pair in prescription)
-        {
-            HerbData herb = pair.Key;
-            int quantity = pair.Value;
-
-            if (herb == null || quantity <= 0)
-                continue;
-
-            total += herb.sellPrice * quantity;
-        }
-
-        return Mathf.Max(1, total);
-    }
-
-    private bool IsPrescriptionCorrectForDisease(
-        DiseaseData disease,
-        Dictionary<HerbData, int> selectedPrescription
-    )
-    {
-        if (disease == null || disease.requiredHerbs == null)
-            return false;
-
-        if (selectedPrescription == null)
-            return false;
-
-        Dictionary<string, int> requiredHerbs = new Dictionary<string, int>();
-
-        foreach (RequiredHerbAmount required in disease.requiredHerbs)
-        {
-            if (required == null || required.herb == null)
-                continue;
-
-            string herbKey = GetHerbKey(required.herb);
-
-            if (string.IsNullOrEmpty(herbKey))
-                continue;
-
-            if (!requiredHerbs.ContainsKey(herbKey))
-                requiredHerbs.Add(herbKey, 0);
-
-            requiredHerbs[herbKey] += Mathf.Max(1, required.amount);
-        }
-
-        Dictionary<string, int> selectedHerbs = new Dictionary<string, int>();
-
-        foreach (KeyValuePair<HerbData, int> pair in selectedPrescription)
-        {
-            HerbData herb = pair.Key;
-            int quantity = pair.Value;
-
-            if (herb == null || quantity <= 0)
-                continue;
-
-            string herbKey = GetHerbKey(herb);
-
-            if (string.IsNullOrEmpty(herbKey))
-                continue;
-
-            if (!selectedHerbs.ContainsKey(herbKey))
-                selectedHerbs.Add(herbKey, 0);
-
-            selectedHerbs[herbKey] += quantity;
-        }
-
-        if (requiredHerbs.Count <= 0)
-        {
-            Debug.LogWarning("Bệnh này chưa có requiredHerbs.");
-            return false;
-        }
-
-        if (selectedHerbs.Count != requiredHerbs.Count)
-        {
-            Debug.Log("Sai số vị thuốc. Cần: "
-                + requiredHerbs.Count
-                + ", đã kê: "
-                + selectedHerbs.Count);
-
-            return false;
-        }
-
-        foreach (KeyValuePair<string, int> requiredPair in requiredHerbs)
-        {
-            string requiredHerbKey = requiredPair.Key;
-            int requiredAmount = requiredPair.Value;
-
-            if (!selectedHerbs.TryGetValue(requiredHerbKey, out int selectedAmount))
-            {
-                Debug.Log("Thiếu vị thuốc: " + requiredHerbKey);
-                return false;
-            }
-
-            if (selectedAmount < requiredAmount)
-            {
-                Debug.Log(
-                    "Không đủ số lượng thuốc: "
-                    + requiredHerbKey
-                    + ". Cần: "
-                    + requiredAmount
-                    + ", đã kê: "
-                    + selectedAmount
-                );
-
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    private string GetHerbKey(HerbData herb)
-    {
-        if (herb == null || string.IsNullOrWhiteSpace(herb.herbName))
-            return string.Empty;
-
-        return herb.herbName.Trim().ToLower();
-    }
-
-    private string GetRequiredHerbNames(DiseaseData disease)
-    {
-        if (disease == null || disease.requiredHerbs == null)
-            return "Không có dữ liệu thuốc.";
-
-        List<string> herbNames = new List<string>();
-
-        foreach (RequiredHerbAmount required in disease.requiredHerbs)
-        {
-            if (required == null || required.herb == null)
-                continue;
-
-            herbNames.Add(required.herb.herbName + " x" + required.amount);
-        }
-
-        if (herbNames.Count <= 0)
-            return "Không có dữ liệu thuốc.";
-
-        return string.Join(", ", herbNames);
-    }
-
-    private int GetCurrentDiseaseLevel()
-    {
-        if (currentPatient == null)
-            return 1;
-
-        PatientCase patientCase = currentPatient.PatientCase;
-
-        if (patientCase == null || patientCase.realDisease == null)
-            return 1;
-
-        return Mathf.Max(1, (int)patientCase.realDisease.diseaseLevel);
-    }
-
-    private int GetCorrectTreatmentReward(int diseaseLevel)
-    {
-        if (diseaseLevel <= 1) return 10;
-        if (diseaseLevel == 2) return 15;
-        if (diseaseLevel == 3) return 22;
-        if (diseaseLevel == 4) return 30;
-
-        return 45;
-    }
-
-    private int GetWrongPrescriptionPenalty(int diseaseLevel)
-    {
-        if (diseaseLevel <= 1) return 3;
-        if (diseaseLevel == 2) return 5;
-        if (diseaseLevel == 3) return 8;
-        if (diseaseLevel == 4) return 12;
-
-        return 18;
-    }
-
-    private int GetWrongDiagnosisPenalty(int diseaseLevel)
-    {
-        if (diseaseLevel <= 1) return 2;
-        if (diseaseLevel == 2) return 4;
-        if (diseaseLevel == 3) return 6;
-        if (diseaseLevel == 4) return 9;
-
-        return 14;
-    }
-
-    private int GetWrongTreatmentPenalty(int diseaseLevel)
-    {
-        if (diseaseLevel <= 1) return 5;
-        if (diseaseLevel == 2) return 8;
-        if (diseaseLevel == 3) return 12;
-        if (diseaseLevel == 4) return 18;
-
-        return 25;
     }
 
     private IEnumerator PatientReceiveMedicineAndLeave()
@@ -416,6 +141,9 @@ public partial class ClinicExamManager
         {
             Destroy(currentPatient.gameObject);
         }
+
+        ClinicPatientMailService.SendPatientMail(pendingPatientMailData);
+        pendingPatientMailData = null;
 
         currentPatient = null;
         currentVisitData = null;
@@ -517,6 +245,8 @@ public partial class ClinicExamManager
         isExamRunning = false;
         isCurrentDiagnosisCorrect = false;
         isCurrentPrescriptionCorrect = false;
+
+        pendingPatientMailData = null;
 
         shouldReturnCurrentPatientToQueueOnExit = false;
         isClinicUiTemporarilyClosed = false;
