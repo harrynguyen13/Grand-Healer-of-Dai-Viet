@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MinimapCameraFollow : MonoBehaviour
 {
@@ -19,27 +20,96 @@ public class MinimapCameraFollow : MonoBehaviour
     private Collider2D[] mapBounds;
     private Collider2D currentBounds;
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        RefreshReferences();
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     private void Start()
+    {
+        RefreshReferences();
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        RefreshReferences();
+    }
+
+    public void SetTarget(Transform newTarget)
+    {
+        player = newTarget;
+        currentBounds = null;
+        RefreshBounds();
+    }
+
+    private void RefreshReferences()
     {
         if (minimapCamera == null)
             minimapCamera = GetComponent<Camera>();
 
-        if (player == null)
-        {
-            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        FindPlayer();
 
-            if (playerObj != null)
-                player = playerObj.transform;
+        RefreshBounds();
+    }
+
+    private void FindPlayer()
+    {
+        if (player != null)
+            return;
+
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+
+        if (playerObj != null)
+            player = playerObj.transform;
+    }
+
+    private void RefreshBounds()
+    {
+        if (cameraBoundsParent == null)
+        {
+            GameObject boundsObj = GameObject.Find("CameraBounds");
+
+            if (boundsObj != null)
+                cameraBoundsParent = boundsObj.transform;
         }
 
         if (cameraBoundsParent != null)
             mapBounds = cameraBoundsParent.GetComponentsInChildren<Collider2D>();
+
+        currentBounds = null;
     }
 
     private void LateUpdate()
     {
-        if (player == null || minimapCamera == null || mapBounds == null || mapBounds.Length == 0)
-            return;
+        if (player == null)
+        {
+            FindPlayer();
+
+            if (player == null)
+                return;
+        }
+
+        if (minimapCamera == null)
+        {
+            minimapCamera = GetComponent<Camera>();
+
+            if (minimapCamera == null)
+                return;
+        }
+
+        if (mapBounds == null || mapBounds.Length == 0)
+        {
+            RefreshBounds();
+
+            if (mapBounds == null || mapBounds.Length == 0)
+                return;
+        }
 
         UpdateCurrentBounds();
 
@@ -62,7 +132,8 @@ public class MinimapCameraFollow : MonoBehaviour
 
         foreach (Collider2D col in mapBounds)
         {
-            if (col == null) continue;
+            if (col == null)
+                continue;
 
             if (col.OverlapPoint(playerPos))
             {

@@ -13,9 +13,6 @@ public class ClinicQueueAutoSpawner : MonoBehaviour
     [Header("Database bệnh / thuốc")]
     [SerializeField] private MedicalDatabase medicalDatabase;
 
-    [Header("Cấp y quán hiện tại")]
-    [SerializeField] private int clinicLevel = 1;
-
     [Header("Clinic Exam Manager")]
     [SerializeField] private ClinicExamManager clinicExamManager;
 
@@ -93,7 +90,6 @@ public class ClinicQueueAutoSpawner : MonoBehaviour
         }
 
         int targetWaitingCount = GetTargetWaitingCount();
-
         int currentWaitingCount = PatientVisitManager.Instance.WaitingCount;
 
         if (currentWaitingCount >= targetWaitingCount)
@@ -124,9 +120,7 @@ public class ClinicQueueAutoSpawner : MonoBehaviour
         float waitingTime = Time.time - queueBelowTargetStartTime;
 
         if (waitingTime < refillDelay)
-        {
             return;
-        }
 
         RefillQueueToTarget(targetWaitingCount);
 
@@ -191,11 +185,13 @@ public class ClinicQueueAutoSpawner : MonoBehaviour
             return false;
         }
 
-        DiseaseData randomDisease = medicalDatabase.GetRandomDisease(clinicLevel);
+        int currentClinicLevel = PlayerLevelService.GetCurrentUnlockLevel();
+
+        DiseaseData randomDisease = medicalDatabase.GetRandomDisease();
 
         if (randomDisease == null)
         {
-            Debug.LogError("Không random được bệnh cho bệnh nhân trong phòng khám.");
+            Debug.LogError("Không random được bệnh cho bệnh nhân trong phòng khám. Cấp hiện tại: " + currentClinicLevel);
             return false;
         }
 
@@ -210,6 +206,7 @@ public class ClinicQueueAutoSpawner : MonoBehaviour
         {
             Debug.Log("Đã thêm bệnh nhân vào hàng chờ trong phòng khám.");
             Debug.Log("NPC prefab: " + randomPrefab.name);
+            Debug.Log("Cấp hiện tại: " + currentClinicLevel);
             Debug.Log("Bệnh thật: " + randomDisease.diseaseName);
         }
 

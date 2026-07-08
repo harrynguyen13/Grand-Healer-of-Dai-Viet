@@ -43,6 +43,7 @@ public class HerbDataAutoCreator : EditorWindow
 
         int createdCount = 0;
         int skippedCount = 0;
+        int failedCount = 0;
 
         foreach (string pngPath in pngFiles)
         {
@@ -53,6 +54,7 @@ public class HerbDataAutoCreator : EditorWindow
             if (iconSprite == null)
             {
                 Debug.LogWarning("Không load được sprite: " + fixedPath);
+                failedCount++;
                 continue;
             }
 
@@ -73,17 +75,31 @@ public class HerbDataAutoCreator : EditorWindow
             herbData.description = "";
             herbData.category = HerbCategory.Khac;
             herbData.rarity = HerbRarity.Common;
+
+            // Đây là cấp mở khóa của dược liệu, KHÔNG phải cấp hiện tại của người chơi.
             herbData.unlockClinicLevel = 1;
-            herbData.price = 5;
+
             herbData.icon = iconSprite;
 
+            herbData.autoCalculateBalance = true;
+            herbData.AutoCalculateBalance();
+
             AssetDatabase.CreateAsset(herbData, assetPath);
+            EditorUtility.SetDirty(herbData);
+
             createdCount++;
         }
 
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
 
-        Debug.Log("Tạo HerbData xong. Created: " + createdCount + " | Skipped: " + skippedCount);
+        Debug.Log(
+            "Tạo HerbData xong. Created: "
+            + createdCount
+            + " | Skipped: "
+            + skippedCount
+            + " | Failed: "
+            + failedCount
+        );
     }
 }

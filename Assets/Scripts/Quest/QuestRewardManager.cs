@@ -236,7 +236,7 @@ public class QuestRewardManager : MonoBehaviour
         }
 
         int unlockLevel = Mathf.Clamp(stage, 1, 5);
-        List<HerbData> unlockedHerbs = medicalDatabase.GetUnlockedHerbs(unlockLevel);
+        List<HerbData> unlockedHerbs = medicalDatabase.GetUnlockedHerbs();
 
         if (unlockedHerbs == null || unlockedHerbs.Count == 0)
             return null;

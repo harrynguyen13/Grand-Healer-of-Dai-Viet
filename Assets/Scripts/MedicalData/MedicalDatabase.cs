@@ -13,46 +13,55 @@ public class MedicalDatabase : ScriptableObject
 
     private const int SpecialDiseaseLevel = 5;
 
-    public List<DiseaseData> GetUnlockedDiseases(int clinicLevel)
+    // =========================================================
+    // API CHUẨN: TẤT CẢ ĐỀU TỰ LẤY CẤP TỪ PlayerLevelService
+    // =========================================================
+
+    public List<DiseaseData> GetUnlockedDiseases()
     {
-        return diseases
-            .Where(disease =>
-                disease != null &&
-                (int)disease.diseaseLevel <= clinicLevel &&
-                !IsSpecialDisease(disease)
-            )
-            .ToList();
+        int currentLevel = GetCurrentClinicLevel();
+        return GetUnlockedDiseasesByLevel(currentLevel);
     }
 
-    public List<HerbData> GetUnlockedHerbs(int clinicLevel)
+    public List<HerbData> GetUnlockedHerbs()
     {
-        return herbs
-            .Where(herb => herb != null && herb.unlockClinicLevel <= clinicLevel)
-            .ToList();
+        int currentLevel = GetCurrentClinicLevel();
+        return GetUnlockedHerbsByLevel(currentLevel);
     }
 
-    public DiseaseData GetRandomDisease(int clinicLevel)
+    public DiseaseData GetRandomDisease()
     {
-        List<DiseaseData> unlockedDiseases = GetUnlockedDiseases(clinicLevel);
+        int currentLevel = GetCurrentClinicLevel();
+
+        List<DiseaseData> unlockedDiseases = GetUnlockedDiseasesByLevel(currentLevel);
 
         if (unlockedDiseases.Count == 0)
         {
-            Debug.LogWarning("Không có bệnh nào được mở khóa.");
+            Debug.LogWarning("Không có bệnh nào được mở khóa ở cấp: " + currentLevel);
             return null;
         }
 
-        return unlockedDiseases[Random.Range(0, unlockedDiseases.Count)];
+        DiseaseData randomDisease = unlockedDiseases[Random.Range(0, unlockedDiseases.Count)];
+
+        Debug.Log("MedicalDatabase random bệnh theo cấp: " + currentLevel);
+        Debug.Log("Bệnh random được: " + randomDisease.diseaseName);
+
+        return randomDisease;
     }
 
-    public List<DiseaseData> GetDiagnosisOptions(DiseaseData realDisease, int optionCount, int clinicLevel)
+    public List<DiseaseData> GetDiagnosisOptions(DiseaseData realDisease, int optionCount)
     {
+        int currentLevel = GetCurrentClinicLevel();
+
+        optionCount = Mathf.Max(1, optionCount);
+
         if (realDisease == null)
         {
             Debug.LogWarning("RealDisease bị null.");
             return new List<DiseaseData>();
         }
 
-        List<DiseaseData> unlockedDiseases = GetUnlockedDiseases(clinicLevel);
+        List<DiseaseData> unlockedDiseases = GetUnlockedDiseasesByLevel(currentLevel);
 
         List<DiseaseData> options = unlockedDiseases
             .Where(disease => disease != null && disease != realDisease)
@@ -66,6 +75,40 @@ public class MedicalDatabase : ScriptableObject
             .OrderBy(disease => Random.value)
             .ToList();
     }
+
+    // =========================================================
+    // HÀM NỘI BỘ: CHỈ MedicalDatabase ĐƯỢC DÙNG LEVEL
+    // File khác không gọi trực tiếp nữa
+    // =========================================================
+
+    private List<DiseaseData> GetUnlockedDiseasesByLevel(int clinicLevel)
+    {
+        clinicLevel = Mathf.Max(1, clinicLevel);
+
+        return diseases
+            .Where(disease =>
+                disease != null &&
+                (int)disease.diseaseLevel <= clinicLevel &&
+                !IsSpecialDisease(disease)
+            )
+            .ToList();
+    }
+
+    private List<HerbData> GetUnlockedHerbsByLevel(int clinicLevel)
+    {
+        clinicLevel = Mathf.Max(1, clinicLevel);
+
+        return herbs
+            .Where(herb =>
+                herb != null &&
+                herb.unlockClinicLevel <= clinicLevel
+            )
+            .ToList();
+    }
+
+    // =========================================================
+    // BỆNH ĐẶC BIỆT
+    // =========================================================
 
     public DiseaseData GetSpecialDiseaseByAssetName(string assetName)
     {
@@ -117,5 +160,19 @@ public class MedicalDatabase : ScriptableObject
             return false;
 
         return (int)disease.diseaseLevel == SpecialDiseaseLevel;
+    }
+
+    // =========================================================
+    // NGUỒN CẤP GỐC
+    // =========================================================
+
+    private int GetCurrentClinicLevel()
+    {
+        int currentLevel = PlayerLevelService.GetCurrentUnlockLevel();
+
+        if (currentLevel > 0)
+            return currentLevel;
+
+        return 1;
     }
 }

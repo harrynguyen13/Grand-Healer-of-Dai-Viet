@@ -76,6 +76,27 @@ public class MailboxManager : MonoBehaviour
         int reputationDelta
     )
     {
+        AddPatientTreatmentMail(
+            patientName,
+            diseaseName,
+            diagnosisCorrect,
+            prescriptionCorrect,
+            moneyDelta,
+            reputationDelta,
+            ""
+        );
+    }
+
+    public void AddPatientTreatmentMail(
+        string patientName,
+        string diseaseName,
+        bool diagnosisCorrect,
+        bool prescriptionCorrect,
+        int moneyDelta,
+        int reputationDelta,
+        string yThuUsageNote
+    )
+    {
         MailType mailType;
         string content;
 
@@ -117,7 +138,9 @@ public class MailboxManager : MonoBehaviour
             patientName,
             content,
             moneyDelta,
-            reputationDelta
+            reputationDelta,
+            null,
+            yThuUsageNote
         );
     }
 
@@ -162,7 +185,8 @@ public class MailboxManager : MonoBehaviour
         string content,
         int moneyDelta,
         int reputationDelta,
-        List<MailHerbReward> herbRewards = null
+        List<MailHerbReward> herbRewards = null,
+        string yThuUsageNote = ""
     )
     {
         MailMessage mail = new MailMessage();
@@ -175,6 +199,7 @@ public class MailboxManager : MonoBehaviour
         mail.readTicks = 0;
         mail.moneyDelta = moneyDelta;
         mail.reputationDelta = reputationDelta;
+        mail.yThuUsageNote = yThuUsageNote;
         mail.herbRewards = herbRewards != null ? herbRewards : new List<MailHerbReward>();
         mail.isRead = false;
         mail.isClaimed = false;
@@ -316,7 +341,7 @@ public class MailboxManager : MonoBehaviour
             return null;
         }
 
-        List<HerbData> herbs = medicalDatabase.GetUnlockedHerbs(5);
+        List<HerbData> herbs = medicalDatabase.GetUnlockedHerbs();
 
         if (herbs == null || herbs.Count == 0)
             return null;
@@ -363,6 +388,24 @@ public class MailboxManager : MonoBehaviour
         mails.Clear();
         SaveMailbox();
         OnMailboxChanged?.Invoke();
+    }
+
+
+    public void ResetMailboxForNewGame()
+    {
+        mails.Clear();
+
+        if (File.Exists(SavePath))
+        {
+            File.Delete(SavePath);
+            Debug.Log("Đã xóa file save hòm thư: " + SavePath);
+        }
+
+        SaveMailbox();
+
+        OnMailboxChanged?.Invoke();
+
+        Debug.Log("Đã reset hòm thư cho game mới.");
     }
 
     private void CleanupExpiredReadMails(bool notifyIfChanged)
@@ -445,6 +488,11 @@ public class MailboxManager : MonoBehaviour
             {
                 if (mail == null)
                     continue;
+
+                if (mail.yThuUsageNote == null)
+                {
+                    mail.yThuUsageNote = "";
+                }
 
                 if (mail.herbRewards == null)
                 {

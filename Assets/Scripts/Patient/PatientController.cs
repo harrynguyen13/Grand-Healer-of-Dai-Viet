@@ -81,7 +81,6 @@ public class PatientController : BaseMove
     public void InitPatient(
         MedicalDatabase database,
         AStarPathfinder2D astarPathfinder,
-        int clinicLevel,
         Transform targetClinicDoorPoint
     )
     {
@@ -104,11 +103,16 @@ public class PatientController : BaseMove
             return;
         }
 
-        DiseaseData randomDisease = medicalDatabase.GetRandomDisease(clinicLevel);
+        int currentClinicLevel = PlayerLevelService.GetCurrentUnlockLevel();
+
+        if (currentClinicLevel < 1)
+            currentClinicLevel = 1;
+
+        DiseaseData randomDisease = medicalDatabase.GetRandomDisease();
 
         if (randomDisease == null)
         {
-            Debug.LogError("Không lấy được bệnh cho NPC bệnh nhân.");
+            Debug.LogError("Không lấy được bệnh cho NPC bệnh nhân. Cấp hiện tại: " + currentClinicLevel);
             currentState = PatientState.Done;
             return;
         }
@@ -116,6 +120,7 @@ public class PatientController : BaseMove
         patientCase = new PatientCase(randomDisease);
 
         Debug.Log("NPC bệnh nhân được sinh ra.");
+        Debug.Log("Cấp hiện tại: " + currentClinicLevel);
         Debug.Log("Bệnh thật: " + patientCase.realDisease.diseaseName);
 
         currentState = PatientState.GoingToClinicDoor;

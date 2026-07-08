@@ -79,6 +79,8 @@ public partial class ClinicExamManager
             isCurrentPrescriptionCorrect
         );
 
+        ClinicYThuUsageRewardService.ApplyRewardOrPenalty(pendingPatientMailData);
+
         shouldReturnCurrentPatientToQueueOnExit = false;
 
         currentStage = ClinicExamStage.PatientReceivingMedicine;
@@ -238,6 +240,8 @@ public partial class ClinicExamManager
             + currentVisitData.patientCase.realDisease.diseaseName
             + ", Stage: "
             + stageToSave);
+
+        ClinicYThuUsageRewardService.CancelTracking();
 
         currentVisitData = null;
         currentPatient = null;

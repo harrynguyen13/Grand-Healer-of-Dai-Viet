@@ -19,6 +19,9 @@ public class MainMenuUIController : MonoBehaviour
     [SerializeField] private RectTransform loadingSpinner;
     [SerializeField] private float spinnerRotateSpeed = 600f;
 
+    [Tooltip("Thời gian tối thiểu để loading hiện ra. Để 0 nếu không muốn delay.")]
+    [SerializeField] private float minimumLoadingVisibleTime = 0.15f;
+
     private const string HasLocalSaveKey = "HasLocalSave";
     private const string HasSeenIntroKey = "HasSeenIntro";
 
@@ -74,6 +77,13 @@ public class MainMenuUIController : MonoBehaviour
 
         ClearOldSave();
 
+        // Chơi mới tuyệt đối không được load vị trí save cũ
+        PlayerPrefs.SetInt(LoadFromSaveKey, 0);
+        PlayerPrefs.DeleteKey(PlayerSceneKey);
+        PlayerPrefs.DeleteKey(PlayerXKey);
+        PlayerPrefs.DeleteKey(PlayerYKey);
+        PlayerPrefs.DeleteKey(PlayerZKey);
+
         PlayerPrefs.SetInt(HasSeenIntroKey, 0);
         PlayerPrefs.Save();
 
@@ -91,6 +101,36 @@ public class MainMenuUIController : MonoBehaviour
             return;
         }
 
+        StartCoroutine(ContinueGameWithLoading());
+    }
+
+    private IEnumerator ContinueGameWithLoading()
+    {
+        isLoading = true;
+
+        ShowMessage("");
+
+        if (loadingPanel != null)
+            loadingPanel.SetActive(true);
+
+        if (loadingText != null)
+            loadingText.text = "Đang tải dữ liệu...";
+
+        Canvas.ForceUpdateCanvases();
+
+        yield return null;
+
+        if (minimumLoadingVisibleTime > 0f)
+        {
+            yield return new WaitForSecondsRealtime(minimumLoadingVisibleTime);
+        }
+
+        if (LocalSaveManager.Instance != null && LocalSaveManager.Instance.HasLocalSave())
+        {
+            LocalSaveManager.Instance.ContinueGameFromLocalSave();
+            yield break;
+        }
+
         string savedSceneName = PlayerPrefs.GetString(PlayerSceneKey, gameSceneName);
 
         if (string.IsNullOrWhiteSpace(savedSceneName))
@@ -101,7 +141,13 @@ public class MainMenuUIController : MonoBehaviour
 
         Debug.Log("Tiếp tục game tại scene đã save: " + savedSceneName);
 
-        StartCoroutine(LoadSceneWithLoading(savedSceneName, "Đang tải dữ liệu..."));
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(savedSceneName);
+        asyncLoad.allowSceneActivation = true;
+
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
     }
 
     public void OnExitClicked()
@@ -128,10 +174,22 @@ public class MainMenuUIController : MonoBehaviour
         if (loadingText != null)
             loadingText.text = loadingMessage;
 
+        Canvas.ForceUpdateCanvases();
+
         yield return null;
+
+        if (minimumLoadingVisibleTime > 0f)
+        {
+            yield return new WaitForSecondsRealtime(minimumLoadingVisibleTime);
+        }
 
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
         asyncLoad.allowSceneActivation = true;
+
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
     }
 
     private bool HasSave()
@@ -156,13 +214,17 @@ public class MainMenuUIController : MonoBehaviour
 
         DeleteAllJsonSaveFiles();
 
+        if (LocalSaveManager.Instance != null)
+        {
+            LocalSaveManager.Instance.ResetForNewGame();
+        }
+
         ResetRuntimeData();
 
         PlayerPrefs.Save();
 
         Debug.Log("Đã reset dữ liệu save cũ.");
     }
-
     private void ClearPlayerPrefsSave()
     {
         PlayerPrefs.DeleteKey(HasLocalSaveKey);
@@ -171,7 +233,7 @@ public class MainMenuUIController : MonoBehaviour
         PlayerPrefs.DeleteKey(PlayerYKey);
         PlayerPrefs.DeleteKey(PlayerZKey);
         PlayerPrefs.DeleteKey(HasSeenIntroKey);
-        PlayerPrefs.DeleteKey(LoadFromSaveKey);
+        PlayerPrefs.SetInt(LoadFromSaveKey, 0);
 
         ClearQuestPlayerPrefsSave();
         ClearGardenPlayerPrefsSave();
@@ -263,6 +325,14 @@ public class MainMenuUIController : MonoBehaviour
             );
 
             Debug.Log("Đã gọi reset kho thuốc nếu HerbInventory có hàm ResetInventoryForNewGame.");
+   
+        }
+
+        if (MailboxManager.Instance != null)
+        {
+            MailboxManager.Instance.ResetMailboxForNewGame();
+
+            Debug.Log("Đã reset hòm thư trong RAM.");
         }
 
         if (QuestProgressManager.Instance != null)

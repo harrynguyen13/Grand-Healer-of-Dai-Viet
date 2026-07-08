@@ -13,6 +13,8 @@ public class PendingPatientMailData
 
     public int moneyDelta;
     public int reputationDelta;
+
+    public string yThuUsageNote;
 }
 
 public static class ClinicPatientMailService
@@ -80,6 +82,7 @@ public static class ClinicPatientMailService
         data.prescriptionCorrect = prescriptionCorrect;
         data.moneyDelta = payment;
         data.reputationDelta = reputationChange;
+        data.yThuUsageNote = "";
 
         Debug.Log("Đã chuẩn bị thư bệnh nhân. Người gửi: " + data.patientName);
 
@@ -103,7 +106,8 @@ public static class ClinicPatientMailService
             data.diagnosisCorrect,
             data.prescriptionCorrect,
             data.moneyDelta,
-            data.reputationDelta
+            data.reputationDelta,
+            data.yThuUsageNote
         );
 
         Debug.Log("Đã gửi thư bệnh nhân sau khi bệnh nhân rời phòng: " + data.patientName);

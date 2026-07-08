@@ -13,9 +13,6 @@ public class PatientSpawnManager : MonoBehaviour
     [Header("A* tìm đường")]
     [SerializeField] private AStarPathfinder2D pathfinder;
 
-    [Header("Cấp y quán hiện tại")]
-    [SerializeField] private int clinicLevel = 1;
-
     [Header("Điểm sinh NPC bệnh nhân")]
     [SerializeField] private Transform[] spawnPoints;
 
@@ -156,12 +153,16 @@ public class PatientSpawnManager : MonoBehaviour
             return;
         }
 
+        int currentClinicLevel = PlayerLevelService.GetCurrentUnlockLevel();
+
+        if (currentClinicLevel < 1)
+            currentClinicLevel = 1;
+
         newPatient.SetSourcePrefab(randomPatientPrefab.gameObject);
 
         newPatient.InitPatient(
             medicalDatabase,
             pathfinder,
-            clinicLevel,
             clinicDoorPoint
         );
 
@@ -169,6 +170,7 @@ public class PatientSpawnManager : MonoBehaviour
 
         Debug.Log("Đã sinh NPC bệnh nhân loại: " + randomPatientPrefab.name);
         Debug.Log("Vị trí sinh: " + randomSpawnPoint.name);
+        Debug.Log("Sinh bệnh nhân theo cấp hiện tại: " + currentClinicLevel);
         Debug.Log("Số NPC bệnh nhân đang đi ngoài map: " + activePatients.Count);
     }
 

@@ -11,9 +11,6 @@ public class PrescriptionUIController : MonoBehaviour
     [Header("Database")]
     [SerializeField] private MedicalDatabase medicalDatabase;
 
-    [Header("Cấp y quán")]
-    [SerializeField] private int clinicLevel = 1;
-
     [Header("Kho thuốc bên trái")]
     [SerializeField] private Transform herbListContent;
     [SerializeField] private HerbItemUI herbItemPrefab;
@@ -89,12 +86,17 @@ public class PrescriptionUIController : MonoBehaviour
             return;
         }
 
+        if (HerbInventory.Instance != null)
+        {
+            HerbInventory.Instance.RefreshUnlockedHerbsByPlayerLevel(false);
+        }
+
         ClearChildren(herbListContent);
 
         herbQuantities.Clear();
         leftHerbItems.Clear();
 
-        List<HerbData> unlockedHerbs = medicalDatabase.GetUnlockedHerbs(clinicLevel);
+        List<HerbData> unlockedHerbs = medicalDatabase.GetUnlockedHerbs();
 
         foreach (HerbData herb in unlockedHerbs)
         {
@@ -103,7 +105,8 @@ public class PrescriptionUIController : MonoBehaviour
 
             int quantity = GetRealHerbQuantity(herb);
 
-            herbQuantities.Add(herb, quantity);
+            if (!herbQuantities.ContainsKey(herb))
+                herbQuantities.Add(herb, quantity);
 
             HerbItemUI item = Instantiate(herbItemPrefab, herbListContent);
             item.Setup(herb, quantity, OnClickHerbFromStorage);
@@ -112,7 +115,8 @@ public class PrescriptionUIController : MonoBehaviour
                 leftHerbItems.Add(herb, item);
         }
 
-        Debug.Log("Đã tạo danh sách dược liệu: " + unlockedHerbs.Count);
+        Debug.Log("Đã tạo danh sách dược liệu theo cấp hiện tại: " + PlayerLevelService.GetCurrentUnlockLevel());
+        Debug.Log("Số dược liệu mở khóa: " + unlockedHerbs.Count);
     }
 
     private int GetRealHerbQuantity(HerbData herb)

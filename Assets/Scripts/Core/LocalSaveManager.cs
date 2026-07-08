@@ -19,6 +19,9 @@ public class LocalSaveManager : MonoBehaviour
         "IntroScene"
     };
 
+    [Header("Scene Menu")]
+    [SerializeField] private string loginSceneName = "LoginScene";
+
     private const string HasLocalSaveKey = "HasLocalSave";
     private const string PlayerSceneKey = "PlayerScene";
     private const string PlayerXKey = "PlayerX";
@@ -80,11 +83,75 @@ public class LocalSaveManager : MonoBehaviour
 
         if (PlayerPrefs.GetInt(LoadFromSaveKey, 0) == 1)
         {
-            LoadPlayerPosition();
+            string savedScene = PlayerPrefs.GetString(PlayerSceneKey, "");
+            string currentScene = SceneManager.GetActiveScene().name;
+
+            if (savedScene != currentScene)
+            {
+                Debug.LogWarning("Không load vị trí vì scene hiện tại không khớp scene đã save. SavedScene = "
+                    + savedScene
+                    + ", CurrentScene = "
+                    + currentScene);
+
+                PlayerPrefs.DeleteKey(LoadFromSaveKey);
+                PlayerPrefs.Save();
+
+                yield break;
+            }
+
+            Vector3 savedPosition = GetSavedPlayerPosition();
+
+            // Apply nhiều frame để ghi đè các script spawn như PatientSpawnManager.
+            yield return StartCoroutine(ApplyPlayerPositionRepeated(savedPosition, 10));
 
             PlayerPrefs.DeleteKey(LoadFromSaveKey);
             PlayerPrefs.Save();
+
+            Debug.Log("Đã load vị trí người chơi từ local save: " + savedPosition);
         }
+    }
+
+    public bool HasLocalSave()
+    {
+        return PlayerPrefs.GetInt(HasLocalSaveKey, 0) == 1;
+    }
+
+    public string GetSavedSceneName()
+    {
+        return PlayerPrefs.GetString(PlayerSceneKey, "");
+    }
+
+    public void ContinueGameFromLocalSave()
+    {
+        if (!HasLocalSave())
+        {
+            Debug.LogWarning("Không có local save để tiếp tục.");
+            return;
+        }
+
+        string savedScene = GetSavedSceneName();
+
+        if (string.IsNullOrWhiteSpace(savedScene))
+        {
+            Debug.LogWarning("Có save nhưng không có tên scene đã lưu.");
+            return;
+        }
+
+        PlayerPrefs.SetInt(LoadFromSaveKey, 1);
+        PlayerPrefs.Save();
+
+        Debug.Log("Tiếp tục game từ local save. Scene: " + savedScene);
+
+        SceneManager.LoadScene(savedScene);
+    }
+
+    public void SaveAndReturnToLogin()
+    {
+        SaveGame();
+
+        Debug.Log("Đã lưu game trước khi quay về LoginScene.");
+
+        SceneManager.LoadScene(loginSceneName);
     }
 
     public void SaveGame()
@@ -129,48 +196,91 @@ public class LocalSaveManager : MonoBehaviour
         Debug.Log("Đã lưu game local tại scene " + currentScene + ": " + player.position);
     }
 
-    private void LoadPlayerPosition()
+    private Vector3 GetSavedPlayerPosition()
     {
-        if (PlayerPrefs.GetInt(HasLocalSaveKey, 0) != 1)
-            return;
+        FindPlayerIfMissing();
 
-        FindOrCreatePlayerIfMissing();
+        Vector3 fallbackPosition = player != null ? player.position : Vector3.zero;
 
-        if (player == null)
-        {
-            Debug.LogWarning("Không có Player để load vị trí.");
-            return;
-        }
-
-        string savedScene = PlayerPrefs.GetString(PlayerSceneKey, "");
-        string currentScene = SceneManager.GetActiveScene().name;
-
-        Debug.Log("Load vị trí save. SavedScene = " + savedScene + ", CurrentScene = " + currentScene);
-
-        if (savedScene != currentScene)
-        {
-            Debug.LogWarning("Không load vị trí vì scene hiện tại không khớp scene đã save.");
-            return;
-        }
-
-        Vector3 savedPosition = new Vector3(
-            PlayerPrefs.GetFloat(PlayerXKey, player.position.x),
-            PlayerPrefs.GetFloat(PlayerYKey, player.position.y),
-            PlayerPrefs.GetFloat(PlayerZKey, player.position.z)
+        return new Vector3(
+            PlayerPrefs.GetFloat(PlayerXKey, fallbackPosition.x),
+            PlayerPrefs.GetFloat(PlayerYKey, fallbackPosition.y),
+            PlayerPrefs.GetFloat(PlayerZKey, fallbackPosition.z)
         );
+    }
 
-        player.position = savedPosition;
+    private IEnumerator ApplyPlayerPositionRepeated(Vector3 targetPosition, int frameCount)
+    {
+        for (int i = 0; i < frameCount; i++)
+        {
+            FindOrCreatePlayerIfMissing();
+
+            if (player != null)
+            {
+                ApplyPlayerPosition(targetPosition);
+                RebindMinimapToPlayer();
+            }
+
+            yield return null;
+        }
+
+        if (player != null)
+        {
+            ApplyPlayerPosition(targetPosition);
+            RebindMinimapToPlayer();
+        }
+    }
+
+    private void ApplyPlayerPosition(Vector3 targetPosition)
+    {
+        if (player == null)
+            return;
+
+        player.position = targetPosition;
 
         Rigidbody2D rb2d = player.GetComponent<Rigidbody2D>();
 
         if (rb2d != null)
         {
-            rb2d.position = savedPosition;
+            rb2d.position = targetPosition;
             rb2d.linearVelocity = Vector2.zero;
             rb2d.angularVelocity = 0f;
         }
+    }
 
-        Debug.Log("Đã load vị trí người chơi từ local save: " + savedPosition);
+    private void RebindMinimapToPlayer()
+    {
+        if (player == null)
+            return;
+
+        GameObject minimapCameraObj = GameObject.Find("MinimapCamera");
+
+        if (minimapCameraObj != null)
+        {
+            minimapCameraObj.SendMessage(
+                "SetTarget",
+                player,
+                SendMessageOptions.DontRequireReceiver
+            );
+
+            Vector3 minimapPosition = minimapCameraObj.transform.position;
+            minimapCameraObj.transform.position = new Vector3(
+                player.position.x,
+                player.position.y,
+                minimapPosition.z
+            );
+        }
+
+        Camera mainCamera = Camera.main;
+
+        if (mainCamera != null)
+        {
+            mainCamera.SendMessage(
+                "SetTarget",
+                player,
+                SendMessageOptions.DontRequireReceiver
+            );
+        }
     }
 
     private void FindPlayerIfMissing()
@@ -234,6 +344,12 @@ public class LocalSaveManager : MonoBehaviour
         SaveGame();
     }
 
+    [ContextMenu("Continue From Local Save")]
+    public void ContinueFromLocalSaveContext()
+    {
+        ContinueGameFromLocalSave();
+    }
+
     [ContextMenu("Delete Local Player Save")]
     public void DeleteLocalPlayerSave()
     {
@@ -246,6 +362,53 @@ public class LocalSaveManager : MonoBehaviour
         PlayerPrefs.Save();
 
         Debug.Log("Đã xóa local save vị trí Player.");
+    }
+
+    public void ResetForNewGame()
+{
+    Debug.Log("===== LocalSaveManager reset cho game mới =====");
+
+    PlayerPrefs.DeleteKey(HasLocalSaveKey);
+    PlayerPrefs.DeleteKey(PlayerSceneKey);
+    PlayerPrefs.DeleteKey(PlayerXKey);
+    PlayerPrefs.DeleteKey(PlayerYKey);
+    PlayerPrefs.DeleteKey(PlayerZKey);
+
+    PlayerPrefs.SetInt(LoadFromSaveKey, 0);
+    PlayerPrefs.Save();
+
+    SceneTransitionData.isChangingScene = false;
+    SceneTransitionData.targetSpawnPointName = "";
+
+    DestroyCurrentPlayerInMemory();
+
+    player = null;
+
+    Debug.Log("Đã xóa local save vị trí và hủy Player cũ trong RAM.");
+    }
+
+    private void DestroyCurrentPlayerInMemory()
+    {
+        if (player != null)
+        {
+            Destroy(player.gameObject);
+            player = null;
+        }
+
+        GameObject[] playerObjects = GameObject.FindGameObjectsWithTag(playerTag);
+
+        for (int i = 0; i < playerObjects.Length; i++)
+        {
+            if (playerObjects[i] == null)
+                continue;
+
+            Destroy(playerObjects[i]);
+        }
+
+        if (PlayerSceneKeeper.Instance != null)
+        {
+            Destroy(PlayerSceneKeeper.Instance.gameObject);
+        }
     }
 
     private void OnApplicationQuit()

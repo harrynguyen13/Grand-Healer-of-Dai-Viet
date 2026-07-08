@@ -71,6 +71,9 @@ public class MailboxPanelUI : MonoBehaviour
 
     private void ShowMailDetail(MailMessage mail)
     {
+        if (mail == null)
+            return;
+
         if (contentDetailText != null)
         {
             contentDetailText.text = mail.content;
@@ -88,6 +91,12 @@ public class MailboxPanelUI : MonoBehaviour
             return "";
 
         List<string> lines = new List<string>();
+
+        if (!string.IsNullOrWhiteSpace(mail.yThuUsageNote))
+        {
+            lines.Add(mail.yThuUsageNote);
+            lines.Add("");
+        }
 
         if (mail.moneyDelta > 0)
         {
@@ -129,7 +138,7 @@ public class MailboxPanelUI : MonoBehaviour
             return "Không có thưởng/phạt.";
         }
 
-        return string.Join("\n", lines);
+        return string.Join("\n", lines).TrimEnd();
     }
 
     private void ClearDetail()

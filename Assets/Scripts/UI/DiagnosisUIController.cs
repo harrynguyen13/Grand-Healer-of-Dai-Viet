@@ -30,7 +30,6 @@ public class DiagnosisUIController : MonoBehaviour
 
     private PatientCase currentPatientCase;
     private MedicalDatabase medicalDatabase;
-    private int clinicLevel;
     private Action<DiseaseData> onDiseaseSelected;
 
     private Coroutine diagnosisCoroutine;
@@ -48,13 +47,11 @@ public class DiagnosisUIController : MonoBehaviour
     public void Show(
         PatientCase patientCase,
         MedicalDatabase database,
-        int currentClinicLevel,
         Action<DiseaseData> selectedCallback
     )
     {
         currentPatientCase = patientCase;
         medicalDatabase = database;
-        clinicLevel = currentClinicLevel;
         onDiseaseSelected = selectedCallback;
 
         if (diagnosisPanel != null)
@@ -111,27 +108,22 @@ public class DiagnosisUIController : MonoBehaviour
 
         currentPatientCase.hasAsked = true;
 
-        // 1. Chạy lời kể bệnh nhân trước
         yield return StartCoroutine(TypeDialogue(disease.patientDialogue));
 
         yield return new WaitForSeconds(typeSpeed * 8f);
 
-        // 2. Hiện triệu chứng hỏi bệnh
         ShowAskSymptoms(disease);
 
         yield return new WaitForSeconds(0.5f);
 
-        // 3. Sau đó mới hiện loading bắt mạch + icon xoay
         yield return StartCoroutine(ShowPulseLoading());
 
         currentPatientCase.hasPulseChecked = true;
 
-        // 4. Hiện triệu chứng sau bắt mạch
         ShowPulseSymptoms(disease);
 
         yield return new WaitForSeconds(0.3f);
 
-        // 5. Cuối cùng mới hiện 4 lựa chọn bệnh
         ShowDiseaseOptions(disease);
     }
 
@@ -220,8 +212,7 @@ public class DiagnosisUIController : MonoBehaviour
 
         List<DiseaseData> options = medicalDatabase.GetDiagnosisOptions(
             realDisease,
-            optionButtons.Length,
-            clinicLevel
+            optionButtons.Length
         );
 
         SetOptionButtonsActive(false);
@@ -252,6 +243,8 @@ public class DiagnosisUIController : MonoBehaviour
                 SelectDisease(optionDisease);
             });
         }
+
+        Debug.Log("Đã hiện lựa chọn bệnh theo cấp hiện tại: " + PlayerLevelService.GetCurrentUnlockLevel());
     }
 
     private void SelectDisease(DiseaseData selectedDisease)

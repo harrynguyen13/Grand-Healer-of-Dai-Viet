@@ -85,6 +85,8 @@ public partial class ClinicExamManager
             isClinicUiTemporarilyClosed = true;
             restoredClinicUiNeedsReopen = true;
 
+            ClinicYThuUsageRewardService.BeginTracking();
+
             Debug.Log("Đã khôi phục phiên khám dở. Bấm " + examineKey + " để mở lại UI. Stage: " + currentStage);
         }
         else
@@ -176,11 +178,14 @@ public partial class ClinicExamManager
         restoredClinicUiNeedsReopen = false;
         currentStage = ClinicExamStage.Diagnosing;
 
+        ClinicYThuUsageRewardService.BeginTracking();
+
         if (currentPatient == null)
         {
             Debug.LogError("Không có NPC bệnh nhân hiện tại.");
             isExamRunning = false;
             currentStage = ClinicExamStage.None;
+            ClinicYThuUsageRewardService.CancelTracking();
             yield break;
         }
 
@@ -191,6 +196,7 @@ public partial class ClinicExamManager
             Debug.LogError("NPC bệnh nhân không có ca bệnh.");
             isExamRunning = false;
             currentStage = ClinicExamStage.None;
+            ClinicYThuUsageRewardService.CancelTracking();
             yield break;
         }
 
@@ -199,6 +205,7 @@ public partial class ClinicExamManager
             Debug.LogError("Chưa kéo MedicalDatabase vào ClinicExamManager.");
             isExamRunning = false;
             currentStage = ClinicExamStage.None;
+            ClinicYThuUsageRewardService.CancelTracking();
             yield break;
         }
 
@@ -207,17 +214,21 @@ public partial class ClinicExamManager
             Debug.LogError("Chưa kéo DiagnosisUIController vào ClinicExamManager.");
             isExamRunning = false;
             currentStage = ClinicExamStage.None;
+            ClinicYThuUsageRewardService.CancelTracking();
             yield break;
         }
+
+        int currentClinicLevel = GetCurrentClinicLevel();
 
         diagnosisUIController.gameObject.SetActive(true);
 
         diagnosisUIController.Show(
             patientCase,
             medicalDatabase,
-            clinicLevel,
             OnDiseaseSelected
         );
+
+        Debug.Log("Mở UI chẩn đoán theo cấp hiện tại: " + currentClinicLevel);
     }
 
     private void OnDiseaseSelected(DiseaseData selectedDisease)
@@ -343,12 +354,15 @@ public partial class ClinicExamManager
              */
             if (restoredClinicUiNeedsReopen)
             {
+                int currentClinicLevel = GetCurrentClinicLevel();
+
                 diagnosisUIController.Show(
                     patientCase,
                     medicalDatabase,
-                    clinicLevel,
                     OnDiseaseSelected
                 );
+
+                Debug.Log("Dựng lại UI chẩn đoán theo cấp hiện tại: " + currentClinicLevel);
             }
 
             isClinicUiTemporarilyClosed = false;

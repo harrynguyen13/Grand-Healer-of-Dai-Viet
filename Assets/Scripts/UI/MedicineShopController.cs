@@ -27,6 +27,7 @@ public class MedicineShopController : MonoBehaviour
     {
         if (buyButton != null)
         {
+            buyButton.onClick.RemoveAllListeners();
             buyButton.onClick.AddListener(BuySelectedHerbs);
         }
     }
@@ -40,6 +41,12 @@ public class MedicineShopController : MonoBehaviour
     public void OpenShop()
     {
         gameObject.SetActive(true);
+
+        if (shopPanel != null)
+        {
+            shopPanel.SetActive(true);
+        }
+
         RefreshShopList();
         RefreshSelectedList();
     }
@@ -72,33 +79,36 @@ public class MedicineShopController : MonoBehaviour
             return;
         }
 
-        int currentClinicLevel = 1;
+        if (shopContent == null)
+        {
+            Debug.LogWarning("MedicineShopController chưa gán ShopContent.");
+            return;
+        }
 
         if (HerbInventory.Instance != null)
         {
-            currentClinicLevel = HerbInventory.Instance.ClinicLevel;
+            HerbInventory.Instance.RefreshUnlockedHerbsByPlayerLevel(false);
         }
 
-        List<HerbData> unlockedHerbs = medicalDatabase.GetUnlockedHerbs(currentClinicLevel);
+        List<HerbData> unlockedHerbs = medicalDatabase.GetUnlockedHerbs();
 
         foreach (HerbData herb in unlockedHerbs)
         {
             if (herb == null)
-            {
                 continue;
-            }
 
             ShopHerbItemUI item = Instantiate(shopHerbItemPrefab, shopContent);
             item.Setup(herb, AddHerbToSelected);
         }
+
+        Debug.Log("Shop đã load dược liệu theo cấp hiện tại: " + PlayerLevelService.GetCurrentUnlockLevel());
+        Debug.Log("Số dược liệu bán trong shop: " + unlockedHerbs.Count);
     }
 
     private void AddHerbToSelected(HerbData herb)
     {
         if (herb == null)
-        {
             return;
-        }
 
         if (!selectedHerbs.ContainsKey(herb))
         {
@@ -113,14 +123,10 @@ public class MedicineShopController : MonoBehaviour
     private void RemoveOneSelectedHerb(HerbData herb)
     {
         if (herb == null)
-        {
             return;
-        }
 
         if (!selectedHerbs.ContainsKey(herb))
-        {
             return;
-        }
 
         selectedHerbs[herb]--;
 
@@ -137,9 +143,10 @@ public class MedicineShopController : MonoBehaviour
         ClearChildren(selectedContent);
 
         if (selectedHerbItemPrefab == null)
-        {
             return;
-        }
+
+        if (selectedContent == null)
+            return;
 
         foreach (KeyValuePair<HerbData, int> pair in selectedHerbs)
         {
@@ -147,9 +154,7 @@ public class MedicineShopController : MonoBehaviour
             int quantity = pair.Value;
 
             if (herb == null || quantity <= 0)
-            {
                 continue;
-            }
 
             ShopSelectedHerbItemUI item = Instantiate(selectedHerbItemPrefab, selectedContent);
             item.Setup(herb, quantity, RemoveOneSelectedHerb);
@@ -187,9 +192,7 @@ public class MedicineShopController : MonoBehaviour
         bool paid = PlayerEconomy.Instance.SpendMoney(totalCost);
 
         if (!paid)
-        {
             return;
-        }
 
         foreach (KeyValuePair<HerbData, int> pair in selectedHerbs)
         {
@@ -197,9 +200,7 @@ public class MedicineShopController : MonoBehaviour
             int quantity = pair.Value;
 
             if (herb == null || quantity <= 0)
-            {
                 continue;
-            }
 
             HerbInventory.Instance.AddHerb(herb, quantity);
 
@@ -210,6 +211,7 @@ public class MedicineShopController : MonoBehaviour
 
         selectedHerbs.Clear();
         RefreshSelectedList();
+        RefreshShopList();
     }
 
     private void NotifyQuestHerbBought(HerbData herb, int quantity)
@@ -244,9 +246,7 @@ public class MedicineShopController : MonoBehaviour
             int quantity = pair.Value;
 
             if (herb == null || quantity <= 0)
-            {
                 continue;
-            }
 
             total += herb.buyPrice * quantity;
         }
@@ -257,9 +257,7 @@ public class MedicineShopController : MonoBehaviour
     private void ClearChildren(Transform root)
     {
         if (root == null)
-        {
             return;
-        }
 
         for (int i = root.childCount - 1; i >= 0; i--)
         {

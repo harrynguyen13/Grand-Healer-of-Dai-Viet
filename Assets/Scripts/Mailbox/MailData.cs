@@ -34,6 +34,9 @@ public class MailMessage
     public int moneyDelta;
     public int reputationDelta;
 
+    // Ghi chú riêng cho Y thư, hiện ở RewardDetailText.
+    public string yThuUsageNote;
+
     public List<MailHerbReward> herbRewards = new List<MailHerbReward>();
 
     public bool isRead;

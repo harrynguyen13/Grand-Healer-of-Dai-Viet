@@ -14,27 +14,19 @@ public class SettingsTabController : MonoBehaviour
     public void ShowGeneralTab()
     {
         if (settingsPanel != null)
-        {
             settingsPanel.SetActive(true);
-        }
 
         if (guidePanel != null)
-        {
             guidePanel.SetActive(false);
-        }
     }
 
     public void ShowGuideTab()
     {
         if (settingsPanel != null)
-        {
             settingsPanel.SetActive(false);
-        }
 
         if (guidePanel != null)
-        {
             guidePanel.SetActive(true);
-        }
     }
 
     public void CloseWindow()

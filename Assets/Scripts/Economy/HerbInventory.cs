@@ -17,7 +17,6 @@ public class HerbInventory : MonoBehaviour
     [System.Serializable]
     private class HerbInventorySaveData
     {
-        public int clinicLevel = 1;
         public List<HerbStockSaveData> stocks = new List<HerbStockSaveData>();
     }
 
@@ -30,9 +29,6 @@ public class HerbInventory : MonoBehaviour
 
     [Header("Database")]
     [SerializeField] private MedicalDatabase medicalDatabase;
-
-    [Header("Cấp y quán hiện tại")]
-    [SerializeField] private int clinicLevel = 1;
 
     [Header("Tự khởi tạo kho theo dược liệu đã mở khóa")]
     [SerializeField] private bool initializeOnAwake = true;
@@ -48,11 +44,6 @@ public class HerbInventory : MonoBehaviour
         {
             return Path.Combine(Application.persistentDataPath, "herb_inventory_save.json");
         }
-    }
-
-    public int ClinicLevel
-    {
-        get { return clinicLevel; }
     }
 
     private void Awake()
@@ -76,12 +67,17 @@ public class HerbInventory : MonoBehaviour
         {
             if (initializeOnAwake)
             {
-                UnlockHerbsForLevel(clinicLevel, false);
+                RefreshUnlockedHerbsByPlayerLevel(false);
                 SaveInventory();
             }
         }
 
         Debug.Log("File save kho thuốc nằm tại: " + SavePath);
+    }
+
+    private void Start()
+    {
+        RefreshUnlockedHerbsByPlayerLevel(true);
     }
 
     private void OnApplicationQuit()
@@ -95,6 +91,16 @@ public class HerbInventory : MonoBehaviour
         {
             SaveInventory();
         }
+    }
+
+    private int GetCurrentClinicLevel()
+    {
+        int currentLevel = PlayerLevelService.GetCurrentUnlockLevel();
+
+        if (currentLevel > 0)
+            return currentLevel;
+
+        return 1;
     }
 
     private void BuildLookup()
@@ -115,31 +121,39 @@ public class HerbInventory : MonoBehaviour
         SyncAllListValues();
     }
 
-    public void SetClinicLevel(int newClinicLevel)
+    public List<HerbStock> GetAllStocks()
     {
-        clinicLevel = Mathf.Max(1, newClinicLevel);
-        UnlockHerbsForLevel(clinicLevel, true);
-        SaveInventory();
+        RefreshUnlockedHerbsByPlayerLevel(false);
+        return herbStocks;
     }
 
-    public void UnlockHerbsForLevel(int level)
+    public void RefreshUnlockedHerbsByPlayerLevel()
     {
-        UnlockHerbsForLevel(level, true);
+        RefreshUnlockedHerbsByPlayerLevel(true);
+    }
+
+    public void RefreshUnlockedHerbsByPlayerLevel(bool saveAfterUnlock)
+    {
+        int currentLevel = GetCurrentClinicLevel();
+        UnlockHerbsForLevel(currentLevel, saveAfterUnlock);
     }
 
     private void UnlockHerbsForLevel(int level, bool saveAfterUnlock)
     {
+        level = Mathf.Max(1, level);
+
         if (medicalDatabase == null)
         {
             Debug.LogWarning("HerbInventory chưa kéo MedicalDatabase.");
             return;
         }
 
-        List<HerbData> unlockedHerbs = medicalDatabase.GetUnlockedHerbs(level);
-
-        foreach (HerbData herb in unlockedHerbs)
+        foreach (HerbData herb in medicalDatabase.herbs)
         {
             if (herb == null)
+                continue;
+
+            if (herb.unlockClinicLevel > level)
                 continue;
 
             if (stockLookup.ContainsKey(herb))
@@ -157,7 +171,7 @@ public class HerbInventory : MonoBehaviour
 
         SyncAllListValues();
 
-        Debug.Log("Đã mở khóa kho dược liệu cấp " + level + ". Tổng vị trong kho: " + herbStocks.Count);
+        Debug.Log("Đã đồng bộ kho dược liệu theo cấp " + level + ". Tổng vị trong kho: " + herbStocks.Count);
 
         if (saveAfterUnlock)
         {
@@ -167,6 +181,8 @@ public class HerbInventory : MonoBehaviour
 
     public int GetQuantity(HerbData herb)
     {
+        RefreshUnlockedHerbsByPlayerLevel(false);
+
         if (herb == null)
             return 0;
 
@@ -189,6 +205,8 @@ public class HerbInventory : MonoBehaviour
 
     public bool HasEnoughPrescription(Dictionary<HerbData, int> prescription)
     {
+        RefreshUnlockedHerbsByPlayerLevel(false);
+
         if (prescription == null)
             return false;
 
@@ -212,6 +230,8 @@ public class HerbInventory : MonoBehaviour
 
     public bool RemoveHerb(HerbData herb, int amount)
     {
+        RefreshUnlockedHerbsByPlayerLevel(false);
+
         if (herb == null || amount <= 0)
             return false;
 
@@ -233,6 +253,8 @@ public class HerbInventory : MonoBehaviour
 
     public bool RemovePrescription(Dictionary<HerbData, int> prescription)
     {
+        RefreshUnlockedHerbsByPlayerLevel(false);
+
         if (prescription == null)
             return false;
 
@@ -265,6 +287,8 @@ public class HerbInventory : MonoBehaviour
 
     public void AddHerb(HerbData herb, int amount)
     {
+        RefreshUnlockedHerbsByPlayerLevel(false);
+
         if (herb == null || amount <= 0)
             return;
 
@@ -288,6 +312,8 @@ public class HerbInventory : MonoBehaviour
 
     public bool BuyHerb(HerbData herb, int amount)
     {
+        RefreshUnlockedHerbsByPlayerLevel(false);
+
         if (herb == null || amount <= 0)
             return false;
 
@@ -338,7 +364,6 @@ public class HerbInventory : MonoBehaviour
     public void SaveInventory()
     {
         HerbInventorySaveData saveData = new HerbInventorySaveData();
-        saveData.clinicLevel = clinicLevel;
 
         foreach (HerbStock stock in herbStocks)
         {
@@ -391,14 +416,12 @@ public class HerbInventory : MonoBehaviour
                 return;
             }
 
-            clinicLevel = Mathf.Max(1, saveData.clinicLevel);
-
             herbStocks.Clear();
             stockLookup.Clear();
 
             if (initializeOnAwake)
             {
-                UnlockHerbsForLevel(clinicLevel, false);
+                RefreshUnlockedHerbsByPlayerLevel(false);
             }
 
             foreach (HerbStockSaveData savedStock in saveData.stocks)
@@ -417,6 +440,7 @@ public class HerbInventory : MonoBehaviour
                 SetHerbQuantity(herb, savedStock.quantity);
             }
 
+            RefreshUnlockedHerbsByPlayerLevel(false);
             SyncAllListValues();
 
             Debug.Log("Đã load kho thuốc từ file save. Tổng vị trong kho: " + herbStocks.Count);
@@ -445,8 +469,6 @@ public class HerbInventory : MonoBehaviour
     {
         Debug.Log("===== RESET KHO THUỐC VỀ BAN ĐẦU =====");
 
-        clinicLevel = 1;
-
         herbStocks.Clear();
         stockLookup.Clear();
 
@@ -454,14 +476,14 @@ public class HerbInventory : MonoBehaviour
 
         if (initializeOnAwake)
         {
-            UnlockHerbsForLevel(clinicLevel, false);
+            UnlockHerbsForLevel(1, false);
         }
 
         SyncAllListValues();
 
         SaveInventory();
 
-        Debug.Log("Đã reset kho thuốc về mặc định cấp " + clinicLevel + ". Tổng vị: " + herbStocks.Count);
+        Debug.Log("Đã reset kho thuốc về mặc định cấp 1. Tổng vị: " + herbStocks.Count);
     }
 
     private void SetHerbQuantity(HerbData herb, int quantity)
@@ -492,9 +514,7 @@ public class HerbInventory : MonoBehaviour
         if (medicalDatabase == null)
             return null;
 
-        List<HerbData> allHerbs = medicalDatabase.GetUnlockedHerbs(99);
-
-        foreach (HerbData herb in allHerbs)
+        foreach (HerbData herb in medicalDatabase.herbs)
         {
             if (herb == null)
                 continue;

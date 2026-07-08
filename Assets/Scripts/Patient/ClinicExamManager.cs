@@ -46,8 +46,8 @@ public partial class ClinicExamManager : MonoBehaviour
     [Tooltip("Nếu hàng chờ trống, phòng khám nghỉ tối đa từng này giây.")]
     [SerializeField] private float maxNextPatientDelay = 20f;
 
-    [Header("Cấp y quán")]
-    [SerializeField] private int clinicLevel = 1;
+    [Header("Fallback cấp y quán nếu PlayerLevelService lỗi")]
+    [SerializeField] private int fallbackClinicLevel = 1;
 
     private PatientVisitData currentVisitData;
     private PatientController currentPatient;
@@ -61,7 +61,7 @@ public partial class ClinicExamManager : MonoBehaviour
     private bool canStartExam;
     private bool isExamRunning;
     private bool isCurrentDiagnosisCorrect;
-    private bool isCurrentPrescriptionCorrect; 
+    private bool isCurrentPrescriptionCorrect;
 
     private bool shouldReturnCurrentPatientToQueueOnExit;
     private bool applicationQuitting;
@@ -77,4 +77,14 @@ public partial class ClinicExamManager : MonoBehaviour
     private ClinicExamStage currentStage = ClinicExamStage.None;
 
     private float nextPatientEnterTime;
+
+    private int GetCurrentClinicLevel()
+    {
+        int currentLevel = PlayerLevelService.GetCurrentUnlockLevel();
+
+        if (currentLevel > 0)
+            return currentLevel;
+
+        return Mathf.Max(1, fallbackClinicLevel);
+    }
 }
