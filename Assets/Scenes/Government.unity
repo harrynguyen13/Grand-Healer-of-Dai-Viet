@@ -1553,6 +1553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb9847dccaf05d041a641c6331a6d20b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollowSetter
+  cameraBoundsParentName: CameraBounds
 --- !u!4 &193774107
 Transform:
   m_ObjectHideFlags: 0
@@ -1610,6 +1611,7 @@ GameObject:
   - component: {fileID: 428763090}
   - component: {fileID: 428763089}
   - component: {fileID: 428763088}
+  - component: {fileID: 428763091}
   m_Layer: 0
   m_Name: DoorTrigger_Exit_Government
   m_TagString: Untagged
@@ -1676,7 +1678,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 5, y: 1}
+  m_Size: {x: 5, y: 0.5}
   m_EdgeRadius: 0
 --- !u!4 &428763090
 Transform:
@@ -1693,6 +1695,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &428763091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428763087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16e2974dfa351b941be7f438335c5d49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractionPromptTrigger
+  keyText: E
+  actionText: "ra kh\u1ECFi ph\u1EE7 quan."
+  promptFormat: "\u1EA4n {0} \u0111\u1EC3 {1}"
+  worldOffset: {x: 2, y: 2, z: 2}
+  playerTag: Player
 --- !u!1001 &851848313
 PrefabInstance:
   m_ObjectHideFlags: 0

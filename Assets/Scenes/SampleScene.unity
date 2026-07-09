@@ -757,6 +757,7 @@ GameObject:
   - component: {fileID: 45440995}
   - component: {fileID: 45440994}
   - component: {fileID: 45440993}
+  - component: {fileID: 45440996}
   m_Layer: 0
   m_Name: DoorTrigger_Clinic
   m_TagString: Untagged
@@ -823,7 +824,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2, y: 1}
+  m_Size: {x: 2, y: 0.5}
   m_EdgeRadius: 0
 --- !u!4 &45440995
 Transform:
@@ -834,12 +835,33 @@ Transform:
   m_GameObject: {fileID: 45440992}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.06, y: 4.52, z: 0}
+  m_LocalPosition: {x: 21.017, y: 4.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &45440996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45440992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16e2974dfa351b941be7f438335c5d49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractionPromptTrigger
+  keyText: E
+  actionText: "v\xE0o ph\xF2ng kh\xE1m."
+  hideKey: 19
+  promptFormat: "\u1EA4n {0} \u0111\u1EC3 {1}"
+  worldOffset: {x: 2, y: 2, z: 2}
+  autoHide: 1
+  visibleDuration: 1.2
+  hideWhenPressKey: 1
+  playerTag: Player
 --- !u!1 &52865071
 GameObject:
   m_ObjectHideFlags: 0
@@ -47906,7 +47928,7 @@ Transform:
   m_GameObject: {fileID: 234567751}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.09, y: 15.74, z: 0}
+  m_LocalPosition: {x: 22.3, y: 15.82, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -123615,7 +123637,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 334
-      m_TileSpriteIndex: 4294967295
+      m_TileSpriteIndex: 887
       m_TileMatrixIndex: 0
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
@@ -123715,7 +123737,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 343
-      m_TileSpriteIndex: 4294967295
+      m_TileSpriteIndex: 888
       m_TileMatrixIndex: 0
       m_TileColorIndex: 2
       m_TileObjectToInstantiateIndex: 65535
@@ -124225,7 +124247,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 344
-      m_TileSpriteIndex: 4294967295
+      m_TileSpriteIndex: 889
       m_TileMatrixIndex: 0
       m_TileColorIndex: 3
       m_TileObjectToInstantiateIndex: 65535
@@ -124325,7 +124347,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 354
-      m_TileSpriteIndex: 4294967295
+      m_TileSpriteIndex: 890
       m_TileMatrixIndex: 0
       m_TileColorIndex: 4
       m_TileObjectToInstantiateIndex: 65535
@@ -124925,7 +124947,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 355
-      m_TileSpriteIndex: 4294967295
+      m_TileSpriteIndex: 891
       m_TileMatrixIndex: 0
       m_TileColorIndex: 5
       m_TileObjectToInstantiateIndex: 65535
@@ -125025,7 +125047,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 365
-      m_TileSpriteIndex: 4294967295
+      m_TileSpriteIndex: 892
       m_TileMatrixIndex: 0
       m_TileColorIndex: 6
       m_TileObjectToInstantiateIndex: 65535
@@ -153122,6 +153144,24 @@ Tilemap:
   - serializedVersion: 2
     m_RefCount: 2
     m_Data: {fileID: 1737153289, guid: 1dad90264a7ddac438b16ac8a36bf963, type: 3}
+  - serializedVersion: 2
+    m_RefCount: 1
+    m_Data: {fileID: 1491974974}
+  - serializedVersion: 2
+    m_RefCount: 1
+    m_Data: {fileID: 1983458479}
+  - serializedVersion: 2
+    m_RefCount: 1
+    m_Data: {fileID: 2102941719}
+  - serializedVersion: 2
+    m_RefCount: 1
+    m_Data: {fileID: 409358444}
+  - serializedVersion: 2
+    m_RefCount: 1
+    m_Data: {fileID: 972075986}
+  - serializedVersion: 2
+    m_RefCount: 1
+    m_Data: {fileID: 1386802404}
   m_TileMatrixArray:
   - serializedVersion: 2
     m_RefCount: 3776
@@ -362193,6 +362233,7 @@ GameObject:
   - component: {fileID: 1407245130}
   - component: {fileID: 1407245129}
   - component: {fileID: 1407245128}
+  - component: {fileID: 1407245131}
   m_Layer: 0
   m_Name: MedicineShopOpenPoint
   m_TagString: Untagged
@@ -362275,6 +362316,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1407245131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1407245127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16e2974dfa351b941be7f438335c5d49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractionPromptTrigger
+  keyText: E
+  actionText: "mua d\u01B0\u1EE3c li\u1EC7u."
+  hideKey: 19
+  promptFormat: "\u1EA4n {0} \u0111\u1EC3 {1}"
+  worldOffset: {x: 2, y: 2, z: 2}
+  autoHide: 1
+  visibleDuration: 1.2
+  hideWhenPressKey: 1
+  playerTag: Player
 --- !u!1 &1414529062
 GameObject:
   m_ObjectHideFlags: 0
@@ -405000,6 +405062,7 @@ GameObject:
   - component: {fileID: 1729638683}
   - component: {fileID: 1729638682}
   - component: {fileID: 1729638684}
+  - component: {fileID: 1729638685}
   m_Layer: 5
   m_Name: MedicineShopPanel
   m_TagString: Untagged
@@ -405087,6 +405150,19 @@ MonoBehaviour:
   selectedContent: {fileID: 138827149}
   buyButton: {fileID: 426400949}
   shopPanel: {fileID: 1729638680}
+--- !u!114 &1729638685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729638680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a304103e187d224cabe3a8c9ee48345, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerControlLockByPanel
+  lockReason: MedicineShopPanel
 --- !u!114 &1732156153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -405626,6 +405702,7 @@ GameObject:
   - component: {fileID: 1792975174}
   - component: {fileID: 1792975173}
   - component: {fileID: 1792975172}
+  - component: {fileID: 1792975175}
   m_Layer: 0
   m_Name: DoorTrigger_Government
   m_TagString: Untagged
@@ -405709,6 +405786,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1792975175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792975171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16e2974dfa351b941be7f438335c5d49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractionPromptTrigger
+  keyText: E
+  actionText: "v\xE0o ph\u1EE7 quan"
+  hideKey: 19
+  promptFormat: "\u1EA4n {0} \u0111\u1EC3 {1}"
+  worldOffset: {x: 0, y: 1.15, z: 0}
+  autoHide: 1
+  visibleDuration: 1.2
+  hideWhenPressKey: 1
+  playerTag: Player
 --- !u!213 &1823173937
 Sprite:
   m_ObjectHideFlags: 0
@@ -424436,7 +424534,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 169
-      m_TileSpriteIndex: 4294967295
+      m_TileSpriteIndex: 633
       m_TileMatrixIndex: 0
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
@@ -425906,7 +426004,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 169
-      m_TileSpriteIndex: 4294967295
+      m_TileSpriteIndex: 633
       m_TileMatrixIndex: 0
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
@@ -433609,6 +433707,9 @@ Tilemap:
   - serializedVersion: 2
     m_RefCount: 2
     m_Data: {fileID: 1737153289, guid: 1dad90264a7ddac438b16ac8a36bf963, type: 3}
+  - serializedVersion: 2
+    m_RefCount: 2
+    m_Data: {fileID: 1284740066}
   m_TileMatrixArray:
   - serializedVersion: 2
     m_RefCount: 1983
@@ -435288,29 +435389,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 118234075598421617, guid: 308d75b77c5face4aaefc9d4c7022060, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 630.512
-      objectReference: {fileID: 0}
-    - target: {fileID: 323923222324391729, guid: 308d75b77c5face4aaefc9d4c7022060, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 523370529558051726, guid: 308d75b77c5face4aaefc9d4c7022060, type: 3}
       propertyPath: m_Name
       value: HUD_Canvas_Persistent
-      objectReference: {fileID: 0}
-    - target: {fileID: 2224743732414287334, guid: 308d75b77c5face4aaefc9d4c7022060, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2224743732414287334, guid: 308d75b77c5face4aaefc9d4c7022060, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2224743732414287334, guid: 308d75b77c5face4aaefc9d4c7022060, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2513389572132432976, guid: 308d75b77c5face4aaefc9d4c7022060, type: 3}
       propertyPath: m_Pivot.x
@@ -435392,57 +435473,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2847690151204152813, guid: 308d75b77c5face4aaefc9d4c7022060, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: -34.027
+    - target: {fileID: 6631111255112267219, guid: 308d75b77c5face4aaefc9d4c7022060, type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2847690151204152813, guid: 308d75b77c5face4aaefc9d4c7022060, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 431.581
+    - target: {fileID: 6631111255112267219, guid: 308d75b77c5face4aaefc9d4c7022060, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4249632076626066587, guid: 308d75b77c5face4aaefc9d4c7022060, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4754260104367994776, guid: 308d75b77c5face4aaefc9d4c7022060, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4754260104367994776, guid: 308d75b77c5face4aaefc9d4c7022060, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4754260104367994776, guid: 308d75b77c5face4aaefc9d4c7022060, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4754260104367994776, guid: 308d75b77c5face4aaefc9d4c7022060, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6387518628241878965, guid: 308d75b77c5face4aaefc9d4c7022060, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6387518628241878965, guid: 308d75b77c5face4aaefc9d4c7022060, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6387518628241878965, guid: 308d75b77c5face4aaefc9d4c7022060, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0.2709702
-      objectReference: {fileID: 0}
-    - target: {fileID: 8915709949684685779, guid: 308d75b77c5face4aaefc9d4c7022060, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8915709949684685779, guid: 308d75b77c5face4aaefc9d4c7022060, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9181623177295865846, guid: 308d75b77c5face4aaefc9d4c7022060, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+    - target: {fileID: 6631111255112267219, guid: 308d75b77c5face4aaefc9d4c7022060, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

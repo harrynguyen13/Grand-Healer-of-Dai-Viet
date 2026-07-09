@@ -11,6 +11,13 @@ public class PlayerMove : BaseMove
 
     private void Update()
     {
+        if (PlayerControlLock.IsLocked)
+        {
+            ForceStopMovement();
+            UpdateAnimation();
+            return;
+        }
+
         ReadMoveInput();
         ReadRunInput();
 
@@ -68,5 +75,20 @@ public class PlayerMove : BaseMove
         isRunning =
             Keyboard.current.leftShiftKey.isPressed ||
             Keyboard.current.rightShiftKey.isPressed;
+    }
+
+    public void ForceStopMovement()
+    {
+        moveInput = Vector2.zero;
+        isRunning = false;
+        moveSpeed = walkSpeed;
+
+        Rigidbody2D rb2d = GetComponent<Rigidbody2D>();
+
+        if (rb2d != null)
+        {
+            rb2d.linearVelocity = Vector2.zero;
+            rb2d.angularVelocity = 0f;
+        }
     }
 }
