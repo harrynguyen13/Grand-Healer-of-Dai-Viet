@@ -241,7 +241,7 @@ public class HerbBalanceAutoSetter : EditorWindow
             herb.category = HerbCategory.ThanhNhiet;
         }
 
-        // Hóa đờm chỉ ho
+        // Hóa đờm trị ho
         else if (IsMatch(key,
             "bach_bo",
             "cat_canh",

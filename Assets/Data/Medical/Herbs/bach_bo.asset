@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
   herbName: "B\u1EA1ch b\u1ED9"
   description: 
+  treatmentRoleText: "Nhu\u1EADn ph\u1EBF , ch\u1EC9 ho"
   category: 2
   rarity: 0
   unlockClinicLevel: 1

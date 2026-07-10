@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
   herbName: "Kim ti\u1EC1n th\u1EA3o"
   description: 
+  treatmentRoleText: "L\u1EE3i th\u1EA5p , th\xF4ng l\xE2m , b\xE0i th\u1EA1ch"
   category: 6
   rarity: 0
   unlockClinicLevel: 1

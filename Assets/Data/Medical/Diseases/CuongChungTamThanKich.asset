@@ -15,9 +15,8 @@ MonoBehaviour:
   diseaseName: "Cu\u1ED3ng ch\u1EE9ng"
   diseaseLevel: 4
   diseaseGroup: 3
-  description: "Th\u1EA7n tr\xED k\xEDch \u0111\u1ED9ng d\u1EEF d\u1ED9i, n\xF3i
-    n\u0103ng b\u1EEBa b\xE3i, g\xE0o th\xE9t, m\u1EAFng ch\u1EEDi ng\u01B0\u1EDDi,
-    \u0111\u1EADp ph\xE1."
+  description: "\u0110\xE0m h\u1ECFa nhi\u1EC5u t\xE2m, th\u1EA7n ch\xED b\u1ECB
+    k\xEDch \u0111\u1ED9ng l\xE0m t\xE2m th\u1EA7n m\u1EA5t ki\u1EC3m so\xE1t."
   patientDialogue: "C\u1EE9u t\xF4i v\u1EDBi th\u1EA7y \u01A1i, t\xF4i th\u1EA5y
     th\u1EA7n tr\xED m\xECnh k\xEDch \u0111\u1ED9ng d\u1EEF d\u1ED9i, c\u1EE9 mu\u1ED1n
     g\xE0o th\xE9t, m\u1EAFng ch\u1EEDi v\xE0 \u0111\u1EADp ph\xE1 \u0111\u1ED3 \u0111\u1EA1c."

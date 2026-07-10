@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
   herbName: "Cam th\u1EA3o"
   description: 
+  treatmentRoleText: "\u0110i\u1EC1u h\xF2a , gi\u1EA3i \u0111\u1ED9c nh\u1EB9 ,
+    l\xE0m d\u1ECBu h\u1ECDng"
   category: 7
   rarity: 0
   unlockClinicLevel: 1

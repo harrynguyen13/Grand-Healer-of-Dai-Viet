@@ -15,8 +15,9 @@ MonoBehaviour:
   diseaseName: "Ti\u1EBFt t\u1EA3 h\xE0n th\u1EA5p"
   diseaseLevel: 1
   diseaseGroup: 1
-  description: "Ti\xEAu ch\u1EA3y, ph\xE2n l\u1ECFng nh\u01B0 n\u01B0\u1EDBc, b\u1EE5ng
-    \u0111au qu\u1EB7n, s\xF4i b\u1EE5ng, th\xEDch ch\u01B0\u1EDDm \u1EA5m."
+  description: "H\xE0n th\u1EA5p x\xE2m ph\u1EA1m t\u1EF3 v\u1ECB, l\xE0m v\u1EADn
+    h\xF3a suy y\u1EBFu v\xE0 th\u1EE7y th\u1EA5p tr\xE0n xu\u1ED1ng \u0111\u1EA1i
+    tr\u01B0\u1EDDng."
   patientDialogue: "Th\u01B0a th\u1EA7y, b\u1EE5ng t\xF4i \u0111au qu\u1EB7n, \u0111i
     ngo\xE0i ph\xE2n l\u1ECFng, ch\u01B0\u1EDDm \u1EA5m th\xEC d\u1EC5 ch\u1ECBu
     h\u01A1n."

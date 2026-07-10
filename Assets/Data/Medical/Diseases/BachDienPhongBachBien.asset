@@ -15,8 +15,9 @@ MonoBehaviour:
   diseaseName: "B\u1EA1ch \u0111i\u1EBFn phong (B\u1EA1ch bi\u1EBFn)"
   diseaseLevel: 4
   diseaseGroup: 7
-  description: "Da m\u1EA5t ho\xE0n to\xE0n s\u1EAFc t\u1ED1 tr\u1EDF n\xEAn tr\u1EAFng
-    b\u1EC7ch th\xE0nh t\u1EEBng m\u1EA3ng l\u1EDBn r\xF5 r\u1EC7t."
+  description: "Phong t\xE0, huy\u1EBFt h\u01B0 ho\u1EB7c can th\u1EADn b\u1EA5t
+    t\xFAc l\xE0m da m\u1EA5t nu\xF4i d\u01B0\u1EE1ng v\xE0 s\u1EAFc t\u1ED1 suy
+    gi\u1EA3m."
   patientDialogue: "Kh\u1EAFp v\xF9ng da tay da m\u1EB7t t\xF4i t\u1EF1 d\u01B0ng
     m\u1EA5t h\u1EBFt m\xE0u s\u1EAFc, tr\u1EDF n\xEAn tr\u1EAFng b\u1EC7ch th\xE0nh
     t\u1EEBng m\u1EA3ng l\u1EDBn nh\xECn s\u1EE3 l\u1EAFm."

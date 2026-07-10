@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
   herbName: Ha Kho Thao
   description: 
+  treatmentRoleText: "Thanh can, t\xE1n k\u1EBFt, s\xE1ng m\u1EAFt"
   category: 11
   rarity: 0
   unlockClinicLevel: 1

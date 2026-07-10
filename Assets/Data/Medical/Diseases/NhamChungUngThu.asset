@@ -15,9 +15,8 @@ MonoBehaviour:
   diseaseName: "Nham ch\u1EE9ng (Ung th\u01B0)"
   diseaseLevel: 4
   diseaseGroup: 7
-  description: "Xu\u1EA5t hi\u1EC7n kh\u1ED1i u c\u1EE9ng ng\u1EAFc nh\u01B0 \u0111\xE1
-    b\xE1m s\xE2u d\u01B0\u1EDBi da, b\u1EC1 m\u1EB7t g\u1ED3 gh\u1EC1, giai \u0111o\u1EA1n
-    mu\u1ED9n \u0111au \u0111\u1EDBn d\u1EEF d\u1ED9i."
+  description: "\u0110\xE0m, \u1EE9 v\xE0 \u0111\u1ED9c k\u1EBFt l\xE2u ng\xE0y trong
+    c\u01A1 th\u1EC3, t\u1EA1o th\xE0nh kh\u1ED1i c\u1EE9ng kh\xF3 ti\xEAu t\xE1n."
   patientDialogue: "Trong ng\u01B0\u1EDDi t\xF4i m\u1ECDc m\u1ED9t kh\u1ED1i u c\u1EE9ng
     ng\u1EAFc nh\u01B0 h\xF2n \u0111\xE1 b\xE1m s\xE2u v\xE0o th\u1ECBt, b\u1EC1
     m\u1EB7t g\u1ED3 gh\u1EC1, gi\u1EDD \u0111au \u0111\u1EDBn d\u1EEF d\u1ED9i."

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
   herbName: "S\u1EED qu\xE2n t\u1EED"
   description: 
+  treatmentRoleText: "S\xE1t tr\xF9ng , ti\xEAu t\xEDch , tr\u1ECB giun"
   category: 4
   rarity: 1
   unlockClinicLevel: 2

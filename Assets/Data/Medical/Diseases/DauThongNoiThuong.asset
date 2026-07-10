@@ -15,8 +15,9 @@ MonoBehaviour:
   diseaseName: "\u0110\u1EA7u th\u1ED1ng (N\u1ED9i th\u01B0\u01A1ng)"
   diseaseLevel: 2
   diseaseGroup: 3
-  description: "\u0110au \u0111\u1EA7u \xE2m \u1EC9, \xEA \u1EA9m l\xE2u ng\xE0y
-    kh\xF4ng kh\u1ECFi, \u0111au t\u0103ng khi m\u1EC7t m\u1ECFi."
+  description: "Kh\xED huy\u1EBFt h\u01B0 ho\u1EB7c can th\u1EADn suy khi\u1EBFn
+    n\xE3o khi\u1EBFu thi\u1EBFu nu\xF4i d\u01B0\u1EE1ng, \u0111au \u0111\u1EA7u
+    k\xE9o d\xE0i."
   patientDialogue: "\u0110\u1EA7u t\xF4i c\u1EE9 \u0111au \xEA \u1EA9m \xE2m \u1EC9
     su\u1ED1t m\u1EA5y tu\u1EA7n nay kh\xF4ng d\u1EE9t, h\u1EC5 h\xF4m n\xE0o l\xE0m
     l\u1EE5ng m\u1EC7t m\u1ECFi l\xE0 \u0111au t\u0103ng l\xEAn."

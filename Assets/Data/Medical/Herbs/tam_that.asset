@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
   herbName: "Tam th\u1EA5t"
   description: 
+  treatmentRoleText: "C\u1EA7m m\xE1u , ho\u1EA1t huy\u1EBFt , ph\u1EE5c h\u1ED3i"
   category: 5
   rarity: 4
   unlockClinicLevel: 4

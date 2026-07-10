@@ -15,9 +15,8 @@ MonoBehaviour:
   diseaseName: "Trung phong (\u0110\u1ED9t qu\u1EF5)"
   diseaseLevel: 4
   diseaseGroup: 3
-  description: "\u0110\u1ED9t ng\u1ED9t h\xF4n m\xEA ng\xE3 g\u1EE5c, b\xE1n th\xE2n
-    b\u1EA5t to\u1EA1i (li\u1EC7t n\u1EEDa ng\u01B0\u1EDDi), m\xE9o mi\u1EC7ng, n\xF3i
-    ng\u1ECDng."
+  description: "Phong, h\u1ECFa, \u0111\xE0m, \u1EE9 ngh\u1ECBch l\xEAn che l\u1EA5p
+    thanh khi\u1EBFu v\xE0 b\u1EBF t\u1EAFc kinh l\u1EA1c."
   patientDialogue: "T\xF4i v\u1EEBa b\u1ECB ng\xE3 g\u1EE5c h\xF4n m\xEA, t\u1EC9nh
     l\u1EA1i th\xEC m\u1ED9t b\xEAn ng\u01B0\u1EDDi kh\xF4ng c\u1EED \u0111\u1ED9ng
     \u0111\u01B0\u1EE3c, mi\u1EC7ng m\xE9o x\u1EBFch v\xE0 n\xF3i n\u0103ng ng\u1ECDng

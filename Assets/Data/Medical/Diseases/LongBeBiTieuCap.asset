@@ -15,9 +15,9 @@ MonoBehaviour:
   diseaseName: "Long b\u1EBF (B\xED ti\u1EC3u c\u1EA5p)"
   diseaseLevel: 4
   diseaseGroup: 2
-  description: "N\u01B0\u1EDBc ti\u1EC3u \u1EE9 \u0111\u1ECDng b\xE0ng quang g\xE2y
-    c\u0103ng tr\u01B0\u1EDBng b\u1EE5ng d\u01B0\u1EDBi d\u1EEF d\u1ED9i, bu\u1ED3n
-    ti\u1EC3u nh\u01B0ng kh\xF4ng r\u1EB7n \u0111\u01B0\u1EE3c."
+  description: "B\xE0ng quang kh\xED h\xF3a b\u1EBF t\u1EAFc do th\u1EA5p nhi\u1EC7t,
+    kh\xED tr\u1EC7 ho\u1EB7c k\u1EBFt t\u1EE5, n\u01B0\u1EDBc ti\u1EC3u kh\xF4ng
+    tho\xE1t ra."
   patientDialogue: "C\u1EE9u con th\u1EA7y \u01A1i, b\u1EE5ng d\u01B0\u1EDBi c\u0103ng
     tr\u01B0\u1EDBng l\u1ED9n l\xEAn \u0111au \u0111\u1EDBn d\u1EEF d\u1ED9i, con
     m\xF3t ti\u1EC3u ph\xE1t \u0111i\xEAn m\xE0 kh\xF4ng r\u1EB7n \u0111\u01B0\u1EE3c

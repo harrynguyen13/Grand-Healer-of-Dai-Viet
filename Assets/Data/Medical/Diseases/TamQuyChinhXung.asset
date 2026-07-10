@@ -15,8 +15,9 @@ MonoBehaviour:
   diseaseName: "T\xE2m qu\xFD / Ch\xEDnh xung"
   diseaseLevel: 2
   diseaseGroup: 3
-  description: "Tim \u0111\u1EADp th\xECnh th\u1ECBch, ho\u1EA3ng h\u1ED1t lo s\u1EE3
-    kh\xF4ng y\xEAn, d\u1EC5 gi\u1EADt m\xECnh."
+  description: "T\xE2m kh\xED ho\u1EB7c t\xE2m huy\u1EBFt b\u1EA5t t\xFAc, th\u1EA7n
+    kh\xF4ng \u0111\u01B0\u1EE3c nu\xF4i d\u01B0\u1EE1ng n\xEAn sinh h\u1ED3i h\u1ED9p
+    b\u1EA5t an."
   patientDialogue: "D\u1EA1o n\xE0y tim t\xF4i c\u1EE9 \u0111\u1EADp th\xECnh th\u1ECBch
     li\xEAn h\u1ED3i trong l\u1ED3ng ng\u1EF1c, hay ho\u1EA3ng h\u1ED1t lo s\u1EE3,
     r\u1EA5t d\u1EC5 b\u1ECB gi\u1EADt m\xECnh."

@@ -15,8 +15,8 @@ MonoBehaviour:
   diseaseName: "\xC1ch ngh\u1ECBch (N\u1EA5c c\u1EE5t)"
   diseaseLevel: 1
   diseaseGroup: 1
-  description: "Ti\u1EBFng n\u1EA5c c\u1EE5t li\xEAn t\u1EE5c t\u1EEB s\xE2u trong
-    cu\u1ED1ng h\u1ECDng ph\xE1t ra, kh\xF4ng t\u1EF1 ch\u1EE7."
+  description: "V\u1ECB kh\xED ngh\u1ECBch l\xEAn, kh\xED c\u01A1 v\xF9ng c\xE1ch
+    b\u1ECB r\u1ED1i lo\u1EA1n g\xE2y \xE1ch ngh\u1ECBch."
   patientDialogue: "Th\u1EA7y \u01A1i c\u1EE9u t\xF4i, t\xF4i b\u1ECB n\u1EA5c c\u1EE5t
     li\xEAn t\u1EE5c t\u1EEB t\u1ED1i qua, ti\u1EBFng n\u1EA5c c\u1EE9 gi\u1EADt
     t\u1EEB h\u1ECDng ra kh\xF4ng k\xECm \u0111\u01B0\u1EE3c."

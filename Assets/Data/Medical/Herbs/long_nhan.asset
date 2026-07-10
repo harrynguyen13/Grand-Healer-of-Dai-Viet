@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
   herbName: "Long nh\xE3n"
   description: 
+  treatmentRoleText: "B\u1ED5 t\xE2m t\u1EF3 , d\u01B0\u1EE1ng huy\u1EBFt , an th\u1EA7n"
   category: 7
   rarity: 1
   unlockClinicLevel: 2

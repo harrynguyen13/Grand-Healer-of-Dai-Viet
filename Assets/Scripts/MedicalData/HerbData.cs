@@ -66,6 +66,11 @@ public class HerbData : ScriptableObject
     [TextArea(2, 5)]
     public string description;
 
+    [Header("Y thư")]
+    [Tooltip("Vai trò điều trị ngắn gọn của vị thuốc. Ví dụ: Thanh nhiệt / giải độc.")]
+    [TextArea(1, 2)]
+    public string treatmentRoleText;
+
     public HerbCategory category;
     public HerbRarity rarity;
 

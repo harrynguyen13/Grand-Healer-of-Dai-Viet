@@ -15,8 +15,9 @@ MonoBehaviour:
   diseaseName: "\u1EE6y ch\u1EE9ng (Li\u1EC7t/Teo c\u01A1)"
   diseaseLevel: 4
   diseaseGroup: 2
-  description: "Ch\xE2n tay b\u1EE7n r\u1EE7n m\u1EC1m nh\u0169n kh\xF4ng c\xF3 l\u1EF1c,
-    l\xE2u ng\xE0y c\u01A1 b\u1EAFp ti\xEAu teo t\xF3p ho\xE0n to\xE0n."
+  description: "Ph\u1EBF v\u1ECB nhi\u1EC7t th\u01B0\u01A1ng t\xE2n ho\u1EB7c can
+    th\u1EADn h\u01B0 y\u1EBFu, g\xE2n c\u01A1 m\u1EA5t nu\xF4i d\u01B0\u1EE1ng sinh
+    m\u1EC1m y\u1EBFu teo c\u01A1."
   patientDialogue: "Hai ch\xE2n hai tay t\xF4i b\u1EE7n r\u1EE7n m\u1EC1m nh\u0169n
     kh\xF4ng c\xF3 t\xED l\u1EF1c n\xE0o, m\u1EA5y th\xE1ng nay c\u01A1 b\u1EAFp
     c\u1EE9 ti\xEAu teo t\xF3p h\u1EB3n l\u1EA1i."

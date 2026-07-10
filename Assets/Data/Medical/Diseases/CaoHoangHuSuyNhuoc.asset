@@ -15,9 +15,8 @@ MonoBehaviour:
   diseaseName: "Cao hoang h\u01B0 (Suy nh\u01B0\u1EE3c t\u1ED9t \u0111\u1ED9)"
   diseaseLevel: 4
   diseaseGroup: 3
-  description: "B\u1EC7nh l\xE2u ng\xE0y \u0103n s\xE2u v\xE0o v\xF9ng cao hoang,
-    g\u1EA7y tr\u01A1 x\u01B0\u01A1ng, ki\u1EC7t qu\u1EC7 \u0111o\u1EA3n h\u01A1i
-    (v\xF4 ph\u01B0\u01A1ng c\u1EE9u ch\u1EEFa)."
+  description: "Ch\xEDnh kh\xED suy ki\u1EC7t l\xE2u ng\xE0y, kh\xED huy\u1EBFt \xE2m
+    d\u01B0\u01A1ng \u0111\u1EC1u hao t\u1ED5n l\xE0m c\u01A1 th\u1EC3 t\xE0n l\u1EE5i."
   patientDialogue: "T\xF4i b\u1ECB b\u1EC7nh l\xE2u ng\xE0y gi\u1EDD ki\u1EC7t qu\u1EC7
     g\u1EA7y tr\u01A1 x\u01B0\u01A1ng, h\u01A1i th\u1EDF \u0111o\u1EA3n h\u1EE5t
     kh\xF4ng ra h\u01A1i, d\xF9ng bao nhi\xEAu thu\u1ED1c kh\xF4ng \u0111\u1EE1."

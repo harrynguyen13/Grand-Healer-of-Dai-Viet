@@ -15,8 +15,8 @@ MonoBehaviour:
   diseaseName: "Nha th\u1ED1ng (Phong h\u1ECFa)"
   diseaseLevel: 3
   diseaseGroup: 1
-  description: "\u0110au nh\u1EE9c r\u0103ng d\u1EEF d\u1ED9i, l\u1EE3i s\u01B0ng
-    \u0111\u1ECF m\u1ECDng, m\xE1 s\u01B0ng to."
+  description: "Phong h\u1ECFa ho\u1EB7c v\u1ECB h\u1ECFa b\u1ED1c l\xEAn r\u0103ng
+    l\u1EE3i, l\xE0m kinh l\u1EA1c v\xF9ng mi\u1EC7ng s\u01B0ng \u0111au."
   patientDialogue: "R\u0103ng t\xF4i nh\u1EE9c bu\u1ED1t th\u1EA5u x\u01B0\u01A1ng,
     v\xF9ng l\u1EE3i s\u01B0ng \u0111\u1ECF m\u1ECDng l\xEAn, m\u1ED9t b\xEAn m\xE1
     s\u01B0ng v\xF9 r\u1ED3i."

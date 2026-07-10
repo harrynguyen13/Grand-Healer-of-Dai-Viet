@@ -15,8 +15,9 @@ MonoBehaviour:
   diseaseName: "Di tinh / M\u1ED9ng tinh"
   diseaseLevel: 3
   diseaseGroup: 2
-  description: "Kh\xF4ng giao h\u1EE3p m\xE0 tinh d\u1ECBch t\u1EF1 ch\u1EA3y ra
-    (khi ng\u1EE7 ho\u1EB7c c\u1EA3 khi t\u1EC9nh), ng\u01B0\u1EDDi m\u1ECFi nh\u1EEB."
+  description: "Th\u1EADn kh\xED b\u1EA5t c\u1ED1 ho\u1EB7c t\xE2m th\u1EADn m\u1EA5t
+    \u0111i\u1EC1u h\xF2a khi\u1EBFn tinh quan kh\xF4ng \u0111\u01B0\u1EE3c gi\u1EEF
+    v\u1EEFng."
   patientDialogue: "T\xF4i kh\xF4ng ph\xF2ng d\u1EE5c g\xEC m\xE0 tinh d\u1ECBch
     c\u1EE9 t\u1EF1 ch\u1EA3y ra khi ng\u1EE7 m\u01A1, c\xF3 l\xFAc t\u1EC9nh c\u0169ng
     r\u1EC9 ra, ng\u01B0\u1EDDi m\u1ECFi nh\u1EEB."

@@ -15,8 +15,8 @@ MonoBehaviour:
   diseaseName: "Hao suy\u1EC5n (Hen suy\u1EC5n)"
   diseaseLevel: 2
   diseaseGroup: 0
-  description: "Th\u1EDF d\u1ED1c, ti\u1EBFng th\u1EDF kh\xF2 kh\xE8 nh\u01B0 k\xE9o
-    c\u01B0a, ng\u1EF1c kh\xF3 th\u1EDF, kh\xF4ng th\u1EC3 n\u1EB1m ng\u1EEDa."
+  description: "\u0110\xE0m kh\xED u\u1EA5t \u1EDF ph\u1EBF, ph\u1EBF kh\xED ngh\u1ECBch
+    l\xEAn l\xE0m h\xF4 h\u1EA5p kh\xF3 th\xF4ng v\xE0 sinh suy\u1EC5n."
   patientDialogue: "Ng\u1EF1c t\xF4i t\u1EE9c ngh\u1EB9n kh\xF4ng th\u1EDF n\u1ED5i,
     h\u01A1i th\u1EDF d\u1ED1c k\xE9o kh\xF2 kh\xE8 nh\u01B0 k\xE9o c\u01B0a, \u0111\xEAm
     \u0111\u1EBFn kh\xF4ng th\u1EC3 n\u1EB1m ng\u1EEDa."

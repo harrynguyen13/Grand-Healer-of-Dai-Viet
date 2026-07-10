@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
   herbName: "Kinh gi\u1EDBi"
   description: 
+  treatmentRoleText: "Gi\u1EA3i bi\u1EC3u , khu phong , gi\u1EA3m ng\u1EE9a"
   category: 0
   rarity: 0
   unlockClinicLevel: 1

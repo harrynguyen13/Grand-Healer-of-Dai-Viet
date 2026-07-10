@@ -15,9 +15,9 @@ MonoBehaviour:
   diseaseName: "\u0110inh sang (M\u1EE5n \u0111inh r\xE2u)"
   diseaseLevel: 2
   diseaseGroup: 7
-  description: "M\u1EE5n nh\u1ECF ch\xE2n s\xE2u c\u1EE9ng ng\u1EAFc \u1EDF m\u1EB7t,
-    \u0111au bu\u1ED1t th\u1EA5u x\u01B0\u01A1ng, s\u01B0ng t\u1EA5y lan nhanh, g\xE2y
-    s\u1ED1t cao nhi\u1EC5m tr\xF9ng m\xE1u."
+  description: "Nhi\u1EC7t \u0111\u1ED9c s\xE2u \u1EDF b\xEC nh\u1EE5c, \u0111\u1ED9c
+    t\xE0 k\u1EBFt l\u1EA1i th\xE0nh m\u1EE5n ch\xE2n c\u1EE9ng v\xE0 d\u1EC5 lan
+    nhanh."
   patientDialogue: "T\xF4i m\u1ECDc c\xE1i m\u1EE5n nh\u1ECF \u1EDF m\xF4i m\xE0
     ch\xE2n n\xF3 s\xE2u c\u1EE9ng ng\u1EAFc, \u0111au bu\u1ED1t th\u1EA5u x\u01B0\u01A1ng
     s\u01B0ng t\u1EA5y lan ra kh\u1EAFp m\u1EB7t, s\u1ED1t \u0111\xF9ng \u0111\xF9ng."

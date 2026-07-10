@@ -15,8 +15,8 @@ MonoBehaviour:
   diseaseName: "C\u1EA3m m\u1EA1o phong nhi\u1EC7t"
   diseaseLevel: 1
   diseaseGroup: 0
-  description: "Ph\xE1t s\u1ED1t r\xF5 r\u1EC7t, s\u1EE3 gi\xF3, h\u1ECDng kh\xF4
-    \u0111au, n\u01B0\u1EDBc m\u0169i \u0111\u1EB7c v\xE0ng."
+  description: "Phong nhi\u1EC7t ph\u1EA1m bi\u1EC3u, nhi\u1EC7t t\xE0 qu\u1EA5y
+    ph\u1EBF khi\u1EBFn v\u1EC7 kh\xED m\u1EA5t \u0111i\u1EC1u h\xF2a."
   patientDialogue: "Th\u01B0a th\u1EA7y, t\xF4i s\u1ED1t nhi\u1EC1u, c\u1ED5 h\u1ECDng
     kh\xF4 \u0111au, n\u01B0\u1EDBc m\u0169i \u0111\u1EB7c v\xE0ng."
   symptoms:

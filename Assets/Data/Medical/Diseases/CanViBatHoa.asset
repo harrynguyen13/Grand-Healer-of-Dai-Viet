@@ -15,9 +15,9 @@ MonoBehaviour:
   diseaseName: "Can v\u1ECB b\u1EA5t h\xF2a"
   diseaseLevel: 2
   diseaseGroup: 1
-  description: "Ng\u1EF1c s\u01B0\u1EDDn \u0111\u1EA7y b\u1EE9t r\u1EE9t, \u0103n
-    v\xE0o \u0111\u1EA7y b\u1EE5ng, n\xF4n ra n\u01B0\u1EDBc \u0111\u1EAFng, hay
-    c\xE1u g\u1EAFt."
+  description: "Can kh\xED m\u1EA5t s\u01A1 ti\u1EBFt \u1EA3nh h\u01B0\u1EDFng t\u1EDBi
+    v\u1ECB, khi\u1EBFn ti\xEAu h\xF3a r\u1ED1i lo\u1EA1n v\xE0 kh\xED c\u01A1 u\u1EA5t
+    tr\u1EC7."
   patientDialogue: "Trong ng\u01B0\u1EDDi t\xF4i l\xFAc n\xE0o c\u0169ng b\u1EE9t
     r\u1EE9t, \u0103n v\xE0o \u0111\u1EA7y b\u1EE5ng ngh\u1EB9n \u1EDF c\u1ED5, hay
     c\xE1u g\u1EAFt v\xE0 n\xF4n ra n\u01B0\u1EDBc \u0111\u1EAFng."

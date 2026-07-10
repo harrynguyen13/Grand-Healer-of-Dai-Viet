@@ -287,6 +287,7 @@ GameObject:
   - component: {fileID: 4235011418767368481}
   - component: {fileID: 8414681920884423086}
   - component: {fileID: 6675881121850597150}
+  - component: {fileID: 2391513493914885035}
   m_Layer: 5
   m_Name: SelectedHerbItemUI
   m_TagString: Untagged
@@ -414,6 +415,19 @@ MonoBehaviour:
   herbNameText: {fileID: 1917540546561311250}
   quantityText: {fileID: 4502301336627470570}
   button: {fileID: 8414681920884423086}
+--- !u!114 &2391513493914885035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4270136126700941288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bd95b3761d22d246bb2d28375eb6488, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HerbTooltipTrigger
+  herbData: {fileID: 0}
 --- !u!1 &5549948052120951454
 GameObject:
   m_ObjectHideFlags: 0

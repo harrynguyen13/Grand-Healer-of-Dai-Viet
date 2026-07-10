@@ -15,9 +15,8 @@ MonoBehaviour:
   diseaseName: "Khuy\u1EBFt ch\u1EE9ng (Ng\u1EA5t x\u1EC9u)"
   diseaseLevel: 4
   diseaseGroup: 3
-  description: "\u0110\u1ED9t ng\u1ED9t ch\xE2n tay gi\xE1 l\u1EA1nh, s\u1EAFc m\u1EB7t
-    tr\u1EAFng b\u1EC7ch, m\u1EA5t tri gi\xE1c ng\u1EAFn h\u1EA1n, m\u1EA1ch mu\u1ED1n
-    tuy\u1EC7t."
+  description: "Kh\xED huy\u1EBFt \u0111\u1ED9t ng\u1ED9t ngh\u1ECBch lo\u1EA1n ho\u1EB7c
+    d\u01B0\u01A1ng kh\xED suy tho\xE1t, thanh khi\u1EBFu m\u1EA5t nu\xF4i d\u01B0\u1EE1ng."
   patientDialogue: "T\xF4i \u0111ang \u0111\u1EE9ng th\xEC t\u1EF1 d\u01B0ng s\u1EAFc
     m\u1EB7t tr\u1EAFng b\u1EC7ch, ch\xE2n tay l\u1EA1nh ng\u1EAFt r\u1ED3i ng\xE3
     l\u0103n ra ng\u1EA5t x\u1EC9u, m\u1EA5t tri gi\xE1c m\u1ED9t l\xFAc."

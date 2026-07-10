@@ -15,8 +15,8 @@ MonoBehaviour:
   diseaseName: "V\u1ECB th\u1ED1ng (Can kh\xED ph\u1EA1m v\u1ECB)"
   diseaseLevel: 2
   diseaseGroup: 1
-  description: "\u0110au th\u01B0\u1EE3ng v\u1ECB lan ra hai b\xEAn s\u01B0\u1EDDn,
-    \u1EE3 chua, \u0111au t\u0103ng khi t\u1EE9c gi\u1EADn."
+  description: "Can kh\xED u\u1EA5t k\u1EBFt ph\u1EA1m v\u1ECB, l\xE0m v\u1ECB kh\xED
+    ngh\u1ECBch v\xE0 \u0111au lan v\xF9ng th\u01B0\u1EE3ng v\u1ECB s\u01B0\u1EDDn."
   patientDialogue: "T\xF4i hay b\u1ECB \u0111au t\u1EE9c v\xF9ng d\u1EA1 d\xE0y r\u1ED3i
     lan sang hai b\xEAn s\u01B0\u1EDDn, h\u1EC5 t\u1EE9c gi\u1EADn hay lo ngh\u0129
     l\xE0 b\u1EE5ng \u0111au qu\u1EB7n l\xEAn."

@@ -15,8 +15,8 @@ MonoBehaviour:
   diseaseName: "T\xE2m th\u1EADn b\u1EA5t giao"
   diseaseLevel: 3
   diseaseGroup: 3
-  description: "M\u1EA5t ng\u1EE7 kinh ni\xEAn, b\u1ED3n ch\u1ED3n, \xF9 tai, hay
-    qu\xEAn, \u0111au l\u01B0ng m\u1ECFi g\u1ED1i, di tinh."
+  description: "T\xE2m h\u1ECFa v\xE0 th\u1EADn th\u1EE7y kh\xF4ng giao h\xF2a, th\u1EA7n
+    ch\xED m\u1EA5t y\xEAn \u1ED5n v\xE0 th\u1EADn tinh suy t\u1ED5n."
   patientDialogue: "T\xF4i m\u1EA5t ng\u1EE7 kinh ni\xEAn n\u1EEDa n\u0103m nay,
     tai c\u1EE9 \xF9 nh\u01B0 ve k\xEAu, th\u1EAFt l\u01B0ng m\u1ECFi nh\u1EEB, ng\u1EE7
     hay b\u1ECB m\u1ED9ng tinh."

@@ -15,8 +15,9 @@ MonoBehaviour:
   diseaseName: "\u0110\u1EDBi tr\u1EA1ng ba ch\u1EA9n (Zona)"
   diseaseLevel: 3
   diseaseGroup: 7
-  description: "M\u1EE5n n\u01B0\u1EDBc m\u1ECDc th\xE0nh ch\xF9m ch\u1EA1y d\u1ECDc
-    d\xE2y th\u1EA7n kinh, \u0111au r\xE1t b\u1ECFng nh\u01B0 l\u1EEDa \u0111\u1ED1t."
+  description: "Can \u0111\u1EDFm th\u1EA5p nhi\u1EC7t k\xE8m \u0111\u1ED9c t\xE0
+    u\u1EA5t \u1EDF kinh l\u1EA1c, l\xE0m da n\u1ED5i m\u1EE5n n\u01B0\u1EDBc \u0111au
+    r\xE1t theo \u0111\u01B0\u1EDDng kinh."
   patientDialogue: "M\u1EA5y n\u1ED1t m\u1EE5n n\u01B0\u1EDBc m\u1ECDc k\u1EBFt th\xE0nh
     ch\xF9m ch\u1EA1y d\u1ECDc m\u1ED9t b\xEAn s\u01B0\u1EDDn t\xF4i, \u0111au nh\u1EE9c
     r\xE1t b\u1ECFng nh\u01B0 b\u1ECB l\u1EEDa \u0111\u1ED1t."

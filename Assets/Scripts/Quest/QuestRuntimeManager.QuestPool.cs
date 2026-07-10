@@ -163,11 +163,11 @@ public partial class QuestRuntimeManager
 
     private void AddStage5Quests(List<QuestDefinition> quests)
     {
-        AddQuest(quests, "S5_Official", "Khám và chữa khỏi bệnh cho quan phủ", () => IsOfficialQuestCompleted() ? 1 : 0, 1);
-        AddQuest(quests, "S5_ThatDiet", "Giúp Quan phủ khỏe lại", () => GetDiseaseCuredValue("ThatDietTrungDocDich"), 1);
+        AddQuest(quests, "S5_Official", "Đến khám bệnh cho quan huyện", () => IsOfficialQuestCompleted() ? 1 : 0, 1);
+        AddQuest(quests, "S5_ThatDiet", "Chữa khỏi bệnh cho quan huyện", () => GetDiseaseCuredValue("ThatDietTrungDocDich"), 1);
 
-        AddQuest(quests, "S5_Gather_25", "Thu thập 25 lần dược liệu để chuẩn bị ca bệnh lớn", GetGatheredTotalValue, 25);
-        AddQuest(quests, "S5_Gather_30", "Thu thập 30 lần dược liệu để dự trữ cho phủ huyện", GetGatheredTotalValue, 30);
+        AddQuest(quests, "S5_Gather_25", "Thu thập 25 lần dược liệu để vào kho thuốc", GetGatheredTotalValue, 25);
+        AddQuest(quests, "S5_Gather_30", "Thu thập 30 lần dược liệu để dự trữ ", GetGatheredTotalValue, 30);
 
         AddQuest(quests, "S5_Buy_15", "Mua 15 dược liệu bất kỳ từ thương nhân", GetBoughtTotalValue, 15);
         AddQuest(quests, "S5_Buy_20", "Mua 20 dược liệu bất kỳ từ thương nhân", GetBoughtTotalValue, 20);

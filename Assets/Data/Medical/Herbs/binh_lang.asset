@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
   herbName: Binh lang
   description: 
+  treatmentRoleText: "H\xE0nh kh\xED , s\xE1t tr\xF9ng , ti\xEAu t\xEDch"
   category: 4
   rarity: 1
   unlockClinicLevel: 2

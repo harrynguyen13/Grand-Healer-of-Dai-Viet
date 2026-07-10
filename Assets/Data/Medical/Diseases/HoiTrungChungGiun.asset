@@ -15,8 +15,9 @@ MonoBehaviour:
   diseaseName: "H\u1ED3i tr\xF9ng ch\u1EE9ng (Giun \u0111\u0169a)"
   diseaseLevel: 2
   diseaseGroup: 1
-  description: "\u0110au b\u1EE5ng qu\u1EB7n quanh r\u1ED1n, nghi\u1EBFn r\u0103ng
-    khi ng\u1EE7, th\xEDch \u0103n v\u1EADt k\u1EF3 l\u1EA1."
+  description: "Tr\xF9ng t\xEDch qu\u1EA5y nhi\u1EC5u \u0111\u01B0\u1EDDng ru\u1ED9t,
+    l\xE0m kh\xED c\u01A1 t\u1EF3 v\u1ECB r\u1ED1i lo\u1EA1n v\xE0 \u0111au quanh
+    r\u1ED1n."
   patientDialogue: "Th\u01B0a th\u1EA7y, t\xF4i hay \u0111au b\u1EE5ng qu\u1EB7n
     quanh r\u1ED1n, \u0111\xEAm ng\u1EE7 c\xF2n nghi\u1EBFn r\u0103ng k\xE8n k\u1EB9t,
     tr\xEAn m\u1EB7t c\u1EE9 c\xF3 m\u1EA5y v\u1EBFt tr\u1EAFng."

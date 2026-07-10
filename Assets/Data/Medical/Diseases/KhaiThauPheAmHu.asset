@@ -15,8 +15,8 @@ MonoBehaviour:
   diseaseName: "Kh\xE1i th\u1EA5u (Ph\u1EBF \xE2m h\u01B0)"
   diseaseLevel: 2
   diseaseGroup: 0
-  description: "Ho khan kh\xF4ng \u0111\u1EDDm ho\u1EB7c \u0111\u1EDDm \xEDt d\xEDnh
-    m\xE1u, s\u1ED1t v\u1EC1 chi\u1EC1u, g\xF2 m\xE1 \u0111\u1ECF."
+  description: "Ph\u1EBF \xE2m hao t\u1ED5n, ph\u1EBF m\u1EA5t nhu\u1EADn d\u01B0\u1EE1ng
+    khi\u1EBFn h\u01B0 nhi\u1EC7t nung ph\u1EBF v\xE0 sinh ho khan."
   patientDialogue: "T\xF4i b\u1ECB ho khan k\xE9o d\xE0i kh\xF4ng c\xF3 \u0111\u1EDDm,
     ng\u01B0\u1EDDi c\u1EE9 s\u1ED1t h\xE2m h\u1EA5p v\u1EC1 chi\u1EC1u, hai g\xF2
     m\xE1 \u0111\u1ECF r\u1EF1c l\xEAn."

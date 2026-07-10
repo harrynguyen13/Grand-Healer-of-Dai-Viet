@@ -15,9 +15,8 @@ MonoBehaviour:
   diseaseName: "T\xFD ch\u1EE9ng (H\xE0nh t\xFD)"
   diseaseLevel: 3
   diseaseGroup: 2
-  description: "\u0110au nh\u1EE9c c\xE1c kh\u1EDBp x\u01B0\u01A1ng, v\u1ECB tr\xED
-    \u0111au di chuy\u1EC3n linh ho\u1EA1t t\u1EEB kh\u1EDBp n\xE0y sang kh\u1EDBp
-    kh\xE1c."
+  description: "Phong t\xE0 th\u1EAFng trong ch\u1EE9ng t\xFD, khi\u1EBFn \u0111au
+    nh\u1EE9c di chuy\u1EC3n gi\u1EEFa c\xE1c kh\u1EDBp."
   patientDialogue: "C\xE1c kh\u1EDBp x\u01B0\u01A1ng c\u1EE7a t\xF4i \u0111au nh\u1EE9c
     l\u1EAFm, m\xE0 l\u1EA1 l\xE0 h\xF4m nay \u0111au \u1EDF kh\u1EDBp g\u1ED1i,
     h\xF4m sau l\u1EA1i ch\u1EA1y l\xEAn kh\u1EDBp c\u1ED5 tay."

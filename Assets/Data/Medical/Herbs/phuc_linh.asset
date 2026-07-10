@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
   herbName: "Ph\u1EE5c linh"
   description: 
+  treatmentRoleText: "Ki\u1EC7n t\u1EF3 , l\u1EE3i th\u1EE7y , an th\u1EA7n"
   category: 6
   rarity: 1
   unlockClinicLevel: 2

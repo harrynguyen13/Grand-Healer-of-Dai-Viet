@@ -15,9 +15,9 @@ MonoBehaviour:
   diseaseName: "Ung nh\u1ECDt (Ung)"
   diseaseLevel: 2
   diseaseGroup: 7
-  description: "Kh\u1ED1i s\u01B0ng \u0111\u1ECF \u0111\u1ED9c l\u1EDBn tr\xEAn da,
-    s\u01B0ng n\xF3ng r\xE1t d\u1EEF d\u1ED9i, \u0111au nh\u1EE9c s\xE2u, h\xF3a
-    m\u1EE7."
+  description: "Nhi\u1EC7t \u0111\u1ED9c t\u1EE5 \u1EDF c\u01A1 nh\u1EE5c, kh\xED
+    huy\u1EBFt \u1EE9 tr\u1EC7 t\u1EA1o th\xE0nh kh\u1ED1i s\u01B0ng \u0111\u1ECF
+    h\xF3a m\u1EE7."
   patientDialogue: "Tr\xEAn \u0111\xF9i t\xF4i m\u1ECDc m\u1ED9t kh\u1ED1i s\u01B0ng
     to \u0111\u1ECF r\u1EF1c, s\u01B0ng n\xF3ng r\xE1t d\u1EEF d\u1ED9i \u0111au
     nh\u1EE9c bu\u1ED1t s\xE2u v\xE0o trong th\u1ECBt."

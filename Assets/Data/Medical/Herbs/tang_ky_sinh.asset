@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
   herbName: "Tang k\xFD sinh"
   description: 
+  treatmentRoleText: "B\u1ED5 can th\u1EADn , tr\u1EEB phong th\u1EA5p , m\u1EA1nh
+    g\xE2n c\u1ED1t"
   category: 8
   rarity: 0
   unlockClinicLevel: 1

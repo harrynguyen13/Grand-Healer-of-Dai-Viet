@@ -64,6 +64,9 @@ public class PrescriptionUIController : MonoBehaviour
     {
         if (prescriptionPanel != null)
             prescriptionPanel.SetActive(false);
+
+        if (HerbRoleTooltipUI.Instance != null)
+            HerbRoleTooltipUI.Instance.Hide();
     }
 
     private void BuildHerbList()
@@ -109,7 +112,10 @@ public class PrescriptionUIController : MonoBehaviour
                 herbQuantities.Add(herb, quantity);
 
             HerbItemUI item = Instantiate(herbItemPrefab, herbListContent);
+
             item.Setup(herb, quantity, OnClickHerbFromStorage);
+
+            SetupTooltipForItem(item.gameObject, herb);
 
             if (!leftHerbItems.ContainsKey(herb))
                 leftHerbItems.Add(herb, item);
@@ -209,7 +215,10 @@ public class PrescriptionUIController : MonoBehaviour
                 continue;
 
             SelectedHerbItemUI item = Instantiate(selectedHerbItemPrefab, selectedHerbRoot);
+
             item.Setup(herb, quantity, OnClickSelectedHerb);
+
+            SetupTooltipForItem(item.gameObject, herb);
         }
     }
 
@@ -268,6 +277,24 @@ public class PrescriptionUIController : MonoBehaviour
             return;
 
         leftHerbItems[herb].UpdateQuantity(herbQuantities[herb]);
+    }
+
+    private void SetupTooltipForItem(GameObject itemObject, HerbData herb)
+    {
+        if (itemObject == null)
+            return;
+
+        if (herb == null)
+            return;
+
+        HerbTooltipTrigger tooltipTrigger = itemObject.GetComponent<HerbTooltipTrigger>();
+
+        if (tooltipTrigger == null)
+        {
+            tooltipTrigger = itemObject.AddComponent<HerbTooltipTrigger>();
+        }
+
+        tooltipTrigger.SetHerb(herb);
     }
 
     private void ClearChildren(Transform parent)

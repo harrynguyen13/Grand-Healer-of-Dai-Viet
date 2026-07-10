@@ -15,9 +15,8 @@ MonoBehaviour:
   diseaseName: "Lao h\u1EA1ch (Tr\xE0ng nh\u1EA1c)"
   diseaseLevel: 4
   diseaseGroup: 7
-  description: "Chu\u1ED7i h\u1EA1ch c\u1EE9ng d\u1ECDc hai b\xEAn c\u1ED5 s\u01B0ng
-    to d\xEDnh nhau r\u1ED3i lo\xE9t m\u1EE7, r\xF2 d\u1ECBch ho\u1EA1i t\u1EED kh\xF3
-    l\xE0nh."
+  description: "\u0110\xE0m h\u1ECFa u\u1EA5t k\u1EBFt \u1EDF v\xF9ng c\u1ED5, ch\xEDnh
+    kh\xED suy khi\u1EBFn h\u1EA1ch k\u1EBFt l\xE2u ng\xE0y h\xF3a m\u1EE7."
   patientDialogue: "Hai b\xEAn c\u1ED5 t\xF4i m\u1ECDc m\u1ED9t chu\u1ED7i h\u1EA1ch
     c\u1EE9ng nh\u01B0 h\u1EA1t \u0111\u1EADu, gi\u1EDD h\u1EA1ch s\u01B0ng to d\xEDnh
     l\xF9m v\xE0o nhau lo\xE9t m\u1EE7 ch\u1EA3y d\u1ECBch h\xF4i."

@@ -15,8 +15,8 @@ MonoBehaviour:
   diseaseName: "Huy\u1EC5n v\u1EF1ng (Can d\u01B0\u01A1ng th\u01B0\u1EE3ng kh\xE1ng)"
   diseaseLevel: 4
   diseaseGroup: 3
-  description: "Ch\xF3ng m\u1EB7t, hoa m\u1EAFt, nh\xE0 c\u1EEDa \u0111\u1EA3o l\u1ED9n,
-    \u0111\u1EA7u n\u1EB7ng ch\xE2n nh\u1EB9, tai \xF9."
+  description: "Can d\u01B0\u01A1ng b\u1ED1c l\xEAn, phong n\u1ED9i \u0111\u1ED9ng
+    l\xE0m thanh khi\u1EBFu b\u1ECB nhi\u1EC5u lo\u1EA1n."
   patientDialogue: "\u0110\u1EA7u \xF3c t\xF4i quay cu\u1ED3ng, hoa m\u1EAFt th\u1EA5y
     nh\xE0 c\u1EEDa \u0111\u1EA3o l\u1ED9n h\u1EBFt l\xEAn, b\u01B0\u1EDBc \u0111i
     h\u1EABng h\u1EE5t \u0111\u1EA7u n\u1EB7ng ch\xE2n nh\u1EB9, tai \xF9."

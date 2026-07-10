@@ -15,8 +15,8 @@ MonoBehaviour:
   diseaseName: "M\u1EC7nh m\xF4n h\u1ECFa suy (Ng\u0169 canh t\u1EA3)"
   diseaseLevel: 4
   diseaseGroup: 1
-  description: "Ti\xEAu ch\u1EA3y qu\u1EB7n b\u1EE5ng \u0111\xFAng l\xFAc s\xE1ng
-    s\u1EDBm (canh n\u0103m), ng\u01B0\u1EDDi ch\xE2n tay l\u1EA1nh gi\xE1."
+  description: "M\u1EC7nh m\xF4n h\u1ECFa suy, t\u1EF3 th\u1EADn d\u01B0\u01A1ng
+    h\u01B0 khi\u1EBFn h\xE0n th\u1EA5p kh\xF4ng \u0111\u01B0\u1EE3c v\u1EADn h\xF3a."
   patientDialogue: "Kh\u1ED5 l\u1EAFm th\u1EA7y \u01A1i, c\u1EE9 t\u1EA7m s\xE1ng
     s\u1EDBm tinh m\u01A1 l\xE0 b\u1EE5ng t\xF4i l\u1EA1i \u0111au qu\u1EB7n l\xEAn
     r\u1ED3i \u0111i ngo\xE0i l\u1ECFng, ch\xE2n tay l\u1EA1nh ng\u1EAFt."

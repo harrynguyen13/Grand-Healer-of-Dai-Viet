@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HerbData
   herbName: "Li\xEAn t\xE2m"
   description: 
+  treatmentRoleText: "Thanh t\xE2m h\u1ECFa , an th\u1EA7n , tr\u1EEB phi\u1EC1n"
   category: 9
   rarity: 1
   unlockClinicLevel: 2
