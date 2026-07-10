@@ -3,101 +3,117 @@
   "states": [
     {
       "character": {
-        "id": "92db557a-1083-4fdb-8d3c-4341945dcdcb",
-        "name": "A professional-grade 2D pixel art sprite sheet of a young, agile Vietnamese traditional doctor (L\u01b0\u01a1ng y) from the 19th century, designed on a precise 56x56 pixel grid per frame. The character features a serene, focused expression with dark hair styled under a neatly wrapped black silk 'Khan Xep' (traditional turban). He is dressed in a classic dark terracotta brown 'Ao Ngu Than' (5-panel tunic) that shows a distinct stand-up collar and a row of tiny black cloth buttons fastened along the right shoulder and side, with a clean ivory silk inner collar peeking out. His lower attire consists of loose-fitting white cotton trousers ending just above the ankles to reveal simple brown wooden clogs (gu\u1ed1c m\u1ed9c) with dark straps. Around his waist, a dark silk cord belt holds a vibrant crimson red pouch for acupuncture needles and a small hollow bamboo tube containing a sprig of fresh green medicinal herbs. The sprite sheet must provide a complete, fluid walk cycle animation sequence for 8 directions, specifically featuring arms swinging in natural opposition to the legs and a distinct knee-lift in each step to ensure the animation feels lifelike and grounded. The art style requires 1-pixel precision with crisp, clean edges and no anti-aliasing, using a rich earthy palette (Terracotta, Ivory, Charcoal, Moss Green, Crimson), set against a flat neutral or transparent background for seamless asset isolation and game engine integration.",
-        "prompt": "A professional-grade 2D pixel art sprite sheet of a young, agile Vietnamese traditional doctor (L\u01b0\u01a1ng y) from the 19th century, designed on a precise 56x56 pixel grid per frame. The character features a serene, focused expression with dark hair styled under a neatly wrapped black silk 'Khan Xep' (traditional turban). He is dressed in a classic dark terracotta brown 'Ao Ngu Than' (5-panel tunic) that shows a distinct stand-up collar and a row of tiny black cloth buttons fastened along the right shoulder and side, with a clean ivory silk inner collar peeking out. His lower attire consists of loose-fitting white cotton trousers ending just above the ankles to reveal simple brown wooden clogs (gu\u1ed1c m\u1ed9c) with dark straps. Around his waist, a dark silk cord belt holds a vibrant crimson red pouch for acupuncture needles and a small hollow bamboo tube containing a sprig of fresh green medicinal herbs. The sprite sheet must provide a complete, fluid walk cycle animation sequence for 8 directions, specifically featuring arms swinging in natural opposition to the legs and a distinct knee-lift in each step to ensure the animation feels lifelike and grounded. The art style requires 1-pixel precision with crisp, clean edges and no anti-aliasing, using a rich earthy palette (Terracotta, Ivory, Charcoal, Moss Green, Crimson), set against a flat neutral or transparent background for seamless asset isolation and game engine integration.",
+        "id": "c2402ce2-95c6-4639-9414-813e012d0db8",
+        "name": "A 2D pixel art chara",
+        "prompt": "A 2D pixel art character sprite of a 19th-century Vietnamese child villager, standing and facing forward from a top-down RPG perspective. The proportion is stylized chibii with a significantly shorter stature, a noticeably larger head, and a very small, slender body. The child has a traditional 't\u00f3c ch\u1ecfm' hairstyle, with most of the hair shaved but distinct tufts remaining on the sides and a small central topknot. The child wears a very simple, rustic, short-sleeved brown tunic and loose off-white trousers, secured with a small dark fabric belt wrap. Completely barefoot, standing on a solid pure black background with clean pixel lines. Functional RPG game asset.",
         "size": {
-          "width": 80,
-          "height": 80
+          "width": 68,
+          "height": 68
         },
         "template_id": "mannequin",
         "directions": 8,
         "view": "low top-down",
-        "created_at": "2026-05-13T08:11:03.231637+00:00"
+        "created_at": "2026-07-09T10:18:17.546265+00:00"
       },
-      "folder": "A_professional-grade_2D_pixel_art_sprite_sheet_of",
+      "folder": "A_2D_pixel_art_chara",
       "frames": {
         "rotations": {
-          "south": "A_professional-grade_2D_pixel_art_sprite_sheet_of/rotations/south.png",
-          "south-east": "A_professional-grade_2D_pixel_art_sprite_sheet_of/rotations/south-east.png",
-          "east": "A_professional-grade_2D_pixel_art_sprite_sheet_of/rotations/east.png",
-          "north-east": "A_professional-grade_2D_pixel_art_sprite_sheet_of/rotations/north-east.png",
-          "north": "A_professional-grade_2D_pixel_art_sprite_sheet_of/rotations/north.png",
-          "north-west": "A_professional-grade_2D_pixel_art_sprite_sheet_of/rotations/north-west.png",
-          "west": "A_professional-grade_2D_pixel_art_sprite_sheet_of/rotations/west.png",
-          "south-west": "A_professional-grade_2D_pixel_art_sprite_sheet_of/rotations/south-west.png"
+          "south": "A_2D_pixel_art_chara/rotations/south.png",
+          "south-east": "A_2D_pixel_art_chara/rotations/south-east.png",
+          "east": "A_2D_pixel_art_chara/rotations/east.png",
+          "north-east": "A_2D_pixel_art_chara/rotations/north-east.png",
+          "north": "A_2D_pixel_art_chara/rotations/north.png",
+          "north-west": "A_2D_pixel_art_chara/rotations/north-west.png",
+          "west": "A_2D_pixel_art_chara/rotations/west.png",
+          "south-west": "A_2D_pixel_art_chara/rotations/south-west.png"
         },
         "animations": {
-          "animation-aba9ebb5": {
-            "south": [
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/south/frame_000.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/south/frame_001.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/south/frame_002.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/south/frame_003.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/south/frame_004.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/south/frame_005.png"
-            ],
-            "north-east": [
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/north-east/frame_000.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/north-east/frame_001.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/north-east/frame_002.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/north-east/frame_003.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/north-east/frame_004.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/north-east/frame_005.png"
+          "Running": {
+            "south-east": [
+              "A_2D_pixel_art_chara/animations/Running/south-east/frame_000.png",
+              "A_2D_pixel_art_chara/animations/Running/south-east/frame_001.png",
+              "A_2D_pixel_art_chara/animations/Running/south-east/frame_002.png",
+              "A_2D_pixel_art_chara/animations/Running/south-east/frame_003.png",
+              "A_2D_pixel_art_chara/animations/Running/south-east/frame_004.png",
+              "A_2D_pixel_art_chara/animations/Running/south-east/frame_005.png",
+              "A_2D_pixel_art_chara/animations/Running/south-east/frame_006.png",
+              "A_2D_pixel_art_chara/animations/Running/south-east/frame_007.png"
             ],
             "north": [
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/north/frame_000.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/north/frame_001.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/north/frame_002.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/north/frame_003.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/north/frame_004.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/north/frame_005.png"
-            ],
-            "east": [
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/east/frame_000.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/east/frame_001.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/east/frame_002.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/east/frame_003.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/east/frame_004.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/east/frame_005.png"
-            ],
-            "south-east": [
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/south-east/frame_000.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/south-east/frame_001.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/south-east/frame_002.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/south-east/frame_003.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/south-east/frame_004.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/south-east/frame_005.png"
-            ],
-            "west": [
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/west/frame_000.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/west/frame_001.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/west/frame_002.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/west/frame_003.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/west/frame_004.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/west/frame_005.png"
+              "A_2D_pixel_art_chara/animations/Running/north/frame_000.png",
+              "A_2D_pixel_art_chara/animations/Running/north/frame_001.png",
+              "A_2D_pixel_art_chara/animations/Running/north/frame_002.png",
+              "A_2D_pixel_art_chara/animations/Running/north/frame_003.png",
+              "A_2D_pixel_art_chara/animations/Running/north/frame_004.png",
+              "A_2D_pixel_art_chara/animations/Running/north/frame_005.png",
+              "A_2D_pixel_art_chara/animations/Running/north/frame_006.png",
+              "A_2D_pixel_art_chara/animations/Running/north/frame_007.png"
             ],
             "south-west": [
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/south-west/frame_000.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/south-west/frame_001.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/south-west/frame_002.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/south-west/frame_003.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/south-west/frame_004.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/south-west/frame_005.png"
+              "A_2D_pixel_art_chara/animations/Running/south-west/frame_000.png",
+              "A_2D_pixel_art_chara/animations/Running/south-west/frame_001.png",
+              "A_2D_pixel_art_chara/animations/Running/south-west/frame_002.png",
+              "A_2D_pixel_art_chara/animations/Running/south-west/frame_003.png",
+              "A_2D_pixel_art_chara/animations/Running/south-west/frame_004.png",
+              "A_2D_pixel_art_chara/animations/Running/south-west/frame_005.png",
+              "A_2D_pixel_art_chara/animations/Running/south-west/frame_006.png",
+              "A_2D_pixel_art_chara/animations/Running/south-west/frame_007.png"
+            ],
+            "east": [
+              "A_2D_pixel_art_chara/animations/Running/east/frame_000.png",
+              "A_2D_pixel_art_chara/animations/Running/east/frame_001.png",
+              "A_2D_pixel_art_chara/animations/Running/east/frame_002.png",
+              "A_2D_pixel_art_chara/animations/Running/east/frame_003.png",
+              "A_2D_pixel_art_chara/animations/Running/east/frame_004.png",
+              "A_2D_pixel_art_chara/animations/Running/east/frame_005.png",
+              "A_2D_pixel_art_chara/animations/Running/east/frame_006.png",
+              "A_2D_pixel_art_chara/animations/Running/east/frame_007.png"
+            ],
+            "south": [
+              "A_2D_pixel_art_chara/animations/Running/south/frame_000.png",
+              "A_2D_pixel_art_chara/animations/Running/south/frame_001.png",
+              "A_2D_pixel_art_chara/animations/Running/south/frame_002.png",
+              "A_2D_pixel_art_chara/animations/Running/south/frame_003.png",
+              "A_2D_pixel_art_chara/animations/Running/south/frame_004.png",
+              "A_2D_pixel_art_chara/animations/Running/south/frame_005.png",
+              "A_2D_pixel_art_chara/animations/Running/south/frame_006.png",
+              "A_2D_pixel_art_chara/animations/Running/south/frame_007.png"
+            ],
+            "north-east": [
+              "A_2D_pixel_art_chara/animations/Running/north-east/frame_000.png",
+              "A_2D_pixel_art_chara/animations/Running/north-east/frame_001.png",
+              "A_2D_pixel_art_chara/animations/Running/north-east/frame_002.png",
+              "A_2D_pixel_art_chara/animations/Running/north-east/frame_003.png",
+              "A_2D_pixel_art_chara/animations/Running/north-east/frame_004.png",
+              "A_2D_pixel_art_chara/animations/Running/north-east/frame_005.png",
+              "A_2D_pixel_art_chara/animations/Running/north-east/frame_006.png",
+              "A_2D_pixel_art_chara/animations/Running/north-east/frame_007.png"
+            ],
+            "west": [
+              "A_2D_pixel_art_chara/animations/Running/west/frame_000.png",
+              "A_2D_pixel_art_chara/animations/Running/west/frame_001.png",
+              "A_2D_pixel_art_chara/animations/Running/west/frame_002.png",
+              "A_2D_pixel_art_chara/animations/Running/west/frame_003.png",
+              "A_2D_pixel_art_chara/animations/Running/west/frame_004.png",
+              "A_2D_pixel_art_chara/animations/Running/west/frame_005.png",
+              "A_2D_pixel_art_chara/animations/Running/west/frame_006.png",
+              "A_2D_pixel_art_chara/animations/Running/west/frame_007.png"
             ],
             "north-west": [
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/north-west/frame_000.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/north-west/frame_001.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/north-west/frame_002.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/north-west/frame_003.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/north-west/frame_004.png",
-              "A_professional-grade_2D_pixel_art_sprite_sheet_of/animations/animation-aba9ebb5/north-west/frame_005.png"
+              "A_2D_pixel_art_chara/animations/Running/north-west/frame_000.png",
+              "A_2D_pixel_art_chara/animations/Running/north-west/frame_001.png",
+              "A_2D_pixel_art_chara/animations/Running/north-west/frame_002.png",
+              "A_2D_pixel_art_chara/animations/Running/north-west/frame_003.png",
+              "A_2D_pixel_art_chara/animations/Running/north-west/frame_004.png",
+              "A_2D_pixel_art_chara/animations/Running/north-west/frame_005.png",
+              "A_2D_pixel_art_chara/animations/Running/north-west/frame_006.png",
+              "A_2D_pixel_art_chara/animations/Running/north-west/frame_007.png"
             ]
           }
         }
       }
     }
   ],
-  "export_version": "3.0",
-  "export_date": "2026-05-18T14:31:05.587513"
+  "export_version": "3.1",
+  "export_date": "2026-07-10T12:01:40.898840"
 }
