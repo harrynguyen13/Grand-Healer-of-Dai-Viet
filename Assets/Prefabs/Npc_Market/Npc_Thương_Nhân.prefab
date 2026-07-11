@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8663953279150094823}
   - component: {fileID: 8457301217473424607}
   m_Layer: 0
-  m_Name: "Npc_Th\u01B0\u01A1ng_Nh\u1EADn"
+  m_Name: "Npc_Th\u01B0\u01A1ng_Nh\xE2n"
   m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
