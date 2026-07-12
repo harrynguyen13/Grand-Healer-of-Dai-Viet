@@ -29,7 +29,7 @@ MonoBehaviour:
     showAtStep: 1
   requiredHerbs:
   - herb: {fileID: 11400000, guid: f91856cf265a58847bf766dfa7783490, type: 2}
-    amount: 6
+    amount: 7
   - herb: {fileID: 11400000, guid: 8bc43412cf64002488e0d47577f6ed17, type: 2}
     amount: 6
   - herb: {fileID: 11400000, guid: bb445db3d4f4d4c44b650d6507db81c7, type: 2}

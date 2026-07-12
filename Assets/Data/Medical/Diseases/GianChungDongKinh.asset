@@ -29,7 +29,7 @@ MonoBehaviour:
     showAtStep: 1
   requiredHerbs:
   - herb: {fileID: 11400000, guid: 00377b35af2267647ae70993533bb58f, type: 2}
-    amount: 7
+    amount: 8
   - herb: {fileID: 11400000, guid: c322e3188908a024196d7ca2260bc282, type: 2}
     amount: 6
   - herb: {fileID: 11400000, guid: 1fd9162dc82209548b1125e6858ad277, type: 2}
@@ -37,9 +37,9 @@ MonoBehaviour:
   - herb: {fileID: 11400000, guid: eeaf131d53e824f4eb20c30f29b595e5, type: 2}
     amount: 4
   - herb: {fileID: 11400000, guid: 41544b55360f41442965fa81733f815c, type: 2}
-    amount: 2
+    amount: 3
   - herb: {fileID: 11400000, guid: 8d4d5f67b180d3743bc13166514ad855, type: 2}
-    amount: 1
+    amount: 2
   medicineCorrectRate: 0.7
   perfectReputation: 20
   perfectMoney: 30

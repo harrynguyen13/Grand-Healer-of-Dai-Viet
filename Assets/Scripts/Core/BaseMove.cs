@@ -47,6 +47,18 @@ public class BaseMove : MonoBehaviour
         }
     }
 
+
+    public virtual void StopImmediately()
+    {
+        moveInput = Vector2.zero;
+
+        if (rb2d != null)
+        {
+            rb2d.linearVelocity = Vector2.zero;
+            rb2d.angularVelocity = 0f;
+        }
+    }
+
     protected virtual void UpdateAnimation()
     {
         if (animator == null) return;

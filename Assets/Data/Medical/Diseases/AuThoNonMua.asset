@@ -31,11 +31,11 @@ MonoBehaviour:
     showAtStep: 1
   requiredHerbs:
   - herb: {fileID: 11400000, guid: a3a51709ce0c90947b99a1ea3bb9b6c2, type: 2}
-    amount: 5
+    amount: 6
   - herb: {fileID: 11400000, guid: 41544b55360f41442965fa81733f815c, type: 2}
-    amount: 3
+    amount: 4
   - herb: {fileID: 11400000, guid: 8703952609057024182bc7cc7c3e61f1, type: 2}
-    amount: 3
+    amount: 2
   medicineCorrectRate: 0.7
   perfectReputation: 20
   perfectMoney: 30

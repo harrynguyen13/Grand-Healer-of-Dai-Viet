@@ -36,7 +36,7 @@ MonoBehaviour:
   - herb: {fileID: 11400000, guid: 43ae4ac10b0448849bdb0013e0dba078, type: 2}
     amount: 5
   - herb: {fileID: 11400000, guid: b6ff94f16ea5df84792e053824367e44, type: 2}
-    amount: 4
+    amount: 3
   - herb: {fileID: 11400000, guid: eeaf131d53e824f4eb20c30f29b595e5, type: 2}
     amount: 2
   medicineCorrectRate: 0.7

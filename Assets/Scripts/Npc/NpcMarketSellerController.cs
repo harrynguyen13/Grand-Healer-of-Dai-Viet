@@ -28,7 +28,7 @@ public class NpcMarketSellerController : MonoBehaviour
 
     [Header("Hội thoại với khách")]
     [SerializeField] private float talkDurationPerLine = 1.4f;
-    [SerializeField] private float talkCooldown = 5f;
+    [SerializeField] private float talkCooldown = 3f;
     [SerializeField] private float buyerMoveAwayTime = 0.8f;
 
     private bool isTalking;

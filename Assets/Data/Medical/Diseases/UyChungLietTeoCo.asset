@@ -34,9 +34,9 @@ MonoBehaviour:
   - herb: {fileID: 11400000, guid: 742b8263af9857f44be232f679e50744, type: 2}
     amount: 8
   - herb: {fileID: 11400000, guid: bb445db3d4f4d4c44b650d6507db81c7, type: 2}
-    amount: 7
-  - herb: {fileID: 11400000, guid: bccb0c4af43d765409640cc9a14fd299, type: 2}
     amount: 6
+  - herb: {fileID: 11400000, guid: bccb0c4af43d765409640cc9a14fd299, type: 2}
+    amount: 5
   - herb: {fileID: 11400000, guid: 25fab37b539c8e142a0d5c00ec613d67, type: 2}
     amount: 4
   - herb: {fileID: 11400000, guid: 3ba4c21b7b5f4e645a1cb94809b6871f, type: 2}

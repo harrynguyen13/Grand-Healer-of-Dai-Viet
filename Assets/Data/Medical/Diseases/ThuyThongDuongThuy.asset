@@ -35,7 +35,7 @@ MonoBehaviour:
   - herb: {fileID: 11400000, guid: 9761ae753acdd5f4995ba63d100426ee, type: 2}
     amount: 6
   - herb: {fileID: 11400000, guid: 54c7982d30dd92f48aca79b82948968c, type: 2}
-    amount: 4
+    amount: 5
   - herb: {fileID: 11400000, guid: 8703952609057024182bc7cc7c3e61f1, type: 2}
     amount: 4
   - herb: {fileID: 11400000, guid: ef583ea8b197b4e409c65b5a82c8833c, type: 2}

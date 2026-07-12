@@ -396,7 +396,7 @@ MonoBehaviour:
   greetingShowTime: 2
   greetingDelay: 4
   talkDurationPerLine: 1.4
-  talkCooldown: 6
+  talkCooldown: 3
   buyerMoveAwayTime: 0.8
 --- !u!1 &4227137350093920359
 GameObject:

@@ -1594,7 +1594,7 @@ Transform:
   m_GameObject: {fileID: 227667716}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -34, y: -33.56, z: 0}
+  m_LocalPosition: {x: -34.09, y: -32.33, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1709,8 +1709,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InteractionPromptTrigger
   keyText: E
   actionText: "ra kh\u1ECFi ph\u1EE7 quan."
+  hideKey: 19
   promptFormat: "\u1EA4n {0} \u0111\u1EC3 {1}"
   worldOffset: {x: 2, y: 2, z: 2}
+  autoHide: 1
+  visibleDuration: 1.2
+  hideWhenPressKey: 1
   playerTag: Player
 --- !u!1001 &851848313
 PrefabInstance:
@@ -1808,7 +1812,7 @@ Transform:
   m_GameObject: {fileID: 901377474}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -21.69598, y: 239.31723, z: 0}
+  m_LocalPosition: {x: -34.87, y: -21.82, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2023,7 +2027,7 @@ Transform:
   m_GameObject: {fileID: 1087645860}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -34.55, y: -33.6, z: 0}
+  m_LocalPosition: {x: -34.55, y: -20.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

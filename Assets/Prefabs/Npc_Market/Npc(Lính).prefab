@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8815140395826800258}
   - component: {fileID: 3743270007298519374}
   - component: {fileID: 8989098085563310070}
-  - component: {fileID: 311844327949310342}
+  - component: {fileID: 5526545057375582082}
   m_Layer: 0
   m_Name: "Npc(L\xEDnh)"
   m_TagString: Untagged
@@ -181,7 +181,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &311844327949310342
+--- !u!114 &5526545057375582082
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -190,10 +190,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 6303735223734470267}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c89b4667d21b2ab4e964c1f82baae92e, type: 3}
+  m_Script: {fileID: 11500000, guid: c270e398a03edd54a8dbd6dd3342b68d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NpcAIController
+  m_EditorClassIdentifier: Assembly-CSharp::NpcGuardQuestController
   moveSpeed: 2
-  directionChangeTime: 3
-  idleChance: 0.2
-  talkDuration: 3
+  currentState: 0
+  patrolDistance: 6
+  startMoveRight: 1
+  pauseAtEdge: 0.5
+  lockYWhenPatrol: 1
+  playerTarget: {fileID: 0}
+  followStopDistance: 1.1
+  medicineReceivePoint: {fileID: 0}
+  leavePoint: {fileID: 0}
+  arriveDistance: 0.15

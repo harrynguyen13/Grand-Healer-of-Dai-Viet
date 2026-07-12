@@ -29,13 +29,13 @@ MonoBehaviour:
     showAtStep: 1
   requiredHerbs:
   - herb: {fileID: 11400000, guid: 0a8a10a57503ae4488eb40640b3b0b94, type: 2}
-    amount: 5
+    amount: 8
   - herb: {fileID: 11400000, guid: daa92dccf0ac4dd42b7624e81c9bc9b0, type: 2}
-    amount: 5
+    amount: 6
   - herb: {fileID: 11400000, guid: 82a0009a11d9ecd42ba1813168312666, type: 2}
     amount: 5
   - herb: {fileID: 11400000, guid: f91856cf265a58847bf766dfa7783490, type: 2}
-    amount: 3
+    amount: 4
   - herb: {fileID: 11400000, guid: bb445db3d4f4d4c44b650d6507db81c7, type: 2}
     amount: 3
   - herb: {fileID: 11400000, guid: c874a978d29033845b4e5d43bfb025f2, type: 2}

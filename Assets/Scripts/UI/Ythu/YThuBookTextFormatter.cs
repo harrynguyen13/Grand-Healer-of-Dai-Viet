@@ -3,8 +3,8 @@ using UnityEngine;
 
 public static class YThuBookTextFormatter
 {
-    private const int MaxMainRoles = 6;
-    private const int MaxSubRoles = 4;
+    private const int MaxRolesPerGroup = 6;
+    private const int MaxRolesPerHerb = 2;
 
     public static string BuildDiseaseInfoText(DiseaseData disease)
     {
@@ -149,11 +149,15 @@ public static class YThuBookTextFormatter
         if (disease == null || disease.requiredHerbs == null)
             return "";
 
-        List<string> mainRoles = new List<string>();
-        List<string> subRoles = new List<string>();
+        List<string> chiefRoles = new List<string>();
+        List<string> assistantRoles = new List<string>();
+        List<string> harmonyRoles = new List<string>();
+        List<string> strongRoles = new List<string>();
 
-        bool hasMoreMainRoles = false;
-        bool hasMoreSubRoles = false;
+        bool hasMoreChiefRoles = false;
+        bool hasMoreAssistantRoles = false;
+        bool hasMoreHarmonyRoles = false;
+        bool hasMoreStrongRoles = false;
 
         for (int i = 0; i < disease.requiredHerbs.Count; i++)
         {
@@ -162,145 +166,217 @@ public static class YThuBookTextFormatter
             if (required == null || required.herb == null)
                 continue;
 
-            string roleText = required.herb.treatmentRoleText;
+            HerbData herb = required.herb;
+            int amount = Mathf.Max(1, required.amount);
 
-            if (string.IsNullOrWhiteSpace(roleText))
-                roleText = GetFallbackTreatmentRole(required.herb);
+            List<string> herbRoles = ExtractImportantRolesFromHerb(herb);
 
-            AddMainAndSubRolesLimited(
-                mainRoles,
-                subRoles,
-                roleText,
-                ref hasMoreMainRoles,
-                ref hasMoreSubRoles
-            );
+            if (herbRoles.Count == 0)
+                continue;
+
+            if (IsStrongOrToxicHerb(herb))
+            {
+                AddRolesLimited(strongRoles, herbRoles, ref hasMoreStrongRoles);
+                continue;
+            }
+
+            if (amount <= 8 && amount >= 6)
+            {
+                AddRolesLimited(chiefRoles, herbRoles, ref hasMoreChiefRoles);
+            }
+            else if (amount >= 3 && amount <= 5)
+            {
+                AddRolesLimited(assistantRoles, herbRoles, ref hasMoreAssistantRoles);
+            }
+            else
+            {
+                AddRolesLimited(harmonyRoles, herbRoles, ref hasMoreHarmonyRoles);
+            }
         }
 
-        RemoveDuplicateSubRolesAlreadyInMain(mainRoles, subRoles);
-
-        if (mainRoles.Count == 0 && subRoles.Count == 0)
-            return "";
+        RemoveDuplicateRoles(chiefRoles, assistantRoles);
+        RemoveDuplicateRoles(chiefRoles, harmonyRoles);
+        RemoveDuplicateRoles(assistantRoles, harmonyRoles);
+        RemoveDuplicateRoles(chiefRoles, strongRoles);
+        RemoveDuplicateRoles(assistantRoles, strongRoles);
+        RemoveDuplicateRoles(harmonyRoles, strongRoles);
 
         string result = "";
 
-        if (mainRoles.Count > 0)
+        if (chiefRoles.Count > 0)
         {
-            result += "<b>Chính:</b>\n";
-            result += BuildRoleLine(mainRoles, hasMoreMainRoles);
+            result += "<b>Chủ dược:</b>\n";
+            result += BuildRoleLine(chiefRoles, hasMoreChiefRoles);
         }
 
-        if (subRoles.Count > 0)
+        if (assistantRoles.Count > 0)
         {
             if (!string.IsNullOrWhiteSpace(result))
                 result += "\n\n";
 
-            result += "<b>Phụ:</b>\n";
-            result += BuildRoleLine(subRoles, hasMoreSubRoles);
+            result += "<b>Phụ dược:</b>\n";
+            result += BuildRoleLine(assistantRoles, hasMoreAssistantRoles);
+        }
+
+        if (harmonyRoles.Count > 0)
+        {
+            if (!string.IsNullOrWhiteSpace(result))
+                result += "\n\n";
+
+            result += "<b>Điều hòa:</b>\n";
+            result += BuildRoleLine(harmonyRoles, hasMoreHarmonyRoles);
+        }
+
+        if (strongRoles.Count > 0)
+        {
+            if (!string.IsNullOrWhiteSpace(result))
+                result += "\n\n";
+
+            result += "<b>Dược mạnh / độc:</b>\n";
+            result += BuildRoleLine(strongRoles, hasMoreStrongRoles);
         }
 
         return result.TrimEnd();
     }
 
-    private static void AddMainAndSubRolesLimited(
-        List<string> mainRoles,
-        List<string> subRoles,
-        string roleText,
-        ref bool hasMoreMainRoles,
-        ref bool hasMoreSubRoles
-    )
+    private static List<string> ExtractImportantRolesFromHerb(HerbData herb)
     {
-        if (mainRoles == null || subRoles == null)
-            return;
+        List<string> roles = new List<string>();
+
+        if (herb == null)
+            return roles;
+
+        string roleText = herb.treatmentRoleText;
 
         if (string.IsNullOrWhiteSpace(roleText))
-            return;
+            return roles;
 
-        string normalizedText = roleText.Replace("/", ",");
+        roleText = NormalizeRoleText(roleText);
 
-        string[] parts = normalizedText.Split(',');
-
-        if (parts.Length == 0)
-            return;
-
-        string mainRole = parts[0].Trim();
-
-        if (!string.IsNullOrWhiteSpace(mainRole))
+        char[] splitChars = new char[]
         {
-            if (!ContainsRole(mainRoles, mainRole))
-            {
-                if (mainRoles.Count < MaxMainRoles)
-                {
-                    mainRoles.Add(mainRole);
+            ',',
+            '/',
+            ';',
+            '\n'
+        };
 
-                    // Nếu vai trò này trước đó từng bị thêm vào Phụ,
-                    // thì xóa khỏi Phụ để tránh trùng Chính / Phụ.
-                    RemoveRole(subRoles, mainRole);
-                }
-                else
-                {
-                    hasMoreMainRoles = true;
-                }
-            }
+        string[] parts = roleText.Split(splitChars);
+
+        for (int i = 0; i < parts.Length; i++)
+        {
+            string role = CleanRoleName(parts[i]);
+
+            if (string.IsNullOrWhiteSpace(role))
+                continue;
+
+            if (ContainsRole(roles, role))
+                continue;
+
+            roles.Add(role);
+
+            if (roles.Count >= MaxRolesPerHerb)
+                break;
         }
 
-        // Chỉ lấy 1 dược tính phụ đầu tiên của mỗi vị thuốc để tránh tràn trang Y thư.
-        if (parts.Length >= 2)
+        return roles;
+    }
+
+    private static string NormalizeRoleText(string roleText)
+    {
+        if (string.IsNullOrWhiteSpace(roleText))
+            return "";
+
+        string result = roleText;
+
+        result = result.Replace("\r", "\n");
+
+        result = result.Replace("<b>", "");
+        result = result.Replace("</b>", "");
+
+        result = result.Replace("Chính:", "\n");
+        result = result.Replace("Chính :", "\n");
+        result = result.Replace("Phụ:", "\n");
+        result = result.Replace("Phụ :", "\n");
+
+        result = result.Replace("chính:", "\n");
+        result = result.Replace("chính :", "\n");
+        result = result.Replace("phụ:", "\n");
+        result = result.Replace("phụ :", "\n");
+
+        return result;
+    }
+
+    private static void AddRolesLimited(List<string> targetRoles, List<string> sourceRoles, ref bool hasMoreRoles)
+    {
+        if (targetRoles == null || sourceRoles == null)
+            return;
+
+        for (int i = 0; i < sourceRoles.Count; i++)
         {
-            string subRole = parts[1].Trim();
+            string role = sourceRoles[i];
 
-            if (string.IsNullOrWhiteSpace(subRole))
-                return;
+            if (string.IsNullOrWhiteSpace(role))
+                continue;
 
-            // Nếu Phụ đã có trong Chính thì không thêm.
-            if (ContainsRole(mainRoles, subRole))
-                return;
+            if (ContainsRole(targetRoles, role))
+                continue;
 
-            // Nếu Phụ đã có trong danh sách Phụ thì không thêm.
-            if (ContainsRole(subRoles, subRole))
-                return;
-
-            if (subRoles.Count < MaxSubRoles)
+            if (targetRoles.Count < MaxRolesPerGroup)
             {
-                subRoles.Add(subRole);
+                targetRoles.Add(role);
             }
             else
             {
-                hasMoreSubRoles = true;
+                hasMoreRoles = true;
             }
         }
     }
 
-    private static void RemoveDuplicateSubRolesAlreadyInMain(List<string> mainRoles, List<string> subRoles)
+    private static void RemoveDuplicateRoles(List<string> sourceRoles, List<string> targetRoles)
     {
-        if (mainRoles == null || subRoles == null)
+        if (sourceRoles == null || targetRoles == null)
             return;
 
-        for (int i = subRoles.Count - 1; i >= 0; i--)
+        for (int i = targetRoles.Count - 1; i >= 0; i--)
         {
-            if (ContainsRole(mainRoles, subRoles[i]))
+            if (ContainsRole(sourceRoles, targetRoles[i]))
             {
-                subRoles.RemoveAt(i);
+                targetRoles.RemoveAt(i);
             }
         }
     }
 
-    private static void RemoveRole(List<string> roles, string targetRole)
+    private static string CleanRoleName(string role)
     {
-        if (roles == null)
-            return;
+        if (string.IsNullOrWhiteSpace(role))
+            return "";
 
-        if (string.IsNullOrWhiteSpace(targetRole))
-            return;
+        string result = role.Trim();
 
-        string normalizedTarget = NormalizeRoleForCompare(targetRole);
+        result = result.TrimStart('-', '+', ' ');
+        result = result.TrimEnd('.', ',', ';', ':', ' ');
 
-        for (int i = roles.Count - 1; i >= 0; i--)
+        while (result.Contains("  "))
         {
-            if (NormalizeRoleForCompare(roles[i]) == normalizedTarget)
-            {
-                roles.RemoveAt(i);
-            }
+            result = result.Replace("  ", " ");
         }
+
+        return result.Trim();
+    }
+
+    private static bool IsStrongOrToxicHerb(HerbData herb)
+    {
+        if (herb == null)
+            return false;
+
+        if (herb.category == HerbCategory.DocTinh)
+            return true;
+
+        if (herb.rarity == HerbRarity.Toxic)
+            return true;
+
+        return false;
     }
 
     private static string BuildRoleLine(List<string> roles, bool hasMoreRoles)
@@ -319,7 +395,7 @@ public static class YThuBookTextFormatter
         }
 
         if (hasMoreRoles)
-            result += " và các tác dụng phụ trợ khác.";
+            result += " và tác dụng khác.";
         else
             result += ".";
 
@@ -371,54 +447,6 @@ public static class YThuBookTextFormatter
             return text.ToLower();
 
         return char.ToLower(text[0]) + text.Substring(1);
-    }
-
-    private static string GetFallbackTreatmentRole(HerbData herb)
-    {
-        if (herb == null)
-            return "hỗ trợ điều trị";
-
-        switch (herb.category)
-        {
-            case HerbCategory.GiaiBieu:
-                return "giải biểu, khu phong";
-
-            case HerbCategory.ThanhNhiet:
-                return "thanh nhiệt, giải độc";
-
-            case HerbCategory.HoaDamChiHo:
-                return "hóa đờm, chỉ ho";
-
-            case HerbCategory.LyKhi:
-                return "lý khí, hành khí";
-
-            case HerbCategory.TieuThuc:
-                return "tiêu thực, hỗ trợ tiêu hóa";
-
-            case HerbCategory.HoatHuyet:
-                return "hoạt huyết, hóa ứ";
-
-            case HerbCategory.LoiThuy:
-                return "lợi thủy, thông tiểu";
-
-            case HerbCategory.BoKhiHuyet:
-                return "bổ khí huyết, phục hồi";
-
-            case HerbCategory.BoThan:
-                return "bổ thận, mạnh gân cốt";
-
-            case HerbCategory.AnThan:
-                return "an thần, dưỡng tâm";
-
-            case HerbCategory.DocTinh:
-                return "dược tính mạnh, dùng thận trọng";
-
-            case HerbCategory.Khac:
-                return "hỗ trợ điều trị theo phối ngũ";
-
-            default:
-                return "hỗ trợ điều trị theo phối ngũ";
-        }
     }
 
     private static string GetDiseaseGroupName(DiseaseGroup group)

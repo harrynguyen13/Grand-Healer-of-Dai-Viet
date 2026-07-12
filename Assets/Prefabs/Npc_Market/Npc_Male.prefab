@@ -334,6 +334,7 @@ GameObject:
   - component: {fileID: 6220498927990080594}
   - component: {fileID: 2593665437820579187}
   - component: {fileID: 2921164940902826930}
+  - component: {fileID: 7325118908666922063}
   m_Layer: 0
   m_Name: Npc_Male
   m_TagString: NPC
@@ -544,3 +545,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NpcMarketBuyerController
   speechBubble: {fileID: 0}
+--- !u!114 &7325118908666922063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7586869687880724349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1e798630c122f34588448fce8892cf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NpcMoveAreaLimiter
+  moveArea: {fileID: 0}
+  pushBackTime: 0.5
+  boundaryPadding: 0.1
