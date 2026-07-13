@@ -221,6 +221,7 @@ public partial class ClinicExamManager
         int currentClinicLevel = GetCurrentClinicLevel();
 
         diagnosisUIController.gameObject.SetActive(true);
+        SetClinicUiVisibleWithoutDisabling(diagnosisUIController.gameObject, true);
 
         diagnosisUIController.Show(
             patientCase,
@@ -283,6 +284,8 @@ public partial class ClinicExamManager
         Debug.Log("Mở UI bốc thuốc.");
 
         prescriptionUIController.gameObject.SetActive(true);
+        SetClinicUiVisibleWithoutDisabling(prescriptionUIController.gameObject, true);
+
         prescriptionUIController.Show(OnPrescriptionConfirmed);
     }
 
@@ -298,11 +301,12 @@ public partial class ClinicExamManager
         {
             if (diagnosisUIController != null)
             {
-                diagnosisUIController.gameObject.SetActive(false);
+                SetClinicUiVisibleWithoutDisabling(diagnosisUIController.gameObject, false);
+
                 isClinicUiTemporarilyClosed = true;
                 restoredClinicUiNeedsReopen = false;
 
-                Debug.Log("Đã ẩn tạm UI chẩn đoán. Bấm " + examineKey + " để mở lại.");
+                Debug.Log("Đã tạm ẩn UI chẩn đoán. Bấm " + examineKey + " để mở lại.");
             }
 
             return;
@@ -312,15 +316,26 @@ public partial class ClinicExamManager
         {
             if (prescriptionUIController != null)
             {
-                prescriptionUIController.gameObject.SetActive(false);
+                SetClinicUiVisibleWithoutDisabling(prescriptionUIController.gameObject, false);
+
+                if (medicineCounterDisplay != null)
+                {
+                    medicineCounterDisplay.Hide();
+                }
+
                 isClinicUiTemporarilyClosed = true;
                 restoredClinicUiNeedsReopen = false;
 
-                Debug.Log("Đã ẩn tạm UI bốc thuốc. Bấm " + examineKey + " để mở lại.");
+                Debug.Log("Đã tạm ẩn UI bốc thuốc. Bấm " + examineKey + " để mở lại.");
             }
 
             return;
         }
+    }
+
+    public void CloseClinicUiTemporarilyByButton()
+    {
+        CloseCurrentClinicUiTemporarily();
     }
 
     private void ResumeTemporarilyClosedClinicUi()
@@ -342,16 +357,8 @@ public partial class ClinicExamManager
                 return;
 
             diagnosisUIController.gameObject.SetActive(true);
+            SetClinicUiVisibleWithoutDisabling(diagnosisUIController.gameObject, true);
 
-            /*
-             * Nếu chỉ bấm X trong cùng scene:
-             * restoredClinicUiNeedsReopen = false
-             * => chỉ bật lại panel, không gọi Show(), không reset.
-             *
-             * Nếu đi ra ngoài scene rồi quay lại:
-             * UI cũ đã mất, restoredClinicUiNeedsReopen = true
-             * => phải gọi Show() lại để dựng UI.
-             */
             if (restoredClinicUiNeedsReopen)
             {
                 int currentClinicLevel = GetCurrentClinicLevel();
@@ -378,13 +385,8 @@ public partial class ClinicExamManager
                 return;
 
             prescriptionUIController.gameObject.SetActive(true);
+            SetClinicUiVisibleWithoutDisabling(prescriptionUIController.gameObject, true);
 
-            /*
-             * Nếu chỉ bấm X trong cùng scene thì không gọi Show() lại,
-             * để giữ thuốc đang chọn.
-             *
-             * Nếu quay lại từ scene khác thì UI phải dựng lại.
-             */
             if (restoredClinicUiNeedsReopen)
             {
                 prescriptionUIController.Show(OnPrescriptionConfirmed);
@@ -396,5 +398,72 @@ public partial class ClinicExamManager
             Debug.Log("Đã mở lại UI bốc thuốc đang dở.");
             return;
         }
+    }
+
+    private void SetClinicUiVisibleWithoutDisabling(GameObject targetObject, bool visible)
+    {
+        if (targetObject == null)
+            return;
+
+        if (visible && !targetObject.activeSelf)
+        {
+            targetObject.SetActive(true);
+        }
+
+        CanvasGroup canvasGroup = targetObject.GetComponent<CanvasGroup>();
+
+        if (canvasGroup == null)
+        {
+            canvasGroup = targetObject.AddComponent<CanvasGroup>();
+        }
+
+        canvasGroup.alpha = visible ? 1f : 0f;
+        canvasGroup.interactable = visible;
+        canvasGroup.blocksRaycasts = visible;
+
+        RefreshPlayerLocksAroundPanel(targetObject);
+    }
+
+    private void RefreshPlayerLocksAroundPanel(GameObject targetObject)
+    {
+        if (targetObject == null)
+            return;
+
+        PlayerControlLockByPanel[] childLocks =
+            targetObject.GetComponentsInChildren<PlayerControlLockByPanel>(true);
+
+        for (int i = 0; i < childLocks.Length; i++)
+        {
+            if (childLocks[i] != null)
+            {
+                childLocks[i].RefreshLockState();
+            }
+        }
+
+        PlayerControlLockByPanel[] parentLocks =
+            targetObject.GetComponentsInParent<PlayerControlLockByPanel>(true);
+
+        for (int i = 0; i < parentLocks.Length; i++)
+        {
+            if (parentLocks[i] != null)
+            {
+                parentLocks[i].RefreshLockState();
+            }
+        }
+
+        Debug.Log("Trạng thái khóa Player hiện tại: " + PlayerControlLock.GetDebugLockReasons());
+    }
+
+    private bool IsClinicUiHiddenByCanvasGroup(GameObject targetObject)
+    {
+        if (targetObject == null)
+            return false;
+
+        CanvasGroup canvasGroup = targetObject.GetComponent<CanvasGroup>();
+
+        if (canvasGroup == null)
+            return false;
+
+        return canvasGroup.alpha <= 0.01f;
     }
 }

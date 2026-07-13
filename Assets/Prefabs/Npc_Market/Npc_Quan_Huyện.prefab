@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7904391308764063353}
   - component: {fileID: 4441001512699309496}
   - component: {fileID: 6230150623640336034}
+  - component: {fileID: 2383077841346885093}
   m_Layer: 0
   m_Name: "Npc_Quan_Huy\u1EC7n"
   m_TagString: NPC
@@ -110,7 +111,6 @@ MonoBehaviour:
   moveSpeed: 2
   directionChangeTime: 3
   idleChance: 0.4
-  talkDuration: 3
 --- !u!95 &7904391308764063353
 Animator:
   serializedVersion: 7
@@ -197,3 +197,24 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.3}
   m_Size: {x: 0.55, y: 0.75}
   m_Direction: 0
+--- !u!114 &2383077841346885093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384662805532660817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66ad470eadb6f9045b0f4c811fbce8f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpecialDiseaseCase
+  specialDisease: {fileID: 11400000, guid: d4bfdb4850fe7db40bfbcff066ff7712, type: 2}
+  temporaryDiseaseName: "B\u1EC7nh l\u1EA1 c\u1EE7a Quan Huy\u1EC7n"
+  maxTreatmentAttempts: 3
+  questUnlocked: 0
+  hasExamined: 0
+  hasAddedToYThu: 0
+  hasNamedDisease: 0
+  isCured: 0
+  treatmentAttemptCount: 0

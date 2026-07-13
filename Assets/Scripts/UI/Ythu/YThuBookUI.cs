@@ -39,12 +39,20 @@ public class YThuBookUI : MonoBehaviour
 
     private readonly List<DiseaseData> unlockedDiseases = new List<DiseaseData>();
     private readonly List<DiseaseData> filteredDiseases = new List<DiseaseData>();
+    private readonly List<BookPageData> bookPages = new List<BookPageData>();
 
     private int currentPageIndex = 0;
 
     private bool isAnimating = false;
     private bool isOpen = false;
     private bool hasLockedDiseasePage = false;
+
+    private class BookPageData
+    {
+        public DiseaseData disease;
+        public int prescriptionPageIndex;
+        public bool isLockedPage;
+    }
 
     private void Awake()
     {
@@ -86,9 +94,7 @@ public class YThuBookUI : MonoBehaviour
             return;
 
         if (panelRoot != null)
-        {
             panelRoot.SetActive(true);
-        }
 
         isOpen = true;
 
@@ -97,9 +103,7 @@ public class YThuBookUI : MonoBehaviour
         RefreshBookData();
 
         if (bookImage != null && idleOpenSprite != null)
-        {
             bookImage.sprite = idleOpenSprite;
-        }
 
         ShowCurrentPage();
         UpdateButtons();
@@ -168,7 +172,49 @@ public class YThuBookUI : MonoBehaviour
             )
         );
 
+        BuildBookPages();
         ClampCurrentPageIndex();
+    }
+
+    private void BuildBookPages()
+    {
+        bookPages.Clear();
+
+        for (int i = 0; i < filteredDiseases.Count; i++)
+        {
+            DiseaseData disease = filteredDiseases[i];
+
+            if (disease == null)
+                continue;
+
+            List<string> prescriptionPages =
+                YThuBookTextFormatter.BuildPrescriptionPages(disease);
+
+            int pageCount = 1;
+
+            if (prescriptionPages != null && prescriptionPages.Count > 0)
+                pageCount = prescriptionPages.Count;
+
+            for (int pageIndex = 0; pageIndex < pageCount; pageIndex++)
+            {
+                BookPageData page = new BookPageData();
+                page.disease = disease;
+                page.prescriptionPageIndex = pageIndex;
+                page.isLockedPage = false;
+
+                bookPages.Add(page);
+            }
+        }
+
+        if (ShouldShowLockedPage())
+        {
+            BookPageData lockedPage = new BookPageData();
+            lockedPage.disease = null;
+            lockedPage.prescriptionPageIndex = 0;
+            lockedPage.isLockedPage = true;
+
+            bookPages.Add(lockedPage);
+        }
     }
 
     private string GetSearchKeyword()
@@ -234,9 +280,7 @@ public class YThuBookUI : MonoBehaviour
         for (int i = 0; i < frames.Count; i++)
         {
             if (bookImage != null && frames[i] != null)
-            {
                 bookImage.sprite = frames[i];
-            }
 
             if (!changedContent && i >= midPoint)
             {
@@ -248,9 +292,7 @@ public class YThuBookUI : MonoBehaviour
         }
 
         if (bookImage != null && idleOpenSprite != null)
-        {
             bookImage.sprite = idleOpenSprite;
-        }
 
         ShowCurrentPage();
 
@@ -263,14 +305,7 @@ public class YThuBookUI : MonoBehaviour
 
     private int GetTotalPageCount()
     {
-        int total = filteredDiseases.Count;
-
-        if (ShouldShowLockedPage())
-        {
-            total++;
-        }
-
-        return total;
+        return bookPages.Count;
     }
 
     private bool ShouldShowLockedPage()
@@ -283,10 +318,13 @@ public class YThuBookUI : MonoBehaviour
 
     private bool IsCurrentPageLockedPage()
     {
-        if (!ShouldShowLockedPage())
+        if (bookPages.Count == 0)
             return false;
 
-        return currentPageIndex == filteredDiseases.Count;
+        if (currentPageIndex < 0 || currentPageIndex >= bookPages.Count)
+            return false;
+
+        return bookPages[currentPageIndex].isLockedPage;
     }
 
     private void ClampCurrentPageIndex()
@@ -306,25 +344,56 @@ public class YThuBookUI : MonoBehaviour
     {
         ClampCurrentPageIndex();
 
+        if (GetTotalPageCount() <= 0)
+        {
+            ShowEmptyPage();
+            return;
+        }
+
         if (IsCurrentPageLockedPage())
         {
             ShowLockedDiseasePage();
             return;
         }
 
-        if (filteredDiseases.Count == 0)
+        BookPageData page = bookPages[currentPageIndex];
+
+        if (page == null || page.disease == null)
         {
             ShowEmptyPage();
             return;
         }
 
-        DiseaseData disease = filteredDiseases[currentPageIndex];
+        DiseaseData disease = page.disease;
 
         if (diseaseInfoText != null)
-            diseaseInfoText.text = YThuBookTextFormatter.BuildDiseaseInfoText(disease);
-
+        {
+            if (page.prescriptionPageIndex == 0)
+            {
+                diseaseInfoText.text = YThuBookTextFormatter.BuildDiseaseInfoText(disease);
+            }
+            else
+            {
+                diseaseInfoText.text = "";
+            }
+        }
         if (prescriptionText != null)
-            prescriptionText.text = YThuBookTextFormatter.BuildPrescriptionText(disease);
+        {
+            List<string> prescriptionPages =
+                YThuBookTextFormatter.BuildPrescriptionPages(disease);
+
+            if (prescriptionPages == null || prescriptionPages.Count == 0)
+            {
+                prescriptionText.text = "";
+            }
+            else
+            {
+                int prescriptionPageIndex =
+                    Mathf.Clamp(page.prescriptionPageIndex, 0, prescriptionPages.Count - 1);
+
+                prescriptionText.text = prescriptionPages[prescriptionPageIndex];
+            }
+        }
 
         if (pageNumberText != null)
         {

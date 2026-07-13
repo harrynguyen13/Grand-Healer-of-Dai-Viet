@@ -6114,19 +6114,20 @@ MonoBehaviour:
   npcExamPoint: {fileID: 502824398}
   playerExamPoint: {fileID: 469998575}
   npcLeavePoints:
-  - {fileID: 347072462}
+  - {fileID: 669892540}
   playerTag: Player
-  playerExamDistance: 2
+  playerExamArea: {fileID: 469998576}
+  playerCollider: {fileID: 469998576}
   examineKey: 20
   medicalDatabase: {fileID: 11400000, guid: b9cbad1ca04118e4f91cc0c62ce48933, type: 2}
   diagnosisUIController: {fileID: 616190066}
   prescriptionUIController: {fileID: 616190067}
   medicineCounterDisplay: {fileID: 211007266}
   receiveMedicineTime: 0.8
-  firstPatientEnterDelay: 2
-  queuedPatientEnterDelay: 1
-  minNextPatientDelay: 12
-  maxNextPatientDelay: 20
+  firstPatientEnterDelay: 10
+  queuedPatientEnterDelay: 3
+  minNextPatientDelay: 100
+  maxNextPatientDelay: 100
   fallbackClinicLevel: 1
 --- !u!4 &211007264
 Transform:
@@ -16928,6 +16929,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerControlLockByPanel
   lockReason: DiagnosisPanel
+  unlockWhenCanvasGroupHidden: 1
 --- !u!213 &341445390
 Sprite:
   m_ObjectHideFlags: 0
@@ -25543,7 +25545,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 3}
   m_EdgeRadius: 0
 --- !u!114 &469998577
 MonoBehaviour:
@@ -25563,7 +25565,7 @@ MonoBehaviour:
   promptFormat: "\u1EA4n {0} \u0111\u1EC3 {1}"
   worldOffset: {x: 2, y: 2, z: 2}
   autoHide: 1
-  visibleDuration: 1.2
+  visibleDuration: 0.5
   hideWhenPressKey: 1
   playerTag: Player
 --- !u!1 &471709675
@@ -27568,11 +27570,13 @@ MonoBehaviour:
   clinicExamManager: {fileID: 211007263}
   requirePlayerInClinic: 1
   playerTag: Player
-  firstCheckDelay: 5
-  checkInterval: 3
+  firstCheckDelay: 20
+  checkInterval: 10
   targetWaitingWhileExam: 2
   targetWaitingWhenIdle: 3
-  refillDelay: 8
+  minRefillDelay: 10
+  maxRefillDelay: 15
+  lowerLevelWeightMultiplier: 0.35
 --- !u!4 &512738615
 Transform:
   m_ObjectHideFlags: 0
@@ -67864,6 +67868,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerControlLockByPanel
   lockReason: PrescriptionPanel
+  unlockWhenCanvasGroupHidden: 1
 --- !u!1 &1742032495
 GameObject:
   m_ObjectHideFlags: 0
@@ -70754,7 +70759,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 211007263}
         m_TargetAssemblyTypeName: ClinicExamManager, Assembly-CSharp
-        m_MethodName: CloseCurrentClinicUiTemporarily
+        m_MethodName: CloseClinicUiTemporarilyByButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -75255,6 +75260,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2023159071}
   m_CullTransparentMesh: 1
+--- !u!1 &2039823756
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2039823758}
+  - component: {fileID: 2039823757}
+  m_Layer: 0
+  m_Name: PatientStageSyncManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2039823757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039823756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d444848053258c4792c689aa35fac3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PatientStageSyncManager
+--- !u!4 &2039823758
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039823756}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 353.9891, y: 191.77692, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!213 &2045280710
 Sprite:
   m_ObjectHideFlags: 0
@@ -78286,3 +78335,4 @@ SceneRoots:
   - {fileID: 512738615}
   - {fileID: 1900974071}
   - {fileID: 515743866}
+  - {fileID: 2039823758}

@@ -126,7 +126,7 @@ public class NpcMarketSellerController : MonoBehaviour
         HideBubble();
 
         // Người bán cảm ơn
-        ShowBubble("Cảm ơn khách nhé.");
+        ShowBubble("Cảm ơn nhé.");
         yield return new WaitForSeconds(talkDurationPerLine);
 
         HideBubble();
@@ -143,22 +143,22 @@ public class NpcMarketSellerController : MonoBehaviour
         switch (goodsType)
         {
             case MarketGoodsType.Rau:
-                return "Rau tươi đây, khách xem đi!";
+                return "Rau tươi đây, bà con xem đi!";
 
             case MarketGoodsType.Thit:
-                return "Thịt mới đây, khách xem đi!";
+                return "Thịt mới đây, bà con xem đi!";
 
             case MarketGoodsType.Gao:
-                return "Gạo ngon đây, khách xem đi!";
+                return "Gạo ngon đây, mọi người xem đi!";
 
             case MarketGoodsType.Thuoc:
-                return "Quý khách vào xem thuốc đi!";
+                return "Mọi người vào xem thuốc đi!";
 
             case MarketGoodsType.Vai:
-                return "Vải đẹp đây, khách xem đi!";
+                return "Vải đẹp đây, bà con xem đi!";
 
             default:
-                return "Khách vào xem hàng đi!";
+                return "Bà con vào xem hàng đi!";
         }
     }
 
@@ -176,7 +176,7 @@ public class NpcMarketSellerController : MonoBehaviour
                 return "Gạo này bán thế nào?";
 
             case MarketGoodsType.Thuoc:
-                return "Có vị thuốc nào trị ho không?";
+                return "Giá thuốc hôm nay thế nào?";
 
             case MarketGoodsType.Vai:
                 return "Vải này bán thế nào?";
@@ -200,7 +200,7 @@ public class NpcMarketSellerController : MonoBehaviour
                 return "Gạo thơm, hạt chắc lắm.";
 
             case MarketGoodsType.Thuoc:
-                return "Có, cam thảo trị ho rất tốt.";
+                return "Giá có tăng lên một chút.";
 
             case MarketGoodsType.Vai:
                 return "Vải bền, may áo rất hợp.";

@@ -86,6 +86,8 @@ public partial class QuestRuntimeManager
 
         SaveActiveQuestSlots(slotQuestIds);
 
+        TrySendQuanHuyenQuestMailIfActive(slotQuestIds);
+
         List<QuestDefinition> result = new List<QuestDefinition>();
 
         for (int i = 0; i < ActiveQuestCount; i++)
@@ -99,6 +101,37 @@ public partial class QuestRuntimeManager
         }
 
         return result;
+    }
+
+    private void TrySendQuanHuyenQuestMailIfActive(string[] slotQuestIds)
+    {
+        if (slotQuestIds == null)
+            return;
+
+        if (IsOfficialQuestCompleted())
+            return;
+
+        bool hasQuanHuyenQuest = false;
+
+        for (int i = 0; i < slotQuestIds.Length; i++)
+        {
+            if (slotQuestIds[i] == "S5_Official")
+            {
+                hasQuanHuyenQuest = true;
+                break;
+            }
+        }
+
+        if (!hasQuanHuyenQuest)
+            return;
+
+        if (SpecialQuestMailBridge.Instance == null)
+        {
+            Debug.LogWarning("QuestRuntimeManager: Chưa có SpecialQuestMailBridge để gửi thư Quan Huyện.");
+            return;
+        }
+
+        SpecialQuestMailBridge.Instance.SendQuanHuyenQuestMailOnce();
     }
 
     private void RewardCompletedOldStageQuests(int oldStage, int currentReputation)

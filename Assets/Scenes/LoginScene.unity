@@ -626,6 +626,7 @@ GameObject:
   - component: {fileID: 541801307}
   - component: {fileID: 541801306}
   - component: {fileID: 541801308}
+  - component: {fileID: 541801309}
   m_Layer: 0
   m_Name: GameSystems
   m_TagString: Untagged
@@ -755,6 +756,19 @@ MonoBehaviour:
   medicalDatabase: {fileID: 11400000, guid: b9cbad1ca04118e4f91cc0c62ce48933, type: 2}
   logDebug: 1
   mails: []
+--- !u!114 &541801309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 541801300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6719eb29e23fade4a85c14427be260f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerLevelUpWatcher
+  playSoundOnLevelUp: 1
 --- !u!1 &573535201
 GameObject:
   m_ObjectHideFlags: 0
@@ -902,6 +916,7 @@ GameObject:
   m_Component:
   - component: {fileID: 779388315}
   - component: {fileID: 779388317}
+  - component: {fileID: 779388318}
   m_Layer: 0
   m_Name: LevelUpSFX
   m_TagString: Untagged
@@ -933,7 +948,7 @@ AudioSource:
   m_GameObject: {fileID: 779388314}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -5137617930960567099, guid: e5d4ec1283b12b947841a840bf473a8e, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
@@ -1021,6 +1036,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &779388318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 779388314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d12d0382e42da24dbcb941cfef43fa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelUpSoundPlayer
+  audioSource: {fileID: 779388317}
+  levelUpClip: {fileID: 8300000, guid: 555543a10314d014981ff74d605a4e02, type: 3}
+  volume: 1
 --- !u!1 &939508438
 GameObject:
   m_ObjectHideFlags: 0
@@ -1666,7 +1696,6 @@ GameObject:
   - component: {fileID: 1924762661}
   - component: {fileID: 1924762660}
   - component: {fileID: 1924762659}
-  - component: {fileID: 1924762662}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -1791,7 +1820,9 @@ MonoBehaviour:
     musicClip: {fileID: 8300000, guid: 0134193ddb98d9a4686fb73e715d91cd, type: 3}
   - sceneName: ClinicInterior
     musicClip: {fileID: 8300000, guid: 0b9dc16753b343846ae14e042e2c309d, type: 3}
-  musicVolume: 0.45
+  - sceneName: Government
+    musicClip: {fileID: 8300000, guid: 0b9dc16753b343846ae14e042e2c309d, type: 3}
+  musicVolume: 0.5
   fadeDuration: 1
 --- !u!4 &1924762661
 Transform:
@@ -1809,21 +1840,6 @@ Transform:
   - {fileID: 779388315}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1924762662
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1924762658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d12d0382e42da24dbcb941cfef43fa7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LevelUpSoundPlayer
-  audioSource: {fileID: 779388317}
-  levelUpClip: {fileID: 8300000, guid: b78047869e4ba8c44ba2bd66ef145172, type: 3}
-  volume: 0.8
 --- !u!1 &1971906166
 GameObject:
   m_ObjectHideFlags: 0

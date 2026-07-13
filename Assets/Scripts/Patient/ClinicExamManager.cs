@@ -14,7 +14,10 @@ public partial class ClinicExamManager : MonoBehaviour
 
     [Header("Player")]
     [SerializeField] private string playerTag = "Player";
-    [SerializeField] private float playerExamDistance = 1f;
+
+    [Header("Vùng cho phép bấm F khám")]
+    [SerializeField] private Collider2D playerExamArea;
+    [SerializeField] private Collider2D playerCollider;
 
     [Header("Phím bắt đầu / mở lại khám")]
     [SerializeField] private Key examineKey = Key.F;
@@ -35,16 +38,16 @@ public partial class ClinicExamManager : MonoBehaviour
     [SerializeField] private float receiveMedicineTime = 0.8f;
 
     [Header("Thời gian nghỉ giữa 2 bệnh nhân")]
-    [SerializeField] private float firstPatientEnterDelay = 2f;
+    [SerializeField] private float firstPatientEnterDelay = 10f;
 
     [Tooltip("Nếu trong hàng chờ còn bệnh nhân, người tiếp theo sẽ lên sau thời gian này.")]
-    [SerializeField] private float queuedPatientEnterDelay = 1f;
+    [SerializeField] private float queuedPatientEnterDelay = 3f;
 
     [Tooltip("Nếu hàng chờ trống, phòng khám nghỉ tối thiểu từng này giây.")]
-    [SerializeField] private float minNextPatientDelay = 12f;
+    [SerializeField] private float minNextPatientDelay = 100f;
 
     [Tooltip("Nếu hàng chờ trống, phòng khám nghỉ tối đa từng này giây.")]
-    [SerializeField] private float maxNextPatientDelay = 20f;
+    [SerializeField] private float maxNextPatientDelay = 100f;
 
     [Header("Fallback cấp y quán nếu PlayerLevelService lỗi")]
     [SerializeField] private int fallbackClinicLevel = 1;

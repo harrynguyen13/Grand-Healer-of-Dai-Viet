@@ -162,6 +162,33 @@ public class MedicalDatabase : ScriptableObject
         return (int)disease.diseaseLevel == SpecialDiseaseLevel;
     }
 
+    public List<DiseaseData> GetUnlockedDiseases(int currentClinicLevel)
+    {
+        List<DiseaseData> unlockedDiseases = new List<DiseaseData>();
+
+        if (diseases == null)
+            return unlockedDiseases;
+
+        currentClinicLevel = Mathf.Max(1, currentClinicLevel);
+
+        for (int i = 0; i < diseases.Count; i++)
+        {
+            DiseaseData disease = diseases[i];
+
+            if (disease == null)
+                continue;
+
+            int diseaseLevel = Mathf.Max(1, (int)disease.diseaseLevel);
+
+            if (diseaseLevel <= currentClinicLevel)
+            {
+                unlockedDiseases.Add(disease);
+            }
+        }
+
+        return unlockedDiseases;
+    }
+
     // =========================================================
     // NGUỒN CẤP GỐC
     // =========================================================
@@ -176,3 +203,4 @@ public class MedicalDatabase : ScriptableObject
         return 1;
     }
 }
+

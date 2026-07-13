@@ -13,14 +13,7 @@ public class LevelUpSoundPlayer : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
         Instance = this;
-        DontDestroyOnLoad(gameObject);
 
         if (audioSource == null)
         {
@@ -34,15 +27,13 @@ public class LevelUpSoundPlayer : MonoBehaviour
 
         audioSource.playOnAwake = false;
         audioSource.loop = false;
+        audioSource.spatialBlend = 0f;
     }
 
     public void PlayLevelUpSound()
     {
         if (audioSource == null || levelUpClip == null)
-        {
-            Debug.LogWarning("Chưa gán AudioSource hoặc Level Up Clip.");
             return;
-        }
 
         audioSource.PlayOneShot(levelUpClip, volume);
     }

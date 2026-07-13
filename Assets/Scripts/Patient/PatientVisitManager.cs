@@ -39,6 +39,7 @@ public class PatientVisitManager : MonoBehaviour
         get { return suspendedClinicVisitData != null; }
     }
 
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -225,6 +226,11 @@ public class PatientVisitManager : MonoBehaviour
     public void ClearAllWaitingPatients()
     {
         waitingPatients.Clear();
-        Debug.Log("Đã xóa toàn bộ hàng đợi bệnh nhân.");
+
+        suspendedClinicVisitData = null;
+        suspendedClinicStage = ClinicExamStage.None;
+        suspendedDiagnosisCorrect = false;
+
+        Debug.Log("Đã xóa toàn bộ dữ liệu bệnh nhân: hàng chờ và phiên khám dở.");
     }
 }

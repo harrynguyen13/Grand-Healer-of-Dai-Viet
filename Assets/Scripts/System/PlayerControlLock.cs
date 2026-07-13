@@ -7,37 +7,35 @@ public static class PlayerControlLock
 
     public static bool IsLocked
     {
-        get
-        {
-            return lockReasons.Count > 0;
-        }
+        get { return lockReasons.Count > 0; }
     }
 
     public static void Lock(string reason)
     {
-        if (string.IsNullOrWhiteSpace(reason))
-            reason = "Unknown";
+        reason = NormalizeReason(reason);
 
-        lockReasons.Add(reason);
+        bool added = lockReasons.Add(reason);
 
         ForceStopPlayer();
 
-        Debug.Log("Đã khóa điều khiển Player: " + reason);
+        if (added)
+        {
+            Debug.Log("Đã khóa điều khiển Player: " + reason);
+        }
     }
 
     public static void Unlock(string reason)
     {
-        if (string.IsNullOrWhiteSpace(reason))
-            reason = "Unknown";
+        reason = NormalizeReason(reason);
 
-        if (lockReasons.Contains(reason))
-        {
-            lockReasons.Remove(reason);
-        }
+        bool removed = lockReasons.Remove(reason);
 
         ForceStopPlayer();
 
-        Debug.Log("Đã mở khóa điều khiển Player: " + reason);
+        if (removed)
+        {
+            Debug.Log("Đã mở khóa điều khiển Player: " + reason);
+        }
     }
 
     public static void UnlockAll()
@@ -47,6 +45,28 @@ public static class PlayerControlLock
         ForceStopPlayer();
 
         Debug.Log("Đã mở toàn bộ khóa điều khiển Player.");
+    }
+
+    public static bool HasLock(string reason)
+    {
+        reason = NormalizeReason(reason);
+        return lockReasons.Contains(reason);
+    }
+
+    public static string GetDebugLockReasons()
+    {
+        if (lockReasons.Count == 0)
+            return "Không còn khóa nào.";
+
+        return string.Join(", ", lockReasons);
+    }
+
+    private static string NormalizeReason(string reason)
+    {
+        if (string.IsNullOrWhiteSpace(reason))
+            return "Unknown";
+
+        return reason.Trim();
     }
 
     private static void ForceStopPlayer()
