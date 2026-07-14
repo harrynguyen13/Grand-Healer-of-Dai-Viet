@@ -11,12 +11,25 @@ public static class YThuBookTextFormatter
 
     public static string BuildDiseaseInfoText(DiseaseData disease)
     {
+        return BuildDiseaseInfoText(disease, "");
+    }
+
+    public static string BuildDiseaseInfoText(
+        DiseaseData disease,
+        string overrideDiseaseName
+    )
+    {
         if (disease == null)
             return "Không có dữ liệu bệnh.";
 
+        string displayName = disease.diseaseName;
+
+        if (!string.IsNullOrWhiteSpace(overrideDiseaseName))
+            displayName = overrideDiseaseName.Trim();
+
         string text = "";
 
-        text += "<align=\"center\"><b>" + disease.diseaseName.ToUpper() + "</b>\n";
+        text += "<align=\"center\"><b>" + displayName.ToUpper() + "</b>\n";
         text += "Cấp " + (int)disease.diseaseLevel + "\n";
         text += "Nhóm: " + GetDiseaseGroupName(disease.diseaseGroup) + "</align>\n\n";
 
@@ -48,7 +61,7 @@ public static class YThuBookTextFormatter
 
     public static string BuildPrescriptionText(DiseaseData disease)
     {
-        List<string> pages = BuildPrescriptionPages(disease);
+        List<string> pages = BuildPrescriptionPages(disease, true);
 
         if (pages == null || pages.Count == 0)
             return "";
@@ -58,6 +71,104 @@ public static class YThuBookTextFormatter
 
     public static List<string> BuildPrescriptionPages(DiseaseData disease)
     {
+        return BuildPrescriptionPages(disease, true);
+    }
+
+    public static List<string> BuildPrescriptionPages(
+        DiseaseData disease,
+        bool showPrescription
+    )
+    {
+        List<string> pages = new List<string>();
+
+        if (disease == null)
+            return pages;
+
+        List<string> currentLines = new List<string>();
+        int currentLineCount = 0;
+
+        if (showPrescription)
+        {
+            AddPageLine(
+                pages,
+                currentLines,
+                ref currentLineCount,
+                "<align=\"center\"><b>Phương thuốc</b></align>"
+            );
+
+            AddPageLine(pages, currentLines, ref currentLineCount, "");
+
+            if (disease.requiredHerbs == null || disease.requiredHerbs.Count == 0)
+            {
+                AddPageLine(
+                    pages,
+                    currentLines,
+                    ref currentLineCount,
+                    "<align=\"left\">- Chưa có dữ liệu vị thuốc.</align>"
+                );
+            }
+            else
+            {
+                for (int i = 0; i < disease.requiredHerbs.Count; i++)
+                {
+                    RequiredHerbAmount required = disease.requiredHerbs[i];
+
+                    if (required == null || required.herb == null)
+                        continue;
+
+                    AddPageLine(
+                        pages,
+                        currentLines,
+                        ref currentLineCount,
+                        "<align=\"left\">- "
+                        + required.herb.herbName
+                        + " x"
+                        + Mathf.Max(1, required.amount)
+                        + "</align>"
+                    );
+                }
+            }
+        }
+
+        AddTreatmentRoleSummaryPageLines(
+            disease,
+            pages,
+            currentLines,
+            ref currentLineCount,
+            showPrescription
+        );
+
+        FlushPrescriptionPage(pages, currentLines);
+
+        return pages;
+    }
+
+    public static List<string> BuildSpecialPrescriptionPages(DiseaseData disease)
+    {
+        bool hasCorrectPrescription =
+            SpecialYThuPrescriptionRecordService.HasCorrectPrescription();
+
+        string correctPrescriptionText =
+            SpecialYThuPrescriptionRecordService.GetCorrectPrescriptionText();
+
+        return BuildSpecialPrescriptionPages(
+            disease,
+            hasCorrectPrescription,
+            correctPrescriptionText
+        );
+    }
+
+    public static List<string> BuildSpecialPrescriptionPages(
+        DiseaseData disease,
+        bool hasCorrectPrescription,
+        string correctPrescriptionText
+    )
+    {
+        if (!hasCorrectPrescription || string.IsNullOrWhiteSpace(correctPrescriptionText))
+        {
+            return BuildPrescriptionPages(disease, false);
+        }
+
         List<string> pages = new List<string>();
 
         if (disease == null)
@@ -70,79 +181,97 @@ public static class YThuBookTextFormatter
             pages,
             currentLines,
             ref currentLineCount,
-            "<align=\"center\"><b>Phương thuốc</b></align>"
+            "<align=\"center\"><b>Phương thuốc đã ghi nhận</b></align>"
         );
 
         AddPageLine(pages, currentLines, ref currentLineCount, "");
 
-        if (disease.requiredHerbs == null || disease.requiredHerbs.Count == 0)
+        string[] prescriptionLines = correctPrescriptionText.Split('\n');
+
+        for (int i = 0; i < prescriptionLines.Length; i++)
         {
+            string line = prescriptionLines[i];
+
+            if (string.IsNullOrWhiteSpace(line))
+                continue;
+
             AddPageLine(
                 pages,
                 currentLines,
                 ref currentLineCount,
-                "<align=\"left\">- Chưa có dữ liệu vị thuốc.</align>"
+                "<align=\"left\">" + line.Trim() + "</align>"
             );
         }
-        else
-        {
-            for (int i = 0; i < disease.requiredHerbs.Count; i++)
-            {
-                RequiredHerbAmount required = disease.requiredHerbs[i];
 
-                if (required == null || required.herb == null)
-                    continue;
+        AddTreatmentRoleSummaryPageLines(
+            disease,
+            pages,
+            currentLines,
+            ref currentLineCount,
+            true
+        );
 
-                AddPageLine(
-                    pages,
-                    currentLines,
-                    ref currentLineCount,
-                    "<align=\"left\">- "
-                    + required.herb.herbName
-                    + " x"
-                    + Mathf.Max(1, required.amount)
-                    + "</align>"
-                );
-            }
-        }
+        FlushPrescriptionPage(pages, currentLines);
 
+        return pages;
+    }
+
+    private static void AddTreatmentRoleSummaryPageLines(
+        DiseaseData disease,
+        List<string> pages,
+        List<string> currentLines,
+        ref int currentLineCount,
+        bool hasContentBefore
+    )
+    {
         string roleSummary = BuildTreatmentRoleSummary(disease);
 
-        if (!string.IsNullOrWhiteSpace(roleSummary))
+        if (!string.IsNullOrWhiteSpace(roleSummary) || !hasContentBefore)
         {
-            AddPageLine(pages, currentLines, ref currentLineCount, "");
+            if (currentLines.Count > 0)
+                AddPageLine(pages, currentLines, ref currentLineCount, "");
+
             AddPageLine(
                 pages,
                 currentLines,
                 ref currentLineCount,
                 "<align=\"center\"><b>Dược tính cần có</b></align>"
             );
+
             AddPageLine(pages, currentLines, ref currentLineCount, "");
 
-            string[] roleLines = roleSummary.Split('\n');
-
-            for (int i = 0; i < roleLines.Length; i++)
+            if (string.IsNullOrWhiteSpace(roleSummary))
             {
-                string line = roleLines[i];
-
-                if (string.IsNullOrWhiteSpace(line))
-                {
-                    AddPageLine(pages, currentLines, ref currentLineCount, "");
-                    continue;
-                }
-
                 AddPageLine(
                     pages,
                     currentLines,
                     ref currentLineCount,
-                    "<align=\"left\">" + line.Trim() + "</align>"
+                    "<align=\"left\">- Chưa có dữ liệu dược tính.</align>"
                 );
             }
+            else
+            {
+                string[] roleLines = roleSummary.Split('\n');
+
+                for (int i = 0; i < roleLines.Length; i++)
+                {
+                    string line = roleLines[i];
+
+                    if (string.IsNullOrWhiteSpace(line))
+                    {
+                        AddPageLine(pages, currentLines, ref currentLineCount, "");
+                        continue;
+                    }
+
+                    AddPageLine(
+                        pages,
+                        currentLines,
+                        ref currentLineCount,
+                        "<align=\"left\">" + line.Trim() + "</align>"
+                    );
+                }
+            }
         }
-
-        FlushPrescriptionPage(pages, currentLines);
-
-        return pages;
     }
 
     private static void AddPageLine(
@@ -310,12 +439,10 @@ public static class YThuBookTextFormatter
             {
                 AddRolesLimited(chiefRoles, herbRoles, ref hasMoreChiefRoles);
             }
-            
             else if (amount >= 3 && amount <= 5)
             {
                 AddRolesLimited(assistantRoles, herbRoles, ref hasMoreAssistantRoles);
             }
-            
             else if (amount >= 1 && amount <= 2)
             {
                 AddRolesLimited(harmonyRoles, herbRoles, ref hasMoreHarmonyRoles);
@@ -419,7 +546,11 @@ public static class YThuBookTextFormatter
         return result;
     }
 
-    private static void AddRolesLimited(List<string> targetRoles, List<string> sourceRoles, ref bool hasMoreRoles)
+    private static void AddRolesLimited(
+        List<string> targetRoles,
+        List<string> sourceRoles,
+        ref bool hasMoreRoles
+    )
     {
         if (targetRoles == null || sourceRoles == null)
             return;

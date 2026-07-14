@@ -7,6 +7,11 @@ public static class PlayerLevelService
     public const int DaiPhuTarget = 300;
     public const int DanhYTarget = 500;
 
+    private const string OfficialQuestCompletedKey = "OfficialQuestCompleted";
+    private const string OfficialQuestFailedKey = "OfficialQuestFailed";
+    private const string SpecialCaseIsCuredKey = "SpecialCase_IsCured";
+    private const string SpecialCaseIsFailedKey = "SpecialCase_IsFailed";
+
     public static int GetReputation()
     {
         if (PlayerEconomy.Instance == null)
@@ -34,7 +39,7 @@ public static class PlayerLevelService
         if (reputation < DanhYTarget)
             return 4;
 
-        if (!IsOfficialQuestCompleted())
+        if (!CanBecomeYDaoSuccessor())
             return 5;
 
         return 6;
@@ -95,7 +100,7 @@ public static class PlayerLevelService
         if (stage == 5)
             return "Chương 5 - Phủ Huyện";
 
-        return "Hậu truyện";
+        return "Hậu truyện - Truyền Nhân Y Đạo";
     }
 
     public static int GetNextTargetReputation()
@@ -122,11 +127,46 @@ public static class PlayerLevelService
         return GetCurrentUnlockLevel() >= Mathf.Max(1, level);
     }
 
+    public static bool CanBecomeYDaoSuccessor()
+    {
+        if (GetReputation() < DanhYTarget)
+            return false;
+
+        if (IsOfficialQuestFailed())
+            return false;
+
+        if (!IsQuanHuyenCured())
+            return false;
+
+        if (!IsOfficialQuestCompleted())
+            return false;
+
+        return true;
+    }
+
+    public static bool IsQuanHuyenCured()
+    {
+        return PlayerPrefs.GetInt(SpecialCaseIsCuredKey, 0) == 1;
+    }
+
+    public static bool IsQuanHuyenFailed()
+    {
+        return PlayerPrefs.GetInt(SpecialCaseIsFailedKey, 0) == 1;
+    }
+
+    public static bool IsOfficialQuestFailed()
+    {
+        if (QuestProgressManager.Instance != null)
+            return QuestProgressManager.Instance.IsOfficialQuestFailed();
+
+        return PlayerPrefs.GetInt(OfficialQuestFailedKey, 0) == 1;
+    }
+
     private static bool IsOfficialQuestCompleted()
     {
         if (QuestProgressManager.Instance != null)
             return QuestProgressManager.Instance.IsOfficialQuestCompleted();
 
-        return PlayerPrefs.GetInt("OfficialQuestCompleted", 0) == 1;
+        return PlayerPrefs.GetInt(OfficialQuestCompletedKey, 0) == 1;
     }
 }

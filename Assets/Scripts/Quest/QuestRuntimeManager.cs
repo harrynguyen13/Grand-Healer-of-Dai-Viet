@@ -88,7 +88,7 @@ public partial class QuestRuntimeManager : MonoBehaviour
         if (reputation < danhYTarget)
             return 4;
 
-        if (!IsOfficialQuestCompleted())
+        if (!PlayerLevelService.CanBecomeYDaoSuccessor())
             return 5;
 
         return 6;
@@ -111,7 +111,7 @@ public partial class QuestRuntimeManager : MonoBehaviour
         if (stage == 5)
             return "Chương 5 - Phủ Huyện";
 
-        return "Hậu truyện";
+        return "Hậu truyện - Truyền Nhân Y Đạo";
     }
 
     public void ResetQuestRuntimeForNewGame()

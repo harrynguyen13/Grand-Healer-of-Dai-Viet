@@ -16,6 +16,12 @@ public class YThuBookUI : MonoBehaviour
     [Tooltip("Nếu bật, bệnh Level 5 cũng hiện trong Y thư. Nếu tắt, Level 5 được xem là bệnh đặc biệt và không hiện.")]
     [SerializeField] private bool includeSpecialLevelDiseases = false;
 
+    [Header("Bệnh đặc biệt Quan Huyện")]
+    [SerializeField] private bool showNamedSpecialDiseasePage = true;
+
+    [Tooltip("Kéo DiseaseData bệnh Quan Huyện vào đây, ví dụ ThatDietTrungDocDich.")]
+    [SerializeField] private DiseaseData specialDiseaseForBook;
+
     [Header("Book Image")]
     [SerializeField] private Image bookImage;
     [SerializeField] private Sprite idleOpenSprite;
@@ -52,6 +58,7 @@ public class YThuBookUI : MonoBehaviour
         public DiseaseData disease;
         public int prescriptionPageIndex;
         public bool isLockedPage;
+        public bool isSpecialDiseasePage;
     }
 
     private void Awake()
@@ -144,8 +151,12 @@ public class YThuBookUI : MonoBehaviour
             + unlockedDiseases.Count
             + " bệnh theo cấp hiện tại: "
             + PlayerLevelService.GetCurrentUnlockLevel()
+            + ". CurrentStage = "
+            + PlayerLevelService.GetCurrentStage()
             + ". Còn bệnh khóa: "
             + hasLockedDiseasePage
+            + ". Có bệnh đặc biệt Quan Huyện: "
+            + ShouldShowSpecialDiseasePage()
         );
     }
 
@@ -187,22 +198,16 @@ public class YThuBookUI : MonoBehaviour
             if (disease == null)
                 continue;
 
-            List<string> prescriptionPages =
-                YThuBookTextFormatter.BuildPrescriptionPages(disease);
+            AddDiseasePages(disease, false);
+        }
 
-            int pageCount = 1;
+        if (ShouldShowSpecialDiseasePage())
+        {
+            DiseaseData specialDisease = GetSpecialDiseaseForBook();
 
-            if (prescriptionPages != null && prescriptionPages.Count > 0)
-                pageCount = prescriptionPages.Count;
-
-            for (int pageIndex = 0; pageIndex < pageCount; pageIndex++)
+            if (specialDisease != null && !IsNormalDiseaseAlreadyShowing(specialDisease))
             {
-                BookPageData page = new BookPageData();
-                page.disease = disease;
-                page.prescriptionPageIndex = pageIndex;
-                page.isLockedPage = false;
-
-                bookPages.Add(page);
+                AddDiseasePages(specialDisease, true);
             }
         }
 
@@ -212,9 +217,48 @@ public class YThuBookUI : MonoBehaviour
             lockedPage.disease = null;
             lockedPage.prescriptionPageIndex = 0;
             lockedPage.isLockedPage = true;
+            lockedPage.isSpecialDiseasePage = false;
 
             bookPages.Add(lockedPage);
         }
+    }
+
+    private void AddDiseasePages(DiseaseData disease, bool isSpecialDiseasePage)
+    {
+        if (disease == null)
+            return;
+
+        List<string> prescriptionPages =
+            GetPrescriptionPagesForDisease(disease, isSpecialDiseasePage);
+
+        int pageCount = 1;
+
+        if (prescriptionPages != null && prescriptionPages.Count > 0)
+            pageCount = prescriptionPages.Count;
+
+        for (int pageIndex = 0; pageIndex < pageCount; pageIndex++)
+        {
+            BookPageData page = new BookPageData();
+            page.disease = disease;
+            page.prescriptionPageIndex = pageIndex;
+            page.isLockedPage = false;
+            page.isSpecialDiseasePage = isSpecialDiseasePage;
+
+            bookPages.Add(page);
+        }
+    }
+
+    private List<string> GetPrescriptionPagesForDisease(
+        DiseaseData disease,
+        bool isSpecialDiseasePage
+    )
+    {
+        if (isSpecialDiseasePage)
+        {
+            return YThuBookTextFormatter.BuildSpecialPrescriptionPages(disease);
+        }
+
+        return YThuBookTextFormatter.BuildPrescriptionPages(disease);
     }
 
     private string GetSearchKeyword()
@@ -228,6 +272,98 @@ public class YThuBookUI : MonoBehaviour
     private bool IsSearching()
     {
         return !string.IsNullOrWhiteSpace(GetSearchKeyword());
+    }
+
+    private bool ShouldShowSpecialDiseasePage()
+    {
+        if (PlayerLevelService.GetCurrentStage() < 5)
+            return false;
+
+        if (!showNamedSpecialDiseasePage)
+            return false;
+
+        if (!SpecialYThuDiseaseService.HasSpecialDiseaseInYThu())
+            return false;
+
+        DiseaseData specialDisease = GetSpecialDiseaseForBook();
+
+        if (specialDisease == null)
+            return false;
+
+        if (IsSearching())
+            return DoesSpecialDiseaseMatchSearch(specialDisease);
+
+        return true;
+    }
+
+    private DiseaseData GetSpecialDiseaseForBook()
+    {
+        if (specialDiseaseForBook != null)
+            return specialDiseaseForBook;
+
+        return SpecialYThuDiseaseService.GetSpecialDisease();
+    }
+
+    private bool DoesSpecialDiseaseMatchSearch(DiseaseData specialDisease)
+    {
+        if (specialDisease == null)
+            return false;
+
+        string keyword = GetSearchKeyword();
+
+        if (string.IsNullOrWhiteSpace(keyword))
+            return true;
+
+        string selectedName = SpecialYThuDiseaseService.GetSelectedDiseaseName();
+
+        if (ContainsSearchText(selectedName, keyword))
+            return true;
+
+        if (ContainsSearchText(specialDisease.diseaseName, keyword))
+            return true;
+
+        if (ContainsSearchText(specialDisease.description, keyword))
+            return true;
+
+        if (ContainsSearchText(GetDiseaseAssetName(specialDisease), keyword))
+            return true;
+
+        return false;
+    }
+
+    private bool ContainsSearchText(string source, string keyword)
+    {
+        if (string.IsNullOrWhiteSpace(source))
+            return false;
+
+        if (string.IsNullOrWhiteSpace(keyword))
+            return true;
+
+        string normalizedSource = YThuBookDataService.NormalizeSearchText(source);
+
+        return normalizedSource.Contains(keyword);
+    }
+
+    private string GetDiseaseAssetName(DiseaseData disease)
+    {
+        if (disease == null)
+            return "";
+
+        return disease.name;
+    }
+
+    private bool IsNormalDiseaseAlreadyShowing(DiseaseData disease)
+    {
+        if (disease == null)
+            return false;
+
+        for (int i = 0; i < filteredDiseases.Count; i++)
+        {
+            if (filteredDiseases[i] == disease)
+                return true;
+        }
+
+        return false;
     }
 
     private void NextPage()
@@ -370,17 +506,33 @@ public class YThuBookUI : MonoBehaviour
         {
             if (page.prescriptionPageIndex == 0)
             {
-                diseaseInfoText.text = YThuBookTextFormatter.BuildDiseaseInfoText(disease);
+                if (page.isSpecialDiseasePage)
+                {
+                    diseaseInfoText.text =
+                        YThuBookTextFormatter.BuildDiseaseInfoText(
+                            disease,
+                            SpecialYThuDiseaseService.GetSelectedDiseaseName()
+                        );
+                }
+                else
+                {
+                    diseaseInfoText.text =
+                        YThuBookTextFormatter.BuildDiseaseInfoText(disease);
+                }
             }
             else
             {
                 diseaseInfoText.text = "";
             }
         }
+
         if (prescriptionText != null)
         {
             List<string> prescriptionPages =
-                YThuBookTextFormatter.BuildPrescriptionPages(disease);
+                GetPrescriptionPagesForDisease(
+                    disease,
+                    page.isSpecialDiseasePage
+                );
 
             if (prescriptionPages == null || prescriptionPages.Count == 0)
             {

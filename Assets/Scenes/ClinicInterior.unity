@@ -6125,7 +6125,7 @@ MonoBehaviour:
   medicineCounterDisplay: {fileID: 211007266}
   receiveMedicineTime: 0.8
   firstPatientEnterDelay: 10
-  queuedPatientEnterDelay: 3
+  queuedPatientEnterDelay: 2
   minNextPatientDelay: 100
   maxNextPatientDelay: 100
   fallbackClinicLevel: 1
@@ -25561,7 +25561,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InteractionPromptTrigger
   keyText: F
   actionText: "kh\xE1m b\u1EC7nh."
-  hideKey: 19
+  hideKey: 20
   promptFormat: "\u1EA4n {0} \u0111\u1EC3 {1}"
   worldOffset: {x: 2, y: 2, z: 2}
   autoHide: 1
@@ -25605,7 +25605,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 7.324, y: -17}
+  m_SizeDelta: {x: 0, y: -17}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &471709677
 MonoBehaviour:
@@ -29645,8 +29645,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 192.338, y: -10}
-  m_SizeDelta: {x: 364.676, y: 0}
+  m_AnchoredPosition: {x: 196, y: -10}
+  m_SizeDelta: {x: 372, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &604370486
 MonoBehaviour:
@@ -51819,7 +51819,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -4.324, y: 0}
+  m_SizeDelta: {x: 3, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1197893556
 MonoBehaviour:

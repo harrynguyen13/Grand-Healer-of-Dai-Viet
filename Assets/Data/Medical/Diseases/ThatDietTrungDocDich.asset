@@ -18,11 +18,11 @@ MonoBehaviour:
   diseaseGroup: 0
   description: "D\u1ECBch \u0111\u1ED9c m\u1EA1nh ph\u1EA1m ph\u1EBF v\xE0 huy\u1EBFt
     m\u1EA1ch, nhi\u1EC7t \u0111\u1ED9c lan s\xE2u l\xE0m ch\xEDnh kh\xED suy tho\xE1t."
-  patientDialogue: "Th\u1EA7y \u01A1i c\u1EE9u m\u1EA1ng... trong l\xE0ng t\xF4i
-    ng\u01B0\u1EDDi ch\u1EBFt la li\u1EC7t r\u1ED3i... t\xF4i th\u1EDF kh\xF4ng ra
-    h\u01A1i, ng\u1EF1c \u0111au nh\u01B0 l\u1EEDa \u0111\u1ED1t, kh\u1EA1c to\xE0n
-    m\xE1u \u0111en tanh h\xF4i, h\u1EA1ch c\u1ED5 s\u01B0ng to c\u1EE9ng ng\u1EAFc
-    s\u1EAFp v\u1EE1 r\u1ED3i!"
+  patientDialogue: "B\u1EA3n quan nhi\u1EC1u ng\xE0y nay s\u1ED1t cao kh\xF4ng d\u1EE9t,
+    ng\u1EF1c \u0111au nh\u01B0 l\u1EEDa \u0111\u1ED1t, h\u01A1i th\u1EDF n\u1EB7ng
+    n\u1EC1, m\u1ED7i c\u01A1n ho l\u1EA1i tr\xE0o ra m\xE1u \u0111en tanh h\xF4i.
+    H\u1EA1ch d\u01B0\u1EDBi tai s\u01B0ng c\u1EE9ng, th\u1EA7n tr\xED m\xEA lo\u1EA1n,
+    e r\u1EB1ng s\u1EAFp kh\xF4ng \u1ED5n r\u1ED3i."
   symptoms:
   - symptomText: "S\u1ED1t cao \u0111\xF9ng \u0111\xF9ng, co gi\u1EADt to\xE0n th\xE2n."
     showAtStep: 0

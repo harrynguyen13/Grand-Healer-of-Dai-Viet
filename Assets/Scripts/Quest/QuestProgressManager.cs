@@ -14,6 +14,7 @@ public class QuestProgressManager : MonoBehaviour
     private const string MoneySpentOnHerbsKey = "Quest_MoneySpentOnHerbs";
 
     private const string OfficialQuestCompletedKey = "OfficialQuestCompleted";
+    private const string OfficialQuestFailedKey = "OfficialQuestFailed";
 
     private const string DiseaseKeyPrefix = "Quest_CuredDisease_";
     private const string LevelKeyPrefix = "Quest_CuredLevel_";
@@ -174,9 +175,23 @@ public class QuestProgressManager : MonoBehaviour
         return PlayerPrefs.GetInt(OfficialQuestCompletedKey, 0) == 1;
     }
 
+    public bool IsOfficialQuestFailed()
+    {
+        return PlayerPrefs.GetInt(OfficialQuestFailedKey, 0) == 1;
+    }
+
+    public void FailOfficialQuest()
+    {
+        PlayerPrefs.SetInt(OfficialQuestFailedKey, 1);
+        PlayerPrefs.SetInt(OfficialQuestCompletedKey, 0);
+        PlayerPrefs.Save();
+
+        Debug.Log("Nhiệm vụ chữa bệnh cho quan đã thất bại.");
+    }
     public void CompleteOfficialQuest()
     {
         PlayerPrefs.SetInt(OfficialQuestCompletedKey, 1);
+        PlayerPrefs.SetInt(OfficialQuestFailedKey, 0);
         PlayerPrefs.Save();
 
         Debug.Log("Đã hoàn thành nhiệm vụ chữa bệnh cho quan.");
@@ -191,7 +206,13 @@ public class QuestProgressManager : MonoBehaviour
         PlayerPrefs.DeleteKey(BoughtHerbTotalKey);
         PlayerPrefs.DeleteKey(MoneySpentOnHerbsKey);
 
+        PlayerPrefs.DeleteKey("Quest_CompletedOnce_S1_Rank_100");
+        PlayerPrefs.DeleteKey("Quest_CompletedOnce_S2_Rank_200");
+        PlayerPrefs.DeleteKey("Quest_CompletedOnce_S3_Rank_300");
+        PlayerPrefs.DeleteKey("Quest_CompletedOnce_S4_Rank_500");
+
         PlayerPrefs.DeleteKey(OfficialQuestCompletedKey);
+        PlayerPrefs.DeleteKey(OfficialQuestFailedKey);
 
         for (int i = 1; i <= 5; i++)
         {

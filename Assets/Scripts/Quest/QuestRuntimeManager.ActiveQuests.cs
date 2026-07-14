@@ -4,6 +4,11 @@ using UnityEngine;
 
 public partial class QuestRuntimeManager
 {
+    private const string ActiveQuestStartValueKeyPrefix = "ActiveQuestStartValue_";
+
+    //Dùng cho nhiệm vụ chỉ được hoàn thành 1 lần trong save.
+    private const string CompletedOnceQuestKeyPrefix = "Quest_CompletedOnce_";
+
     private List<QuestDefinition> GetActiveQuests(int stage, int reputation)
     {
         LastRewardMessage = "";
@@ -44,8 +49,11 @@ public partial class QuestRuntimeManager
             if (currentQuest == null)
             {
                 slotQuestIds[i] = "";
+                ClearQuestStartValue(i);
                 continue;
             }
+
+            ApplySavedQuestStartValue(i, currentQuest);
 
             if (currentQuest.IsCompleted)
             {
@@ -57,6 +65,7 @@ public partial class QuestRuntimeManager
                     + currentQuest.Title);
 
                 slotQuestIds[i] = "";
+                ClearQuestStartValue(i);
             }
         }
 
@@ -77,11 +86,14 @@ public partial class QuestRuntimeManager
             QuestDefinition newQuest = candidates[randomIndex];
 
             slotQuestIds[i] = newQuest.Id;
+            SaveQuestStartValue(i, newQuest);
 
             Debug.Log("Random nhiệm vụ mới vào slot "
                 + (i + 1)
                 + ": "
-                + newQuest.Title);
+                + newQuest.Title
+                + " | Mốc bắt đầu: "
+                + newQuest.StartValue);
         }
 
         SaveActiveQuestSlots(slotQuestIds);
@@ -94,9 +106,14 @@ public partial class QuestRuntimeManager
         {
             QuestDefinition quest = FindQuestById(questPool, slotQuestIds[i]);
 
-            if (quest != null && !quest.IsCompleted)
+            if (quest != null)
             {
-                result.Add(quest);
+                ApplySavedQuestStartValue(i, quest);
+
+                if (!quest.IsCompleted)
+                {
+                    result.Add(quest);
+                }
             }
         }
 
@@ -150,6 +167,8 @@ public partial class QuestRuntimeManager
             if (oldQuest == null)
                 continue;
 
+            ApplySavedQuestStartValue(i, oldQuest);
+
             if (!oldQuest.IsCompleted)
                 continue;
 
@@ -159,6 +178,9 @@ public partial class QuestRuntimeManager
 
     private void GiveQuestReward(QuestDefinition quest, int stage)
     {
+        if (quest == null)
+            return;
+
         if (QuestRewardManager.Instance == null)
         {
             Debug.LogWarning("Không tìm thấy QuestRewardManager để phát thưởng nhiệm vụ.");
@@ -169,6 +191,14 @@ public partial class QuestRuntimeManager
 
         if (!string.IsNullOrEmpty(rewardText))
             LastRewardMessage = rewardText;
+
+
+         //Nếu là nhiệm vụ chỉ hoàn thành 1 lần,
+         //đánh dấu lại để sau này không random ra nữa.
+        if (IsCompletedOnceQuest(quest))
+        {
+            MarkCompletedOnceQuest(quest.Id);
+        }
     }
 
     private int GetRandomIndex(int maxExclusive)
@@ -194,16 +224,38 @@ public partial class QuestRuntimeManager
             if (quest == null)
                 continue;
 
-            if (quest.IsCompleted)
+            if (IsQuestAlreadyInSlots(quest.Id, slotQuestIds))
                 continue;
 
-            if (IsQuestAlreadyInSlots(quest.Id, slotQuestIds))
+             //Chặn nhiệm vụ chỉ hoàn thành 1 lần.
+            if (IsCompletedOnceQuest(quest) && HasCompletedOnceQuest(quest.Id))
+                continue;
+
+            if (IsNonRepeatableQuestAlreadyCompleted(quest))
                 continue;
 
             candidates.Add(quest);
         }
 
         return candidates;
+    }
+
+    private bool IsNonRepeatableQuestAlreadyCompleted(QuestDefinition quest)
+    {
+        if (quest == null)
+            return false;
+
+        if (quest.Id == "S5_Official")
+        {
+            return IsOfficialQuestCompleted();
+        }
+
+        if (quest.Id == "S5_ThatDiet")
+        {
+            return quest.RawCurrent >= quest.Target;
+        }
+
+        return false;
     }
 
     private bool IsQuestAlreadyInSlots(string questId, string[] slotQuestIds)
@@ -233,6 +285,7 @@ public partial class QuestRuntimeManager
             else
             {
                 PlayerPrefs.DeleteKey(key);
+                ClearQuestStartValue(i);
             }
         }
 
@@ -244,13 +297,94 @@ public partial class QuestRuntimeManager
         for (int i = 0; i < ActiveQuestCount; i++)
         {
             PlayerPrefs.DeleteKey(GetActiveQuestSlotKey(i));
+            ClearQuestStartValue(i);
         }
 
         PlayerPrefs.Save();
     }
 
+    private void SaveQuestStartValue(int slotIndex, QuestDefinition quest)
+    {
+        if (quest == null)
+            return;
+
+        int startValue = quest.RawCurrent;
+
+        PlayerPrefs.SetInt(GetActiveQuestStartValueKey(slotIndex), startValue);
+        quest.SetStartValue(startValue);
+
+        PlayerPrefs.Save();
+    }
+
+    private void ApplySavedQuestStartValue(int slotIndex, QuestDefinition quest)
+    {
+        if (quest == null)
+            return;
+
+        string key = GetActiveQuestStartValueKey(slotIndex);
+
+        if (!PlayerPrefs.HasKey(key))
+        {
+            SaveQuestStartValue(slotIndex, quest);
+            return;
+        }
+
+        int savedStartValue = PlayerPrefs.GetInt(key, quest.RawCurrent);
+        quest.SetStartValue(savedStartValue);
+    }
+
+    private void ClearQuestStartValue(int slotIndex)
+    {
+        PlayerPrefs.DeleteKey(GetActiveQuestStartValueKey(slotIndex));
+    }
+
     private string GetActiveQuestSlotKey(int index)
     {
         return ActiveQuestKeyPrefix + index;
+    }
+
+    private string GetActiveQuestStartValueKey(int index)
+    {
+        return ActiveQuestStartValueKeyPrefix + index;
+    }
+
+    private bool IsCompletedOnceQuest(QuestDefinition quest)
+    {
+        if (quest == null)
+            return false;
+
+        return IsRankQuestId(quest.Id);
+    }
+
+    private bool IsRankQuestId(string questId)
+    {
+        if (string.IsNullOrEmpty(questId))
+            return false;
+
+        return questId.Contains("_Rank_");
+    }
+
+    private bool HasCompletedOnceQuest(string questId)
+    {
+        if (string.IsNullOrEmpty(questId))
+            return false;
+
+        return PlayerPrefs.GetInt(GetCompletedOnceQuestKey(questId), 0) == 1;
+    }
+
+    private void MarkCompletedOnceQuest(string questId)
+    {
+        if (string.IsNullOrEmpty(questId))
+            return;
+
+        PlayerPrefs.SetInt(GetCompletedOnceQuestKey(questId), 1);
+        PlayerPrefs.Save();
+
+        Debug.Log("Đã đánh dấu nhiệm vụ chỉ hoàn thành 1 lần: " + questId);
+    }
+
+    private string GetCompletedOnceQuestKey(string questId)
+    {
+        return CompletedOnceQuestKeyPrefix + questId;
     }
 }

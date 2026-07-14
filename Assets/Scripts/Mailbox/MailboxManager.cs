@@ -410,7 +410,7 @@ public class MailboxManager : MonoBehaviour
 
     private void CleanupExpiredReadMails(bool notifyIfChanged)
     {
-        long expiredBeforeTicks = DateTime.Now.AddDays(-7).Ticks;
+        long expiredBeforeTicks = DateTime.Now.AddDays(-1).Ticks;
         int removedCount = 0;
 
         for (int i = mails.Count - 1; i >= 0; i--)
@@ -443,7 +443,7 @@ public class MailboxManager : MonoBehaviour
 
             if (logDebug)
             {
-                Debug.Log("Đã tự xóa " + removedCount + " thư đã đọc quá 7 ngày.");
+                Debug.Log("Đã tự xóa " + removedCount + " thư đã đọc quá 1 ngày.");
             }
 
             if (notifyIfChanged)
