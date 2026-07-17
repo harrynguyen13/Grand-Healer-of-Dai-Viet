@@ -9,6 +9,8 @@ public class MailboxManager : MonoBehaviour
 
     public event Action OnMailboxChanged;
 
+    private const string SaveFileName = "mailbox_save.json";
+
     [Header("Database dược liệu")]
     [SerializeField] private MedicalDatabase medicalDatabase;
 
@@ -21,7 +23,7 @@ public class MailboxManager : MonoBehaviour
     {
         get
         {
-            return Path.Combine(Application.persistentDataPath, "mailbox_save.json");
+            return GameSavePath.GetSavePath(SaveFileName);
         }
     }
 
@@ -35,6 +37,8 @@ public class MailboxManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        GameSavePath.MigrateLegacyRootSave(SaveFileName);
 
         LoadMailbox();
         CleanupExpiredReadMails(false);
@@ -390,16 +394,11 @@ public class MailboxManager : MonoBehaviour
         OnMailboxChanged?.Invoke();
     }
 
-
     public void ResetMailboxForNewGame()
     {
         mails.Clear();
 
-        if (File.Exists(SavePath))
-        {
-            File.Delete(SavePath);
-            Debug.Log("Đã xóa file save hòm thư: " + SavePath);
-        }
+        GameSavePath.DeleteSaveAndLegacy(SaveFileName);
 
         SaveMailbox();
 
@@ -460,6 +459,11 @@ public class MailboxManager : MonoBehaviour
 
         string json = JsonUtility.ToJson(saveData, true);
         File.WriteAllText(SavePath, json);
+
+        if (logDebug)
+        {
+            Debug.Log("Đã lưu hòm thư tại: " + SavePath);
+        }
     }
 
     private void LoadMailbox()
@@ -504,6 +508,11 @@ public class MailboxManager : MonoBehaviour
                     mail.readTicks = DateTime.Now.Ticks;
                 }
             }
+        }
+
+        if (logDebug)
+        {
+            Debug.Log("Đã load hòm thư từ: " + SavePath);
         }
     }
 

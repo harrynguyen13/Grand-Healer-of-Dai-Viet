@@ -48,6 +48,10 @@ public class MainMenuUIController : MonoBehaviour
     private const string HomeGardenReadyKey = "HerbGarden_HomeGarden_01_Ready";
     private const string HomeGardenNextReadyKey = "HerbGarden_HomeGarden_01_NextReadyUtcTicks";
 
+    private const string PlayerEconomySaveFile = "player_economy_save.json";
+    private const string HerbInventorySaveFile = "herb_inventory_save.json";
+    private const string MailboxSaveFile = "mailbox_save.json";
+
     private bool isLoading = false;
 
     private void Start()
@@ -197,10 +201,13 @@ public class MainMenuUIController : MonoBehaviour
         if (PlayerPrefs.GetInt(HasLocalSaveKey, 0) == 1)
             return true;
 
-        if (File.Exists(GetJsonSavePath("player_economy_save.json")))
+        if (File.Exists(GetJsonSavePath(PlayerEconomySaveFile)))
             return true;
 
-        if (File.Exists(GetJsonSavePath("herb_inventory_save.json")))
+        if (File.Exists(GetJsonSavePath(HerbInventorySaveFile)))
+            return true;
+
+        if (File.Exists(GetJsonSavePath(MailboxSaveFile)))
             return true;
 
         return false;
@@ -225,6 +232,7 @@ public class MainMenuUIController : MonoBehaviour
 
         Debug.Log("Đã reset dữ liệu save cũ.");
     }
+
     private void ClearPlayerPrefsSave()
     {
         PlayerPrefs.DeleteKey(HasLocalSaveKey);
@@ -325,7 +333,6 @@ public class MainMenuUIController : MonoBehaviour
             );
 
             Debug.Log("Đã gọi reset kho thuốc nếu HerbInventory có hàm ResetInventoryForNewGame.");
-   
         }
 
         if (MailboxManager.Instance != null)
@@ -369,7 +376,7 @@ public class MainMenuUIController : MonoBehaviour
 
     private void DeleteAllJsonSaveFiles()
     {
-        string folderPath = Application.persistentDataPath;
+        string folderPath = GameSavePath.GetSaveFolderPath();
 
         if (!Directory.Exists(folderPath))
         {
@@ -384,11 +391,15 @@ public class MainMenuUIController : MonoBehaviour
             File.Delete(file);
             Debug.Log("Đã xóa file save: " + file);
         }
+
+        GameSavePath.DeleteSaveAndLegacy(PlayerEconomySaveFile);
+        GameSavePath.DeleteSaveAndLegacy(HerbInventorySaveFile);
+        GameSavePath.DeleteSaveAndLegacy(MailboxSaveFile);
     }
 
     private string GetJsonSavePath(string fileName)
     {
-        return Path.Combine(Application.persistentDataPath, fileName);
+        return GameSavePath.GetSavePath(fileName);
     }
 
     private void ShowMessage(string message)

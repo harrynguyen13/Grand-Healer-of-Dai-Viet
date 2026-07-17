@@ -6,6 +6,8 @@ public class PlayerEconomy : MonoBehaviour
 {
     public static PlayerEconomy Instance { get; private set; }
 
+    private const string SaveFileName = "player_economy_save.json";
+
     [Header("Tiền mặc định khi chưa có save")]
     [SerializeField] private int money = 200;
 
@@ -19,7 +21,7 @@ public class PlayerEconomy : MonoBehaviour
     {
         get
         {
-            return Path.Combine(Application.persistentDataPath, "player_economy_save.json");
+            return GameSavePath.GetSavePath(SaveFileName);
         }
     }
 
@@ -107,26 +109,46 @@ public class PlayerEconomy : MonoBehaviour
         saveData.reputation = reputation;
 
         string json = JsonUtility.ToJson(saveData, true);
+        string savePath = SavePath;
 
-        File.WriteAllText(SavePath, json);
+        File.WriteAllText(savePath, json);
 
-        Debug.Log("Đã lưu tiền/tín nhiệm tại: " + SavePath);
+        Debug.Log("Đã lưu tiền/tín nhiệm tại: " + savePath);
     }
 
     private void LoadEconomy()
     {
-        if (!File.Exists(SavePath))
+        GameSavePath.MigrateLegacyRootSave(SaveFileName);
+
+        string savePath = SavePath;
+
+        if (!File.Exists(savePath))
         {
             Debug.Log("Chưa có file save tiền/tín nhiệm. Dùng giá trị mặc định.");
             SaveEconomy();
             return;
         }
 
-        string json = File.ReadAllText(SavePath);
+        LoadEconomyFromPath(savePath);
+    }
+
+    private void LoadEconomyFromPath(string path)
+    {
+        if (!File.Exists(path))
+        {
+            Debug.LogWarning("Không tìm thấy file save tiền/tín nhiệm tại: " + path);
+            return;
+        }
+
+        string json = File.ReadAllText(path);
 
         if (string.IsNullOrWhiteSpace(json))
         {
             Debug.LogWarning("File save tiền/tín nhiệm rỗng. Dùng giá trị mặc định.");
+
+            money = 200;
+            reputation = 0;
+
             SaveEconomy();
             return;
         }
@@ -136,6 +158,10 @@ public class PlayerEconomy : MonoBehaviour
         if (saveData == null)
         {
             Debug.LogWarning("Không đọc được file save tiền/tín nhiệm. Dùng giá trị mặc định.");
+
+            money = 200;
+            reputation = 0;
+
             SaveEconomy();
             return;
         }
@@ -143,16 +169,16 @@ public class PlayerEconomy : MonoBehaviour
         money = Mathf.Max(0, saveData.money);
         reputation = Mathf.Max(0, saveData.reputation);
 
-        Debug.Log("Đã load tiền/tín nhiệm. Tiền: " + money + ", tín nhiệm: " + reputation);
+        Debug.Log(
+            "Đã load tiền/tín nhiệm từ: " + path
+            + " | Tiền: " + money
+            + " | Tín nhiệm: " + reputation
+        );
     }
 
     public void DeleteEconomySave()
     {
-        if (File.Exists(SavePath))
-        {
-            File.Delete(SavePath);
-            Debug.Log("Đã xóa save tiền/tín nhiệm.");
-        }
+        GameSavePath.DeleteSaveAndLegacy(SaveFileName);
 
         money = 200;
         reputation = 0;

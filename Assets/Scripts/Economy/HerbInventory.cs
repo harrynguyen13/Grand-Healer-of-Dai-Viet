@@ -7,6 +7,8 @@ public class HerbInventory : MonoBehaviour
 {
     public static HerbInventory Instance { get; private set; }
 
+    private const string SaveFileName = "herb_inventory_save.json";
+
     [System.Serializable]
     public class HerbStock
     {
@@ -42,7 +44,7 @@ public class HerbInventory : MonoBehaviour
     {
         get
         {
-            return Path.Combine(Application.persistentDataPath, "herb_inventory_save.json");
+            return GameSavePath.GetSavePath(SaveFileName);
         }
     }
 
@@ -58,6 +60,8 @@ public class HerbInventory : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         BuildLookup();
+
+        GameSavePath.MigrateLegacyRootSave(SaveFileName);
 
         if (File.Exists(SavePath))
         {
@@ -382,7 +386,7 @@ public class HerbInventory : MonoBehaviour
         try
         {
             File.WriteAllText(SavePath, json);
-            Debug.Log("Đã lưu kho thuốc.");
+            Debug.Log("Đã lưu kho thuốc tại: " + SavePath);
         }
         catch (Exception e)
         {
@@ -443,7 +447,7 @@ public class HerbInventory : MonoBehaviour
             RefreshUnlockedHerbsByPlayerLevel(false);
             SyncAllListValues();
 
-            Debug.Log("Đã load kho thuốc từ file save. Tổng vị trong kho: " + herbStocks.Count);
+            Debug.Log("Đã load kho thuốc từ file save: " + SavePath + ". Tổng vị trong kho: " + herbStocks.Count);
         }
         catch (Exception e)
         {
@@ -454,15 +458,7 @@ public class HerbInventory : MonoBehaviour
     [ContextMenu("Delete Herb Inventory Save")]
     public void DeleteInventorySave()
     {
-        if (File.Exists(SavePath))
-        {
-            File.Delete(SavePath);
-            Debug.Log("Đã xóa file save kho thuốc.");
-        }
-        else
-        {
-            Debug.Log("Không có file save kho thuốc để xóa.");
-        }
+        GameSavePath.DeleteSaveAndLegacy(SaveFileName);
     }
 
     public void ResetInventoryForNewGame()
