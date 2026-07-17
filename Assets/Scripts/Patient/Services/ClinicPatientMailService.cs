@@ -14,6 +14,8 @@ public class PendingPatientMailData
     public int moneyDelta;
     public int reputationDelta;
 
+    public int medicinePayment;
+
     public string yThuUsageNote;
 }
 
@@ -29,7 +31,12 @@ public static class ClinicPatientMailService
     {
         PendingPatientMailData data = new PendingPatientMailData();
 
-        int payment = ClinicPrescriptionService.CalculatePrescriptionPayment(prescription);
+        int medicinePayment = ClinicPrescriptionService.CalculatePrescriptionPayment(prescription);
+
+        if (medicinePayment < 1)
+            medicinePayment = 1;
+
+        PayMedicineMoneyNow(medicinePayment);
 
         int diseaseLevel = 1;
 
@@ -39,54 +46,73 @@ public static class ClinicPatientMailService
         }
 
         int reputationChange;
-        float paymentMultiplier;
 
         if (diagnosisCorrect && prescriptionCorrect)
         {
             reputationChange = GetCorrectTreatmentReward(diseaseLevel);
-            paymentMultiplier = 1f;
 
             Debug.Log("Kết quả: ĐÚNG BỆNH + ĐÚNG THUỐC.");
         }
         else if (diagnosisCorrect && !prescriptionCorrect)
         {
             reputationChange = -GetWrongPrescriptionPenalty(diseaseLevel);
-            paymentMultiplier = 0.4f;
 
             Debug.Log("Kết quả: ĐÚNG BỆNH nhưng SAI THUỐC.");
         }
         else if (!diagnosisCorrect && prescriptionCorrect)
         {
             reputationChange = -GetWrongDiagnosisPenalty(diseaseLevel);
-            paymentMultiplier = 0.5f;
 
             Debug.Log("Kết quả: SAI BỆNH nhưng THUỐC ĐÚNG BỆNH THẬT.");
         }
         else
         {
             reputationChange = -GetWrongTreatmentPenalty(diseaseLevel);
-            paymentMultiplier = 0.2f;
 
             Debug.Log("Kết quả: SAI BỆNH + SAI THUỐC.");
         }
-
-        payment = Mathf.RoundToInt(payment * paymentMultiplier);
-
-        if (payment < 1)
-            payment = 1;
 
         data.hasMail = true;
         data.patientName = GetPatientDisplayName(patientObject);
         data.diseaseName = realDisease != null ? realDisease.diseaseName : "Không rõ bệnh";
         data.diagnosisCorrect = diagnosisCorrect;
         data.prescriptionCorrect = prescriptionCorrect;
-        data.moneyDelta = payment;
+
+        // Tiền thuốc đã trả ngay sau khi kê đơn, không nhận trong mail nữa.
+        data.moneyDelta = 0;
+
+        // Uy tín vẫn xử lý qua mail sau khi biết kết quả.
         data.reputationDelta = reputationChange;
+
+        data.medicinePayment = medicinePayment;
         data.yThuUsageNote = "";
 
-        Debug.Log("Đã chuẩn bị thư bệnh nhân. Người gửi: " + data.patientName);
+        Debug.Log(
+            "Đã chuẩn bị thư bệnh nhân. Người gửi: "
+            + data.patientName
+            + " | Tiền thuốc đã trả ngay: "
+            + medicinePayment
+            + " | Uy tín trong mail: "
+            + reputationChange
+        );
 
         return data;
+    }
+
+    private static void PayMedicineMoneyNow(int medicinePayment)
+    {
+        if (medicinePayment <= 0)
+            return;
+
+        if (PlayerEconomy.Instance == null)
+        {
+            Debug.LogWarning("Không tìm thấy PlayerEconomy. Không thể cộng tiền thuốc ngay.");
+            return;
+        }
+
+        PlayerEconomy.Instance.AddMoney(medicinePayment);
+
+        Debug.Log("Bệnh nhân đã trả tiền thuốc ngay: " + medicinePayment);
     }
 
     public static void SendPatientMail(PendingPatientMailData data)
