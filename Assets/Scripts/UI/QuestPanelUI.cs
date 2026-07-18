@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class QuestPanelUI : MonoBehaviour
@@ -31,17 +32,21 @@ public class QuestPanelUI : MonoBehaviour
     {
         AutoBindReferences();
 
-        if (Keyboard.current != null &&
-            Keyboard.current[toggleKey].wasPressedThisFrame)
-        {
-            ToggleQuestPanel();
-        }
-
         if (questPanel != null)
             isOpen = questPanel.activeSelf;
 
         if (isOpen)
             RefreshQuestContent();
+
+        // Khi đang gõ trong ô tìm kiếm/input thì không cho phím tắt UI chạy.
+        if (IsTypingInInputField())
+            return;
+
+        if (Keyboard.current != null &&
+            Keyboard.current[toggleKey].wasPressedThisFrame)
+        {
+            ToggleQuestPanel();
+        }
 
         if (isOpen &&
             Keyboard.current != null &&
@@ -49,6 +54,25 @@ public class QuestPanelUI : MonoBehaviour
         {
             CloseQuestPanel();
         }
+    }
+
+    private bool IsTypingInInputField()
+    {
+        if (EventSystem.current == null)
+            return false;
+
+        GameObject selectedObject = EventSystem.current.currentSelectedGameObject;
+
+        if (selectedObject == null)
+            return false;
+
+        if (selectedObject.GetComponent<TMP_InputField>() != null)
+            return true;
+
+        if (selectedObject.GetComponentInParent<TMP_InputField>() != null)
+            return true;
+
+        return false;
     }
 
     private void AutoBindReferences()
