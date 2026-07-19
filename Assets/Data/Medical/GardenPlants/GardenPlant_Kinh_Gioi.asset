@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf9ba1a39d979b246b1505e940745e61, type: 3}
+  m_Name: GardenPlant_Kinh_Gioi
+  m_EditorClassIdentifier: Assembly-CSharp::GardenPlantData
+  plantName: "Kinh Gi\u1EDBi"
+  iconSprite: {fileID: -5107923959259139262, guid: 7d63d22e04eb081408c4933d0966721d, type: 3}
+  seedlingSprite: {fileID: -5107923959259139262, guid: 7d63d22e04eb081408c4933d0966721d, type: 3}
+  matureSprite: {fileID: 21300000, guid: fea45692fdaaa8641958a7323b976dbc, type: 3}
+  rewardHerb: {fileID: 11400000, guid: 5e7d73b057a5f614abf98862ef6ca724, type: 2}
+  harvestAmount: 1
+  growDurationSeconds: 60

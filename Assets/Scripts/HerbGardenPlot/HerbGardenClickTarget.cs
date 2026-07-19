@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class HerbGardenClickTarget : MonoBehaviour
@@ -27,7 +28,9 @@ public class HerbGardenClickTarget : MonoBehaviour
         if (!Mouse.current.leftButton.wasPressedThisFrame)
             return;
 
-        Debug.Log("Đã bấm chuột trái.");
+        // Nếu đang bấm lên UI thì không cho click xuyên xuống ô đất.
+        if (IsPointerOverUI())
+            return;
 
         if (mainCamera == null)
             mainCamera = Camera.main;
@@ -48,22 +51,23 @@ public class HerbGardenClickTarget : MonoBehaviour
         Vector3 mouseWorldPosition = mainCamera.ScreenToWorldPoint(mouseScreenPosition);
         Vector2 mousePoint = new Vector2(mouseWorldPosition.x, mouseWorldPosition.y);
 
-        Debug.Log("Mouse World Position: " + mousePoint);
-
         if (!clickCollider.OverlapPoint(mousePoint))
-        {
-            Debug.Log("Bấm chuột nhưng chưa trúng icon thu hoạch.");
             return;
-        }
-
-        Debug.Log("ĐÃ CLICK TRÚNG ICON THU HOẠCH.");
 
         if (gardenPlot == null)
         {
-            Debug.LogWarning("HarvestReadyIcon chưa gán Garden Plot.");
+            Debug.LogWarning("Ô đất chưa gán HerbGardenPlot.");
             return;
         }
 
         gardenPlot.TryHarvest();
+    }
+
+    private bool IsPointerOverUI()
+    {
+        if (EventSystem.current == null)
+            return false;
+
+        return EventSystem.current.IsPointerOverGameObject();
     }
 }
