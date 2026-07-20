@@ -3,111 +3,37 @@
   "states": [
     {
       "character": {
-        "id": "c2402ce2-95c6-4639-9414-813e012d0db8",
-        "name": "A 2D pixel art chara",
-        "prompt": "A 2D pixel art character sprite of a 19th-century Vietnamese child villager, standing and facing forward from a top-down RPG perspective. The proportion is stylized chibii with a significantly shorter stature, a noticeably larger head, and a very small, slender body. The child has a traditional 't\u00f3c ch\u1ecfm' hairstyle, with most of the hair shaved but distinct tufts remaining on the sides and a small central topknot. The child wears a very simple, rustic, short-sleeved brown tunic and loose off-white trousers, secured with a small dark fabric belt wrap. Completely barefoot, standing on a solid pure black background with clean pixel lines. Functional RPG game asset.",
+        "id": "35880c6d-257f-4de4-94a8-79dc7cca2535",
+        "name": "A 2D pixel art character sprite of an old Vietnamese merchant man, full body, top-down 2D RPG game perspective, facing forward, straight front view standing pose. The character anatomy and style must perfectly match the reference: grey hair styled into a high, rounded traditional topknot bun (\"b\u00fai t\u00f3c c\u1ee7 t\u1ecfi\") with a small white hairpin visible. He has an elderly weathered face with a short neat grey beard and mustache. He wears a simple, rustic, short-sleeved loose brown traditional collarless shirt (\"\u00e1o c\u00e1nh\") that opens slightly at the neck, over loose dark charcoal cropped trousers that reach below the knees. Completely barefoot with blocky pixel feet. Thick clean pixel outlines, flat 16-bit colors, no modern gradients, perfectly isolated on a solid pure black background, functional RPG game asset.",
+        "prompt": "A 2D pixel art character sprite of an old Vietnamese merchant man, full body, top-down 2D RPG game perspective, facing forward, straight front view standing pose. The character anatomy and style must perfectly match the reference: grey hair styled into a high, rounded traditional topknot bun (\"b\u00fai t\u00f3c c\u1ee7 t\u1ecfi\") with a small white hairpin visible. He has an elderly weathered face with a short neat grey beard and mustache. He wears a simple, rustic, short-sleeved loose brown traditional collarless shirt (\"\u00e1o c\u00e1nh\") that opens slightly at the neck, over loose dark charcoal cropped trousers that reach below the knees. Completely barefoot with blocky pixel feet. Thick clean pixel outlines, flat 16-bit colors, no modern gradients, perfectly isolated on a solid pure black background, functional RPG game asset.",
         "size": {
-          "width": 68,
-          "height": 68
+          "width": 80,
+          "height": 80
         },
         "template_id": "mannequin",
         "directions": 8,
         "view": "low top-down",
-        "created_at": "2026-07-09T10:18:17.546265+00:00"
+        "created_at": "2026-07-19T14:03:04.772815+00:00"
       },
-      "folder": "A_2D_pixel_art_chara",
+      "folder": "A_2D_pixel_art_character_sprite_of_an_old_Vietname",
       "frames": {
         "rotations": {
-          "south": "A_2D_pixel_art_chara/rotations/south.png",
-          "south-east": "A_2D_pixel_art_chara/rotations/south-east.png",
-          "east": "A_2D_pixel_art_chara/rotations/east.png",
-          "north-east": "A_2D_pixel_art_chara/rotations/north-east.png",
-          "north": "A_2D_pixel_art_chara/rotations/north.png",
-          "north-west": "A_2D_pixel_art_chara/rotations/north-west.png",
-          "west": "A_2D_pixel_art_chara/rotations/west.png",
-          "south-west": "A_2D_pixel_art_chara/rotations/south-west.png"
+          "south": "A_2D_pixel_art_character_sprite_of_an_old_Vietname/rotations/south.png",
+          "south-east": "A_2D_pixel_art_character_sprite_of_an_old_Vietname/rotations/south-east.png",
+          "east": "A_2D_pixel_art_character_sprite_of_an_old_Vietname/rotations/east.png",
+          "north-east": "A_2D_pixel_art_character_sprite_of_an_old_Vietname/rotations/north-east.png",
+          "north": "A_2D_pixel_art_character_sprite_of_an_old_Vietname/rotations/north.png",
+          "north-west": "A_2D_pixel_art_character_sprite_of_an_old_Vietname/rotations/north-west.png",
+          "west": "A_2D_pixel_art_character_sprite_of_an_old_Vietname/rotations/west.png",
+          "south-west": "A_2D_pixel_art_character_sprite_of_an_old_Vietname/rotations/south-west.png"
         },
         "animations": {
-          "Running": {
-            "south-east": [
-              "A_2D_pixel_art_chara/animations/Running/south-east/frame_000.png",
-              "A_2D_pixel_art_chara/animations/Running/south-east/frame_001.png",
-              "A_2D_pixel_art_chara/animations/Running/south-east/frame_002.png",
-              "A_2D_pixel_art_chara/animations/Running/south-east/frame_003.png",
-              "A_2D_pixel_art_chara/animations/Running/south-east/frame_004.png",
-              "A_2D_pixel_art_chara/animations/Running/south-east/frame_005.png",
-              "A_2D_pixel_art_chara/animations/Running/south-east/frame_006.png",
-              "A_2D_pixel_art_chara/animations/Running/south-east/frame_007.png"
-            ],
-            "north": [
-              "A_2D_pixel_art_chara/animations/Running/north/frame_000.png",
-              "A_2D_pixel_art_chara/animations/Running/north/frame_001.png",
-              "A_2D_pixel_art_chara/animations/Running/north/frame_002.png",
-              "A_2D_pixel_art_chara/animations/Running/north/frame_003.png",
-              "A_2D_pixel_art_chara/animations/Running/north/frame_004.png",
-              "A_2D_pixel_art_chara/animations/Running/north/frame_005.png",
-              "A_2D_pixel_art_chara/animations/Running/north/frame_006.png",
-              "A_2D_pixel_art_chara/animations/Running/north/frame_007.png"
-            ],
-            "south-west": [
-              "A_2D_pixel_art_chara/animations/Running/south-west/frame_000.png",
-              "A_2D_pixel_art_chara/animations/Running/south-west/frame_001.png",
-              "A_2D_pixel_art_chara/animations/Running/south-west/frame_002.png",
-              "A_2D_pixel_art_chara/animations/Running/south-west/frame_003.png",
-              "A_2D_pixel_art_chara/animations/Running/south-west/frame_004.png",
-              "A_2D_pixel_art_chara/animations/Running/south-west/frame_005.png",
-              "A_2D_pixel_art_chara/animations/Running/south-west/frame_006.png",
-              "A_2D_pixel_art_chara/animations/Running/south-west/frame_007.png"
-            ],
-            "east": [
-              "A_2D_pixel_art_chara/animations/Running/east/frame_000.png",
-              "A_2D_pixel_art_chara/animations/Running/east/frame_001.png",
-              "A_2D_pixel_art_chara/animations/Running/east/frame_002.png",
-              "A_2D_pixel_art_chara/animations/Running/east/frame_003.png",
-              "A_2D_pixel_art_chara/animations/Running/east/frame_004.png",
-              "A_2D_pixel_art_chara/animations/Running/east/frame_005.png",
-              "A_2D_pixel_art_chara/animations/Running/east/frame_006.png",
-              "A_2D_pixel_art_chara/animations/Running/east/frame_007.png"
-            ],
+          "Breathing_Idle": {
             "south": [
-              "A_2D_pixel_art_chara/animations/Running/south/frame_000.png",
-              "A_2D_pixel_art_chara/animations/Running/south/frame_001.png",
-              "A_2D_pixel_art_chara/animations/Running/south/frame_002.png",
-              "A_2D_pixel_art_chara/animations/Running/south/frame_003.png",
-              "A_2D_pixel_art_chara/animations/Running/south/frame_004.png",
-              "A_2D_pixel_art_chara/animations/Running/south/frame_005.png",
-              "A_2D_pixel_art_chara/animations/Running/south/frame_006.png",
-              "A_2D_pixel_art_chara/animations/Running/south/frame_007.png"
-            ],
-            "north-east": [
-              "A_2D_pixel_art_chara/animations/Running/north-east/frame_000.png",
-              "A_2D_pixel_art_chara/animations/Running/north-east/frame_001.png",
-              "A_2D_pixel_art_chara/animations/Running/north-east/frame_002.png",
-              "A_2D_pixel_art_chara/animations/Running/north-east/frame_003.png",
-              "A_2D_pixel_art_chara/animations/Running/north-east/frame_004.png",
-              "A_2D_pixel_art_chara/animations/Running/north-east/frame_005.png",
-              "A_2D_pixel_art_chara/animations/Running/north-east/frame_006.png",
-              "A_2D_pixel_art_chara/animations/Running/north-east/frame_007.png"
-            ],
-            "west": [
-              "A_2D_pixel_art_chara/animations/Running/west/frame_000.png",
-              "A_2D_pixel_art_chara/animations/Running/west/frame_001.png",
-              "A_2D_pixel_art_chara/animations/Running/west/frame_002.png",
-              "A_2D_pixel_art_chara/animations/Running/west/frame_003.png",
-              "A_2D_pixel_art_chara/animations/Running/west/frame_004.png",
-              "A_2D_pixel_art_chara/animations/Running/west/frame_005.png",
-              "A_2D_pixel_art_chara/animations/Running/west/frame_006.png",
-              "A_2D_pixel_art_chara/animations/Running/west/frame_007.png"
-            ],
-            "north-west": [
-              "A_2D_pixel_art_chara/animations/Running/north-west/frame_000.png",
-              "A_2D_pixel_art_chara/animations/Running/north-west/frame_001.png",
-              "A_2D_pixel_art_chara/animations/Running/north-west/frame_002.png",
-              "A_2D_pixel_art_chara/animations/Running/north-west/frame_003.png",
-              "A_2D_pixel_art_chara/animations/Running/north-west/frame_004.png",
-              "A_2D_pixel_art_chara/animations/Running/north-west/frame_005.png",
-              "A_2D_pixel_art_chara/animations/Running/north-west/frame_006.png",
-              "A_2D_pixel_art_chara/animations/Running/north-west/frame_007.png"
+              "A_2D_pixel_art_character_sprite_of_an_old_Vietname/animations/Breathing_Idle/south/frame_000.png",
+              "A_2D_pixel_art_character_sprite_of_an_old_Vietname/animations/Breathing_Idle/south/frame_001.png",
+              "A_2D_pixel_art_character_sprite_of_an_old_Vietname/animations/Breathing_Idle/south/frame_002.png",
+              "A_2D_pixel_art_character_sprite_of_an_old_Vietname/animations/Breathing_Idle/south/frame_003.png"
             ]
           }
         }
@@ -115,5 +41,5 @@
     }
   ],
   "export_version": "3.1",
-  "export_date": "2026-07-10T12:01:40.898840"
+  "export_date": "2026-07-19T16:58:35.440152"
 }
