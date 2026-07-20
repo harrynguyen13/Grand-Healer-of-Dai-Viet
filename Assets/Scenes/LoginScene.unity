@@ -1696,6 +1696,7 @@ GameObject:
   - component: {fileID: 1924762661}
   - component: {fileID: 1924762660}
   - component: {fileID: 1924762659}
+  - component: {fileID: 1924762662}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -1822,7 +1823,7 @@ MonoBehaviour:
     musicClip: {fileID: 8300000, guid: 0b9dc16753b343846ae14e042e2c309d, type: 3}
   - sceneName: Government
     musicClip: {fileID: 8300000, guid: 0b9dc16753b343846ae14e042e2c309d, type: 3}
-  musicVolume: 0.5
+  musicVolume: 0.4
   fadeDuration: 1
 --- !u!4 &1924762661
 Transform:
@@ -1840,6 +1841,22 @@ Transform:
   - {fileID: 779388315}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1924762662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924762658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00cb20c4b568d944c854a01d71878fa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonSFXManager
+  sfxSource: {fileID: 779388317}
+  buttonClickClip: {fileID: 8300000, guid: cded688acca816a41a9499dfe007af1b, type: 3}
+  buttonClickVolume: 0.8
+  autoRegisterButtons: 1
 --- !u!1 &1971906166
 GameObject:
   m_ObjectHideFlags: 0
