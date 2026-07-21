@@ -21,6 +21,8 @@ public partial class QuestRuntimeManager : MonoBehaviour
 
     public string LastRewardMessage { get; private set; }
 
+    private bool isRefreshingQuestState;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -67,6 +69,26 @@ public partial class QuestRuntimeManager : MonoBehaviour
         }
 
         return result;
+    }
+
+    public void RefreshQuestStateNow()
+    {
+        if (isRefreshingQuestState)
+            return;
+
+        isRefreshingQuestState = true;
+
+        try
+        {
+            int reputation = GetReputation();
+            int stage = GetCurrentStage(reputation);
+
+            GetActiveQuests(stage, reputation);
+        }
+        finally
+        {
+            isRefreshingQuestState = false;
+        }
     }
 
     public int GetCurrentStage()

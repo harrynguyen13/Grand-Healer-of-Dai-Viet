@@ -142,13 +142,37 @@ public static class ClinicPatientMailService
     public static string GetPatientDisplayName(GameObject patientObject)
     {
         if (patientObject == null)
-            return "Bệnh nhân";
+            return GetRandomPatientName();
 
         string rawName = patientObject.name;
 
         if (string.IsNullOrWhiteSpace(rawName))
-            return "Bệnh nhân";
+            return GetRandomPatientName();
 
+        string cleanName = CleanPatientObjectName(rawName);
+
+        if (string.IsNullOrWhiteSpace(cleanName))
+            return GetRandomPatientName();
+
+        string compactKey = cleanName.ToLower().Replace(" ", "");
+
+        if (compactKey.Contains("balao"))
+            return GetRandomOldFemalePatientName();
+
+        if (compactKey.Contains("laonong"))
+            return GetRandomOldMalePatientName();
+
+        if (compactKey.Contains("phunu"))
+            return GetRandomFemalePatientName();
+
+        if (compactKey.Contains("male"))
+            return GetRandomMalePatientName();
+
+        return GetRandomPatientName();
+    }
+
+    private static string CleanPatientObjectName(string rawName)
+    {
         string cleanName = rawName;
 
         cleanName = cleanName.Replace("(Clone)", "");
@@ -158,34 +182,98 @@ public static class ClinicPatientMailService
         cleanName = cleanName.Replace("_", " ");
         cleanName = cleanName.Trim();
 
-        string key = cleanName.ToLower();
-
-        while (key.Contains("  "))
+        while (cleanName.Contains("  "))
         {
-            key = key.Replace("  ", " ");
+            cleanName = cleanName.Replace("  ", " ");
         }
 
-        string compactKey = key.Replace(" ", "");
+        return cleanName;
+    }
 
-        if (compactKey.Contains("balao") || key.Contains("bà lão"))
-            return "Bà lão";
+    private static string GetRandomPatientName()
+    {
+        string[] names =
+        {
+            "Ông Phúc",
+            "Bà Lụa",
+            "Chú Bình",
+            "Cô Sen",
+            "Anh Hòa",
+            "Chị Mùi",
+            "Bác Đình",
+            "Cụ Thành",
+            "Thím Hạnh",
+            "Dì Xuân",
+            "Cậu Minh",
+            "Mợ Lan"
+        };
 
-        if (compactKey.Contains("laonong") || key.Contains("lão nông"))
-            return "Lão nông";
+        int index = UnityEngine.Random.Range(0, names.Length);
+        return names[index];
+    }
 
-        if (compactKey.Contains("onglao") || key.Contains("ông lão"))
-            return "Ông lão";
+    private static string GetRandomOldMalePatientName()
+    {
+        string[] names =
+        {
+            "Ông Phúc",
+            "Ông Khang",
+            "Ông Lộc",
+            "Bác Đình",
+            "Bác Thành",
+            "Cụ An"
+        };
 
-        if (compactKey.Contains("thuongnhan") || key.Contains("thương nhân"))
-            return "Thương nhân";
+        int index = UnityEngine.Random.Range(0, names.Length);
+        return names[index];
+    }
 
-        if (compactKey.Contains("nam"))
-            return "Nam bệnh nhân";
+    private static string GetRandomOldFemalePatientName()
+    {
+        string[] names =
+        {
+            "Bà Lụa",
+            "Bà Hạnh",
+            "Bà Mận",
+            "Bà Tảo",
+            "Bà Xuân",
+            "Cụ Lan"
+        };
 
-        if (compactKey.Contains("nu") || key.Contains("nữ"))
-            return "Nữ bệnh nhân";
+        int index = UnityEngine.Random.Range(0, names.Length);
+        return names[index];
+    }
 
-        return "Bệnh nhân";
+    private static string GetRandomMalePatientName()
+    {
+        string[] names =
+        {
+            "Anh Hòa",
+            "Anh Lâm",
+            "Anh Khang",
+            "Cậu Minh",
+            "Cậu Bình",
+            "Chú Nhân"
+        };
+
+        int index = UnityEngine.Random.Range(0, names.Length);
+        return names[index];
+    }
+
+    private static string GetRandomFemalePatientName()
+    {
+        string[] names =
+        {
+            "Cô Sen",
+            "Cô Mùi",
+            "Cô Nụ",
+            "Chị Lụa",
+            "Chị Hạnh",
+            "Mợ Lan"
+        };
+
+        int index = UnityEngine.Random.Range(0, names.Length);
+        return names[index];
     }
 
     private static int GetCorrectTreatmentReward(int diseaseLevel)

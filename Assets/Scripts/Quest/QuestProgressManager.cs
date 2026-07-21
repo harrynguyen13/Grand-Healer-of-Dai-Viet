@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
@@ -6,6 +7,8 @@ using UnityEngine;
 public class QuestProgressManager : MonoBehaviour
 {
     public static QuestProgressManager Instance { get; private set; }
+
+    private bool questRefreshPending;
 
     private const string CorrectDiagnosisCountKey = "Quest_CorrectDiagnosisCount";
     private const string CorrectTreatmentCountKey = "Quest_CorrectTreatmentCount";
@@ -75,7 +78,11 @@ public class QuestProgressManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void RecordTreatmentResult(DiseaseData realDisease, bool diagnosisCorrect, bool prescriptionCorrect)
+    public void RecordTreatmentResult(
+        DiseaseData realDisease,
+        bool diagnosisCorrect,
+        bool prescriptionCorrect
+    )
     {
         if (diagnosisCorrect)
         {
@@ -87,6 +94,7 @@ public class QuestProgressManager : MonoBehaviour
         if (!fullCorrect)
         {
             PlayerPrefs.Save();
+            RequestQuestRuntimeRefresh();
             return;
         }
 
@@ -104,6 +112,7 @@ public class QuestProgressManager : MonoBehaviour
         }
 
         PlayerPrefs.Save();
+        RequestQuestRuntimeRefresh();
     }
 
     public void RecordHerbGathered(HerbData herb, int amount)
@@ -115,6 +124,7 @@ public class QuestProgressManager : MonoBehaviour
         AddInt(GetGatheredHerbKey(herb.herbName), amount);
 
         PlayerPrefs.Save();
+        RequestQuestRuntimeRefresh();
 
         Debug.Log("Quest ghi nhận số lượng hái thuốc: " + herb.herbName + " x" + amount);
     }
@@ -141,6 +151,7 @@ public class QuestProgressManager : MonoBehaviour
         AddInt(GardenHarvestSessionHerbPrefix + herbKey, 1);
 
         PlayerPrefs.Save();
+        RequestQuestRuntimeRefresh();
 
         Debug.Log("Quest ghi nhận số lần thu hoạch vị " + herbName + ": +1 lần.");
     }
@@ -181,8 +192,50 @@ public class QuestProgressManager : MonoBehaviour
         }
 
         PlayerPrefs.Save();
+        RequestQuestRuntimeRefresh();
 
         Debug.Log("Quest ghi nhận 1 lần thu hoạch vườn. Số loại vị được tính: " + uniqueHerbKeys.Count);
+    }
+
+    public void RecordGardenHarvestSessionForHerbBatch(HerbData herb, string batchId)
+    {
+        if (herb == null)
+            return;
+
+        RecordGardenHarvestSessionForHerbBatchName(herb.herbName, batchId);
+    }
+
+    public void RecordGardenHarvestSessionForHerbBatchName(string herbName, string batchId)
+    {
+        if (string.IsNullOrWhiteSpace(herbName))
+            return;
+
+        if (string.IsNullOrWhiteSpace(batchId))
+            batchId = System.Guid.NewGuid().ToString("N");
+
+        string herbKey = GetGardenHarvestHerbKey(herbName);
+
+        if (string.IsNullOrWhiteSpace(herbKey))
+            return;
+
+        string completedBatchKey =
+            GardenHarvestBatchCompletedPrefix + herbKey + "_" + batchId.Trim();
+
+        if (PlayerPrefs.GetInt(completedBatchKey, 0) == 1)
+        {
+            Debug.Log("Lượt trồng " + herbName + " này đã được tính nhiệm vụ rồi.");
+            return;
+        }
+
+        PlayerPrefs.SetInt(completedBatchKey, 1);
+
+        AddInt(GardenHarvestSessionTotalKey, 1);
+        AddInt(GardenHarvestSessionHerbPrefix + herbKey, 1);
+
+        PlayerPrefs.Save();
+        RequestQuestRuntimeRefresh();
+
+        Debug.Log("Quest ghi nhận lượt trồng vị " + herbName + ": +1 lần.");
     }
 
     public void RecordHerbBought(HerbData herb, int amount, int totalCost)
@@ -195,6 +248,7 @@ public class QuestProgressManager : MonoBehaviour
         AddInt(MoneySpentOnHerbsKey, Mathf.Max(0, totalCost));
 
         PlayerPrefs.Save();
+        RequestQuestRuntimeRefresh();
 
         Debug.Log("Quest ghi nhận mua thuốc: " + herb.herbName + " x" + amount);
     }
@@ -286,7 +340,9 @@ public class QuestProgressManager : MonoBehaviour
     {
         PlayerPrefs.SetInt(OfficialQuestFailedKey, 1);
         PlayerPrefs.SetInt(OfficialQuestCompletedKey, 0);
+
         PlayerPrefs.Save();
+        RequestQuestRuntimeRefresh();
 
         Debug.Log("Nhiệm vụ chữa bệnh cho quan đã thất bại.");
     }
@@ -295,7 +351,9 @@ public class QuestProgressManager : MonoBehaviour
     {
         PlayerPrefs.SetInt(OfficialQuestCompletedKey, 1);
         PlayerPrefs.SetInt(OfficialQuestFailedKey, 0);
+
         PlayerPrefs.Save();
+        RequestQuestRuntimeRefresh();
 
         Debug.Log("Đã hoàn thành nhiệm vụ chữa bệnh cho quan.");
     }
@@ -342,12 +400,41 @@ public class QuestProgressManager : MonoBehaviour
 
         for (int i = 0; i < trackedGardenHerbQuestTargetIds.Length; i++)
         {
-            PlayerPrefs.DeleteKey(GardenHerbQuestTargetPrefix + trackedGardenHerbQuestTargetIds[i]);
+            PlayerPrefs.DeleteKey(
+                GardenHerbQuestTargetPrefix + trackedGardenHerbQuestTargetIds[i]
+            );
         }
 
         PlayerPrefs.Save();
 
         Debug.Log("Đã reset toàn bộ tiến độ nhiệm vụ.");
+    }
+
+    private void RequestQuestRuntimeRefresh()
+    {
+        if (questRefreshPending)
+            return;
+
+        questRefreshPending = true;
+        StartCoroutine(RefreshQuestRuntimeNextFrame());
+    }
+
+    private IEnumerator RefreshQuestRuntimeNextFrame()
+    {
+        yield return null;
+
+        questRefreshPending = false;
+
+        if (QuestRuntimeManager.Instance == null)
+        {
+            Debug.LogWarning(
+                "QuestProgressManager: Không tìm thấy QuestRuntimeManager để kiểm tra nhiệm vụ."
+            );
+
+            yield break;
+        }
+
+        QuestRuntimeManager.Instance.RefreshQuestStateNow();
     }
 
     private void AddInt(string key, int amount)
@@ -437,44 +524,5 @@ public class QuestProgressManager : MonoBehaviour
         }
 
         return key;
-    }
-    public void RecordGardenHarvestSessionForHerbBatch(HerbData herb, string batchId)
-    {
-    if (herb == null)
-        return;
-
-    RecordGardenHarvestSessionForHerbBatchName(herb.herbName, batchId);
-    }
-
-    public void RecordGardenHarvestSessionForHerbBatchName(string herbName, string batchId)
-    {
-        if (string.IsNullOrWhiteSpace(herbName))
-            return;
-
-        if (string.IsNullOrWhiteSpace(batchId))
-            batchId = System.Guid.NewGuid().ToString("N");
-
-        string herbKey = GetGardenHarvestHerbKey(herbName);
-
-        if (string.IsNullOrWhiteSpace(herbKey))
-            return;
-
-        string completedBatchKey =
-            GardenHarvestBatchCompletedPrefix + herbKey + "_" + batchId.Trim();
-
-        if (PlayerPrefs.GetInt(completedBatchKey, 0) == 1)
-        {
-            Debug.Log("Lượt trồng " + herbName + " này đã được tính nhiệm vụ rồi.");
-            return;
-        }
-
-        PlayerPrefs.SetInt(completedBatchKey, 1);
-
-        AddInt(GardenHarvestSessionTotalKey, 1);
-        AddInt(GardenHarvestSessionHerbPrefix + herbKey, 1);
-
-        PlayerPrefs.Save();
-
-        Debug.Log("Quest ghi nhận lượt trồng vị " + herbName + ": +1 lần.");
     }
 }
