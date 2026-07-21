@@ -189,7 +189,7 @@ public class HerbGardenHarvestAllController : MonoBehaviour
     private void HarvestAllReadyPlots()
     {
         Dictionary<string, int> totalRewards = new Dictionary<string, int>();
-        int harvestedCount = 0;
+        int harvestedPlotCount = 0;
 
         for (int i = 0; i < gardenPlots.Count; i++)
         {
@@ -217,16 +217,18 @@ public class HerbGardenHarvestAllController : MonoBehaviour
                 totalRewards.Add(herbName, 0);
             }
 
+            // Đây là số lượng dược liệu nhận được, không phải số lần nhiệm vụ.
             totalRewards[herbName] += amount;
-            harvestedCount++;
+
+            harvestedPlotCount++;
         }
 
-        if (harvestedCount > 0)
+        if (harvestedPlotCount > 0)
         {
             ShowHarvestSummary(totalRewards);
         }
 
-        Debug.Log("Đã thu hoạch toàn bộ vườn. Số ô đã thu: " + harvestedCount);
+        Debug.Log("Đã thu hoạch toàn bộ vườn. Số ô đã thu: " + harvestedPlotCount);
 
         UpdateHarvestIconState();
     }
@@ -244,6 +246,7 @@ public class HerbGardenHarvestAllController : MonoBehaviour
 
         foreach (KeyValuePair<string, int> reward in totalRewards)
         {
+            // Text hiện lên chỉ là số lượng dược liệu nhận được.
             builder.AppendLine(reward.Key + " +" + reward.Value);
         }
 

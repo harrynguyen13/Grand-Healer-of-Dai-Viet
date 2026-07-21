@@ -3,8 +3,8 @@ using UnityEngine.InputSystem;
 
 public class HerbGardenPlantStation : MonoBehaviour
 {
-    [Header("Phím mở UI chọn cây")]
-    [SerializeField] private Key interactKey = Key.E;
+    [Header("Phím mở / đóng UI chọn cây")]
+    [SerializeField] private Key interactKey = Key.Q;
 
     [Header("Tag người chơi")]
     [SerializeField] private string playerTag = "Player";
@@ -24,12 +24,25 @@ public class HerbGardenPlantStation : MonoBehaviour
 
         if (Keyboard.current[interactKey].wasPressedThisFrame)
         {
-            OpenPlantSelectionUI();
+            TogglePlantSelectionUI();
         }
     }
 
-    private void OpenPlantSelectionUI()
+    private void TogglePlantSelectionUI()
     {
+        if (GardenPlantSelectionUI.Instance == null)
+        {
+            Debug.LogWarning("Không tìm thấy GardenPlantSelectionUI trong scene.");
+            return;
+        }
+
+        if (GardenPlantSelectionUI.Instance.IsOpen)
+        {
+            GardenPlantSelectionUI.Instance.Close();
+            Debug.Log("Đã đóng UI chọn cây trồng.");
+            return;
+        }
+
         int currentUnlockLevel = PlayerLevelService.GetCurrentUnlockLevel();
 
         if (currentUnlockLevel < requiredUnlockLevel)
@@ -42,12 +55,6 @@ public class HerbGardenPlantStation : MonoBehaviour
                 + " để bắt đầu trồng dược liệu."
             );
 
-            return;
-        }
-
-        if (GardenPlantSelectionUI.Instance == null)
-        {
-            Debug.LogWarning("Không tìm thấy GardenPlantSelectionUI trong scene.");
             return;
         }
 
@@ -70,5 +77,10 @@ public class HerbGardenPlantStation : MonoBehaviour
             return;
 
         isPlayerInRange = false;
+
+        if (GardenPlantSelectionUI.Instance != null && GardenPlantSelectionUI.Instance.IsOpen)
+        {
+            GardenPlantSelectionUI.Instance.Close();
+        }
     }
 }

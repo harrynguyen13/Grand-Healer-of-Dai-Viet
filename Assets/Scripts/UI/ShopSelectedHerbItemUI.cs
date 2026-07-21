@@ -1,9 +1,10 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ShopSelectedHerbItemUI : MonoBehaviour
+public class ShopSelectedHerbItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerMoveHandler
 {
     [Header("UI")]
     [SerializeField] private Image iconImage;
@@ -23,6 +24,7 @@ public class ShopSelectedHerbItemUI : MonoBehaviour
 
         if (button != null)
         {
+            button.onClick.RemoveListener(OnButtonClicked);
             button.onClick.AddListener(OnButtonClicked);
         }
     }
@@ -32,15 +34,19 @@ public class ShopSelectedHerbItemUI : MonoBehaviour
         herbData = data;
         onClicked = clickCallback;
 
+        if (herbData == null)
+            return;
+
         if (iconImage != null)
         {
-            iconImage.sprite = data.icon;
+            iconImage.sprite = herbData.icon;
             iconImage.preserveAspect = true;
+            iconImage.raycastTarget = true;
         }
 
         if (herbNameText != null)
         {
-            herbNameText.text = data.herbName;
+            herbNameText.text = herbData.herbName;
         }
 
         if (quantityText != null)
@@ -54,6 +60,44 @@ public class ShopSelectedHerbItemUI : MonoBehaviour
         if (herbData != null)
         {
             onClicked?.Invoke(herbData);
+        }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (herbData == null)
+            return;
+
+        if (HerbRoleTooltipUI.Instance == null)
+        {
+            Debug.LogWarning("Không tìm thấy HerbRoleTooltipUI.Instance.");
+            return;
+        }
+
+        HerbRoleTooltipUI.Instance.Show(herbData, eventData.position);
+    }
+
+    public void OnPointerMove(PointerEventData eventData)
+    {
+        if (HerbRoleTooltipUI.Instance == null)
+            return;
+
+        HerbRoleTooltipUI.Instance.Move(eventData.position);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (HerbRoleTooltipUI.Instance == null)
+            return;
+
+        HerbRoleTooltipUI.Instance.Hide();
+    }
+
+    private void OnDisable()
+    {
+        if (HerbRoleTooltipUI.Instance != null)
+        {
+            HerbRoleTooltipUI.Instance.Hide();
         }
     }
 }

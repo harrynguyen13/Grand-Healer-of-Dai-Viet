@@ -1,8 +1,7 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
-public class HerbGardenPlot : MonoBehaviour
+public partial class HerbGardenPlot : MonoBehaviour
 {
     private enum GardenState
     {
@@ -33,9 +32,12 @@ public class HerbGardenPlot : MonoBehaviour
     [Header("Prefab text bay lên")]
     [SerializeField] private FloatingHarvestText floatingTextPrefab;
 
+    private const string HerbOpenBatchKeyPrefix = "HerbGarden_OpenBatch_";
+
     private GardenState currentState = GardenState.Empty;
     private GardenPlantData currentPlant;
     private DateTime nextReadyUtcTime;
+    private string currentPlantBatchId = "";
 
     public bool IsUnlocked
     {
@@ -65,6 +67,11 @@ public class HerbGardenPlot : MonoBehaviour
     private string PlantKey
     {
         get { return "HerbGarden_" + gardenId + "_Plant"; }
+    }
+
+    private string PlantBatchKey
+    {
+        get { return "HerbGarden_" + gardenId + "_PlantBatch"; }
     }
 
     private string NextReadyUtcTicksKey
@@ -111,9 +118,7 @@ public class HerbGardenPlot : MonoBehaviour
         Transform visualTransform = transform.Find("PlantVisual");
 
         if (visualTransform != null)
-        {
             plantRenderer = visualTransform.GetComponent<SpriteRenderer>();
-        }
     }
 
     public void SetPlotUnlocked(bool unlocked)
@@ -206,8 +211,11 @@ public class HerbGardenPlot : MonoBehaviour
             return;
         }
 
+        string batchId = GetOrCreateOpenBatchId(plantData.rewardHerb);
+
         currentPlant = plantData;
         currentState = GardenState.Growing;
+        currentPlantBatchId = batchId;
 
         float baseGrowDuration = Mathf.Max(1f, currentPlant.growDurationSeconds);
         float growDuration = GetGrowDurationByPlayerLevel(baseGrowDuration);
@@ -226,6 +234,8 @@ public class HerbGardenPlot : MonoBehaviour
             + currentPlant.plantName
             + " tại ô "
             + gardenId
+            + ". Batch: "
+            + currentPlantBatchId
             + ". Cấp vườn: "
             + PlayerLevelService.GetCurrentUnlockLevel()
             + ". Sẵn sàng sau "
@@ -233,7 +243,6 @@ public class HerbGardenPlot : MonoBehaviour
             + " giây."
         );
     }
-
 
     private float GetGrowDurationByPlayerLevel(float baseGrowDuration)
     {
@@ -261,62 +270,11 @@ public class HerbGardenPlot : MonoBehaviour
             harvestReadyIcon.SetActive(isUnlocked);
     }
 
-    private void HarvestCurrentPlant()
-    {
-        if (!isUnlocked)
-        {
-            Debug.Log("Ô đất " + gardenId + " chưa được mở khóa.");
-            return;
-        }
-
-        if (currentPlant == null)
-        {
-            Debug.LogWarning("Ô đất đang ready nhưng không có dữ liệu cây.");
-            SetEmpty();
-            SaveGardenState();
-            return;
-        }
-
-        if (currentPlant.rewardHerb == null)
-        {
-            Debug.LogWarning("Cây " + currentPlant.plantName + " chưa kéo Reward Herb.");
-            return;
-        }
-
-        if (HerbInventory.Instance == null)
-        {
-            Debug.LogWarning("Không tìm thấy HerbInventory.Instance để cộng dược liệu.");
-            return;
-        }
-
-        int amount = Mathf.Max(1, currentPlant.harvestAmount);
-
-        HerbInventory.Instance.AddHerb(currentPlant.rewardHerb, amount);
-
-        if (QuestProgressManager.Instance != null)
-        {
-            QuestProgressManager.Instance.RecordHerbGathered(currentPlant.rewardHerb, amount);
-        }
-
-        StartCoroutine(ShowFloatingText(currentPlant.rewardHerb.herbName, amount));
-
-        Debug.Log(
-            "Thu hoạch "
-            + currentPlant.plantName
-            + " -> nhận "
-            + currentPlant.rewardHerb.herbName
-            + " +"
-            + amount
-        );
-
-        SetEmpty();
-        SaveGardenState();
-    }
-
     private void SetEmpty()
     {
         currentState = GardenState.Empty;
         currentPlant = null;
+        currentPlantBatchId = "";
         nextReadyUtcTime = DateTime.MinValue;
 
         if (plantRenderer != null)
@@ -366,189 +324,5 @@ public class HerbGardenPlot : MonoBehaviour
             plantRenderer.sprite = currentPlant.matureSprite;
             plantRenderer.enabled = currentPlant.matureSprite != null;
         }
-    }
-
-    private void SaveGardenState()
-    {
-        PlayerPrefs.SetInt(StateKey, (int)currentState);
-
-        if (currentPlant != null)
-            PlayerPrefs.SetString(PlantKey, currentPlant.name);
-        else
-            PlayerPrefs.DeleteKey(PlantKey);
-
-        PlayerPrefs.SetString(NextReadyUtcTicksKey, nextReadyUtcTime.Ticks.ToString());
-        PlayerPrefs.Save();
-    }
-
-    private void LoadGardenState()
-    {
-        int savedState = PlayerPrefs.GetInt(StateKey, (int)GardenState.Empty);
-        string savedPlantName = PlayerPrefs.GetString(PlantKey, "");
-        string savedTicksText = PlayerPrefs.GetString(NextReadyUtcTicksKey, "");
-
-        currentState = (GardenState)savedState;
-        currentPlant = FindPlantByAssetName(savedPlantName);
-
-        if (currentState == GardenState.Empty || currentPlant == null)
-        {
-            SetEmpty();
-            Debug.Log("Load ô đất " + gardenId + ": đang trống.");
-            return;
-        }
-
-        if (!string.IsNullOrEmpty(savedTicksText) &&
-            long.TryParse(savedTicksText, out long savedTicks))
-        {
-            nextReadyUtcTime = new DateTime(savedTicks, DateTimeKind.Utc);
-        }
-        else
-        {
-            nextReadyUtcTime = DateTime.UtcNow.AddSeconds(
-                Mathf.Max(1f, currentPlant.growDurationSeconds)
-            );
-        }
-
-        if (currentState == GardenState.ReadyToHarvest)
-        {
-            SetReadyToHarvest();
-            Debug.Log("Load ô đất " + gardenId + ": cây đã sẵn sàng thu hoạch.");
-            return;
-        }
-
-        if (currentState == GardenState.Growing)
-        {
-            if (DateTime.UtcNow >= nextReadyUtcTime)
-            {
-                SetReadyToHarvest();
-                SaveGardenState();
-
-                Debug.Log("Load ô đất " + gardenId + ": thời gian đã hết khi tắt game.");
-                return;
-            }
-
-            ApplyPlantVisual();
-
-            if (harvestReadyIcon != null)
-                harvestReadyIcon.SetActive(false);
-
-            double remainingSeconds = (nextReadyUtcTime - DateTime.UtcNow).TotalSeconds;
-
-            Debug.Log(
-                "Load ô đất "
-                + gardenId
-                + ": "
-                + currentPlant.plantName
-                + " còn "
-                + Mathf.CeilToInt((float)remainingSeconds)
-                + " giây."
-            );
-        }
-    }
-
-    private GardenPlantData FindPlantByAssetName(string assetName)
-    {
-        if (string.IsNullOrWhiteSpace(assetName))
-            return null;
-
-        if (gardenPlantDatabase == null || gardenPlantDatabase.plants == null)
-            return null;
-
-        for (int i = 0; i < gardenPlantDatabase.plants.Count; i++)
-        {
-            GardenPlantData plant = gardenPlantDatabase.plants[i];
-
-            if (plant == null)
-                continue;
-
-            if (plant.name == assetName)
-                return plant;
-        }
-
-        return null;
-    }
-
-    private IEnumerator ShowFloatingText(string herbName, int amount)
-    {
-        if (floatingTextPrefab == null || floatingTextSpawnPoint == null)
-            yield break;
-
-        FloatingHarvestText textInstance = Instantiate(
-            floatingTextPrefab,
-            floatingTextSpawnPoint.position,
-            Quaternion.identity
-        );
-
-        textInstance.Setup(herbName + " +" + amount);
-
-        yield return null;
-    }
-
-    public bool TryHarvestForSummary(out string herbName, out int amount)
-    {
-        herbName = "";
-        amount = 0;
-
-        if (!isUnlocked)
-            return false;
-
-        if (currentState != GardenState.ReadyToHarvest)
-            return false;
-
-        if (currentPlant == null)
-        {
-            Debug.LogWarning("Ô đất đang ready nhưng không có dữ liệu cây.");
-            SetEmpty();
-            SaveGardenState();
-            return false;
-        }
-
-        if (currentPlant.rewardHerb == null)
-        {
-            Debug.LogWarning("Cây " + currentPlant.plantName + " chưa kéo Reward Herb.");
-            return false;
-        }
-
-        if (HerbInventory.Instance == null)
-        {
-            Debug.LogWarning("Không tìm thấy HerbInventory.Instance để cộng dược liệu.");
-            return false;
-        }
-
-        amount = Mathf.Max(1, currentPlant.harvestAmount);
-        herbName = currentPlant.rewardHerb.herbName;
-
-        HerbInventory.Instance.AddHerb(currentPlant.rewardHerb, amount);
-
-        if (QuestProgressManager.Instance != null)
-        {
-            QuestProgressManager.Instance.RecordHerbGathered(currentPlant.rewardHerb, amount);
-        }
-
-        Debug.Log(
-            "Thu hoạch "
-            + currentPlant.plantName
-            + " -> nhận "
-            + herbName
-            + " +"
-            + amount
-        );
-
-        SetEmpty();
-        SaveGardenState();
-
-        return true;
-    }
-
-    public void ResetGardenForNewGame()
-    {
-        PlayerPrefs.DeleteKey(StateKey);
-        PlayerPrefs.DeleteKey(PlantKey);
-        PlayerPrefs.DeleteKey(NextReadyUtcTicksKey);
-        PlayerPrefs.Save();
-
-        SetEmpty();
-
-        Debug.Log("Đã reset ô đất " + gardenId + " cho game mới.");
     }
 }

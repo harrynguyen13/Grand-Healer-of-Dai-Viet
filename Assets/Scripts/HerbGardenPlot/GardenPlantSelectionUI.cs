@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class GardenPlantSelectionUI : MonoBehaviour
 {
-    public static GardenPlantSelectionUI Instance { get; private set; }
-
     [Header("UI")]
     [SerializeField] private GameObject panelRoot;
     [SerializeField] private Transform contentRoot;
@@ -13,11 +11,34 @@ public class GardenPlantSelectionUI : MonoBehaviour
     [Header("Database cây trồng")]
     [SerializeField] private GardenPlantDatabase gardenPlantDatabase;
 
+    public static GardenPlantSelectionUI Instance { get; private set; }
+
+    public bool IsOpen
+    {
+        get
+        {
+            return panelRoot != null && panelRoot.activeSelf;
+        }
+    }
+
     public GardenPlantData SelectedPlant { get; private set; }
 
     public bool HasSelectedPlant
     {
         get { return SelectedPlant != null; }
+    }
+
+    private string currentPlantingBatchId = "";
+
+    public string CurrentPlantingBatchId
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(currentPlantingBatchId))
+                currentPlantingBatchId = System.Guid.NewGuid().ToString("N");
+
+            return currentPlantingBatchId;
+        }
     }
 
     private readonly List<GameObject> spawnedItems = new List<GameObject>();
@@ -52,6 +73,8 @@ public class GardenPlantSelectionUI : MonoBehaviour
     public void ClearSelectedPlant()
     {
         SelectedPlant = null;
+        currentPlantingBatchId = "";
+
         Debug.Log("Đã hủy chọn cây trồng.");
     }
 
@@ -112,9 +135,21 @@ public class GardenPlantSelectionUI : MonoBehaviour
 
     private void OnPlantClicked(GardenPlantData plant)
     {
+        if (plant == null)
+            return;
+
         SelectedPlant = plant;
 
-        Debug.Log("Đã chọn cây để trồng: " + plant.plantName);
+        // Mỗi lần chọn cây trong UI = 1 lượt trồng mới.
+        // Trồng nhiều ô sau lần chọn này thì các ô đó cùng batch.
+        currentPlantingBatchId = System.Guid.NewGuid().ToString("N");
+
+        Debug.Log(
+            "Đã chọn cây để trồng: "
+            + plant.plantName
+            + " | Batch: "
+            + currentPlantingBatchId
+        );
 
         Close();
     }
