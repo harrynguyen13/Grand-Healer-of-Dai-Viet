@@ -101,13 +101,26 @@ public class LocalSaveManager : MonoBehaviour
 
             Vector3 savedPosition = GetSavedPlayerPosition();
 
-            // Apply nhiều frame để ghi đè các script spawn như PatientSpawnManager.
-            yield return StartCoroutine(ApplyPlayerPositionRepeated(savedPosition, 10));
+        yield return StartCoroutine(ApplyPlayerPositionRepeated(savedPosition, 10));
 
-            PlayerPrefs.DeleteKey(LoadFromSaveKey);
-            PlayerPrefs.Save();
+        // Chờ toàn bộ NPC trong scene khởi tạo xong
+        yield return null;
+        yield return null;
 
-            Debug.Log("Đã load vị trí người chơi từ local save: " + savedPosition);
+        // Load vị trí NPC
+        if (NPCSaveManager.Instance != null)
+        {
+            NPCSaveManager.Instance.LoadNPCs();
+        }
+        else
+        {
+            Debug.LogWarning("Không tìm thấy NPCSaveManager.");
+        }
+
+        PlayerPrefs.DeleteKey(LoadFromSaveKey);
+        PlayerPrefs.Save();
+
+        Debug.Log("Đã load vị trí người chơi từ local save: " + savedPosition);
         }
     }
 
@@ -192,6 +205,16 @@ public class LocalSaveManager : MonoBehaviour
         PlayerPrefs.SetFloat(PlayerZKey, player.position.z);
 
         PlayerPrefs.Save();
+
+        // Lưu vị trí toàn bộ NPC
+        if (NPCSaveManager.Instance != null)
+        {
+            NPCSaveManager.Instance.SaveNPCs();
+        }
+        else
+        {
+            Debug.LogWarning("Không tìm thấy NPCSaveManager.");
+        }
 
         Debug.Log("Đã lưu game local tại scene " + currentScene + ": " + player.position);
     }

@@ -153,6 +153,7 @@ GameObject:
   - component: {fileID: 1061654274643755066}
   - component: {fileID: 5403506445496059581}
   - component: {fileID: 7158636375027225020}
+  - component: {fileID: 5581887701850869773}
   m_Layer: 0
   m_Name: "Npc_B\xE0_l\xE3o"
   m_TagString: NPC
@@ -369,6 +370,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NpcSpeechBubble
   bubbleRoot: {fileID: 7680956190670010358}
   bubbleText: {fileID: 1044757341231399707}
+--- !u!114 &5581887701850869773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4839848908844110424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1837e046cb7627841a22d93d30422d57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCPersistentID
+  npcID: 
 --- !u!1 &7466920191608520072
 GameObject:
   m_ObjectHideFlags: 0

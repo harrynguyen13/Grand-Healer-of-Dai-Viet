@@ -335,6 +335,7 @@ GameObject:
   - component: {fileID: 7976919843359641826}
   - component: {fileID: 1532627964414469340}
   - component: {fileID: 8088178059641354954}
+  - component: {fileID: 2112703115290284978}
   m_Layer: 0
   m_Name: "Npc(Ph\u1EE5 n\u1EEF)"
   m_TagString: Untagged
@@ -560,3 +561,16 @@ MonoBehaviour:
   moveArea: {fileID: 0}
   pushBackTime: 0.5
   boundaryPadding: 0.1
+--- !u!114 &2112703115290284978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7549048073743206332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1837e046cb7627841a22d93d30422d57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCPersistentID
+  npcID: 

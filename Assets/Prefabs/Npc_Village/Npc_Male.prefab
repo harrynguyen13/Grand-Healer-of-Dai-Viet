@@ -195,6 +195,7 @@ GameObject:
   - component: {fileID: 6220498927990080594}
   - component: {fileID: 1644517598111399550}
   - component: {fileID: 5990661579651564459}
+  - component: {fileID: 7590373858248235098}
   m_Layer: 0
   m_Name: Npc_Male
   m_TagString: NPC
@@ -411,6 +412,19 @@ MonoBehaviour:
   separateMoveTime: 0.8
   talkChance: 0.75
   speechBubble: {fileID: 0}
+--- !u!114 &7590373858248235098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7586869687880724349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1837e046cb7627841a22d93d30422d57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCPersistentID
+  npcID: 
 --- !u!1 &9160186967598642889
 GameObject:
   m_ObjectHideFlags: 0

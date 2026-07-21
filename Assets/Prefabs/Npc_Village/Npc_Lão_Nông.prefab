@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5056968546849698711}
   - component: {fileID: 6438555554597320609}
   - component: {fileID: 1503511269194294104}
+  - component: {fileID: 4608342267088089699}
   m_Layer: 0
   m_Name: "Npc_L\xE3o_N\xF4ng"
   m_TagString: NPC
@@ -232,6 +233,19 @@ MonoBehaviour:
   separateMoveTime: 0.8
   talkChance: 0.75
   speechBubble: {fileID: 0}
+--- !u!114 &4608342267088089699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309602070240876178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1837e046cb7627841a22d93d30422d57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCPersistentID
+  npcID: 
 --- !u!1 &493396387098584820
 GameObject:
   m_ObjectHideFlags: 0

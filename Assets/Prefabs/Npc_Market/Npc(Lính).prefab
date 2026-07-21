@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3743270007298519374}
   - component: {fileID: 8989098085563310070}
   - component: {fileID: 5526545057375582082}
+  - component: {fileID: 6936020169344720617}
   m_Layer: 0
   m_Name: "Npc(L\xEDnh)"
   m_TagString: Untagged
@@ -194,13 +195,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NpcGuardQuestController
   moveSpeed: 2
-  currentState: 0
-  patrolDistance: 6
-  startMoveRight: 1
-  pauseAtEdge: 0.5
-  lockYWhenPatrol: 1
-  playerTarget: {fileID: 0}
-  followStopDistance: 1.1
-  medicineReceivePoint: {fileID: 0}
-  leavePoint: {fileID: 0}
-  arriveDistance: 0.15
+  patrolLine: 0
+  startMoveToRight: 1
+  guard1LeftPoint: {fileID: 0}
+  guard1RightPoint: {fileID: 0}
+  guard2LeftPoint: {fileID: 0}
+  guard2RightPoint: {fileID: 0}
+  patrolArriveDistance: 0.15
+  waitAtPatrolPoint: 0
+  lockPatrolY: 1
+--- !u!114 &6936020169344720617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6303735223734470267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1837e046cb7627841a22d93d30422d57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCPersistentID
+  npcID: 
