@@ -64,12 +64,33 @@ public static partial class YThuBookTextFormatter
         if (string.IsNullOrWhiteSpace(cleanText))
             return 1;
 
-        int estimatedLineCount = Mathf.CeilToInt((float)cleanText.Length / MaxCharacterPerLine);
+        string[] manualLines = cleanText.Split('\n');
 
-        if (estimatedLineCount < 1)
-            estimatedLineCount = 1;
+        int totalLineCount = 0;
 
-        return estimatedLineCount;
+        for (int i = 0; i < manualLines.Length; i++)
+        {
+            string line = manualLines[i];
+
+            if (string.IsNullOrWhiteSpace(line))
+            {
+                totalLineCount += 1;
+                continue;
+            }
+
+            int estimatedLineCount =
+                Mathf.CeilToInt((float)line.Trim().Length / MaxCharacterPerLine);
+
+            if (estimatedLineCount < 1)
+                estimatedLineCount = 1;
+
+            totalLineCount += estimatedLineCount;
+        }
+
+        if (totalLineCount < 1)
+            totalLineCount = 1;
+
+        return totalLineCount;
     }
 
     private static string StripRichTextTags(string text)

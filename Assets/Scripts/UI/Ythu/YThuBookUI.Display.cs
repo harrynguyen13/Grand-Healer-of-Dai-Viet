@@ -66,9 +66,21 @@ public partial class YThuBookUI
 
         DiseaseData disease = page.disease;
 
-        if (diseaseInfoText != null)
+        List<string> prescriptionPages =
+            GetPrescriptionPagesForDisease(
+                disease,
+                page.isSpecialDiseasePage
+            );
+
+        if (prescriptionPages == null)
+            prescriptionPages = new List<string>();
+
+        if (page.prescriptionPageIndex <= 0)
         {
-            if (page.prescriptionPageIndex == 0)
+            // Spread đầu tiên:
+            // Trái = thông tin bệnh
+            // Phải = phương thuốc trang 1
+            if (diseaseInfoText != null)
             {
                 if (page.isSpecialDiseasePage)
                 {
@@ -84,30 +96,39 @@ public partial class YThuBookUI
                         YThuBookTextFormatter.BuildDiseaseInfoText(disease);
                 }
             }
-            else
+
+            if (prescriptionText != null)
             {
-                diseaseInfoText.text = "";
+                if (prescriptionPages.Count > 0)
+                    prescriptionText.text = prescriptionPages[0];
+                else
+                    prescriptionText.text = "";
             }
         }
-
-        if (prescriptionText != null)
+        else
         {
-            List<string> prescriptionPages =
-                GetPrescriptionPagesForDisease(
-                    disease,
-                    page.isSpecialDiseasePage
-                );
+            // Các spread sau:
+            // Trái = phương thuốc trang hiện tại
+            // Phải = phương thuốc trang kế tiếp nếu có
+            int leftPrescriptionIndex = page.prescriptionPageIndex;
+            int rightPrescriptionIndex = leftPrescriptionIndex + 1;
 
-            if (prescriptionPages == null || prescriptionPages.Count == 0)
+            if (diseaseInfoText != null)
             {
-                prescriptionText.text = "";
+                if (leftPrescriptionIndex >= 0 && leftPrescriptionIndex < prescriptionPages.Count)
+                    diseaseInfoText.text = prescriptionPages[leftPrescriptionIndex];
+                else
+                {
+                    diseaseInfoText.text = "";
+                }
             }
-            else
-            {
-                int prescriptionPageIndex =
-                    Mathf.Clamp(page.prescriptionPageIndex, 0, prescriptionPages.Count - 1);
 
-                prescriptionText.text = prescriptionPages[prescriptionPageIndex];
+            if (prescriptionText != null)
+            {
+                if (rightPrescriptionIndex >= 0 && rightPrescriptionIndex < prescriptionPages.Count)
+                    prescriptionText.text = prescriptionPages[rightPrescriptionIndex];
+                else
+                    prescriptionText.text = "";
             }
         }
 
@@ -119,7 +140,6 @@ public partial class YThuBookUI
                 + GetTotalPageCount();
         }
     }
-
     private void ShowEmptyPage()
     {
         if (diseaseInfoText != null)
@@ -185,15 +205,12 @@ public partial class YThuBookUI
 
     private void UpdateButtons()
     {
-        int totalPageCount = GetTotalPageCount();
-
         if (prevButton != null)
             prevButton.gameObject.SetActive(isOpen && currentPageIndex > 0);
 
         if (nextButton != null)
-            nextButton.gameObject.SetActive(isOpen && currentPageIndex < totalPageCount - 1);
+            nextButton.gameObject.SetActive(isOpen && GetNextSpreadStartIndex() > currentPageIndex);
     }
-
     private void SetButtonsInteractable(bool canInteract)
     {
         if (nextButton != null)
