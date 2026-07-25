@@ -55,11 +55,12 @@ public partial class ClinicExamManager
 
         ClinicExamStage restoredStage;
         bool restoredDiagnosisCorrect;
+        int restoredYThuOpenCount;
 
         PatientVisitData restoredVisitData = PatientVisitManager.Instance.TakeSuspendedClinicSession(
             out restoredStage,
-            out restoredDiagnosisCorrect
-        );
+            out restoredDiagnosisCorrect,
+            out restoredYThuOpenCount);
 
         if (restoredVisitData == null)
             return false;
@@ -85,9 +86,18 @@ public partial class ClinicExamManager
             isClinicUiTemporarilyClosed = true;
             restoredClinicUiNeedsReopen = true;
 
-            ClinicYThuUsageRewardService.BeginTracking();
+        ClinicYThuUsageRewardService.BeginTracking(
+            restoredYThuOpenCount
+        );
 
-            Debug.Log("Đã khôi phục phiên khám dở. Bấm " + examineKey + " để mở lại UI. Stage: " + currentStage);
+        Debug.Log(
+            "Đã khôi phục phiên khám dở. Bấm "
+            + examineKey
+            + " để mở lại UI. Stage: "
+            + currentStage
+            + ", số lần mở Y thư: "
+            + restoredYThuOpenCount
+        );
         }
         else
         {

@@ -8,11 +8,16 @@ public class PatientVisitManager : MonoBehaviour
     [Header("Số bệnh nhân chờ tối đa")]
     [SerializeField] private int maxWaitingPatients = 3;
 
-    private readonly Queue<PatientVisitData> waitingPatients = new Queue<PatientVisitData>();
+    private readonly Queue<PatientVisitData> waitingPatients =
+        new Queue<PatientVisitData>();
 
     private PatientVisitData suspendedClinicVisitData;
-    private ClinicExamStage suspendedClinicStage = ClinicExamStage.None;
+    private ClinicExamStage suspendedClinicStage =
+        ClinicExamStage.None;
     private bool suspendedDiagnosisCorrect;
+
+    // Lưu số lần mở Y thư của ca khám đang làm dở.
+    private int suspendedYThuOpenCount;
 
     public bool HasWaitingPatient
     {
@@ -31,14 +36,20 @@ public class PatientVisitManager : MonoBehaviour
 
     public bool CanAcceptMorePatients
     {
-        get { return waitingPatients.Count < maxWaitingPatients; }
+        get
+        {
+            return waitingPatients.Count
+                < maxWaitingPatients;
+        }
     }
 
     public bool HasSuspendedClinicSession
     {
-        get { return suspendedClinicVisitData != null; }
+        get
+        {
+            return suspendedClinicVisitData != null;
+        }
     }
-
 
     private void Awake()
     {
@@ -52,35 +63,65 @@ public class PatientVisitManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public bool AddWaitingPatient(GameObject patientPrefab, PatientCase patientCase)
+    public bool AddWaitingPatient(
+        GameObject patientPrefab,
+        PatientCase patientCase
+    )
     {
         if (patientPrefab == null)
         {
-            Debug.LogWarning("Không thể thêm bệnh nhân chờ vì patientPrefab null.");
+            Debug.LogWarning(
+                "Không thể thêm bệnh nhân chờ "
+                + "vì patientPrefab null."
+            );
+
             return false;
         }
 
-        if (patientCase == null || patientCase.realDisease == null)
+        if (
+            patientCase == null
+            || patientCase.realDisease == null
+        )
         {
-            Debug.LogWarning("Không thể thêm bệnh nhân chờ vì PatientCase null hoặc chưa có bệnh.");
+            Debug.LogWarning(
+                "Không thể thêm bệnh nhân chờ vì "
+                + "PatientCase null hoặc chưa có bệnh."
+            );
+
             return false;
         }
 
-        if (waitingPatients.Count >= maxWaitingPatients)
+        if (
+            waitingPatients.Count
+            >= maxWaitingPatients
+        )
         {
-            Debug.LogWarning("Hàng đợi bệnh nhân đã đầy: " + waitingPatients.Count + "/" + maxWaitingPatients);
+            Debug.LogWarning(
+                "Hàng đợi bệnh nhân đã đầy: "
+                + waitingPatients.Count
+                + "/"
+                + maxWaitingPatients
+            );
+
             return false;
         }
 
-        PatientVisitData visitData = new PatientVisitData(patientPrefab, patientCase);
+        PatientVisitData visitData =
+            new PatientVisitData(
+                patientPrefab,
+                patientCase
+            );
+
         waitingPatients.Enqueue(visitData);
 
-        Debug.Log("Đã thêm bệnh nhân vào hàng đợi. Bệnh: "
+        Debug.Log(
+            "Đã thêm bệnh nhân vào hàng đợi. Bệnh: "
             + patientCase.realDisease.diseaseName
             + ". Số người chờ: "
             + waitingPatients.Count
             + "/"
-            + maxWaitingPatients);
+            + maxWaitingPatients
+        );
 
         return true;
     }
@@ -89,121 +130,218 @@ public class PatientVisitManager : MonoBehaviour
     {
         if (waitingPatients.Count <= 0)
         {
-            Debug.Log("Không có bệnh nhân nào trong hàng đợi.");
+            Debug.Log(
+                "Không có bệnh nhân nào "
+                + "trong hàng đợi."
+            );
+
             return null;
         }
 
-        PatientVisitData visitData = waitingPatients.Dequeue();
+        PatientVisitData visitData =
+            waitingPatients.Dequeue();
 
-        if (visitData != null && visitData.patientCase != null && visitData.patientCase.realDisease != null)
+        if (
+            visitData != null
+            && visitData.patientCase != null
+            && visitData.patientCase.realDisease != null
+        )
         {
-            Debug.Log("Lấy bệnh nhân khỏi hàng đợi. Bệnh: "
-                + visitData.patientCase.realDisease.diseaseName
+            Debug.Log(
+                "Lấy bệnh nhân khỏi hàng đợi. Bệnh: "
+                + visitData
+                    .patientCase
+                    .realDisease
+                    .diseaseName
                 + ". Còn chờ: "
                 + waitingPatients.Count
                 + "/"
-                + maxWaitingPatients);
+                + maxWaitingPatients
+            );
         }
 
         return visitData;
     }
 
-    public void ReturnPatientToFront(PatientVisitData visitData)
+    public void ReturnPatientToFront(
+        PatientVisitData visitData
+    )
     {
         if (visitData == null)
         {
-            Debug.LogWarning("Không thể trả bệnh nhân về hàng chờ vì visitData null.");
+            Debug.LogWarning(
+                "Không thể trả bệnh nhân về hàng chờ "
+                + "vì visitData null."
+            );
+
             return;
         }
 
         if (visitData.patientPrefab == null)
         {
-            Debug.LogWarning("Không thể trả bệnh nhân về hàng chờ vì patientPrefab null.");
+            Debug.LogWarning(
+                "Không thể trả bệnh nhân về hàng chờ "
+                + "vì patientPrefab null."
+            );
+
             return;
         }
 
-        if (visitData.patientCase == null || visitData.patientCase.realDisease == null)
+        if (
+            visitData.patientCase == null
+            || visitData.patientCase.realDisease == null
+        )
         {
-            Debug.LogWarning("Không thể trả bệnh nhân về hàng chờ vì PatientCase không hợp lệ.");
+            Debug.LogWarning(
+                "Không thể trả bệnh nhân về hàng chờ "
+                + "vì PatientCase không hợp lệ."
+            );
+
             return;
         }
 
-        Queue<PatientVisitData> newQueue = new Queue<PatientVisitData>();
+        Queue<PatientVisitData> newQueue =
+            new Queue<PatientVisitData>();
 
         newQueue.Enqueue(visitData);
 
         while (waitingPatients.Count > 0)
         {
-            newQueue.Enqueue(waitingPatients.Dequeue());
+            newQueue.Enqueue(
+                waitingPatients.Dequeue()
+            );
         }
 
         while (newQueue.Count > 0)
         {
-            waitingPatients.Enqueue(newQueue.Dequeue());
+            waitingPatients.Enqueue(
+                newQueue.Dequeue()
+            );
         }
 
-        Debug.Log("Đã trả bệnh nhân hiện tại về đầu hàng chờ. Bệnh: "
-            + visitData.patientCase.realDisease.diseaseName
+        Debug.Log(
+            "Đã trả bệnh nhân hiện tại về đầu hàng chờ. Bệnh: "
+            + visitData
+                .patientCase
+                .realDisease
+                .diseaseName
             + ". Số người chờ: "
             + waitingPatients.Count
             + "/"
-            + maxWaitingPatients);
+            + maxWaitingPatients
+        );
     }
 
+    /// <summary>
+    /// Lưu phiên khám đang làm dở khi người chơi rời phòng khám.
+    /// Bao gồm cả số lần đã mở Y thư.
+    /// </summary>
     public void SaveSuspendedClinicSession(
         PatientVisitData visitData,
         ClinicExamStage stage,
-        bool isDiagnosisCorrect
+        bool isDiagnosisCorrect,
+        int yThuOpenCount
     )
     {
         if (visitData == null)
         {
-            Debug.LogWarning("Không thể lưu phiên khám dở vì visitData null.");
+            Debug.LogWarning(
+                "Không thể lưu phiên khám dở "
+                + "vì visitData null."
+            );
+
             return;
         }
 
         if (visitData.patientPrefab == null)
         {
-            Debug.LogWarning("Không thể lưu phiên khám dở vì patientPrefab null.");
+            Debug.LogWarning(
+                "Không thể lưu phiên khám dở "
+                + "vì patientPrefab null."
+            );
+
             return;
         }
 
-        if (visitData.patientCase == null || visitData.patientCase.realDisease == null)
+        if (
+            visitData.patientCase == null
+            || visitData.patientCase.realDisease == null
+        )
         {
-            Debug.LogWarning("Không thể lưu phiên khám dở vì PatientCase không hợp lệ.");
+            Debug.LogWarning(
+                "Không thể lưu phiên khám dở "
+                + "vì PatientCase không hợp lệ."
+            );
+
             return;
         }
 
         suspendedClinicVisitData = visitData;
         suspendedClinicStage = stage;
-        suspendedDiagnosisCorrect = isDiagnosisCorrect;
+        suspendedDiagnosisCorrect =
+            isDiagnosisCorrect;
 
-        Debug.Log("Đã lưu phiên khám dở. Bệnh: "
-            + visitData.patientCase.realDisease.diseaseName
+        suspendedYThuOpenCount =
+            Mathf.Max(0, yThuOpenCount);
+
+        Debug.Log(
+            "Đã lưu phiên khám dở. Bệnh: "
+            + visitData
+                .patientCase
+                .realDisease
+                .diseaseName
             + ", Stage: "
-            + stage);
+            + stage
+            + ", số lần mở Y thư: "
+            + suspendedYThuOpenCount
+        );
     }
 
+    /// <summary>
+    /// Lấy và xóa phiên khám dở khỏi bộ nhớ tạm.
+    /// Trả về cả số lần mở Y thư đã được lưu.
+    /// </summary>
     public PatientVisitData TakeSuspendedClinicSession(
         out ClinicExamStage stage,
-        out bool isDiagnosisCorrect
+        out bool isDiagnosisCorrect,
+        out int yThuOpenCount
     )
     {
         stage = suspendedClinicStage;
-        isDiagnosisCorrect = suspendedDiagnosisCorrect;
 
-        PatientVisitData visitData = suspendedClinicVisitData;
+        isDiagnosisCorrect =
+            suspendedDiagnosisCorrect;
 
+        yThuOpenCount =
+            suspendedYThuOpenCount;
+
+        PatientVisitData visitData =
+            suspendedClinicVisitData;
+
+        // Xóa dữ liệu tạm sau khi đã lấy ra.
         suspendedClinicVisitData = null;
-        suspendedClinicStage = ClinicExamStage.None;
+        suspendedClinicStage =
+            ClinicExamStage.None;
         suspendedDiagnosisCorrect = false;
+        suspendedYThuOpenCount = 0;
 
-        if (visitData != null && visitData.patientCase != null && visitData.patientCase.realDisease != null)
+        if (
+            visitData != null
+            && visitData.patientCase != null
+            && visitData.patientCase.realDisease != null
+        )
         {
-            Debug.Log("Khôi phục phiên khám dở. Bệnh: "
-                + visitData.patientCase.realDisease.diseaseName
+            Debug.Log(
+                "Khôi phục phiên khám dở. Bệnh: "
+                + visitData
+                    .patientCase
+                    .realDisease
+                    .diseaseName
                 + ", Stage: "
-                + stage);
+                + stage
+                + ", số lần mở Y thư: "
+                + yThuOpenCount
+            );
         }
 
         return visitData;
@@ -212,15 +350,22 @@ public class PatientVisitManager : MonoBehaviour
     public void ClearSuspendedClinicSession()
     {
         suspendedClinicVisitData = null;
-        suspendedClinicStage = ClinicExamStage.None;
+        suspendedClinicStage =
+            ClinicExamStage.None;
         suspendedDiagnosisCorrect = false;
+        suspendedYThuOpenCount = 0;
 
-        Debug.Log("Đã xóa phiên khám dở.");
+        Debug.Log(
+            "Đã xóa phiên khám dở."
+        );
     }
 
-    public List<PatientVisitData> GetWaitingPatientsSnapshot()
+    public List<PatientVisitData>
+        GetWaitingPatientsSnapshot()
     {
-        return new List<PatientVisitData>(waitingPatients);
+        return new List<PatientVisitData>(
+            waitingPatients
+        );
     }
 
     public void ClearAllWaitingPatients()
@@ -228,9 +373,14 @@ public class PatientVisitManager : MonoBehaviour
         waitingPatients.Clear();
 
         suspendedClinicVisitData = null;
-        suspendedClinicStage = ClinicExamStage.None;
+        suspendedClinicStage =
+            ClinicExamStage.None;
         suspendedDiagnosisCorrect = false;
+        suspendedYThuOpenCount = 0;
 
-        Debug.Log("Đã xóa toàn bộ dữ liệu bệnh nhân: hàng chờ và phiên khám dở.");
+        Debug.Log(
+            "Đã xóa toàn bộ dữ liệu bệnh nhân: "
+            + "hàng chờ và phiên khám dở."
+        );
     }
 }
