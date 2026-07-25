@@ -28,6 +28,7 @@ public class GuideTextController : MonoBehaviour
 - E: Nhấn để mở cửa, đi vào nhà hoặc mua dược liệu.
 - F: Nhấn để khám bệnh.
 - X: Nhấn để đóng mở bảng nhiệm vụ.
+- Q: Nhấn để mở giao diện trồng thuốc.
 - Chuột trái: Bấm chọn / thu hoạch.
 
 <b>CHÚ Ý:</b>
@@ -41,9 +42,9 @@ public class GuideTextController : MonoBehaviour
 
 <b>MẸO BỐC THUỐC:</b>
 
-- Chủ dược: 6-8 đơn vị  
-- Phụ dược: 3-5 đơn vị
-- Điều hòa: 1,2 đơn vị";
+- Chủ dược: bốc 6-8 đơn vị/dược liệu.  
+- Phụ dược: 3-5 đơn vị/dược liệu.
+- Điều hòa: 1,2 đơn vị/dược liệu.";
 
         Canvas.ForceUpdateCanvases();
 

@@ -40,6 +40,7 @@ public class QuestRewardManager : MonoBehaviour
 
     public string GiveRewardIfNeeded(QuestDefinition quest, int stage)
     {
+        Debug.Log("GiveRewardIfNeeded được gọi");
         LastRewardMessage = "";
 
         if (quest == null)
@@ -119,6 +120,7 @@ public class QuestRewardManager : MonoBehaviour
             reputationReward,
             herbRewards
         );
+        Debug.Log("Đã gửi mail thưởng nhiệm vụ");
 
         PlayerPrefs.SetInt(claimedKey, 1);
         PlayerPrefs.Save();

@@ -1981,7 +1981,7 @@ MonoBehaviour:
   loadingText: {fileID: 573535204}
   loadingSpinner: {fileID: 2070383819}
   spinnerRotateSpeed: 600
-  minimumLoadingVisibleTime: 1
+  minimumLoadingVisibleTime: 2
 --- !u!1 &2070383818
 GameObject:
   m_ObjectHideFlags: 0
