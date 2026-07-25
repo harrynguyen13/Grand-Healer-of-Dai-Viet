@@ -15,9 +15,7 @@ public class MailboxPanelUI : MonoBehaviour
     private void OnEnable()
     {
         if (MailboxManager.Instance != null)
-        {
             MailboxManager.Instance.OnMailboxChanged += RefreshUI;
-        }
 
         RefreshUI();
     }
@@ -25,9 +23,7 @@ public class MailboxPanelUI : MonoBehaviour
     private void OnDisable()
     {
         if (MailboxManager.Instance != null)
-        {
             MailboxManager.Instance.OnMailboxChanged -= RefreshUI;
-        }
     }
 
     public void RefreshUI()
@@ -75,14 +71,10 @@ public class MailboxPanelUI : MonoBehaviour
             return;
 
         if (contentDetailText != null)
-        {
             contentDetailText.text = mail.content;
-        }
 
         if (rewardDetailText != null)
-        {
             rewardDetailText.text = BuildRewardText(mail);
-        }
     }
 
     private string BuildRewardText(MailMessage mail)
@@ -90,31 +82,22 @@ public class MailboxPanelUI : MonoBehaviour
         if (mail == null)
             return "";
 
-        List<string> lines = new List<string>();
+        List<string> sections = new List<string>();
 
         if (!string.IsNullOrWhiteSpace(mail.yThuUsageNote))
-        {
-            lines.Add(mail.yThuUsageNote);
-            lines.Add("");
-        }
+            sections.Add(FormatSystemNote(mail.yThuUsageNote));
+
+        List<string> resultLines = new List<string>();
 
         if (mail.moneyDelta > 0)
-        {
-            lines.Add("Thưởng tiền: +" + mail.moneyDelta + " xu");
-        }
+            resultLines.Add("- Thưởng tiền: +" + mail.moneyDelta + " xu");
         else if (mail.moneyDelta < 0)
-        {
-            lines.Add("Phạt tiền: " + mail.moneyDelta + " xu");
-        }
+            resultLines.Add("- Trừ tiền: " + mail.moneyDelta + " xu");
 
         if (mail.reputationDelta > 0)
-        {
-            lines.Add("Thưởng tín nhiệm: +" + mail.reputationDelta);
-        }
+            resultLines.Add("- Cộng tín nhiệm: +" + mail.reputationDelta);
         else if (mail.reputationDelta < 0)
-        {
-            lines.Add("Phạt tín nhiệm: " + mail.reputationDelta);
-        }
+            resultLines.Add("- Trừ tín nhiệm: " + mail.reputationDelta);
 
         if (mail.herbRewards != null)
         {
@@ -129,29 +112,51 @@ public class MailboxPanelUI : MonoBehaviour
                 if (herbReward.amount <= 0)
                     continue;
 
-                lines.Add("Dược liệu: +" + herbReward.amount + " " + herbReward.herbName);
+                resultLines.Add(
+                    "- Dược liệu: +" + herbReward.amount + " " + herbReward.herbName
+                );
             }
         }
 
-        if (lines.Count == 0)
-        {
-            return "Không có thưởng/phạt.";
-        }
+        if (resultLines.Count > 0)
+            sections.Add("<b>Kết Quả</b>\n" + string.Join("\n", resultLines));
 
-        return string.Join("\n", lines).TrimEnd();
+        if (sections.Count == 0)
+            return "Không có thưởng/phạt.";
+
+        return string.Join("\n\n", sections);
+    }
+
+    private string FormatSystemNote(string rawNote)
+    {
+        string note = rawNote.Trim();
+
+        note = note
+            .Replace("\n<b>Nhắc Nhở Từ Hệ Thống</b>", "")
+            .Replace("<b>Tên bệnh đúng:</b>", "- <b>Tên bệnh đúng:</b>")
+            .Replace("<b>Tên bệnh đã chọn:</b>", "- <b>Tên bệnh đã chọn:</b>")
+            .Replace("<b>Dược liệu cần:</b>", "- <b>Dược liệu cần:</b>")
+            .Replace("<b>Thiếu:</b>", "- <b>Thiếu:</b>")
+            .Replace("<b>Thừa:</b>", "- <b>Thừa:</b>")
+            .Replace(
+                "(Chú ý:",
+                "\n\n<b>Ghi Chú Y Thư</b>\n-"
+            )
+            .Trim();
+
+        if (note.EndsWith(")"))
+            note = note.Substring(0, note.Length - 1);
+
+        return "<b>Nhắc Nhở Từ Hệ Thống</b>\n" + note;
     }
 
     private void ClearDetail()
     {
         if (contentDetailText != null)
-        {
             contentDetailText.text = "Chọn một thư để xem nội dung.";
-        }
 
         if (rewardDetailText != null)
-        {
             rewardDetailText.text = "";
-        }
     }
 
     private void ClearChildren(Transform root)
@@ -160,8 +165,6 @@ public class MailboxPanelUI : MonoBehaviour
             return;
 
         for (int i = root.childCount - 1; i >= 0; i--)
-        {
             Destroy(root.GetChild(i).gameObject);
-        }
     }
 }

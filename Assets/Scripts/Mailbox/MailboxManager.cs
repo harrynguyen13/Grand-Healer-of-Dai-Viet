@@ -107,6 +107,7 @@ public class MailboxManager : MonoBehaviour
         if (diagnosisCorrect && prescriptionCorrect)
         {
             mailType = MailType.PatientSuccess;
+
             content =
                 "Thưa lương y,\n\n" +
                 "Từ hôm được thầy xem bệnh và bốc thuốc, người tôi đã nhẹ nhõm hơn nhiều. Những cơn khó chịu trước đó cũng dần lui đi.\n\n" +
@@ -115,6 +116,7 @@ public class MailboxManager : MonoBehaviour
         else if (diagnosisCorrect && !prescriptionCorrect)
         {
             mailType = MailType.PatientFail;
+
             content =
                 "Thưa thầy,\n\n" +
                 "Bệnh mà thầy nói xem ra không sai, nhưng thang thuốc vừa rồi uống vào vẫn chưa thấy chuyển biến rõ. Người tôi vẫn còn mệt, bệnh chưa lui hẳn.\n\n" +
@@ -123,6 +125,7 @@ public class MailboxManager : MonoBehaviour
         else if (!diagnosisCorrect && prescriptionCorrect)
         {
             mailType = MailType.PatientFail;
+
             content =
                 "Thưa thầy,\n\n" +
                 "Uống thuốc xong tôi có thấy dễ chịu hơn đôi chút, nhưng nghĩ lại thì bệnh tình của tôi hình như không đúng như lời thầy chẩn đoán.\n\n" +
@@ -131,6 +134,7 @@ public class MailboxManager : MonoBehaviour
         else
         {
             mailType = MailType.PatientFail;
+
             content =
                 "Thưa thầy,\n\n" +
                 "Tôi đã dùng thuốc theo đơn, nhưng bệnh không những chẳng đỡ mà trong người còn thêm phần khó chịu. Lần chữa này thật khiến tôi thất vọng.\n\n" +

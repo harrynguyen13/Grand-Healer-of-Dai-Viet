@@ -73,6 +73,7 @@ public partial class ClinicExamManager
 
         pendingPatientMailData = ClinicPatientMailService.PreparePatientMail(
             currentPatient.gameObject,
+            patientCase.selectedDisease,
             patientCase.realDisease,
             selectedPrescription,
             isCurrentDiagnosisCorrect,

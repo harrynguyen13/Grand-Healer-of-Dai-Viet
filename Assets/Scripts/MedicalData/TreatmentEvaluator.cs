@@ -2,23 +2,21 @@ using System.Collections.Generic;
 
 public enum TreatmentResultType
 {
-    Perfect,                    // Đúng bệnh đúng thuốc
-    RightDiseaseWrongMedicine,  // Đúng bệnh sai thuốc
-    WrongDiseaseRightMedicine,  // Sai bệnh đúng thuốc
-    Failed                      // Sai bệnh sai thuốc
+    Perfect,
+    RightDiseaseWrongMedicine,
+    WrongDiseaseRightMedicine,
+    Failed
 }
 
 public static class TreatmentEvaluator
 {
     public static TreatmentResultType Evaluate(PatientCase patientCase)
     {
-        if (patientCase == null)
+        if (patientCase == null || patientCase.realDisease == null)
             return TreatmentResultType.Failed;
 
-        if (patientCase.realDisease == null)
-            return TreatmentResultType.Failed;
-
-        bool isDiseaseCorrect = patientCase.selectedDisease == patientCase.realDisease;
+        bool isDiseaseCorrect =
+            patientCase.selectedDisease == patientCase.realDisease;
 
         bool isMedicineCorrect = IsMedicineCorrect(
             patientCase.realDisease.requiredHerbs,
@@ -50,6 +48,7 @@ public static class TreatmentEvaluator
         if (selectedHerbs == null || selectedHerbs.Count == 0)
             return false;
 
+        int validRequiredHerbCount = 0;
         int correctRequiredCount = 0;
 
         foreach (RequiredHerbAmount required in requiredHerbs)
@@ -57,7 +56,12 @@ public static class TreatmentEvaluator
             if (required == null || required.herb == null)
                 continue;
 
-            int selectedAmount = CountSelectedHerb(selectedHerbs, required.herb);
+            validRequiredHerbCount++;
+
+            int selectedAmount = CountSelectedHerb(
+                selectedHerbs,
+                required.herb
+            );
 
             if (selectedAmount >= required.amount)
             {
@@ -65,13 +69,23 @@ public static class TreatmentEvaluator
             }
         }
 
-        float currentRate = (float)correctRequiredCount / requiredHerbs.Count;
+        if (validRequiredHerbCount == 0)
+            return false;
+
+        float currentRate =
+            (float)correctRequiredCount / validRequiredHerbCount;
 
         return currentRate >= requiredRate;
     }
 
-    private static int CountSelectedHerb(List<HerbData> selectedHerbs, HerbData targetHerb)
+    private static int CountSelectedHerb(
+        List<HerbData> selectedHerbs,
+        HerbData targetHerb
+    )
     {
+        if (selectedHerbs == null || targetHerb == null)
+            return 0;
+
         int count = 0;
 
         foreach (HerbData selectedHerb in selectedHerbs)
