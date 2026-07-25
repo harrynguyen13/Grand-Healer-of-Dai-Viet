@@ -30,10 +30,14 @@ public class PatientController : BaseMove
     private List<Vector2> currentPath = new List<Vector2>();
     private int currentPathIndex;
 
-    private List<Vector2> leavePath = new List<Vector2>();
-    private int leavePathIndex;
+    private readonly List<Transform> leavePoints = new List<Transform>();
+    private int leavePointIndex;
     private Action onLeaveFinished;
     private float leaveStartTime;
+    private bool isFinishingLeave;
+
+    [Header("Vùng thoát NPC")]
+    [SerializeField] private string clinicExitTag = "NPCExit";
 
     private float lastCollisionRepathTime;
 
@@ -61,10 +65,11 @@ public class PatientController : BaseMove
         currentPath.Clear();
         currentPathIndex = 0;
 
-        leavePath.Clear();
-        leavePathIndex = 0;
+        leavePoints.Clear();
+        leavePointIndex = 0;
         onLeaveFinished = null;
         leaveStartTime = 0f;
+        isFinishingLeave = false;
 
         StopMoving();
 
@@ -91,10 +96,11 @@ public class PatientController : BaseMove
         currentPath.Clear();
         currentPathIndex = 0;
 
-        leavePath.Clear();
-        leavePathIndex = 0;
+        leavePoints.Clear();
+        leavePointIndex = 0;
         onLeaveFinished = null;
         leaveStartTime = 0f;
+        isFinishingLeave = false;
 
         if (medicalDatabase == null)
         {
@@ -253,31 +259,32 @@ public class PatientController : BaseMove
         Destroy(gameObject);
     }
 
-    public void LeaveClinic(Transform[] leavePoints, Action finishedCallback)
+    public void LeaveClinic(Transform[] targetLeavePoints, Action finishedCallback)
     {
         StopMoving();
 
-        leavePath.Clear();
-        leavePathIndex = 0;
+        leavePoints.Clear();
+        leavePointIndex = 0;
         onLeaveFinished = finishedCallback;
         leaveStartTime = Time.time;
+        isFinishingLeave = false;
 
-        if (leavePoints == null || leavePoints.Length == 0)
+        if (targetLeavePoints == null || targetLeavePoints.Length == 0)
         {
             Debug.LogWarning("Chưa có điểm rời phòng. Tạm ẩn NPC bệnh nhân.");
             FinishLeavingClinic();
             return;
         }
 
-        foreach (Transform point in leavePoints)
+        foreach (Transform point in targetLeavePoints)
         {
             if (point == null)
                 continue;
 
-            leavePath.Add(point.position);
+            leavePoints.Add(point);
         }
 
-        if (leavePath.Count == 0)
+        if (leavePoints.Count == 0)
         {
             Debug.LogWarning("Danh sách điểm rời phòng rỗng. Tạm ẩn NPC bệnh nhân.");
             FinishLeavingClinic();
@@ -286,11 +293,14 @@ public class PatientController : BaseMove
 
         currentState = PatientState.LeavingClinic;
 
-        Debug.Log("NPC bắt đầu rời phòng thuốc. Số điểm: " + leavePath.Count);
+        Debug.Log("NPC bắt đầu rời phòng thuốc. Số điểm: " + leavePoints.Count);
     }
 
     private void FollowLeavePath()
     {
+        if (isFinishingLeave)
+            return;
+
         if (Time.time - leaveStartTime >= maxLeaveTime)
         {
             Debug.LogWarning("NPC rời phòng quá lâu, tự ẩn để tránh kẹt cửa.");
@@ -298,29 +308,36 @@ public class PatientController : BaseMove
             return;
         }
 
-        if (leavePath == null || leavePath.Count == 0)
+        if (leavePoints.Count == 0)
         {
             FinishLeavingClinic();
             return;
         }
 
-        if (leavePathIndex >= leavePath.Count)
+        while (leavePointIndex < leavePoints.Count && leavePoints[leavePointIndex] == null)
+        {
+            leavePointIndex++;
+        }
+
+        if (leavePointIndex >= leavePoints.Count)
         {
             FinishLeavingClinic();
             return;
         }
 
         Vector2 currentPosition = transform.position;
-        Vector2 targetPosition = leavePath[leavePathIndex];
+        Vector2 targetPosition = leavePoints[leavePointIndex].position;
 
         Vector2 direction = targetPosition - currentPosition;
         float distance = direction.magnitude;
 
         if (distance <= leaveReachDistance)
         {
-            leavePathIndex++;
+            StopMoving();
 
-            if (leavePathIndex >= leavePath.Count)
+            leavePointIndex++;
+
+            if (leavePointIndex >= leavePoints.Count)
             {
                 FinishLeavingClinic();
             }
@@ -331,18 +348,63 @@ public class PatientController : BaseMove
         moveInput = direction.normalized;
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        TryFinishLeaveFromTrigger(other);
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        TryFinishLeaveFromTrigger(other);
+    }
+
+    private void TryFinishLeaveFromTrigger(Collider2D other)
+    {
+        if (currentState != PatientState.LeavingClinic)
+            return;
+
+        if (other == null || !other.CompareTag(clinicExitTag))
+            return;
+
+        Debug.Log("NPC đã chạm vùng thoát: " + other.name + ". Kết thúc rời phòng ngay.");
+
+        FinishLeavingClinic();
+    }
+
     private void FinishLeavingClinic()
     {
-        StopMoving();
+        if (isFinishingLeave)
+            return;
+
+        if (currentState == PatientState.Done)
+            return;
+
+        isFinishingLeave = true;
+
+        moveInput = Vector2.zero;
+
+        if (rb2d != null)
+        {
+            rb2d.linearVelocity = Vector2.zero;
+            rb2d.angularVelocity = 0f;
+        }
 
         currentState = PatientState.Done;
 
+        if (animator != null)
+        {
+            animator.SetBool("isMoving", false);
+            animator.SetFloat("speed", 0f);
+        }
+
         Debug.Log("NPC bệnh nhân đã rời khỏi phòng thuốc.");
+
+        Action callback = onLeaveFinished;
+        onLeaveFinished = null;
 
         gameObject.SetActive(false);
 
-        onLeaveFinished?.Invoke();
-        onLeaveFinished = null;
+        callback?.Invoke();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

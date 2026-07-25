@@ -6114,7 +6114,7 @@ MonoBehaviour:
   npcExamPoint: {fileID: 502824398}
   playerExamPoint: {fileID: 469998575}
   npcLeavePoints:
-  - {fileID: 669892540}
+  - {fileID: 347072462}
   playerTag: Player
   playerExamArea: {fileID: 469998576}
   playerCollider: {fileID: 469998576}
@@ -17440,7 +17440,7 @@ GameObject:
   - component: {fileID: 347072463}
   m_Layer: 0
   m_Name: NPCExitPoint
-  m_TagString: Untagged
+  m_TagString: NPCExit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17454,8 +17454,8 @@ Transform:
   m_GameObject: {fileID: 347072461}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.16, y: -8.63, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -12.2, y: -8.98, z: 0}
+  m_LocalScale: {x: 2, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -17504,7 +17504,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 4, y: 1}
+  m_Size: {x: 2, y: 0.5}
   m_EdgeRadius: 0
 --- !u!114 &352915428
 MonoBehaviour:
@@ -27691,6 +27691,7 @@ MonoBehaviour:
   - {fileID: 7829377076918532648, guid: a541b7900ccf3bb42b5c622b14ff5b45, type: 3}
   - {fileID: 1516903632205100574, guid: 2711cd6797ff50f49b0317822d2b668d, type: 3}
   - {fileID: 8133725862667121749, guid: 9e616ea1b63bceb4aa6a712fde0070db, type: 3}
+  - {fileID: 8356043658499087404, guid: c19c91645a284b849bf3e29ab7a01028, type: 3}
   medicalDatabase: {fileID: 11400000, guid: b9cbad1ca04118e4f91cc0c62ce48933, type: 2}
   clinicExamManager: {fileID: 211007263}
   requirePlayerInClinic: 1
