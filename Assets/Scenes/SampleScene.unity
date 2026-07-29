@@ -2612,7 +2612,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -530, y: 76.391}
+  m_SizeDelta: {x: -570, y: 76.391}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &83788312
 MonoBehaviour:
@@ -3842,7 +3842,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1991760758}
   m_HandleRect: {fileID: 1991760757}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -94622,7 +94622,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -0.00021362305, y: 0.000030517578}
-  m_SizeDelta: {x: 0, y: 23}
+  m_SizeDelta: {x: 0, y: 22}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &478902557
 MonoBehaviour:
@@ -478967,6 +478967,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 301817062410174698, guid: 1181e703c6a6f3348a0bf889dd26d491, type: 3}
       propertyPath: m_NeverAutoSwitchControlSchemes
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 649211111732903115, guid: 1181e703c6a6f3348a0bf889dd26d491, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7297683385582255636, guid: 1181e703c6a6f3348a0bf889dd26d491, type: 3}
