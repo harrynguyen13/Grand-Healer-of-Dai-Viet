@@ -21,7 +21,13 @@ public class MedicineShopController : MonoBehaviour
     [Header("Panel")]
     [SerializeField] private GameObject shopPanel;
 
-    private readonly Dictionary<HerbData, int> selectedHerbs = new Dictionary<HerbData, int>();
+    private readonly Dictionary<HerbData, int> selectedHerbs =
+        new Dictionary<HerbData, int>();
+
+    // Chỉ dùng để quản lý thứ tự hiển thị.
+    // Vị thuốc vừa được chọn sẽ luôn nằm ở đầu danh sách.
+    private readonly List<HerbData> selectedHerbOrder =
+        new List<HerbData>();
 
     private void Awake()
     {
@@ -97,12 +103,21 @@ public class MedicineShopController : MonoBehaviour
             if (herb == null)
                 continue;
 
-            ShopHerbItemUI item = Instantiate(shopHerbItemPrefab, shopContent);
+            ShopHerbItemUI item =
+                Instantiate(shopHerbItemPrefab, shopContent);
+
             item.Setup(herb, AddHerbToSelected);
         }
 
-        Debug.Log("Shop đã load dược liệu theo cấp hiện tại: " + PlayerLevelService.GetCurrentUnlockLevel());
-        Debug.Log("Số dược liệu bán trong shop: " + unlockedHerbs.Count);
+        Debug.Log(
+            "Shop đã load dược liệu theo cấp hiện tại: " +
+            PlayerLevelService.GetCurrentUnlockLevel()
+        );
+
+        Debug.Log(
+            "Số dược liệu bán trong shop: " +
+            unlockedHerbs.Count
+        );
     }
 
     private void AddHerbToSelected(HerbData herb)
@@ -116,6 +131,10 @@ public class MedicineShopController : MonoBehaviour
         }
 
         selectedHerbs[herb]++;
+
+        // Đưa vị thuốc vừa chọn lên đầu danh sách hiển thị.
+        selectedHerbOrder.Remove(herb);
+        selectedHerbOrder.Insert(0, herb);
 
         RefreshSelectedList();
     }
@@ -133,6 +152,7 @@ public class MedicineShopController : MonoBehaviour
         if (selectedHerbs[herb] <= 0)
         {
             selectedHerbs.Remove(herb);
+            selectedHerbOrder.Remove(herb);
         }
 
         RefreshSelectedList();
@@ -148,16 +168,25 @@ public class MedicineShopController : MonoBehaviour
         if (selectedContent == null)
             return;
 
-        foreach (KeyValuePair<HerbData, int> pair in selectedHerbs)
+        foreach (HerbData herb in selectedHerbOrder)
         {
-            HerbData herb = pair.Key;
-            int quantity = pair.Value;
-
-            if (herb == null || quantity <= 0)
+            if (herb == null)
                 continue;
 
-            ShopSelectedHerbItemUI item = Instantiate(selectedHerbItemPrefab, selectedContent);
-            item.Setup(herb, quantity, RemoveOneSelectedHerb);
+            if (!selectedHerbs.TryGetValue(herb, out int quantity))
+                continue;
+
+            if (quantity <= 0)
+                continue;
+
+            ShopSelectedHerbItemUI item =
+                Instantiate(selectedHerbItemPrefab, selectedContent);
+
+            item.Setup(
+                herb,
+                quantity,
+                RemoveOneSelectedHerb
+            );
         }
     }
 
@@ -185,7 +214,13 @@ public class MedicineShopController : MonoBehaviour
 
         if (PlayerEconomy.Instance.Money < totalCost)
         {
-            Debug.LogWarning("Không đủ tiền mua thuốc. Cần: " + totalCost + ", hiện có: " + PlayerEconomy.Instance.Money);
+            Debug.LogWarning(
+                "Không đủ tiền mua thuốc. Cần: " +
+                totalCost +
+                ", hiện có: " +
+                PlayerEconomy.Instance.Money
+            );
+
             return;
         }
 
@@ -210,6 +245,8 @@ public class MedicineShopController : MonoBehaviour
         Debug.Log("Đã mua thuốc. Tổng tiền: " + totalCost);
 
         selectedHerbs.Clear();
+        selectedHerbOrder.Clear();
+
         RefreshSelectedList();
         RefreshShopList();
     }
@@ -221,7 +258,10 @@ public class MedicineShopController : MonoBehaviour
 
         if (QuestProgressManager.Instance == null)
         {
-            Debug.LogWarning("Không tìm thấy QuestProgressManager để ghi nhiệm vụ mua dược liệu.");
+            Debug.LogWarning(
+                "Không tìm thấy QuestProgressManager để ghi nhiệm vụ mua dược liệu."
+            );
+
             return;
         }
 
@@ -233,7 +273,12 @@ public class MedicineShopController : MonoBehaviour
             lineCost
         );
 
-        Debug.Log("Đã ghi nhiệm vụ mua dược liệu: " + herb.herbName + " x" + quantity);
+        Debug.Log(
+            "Đã ghi nhiệm vụ mua dược liệu: " +
+            herb.herbName +
+            " x" +
+            quantity
+        );
     }
 
     private int CalculateTotalCost()

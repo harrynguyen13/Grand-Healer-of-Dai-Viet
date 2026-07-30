@@ -9,6 +9,7 @@ public class HerbItemUI : MonoBehaviour
     [SerializeField] private Image iconImage;
     [SerializeField] private TMP_Text herbNameText;
     [SerializeField] private TMP_Text quantityText;
+    [SerializeField] private TMP_Text priceText;
     [SerializeField] private Button button;
 
     private HerbData herbData;
@@ -30,6 +31,9 @@ public class HerbItemUI : MonoBehaviour
 
         if (quantityText != null)
             quantityText.text = "x" + quantity;
+
+        if (priceText != null)
+            priceText.text = herbData.sellPrice + " xu";
 
         if (button != null)
         {
