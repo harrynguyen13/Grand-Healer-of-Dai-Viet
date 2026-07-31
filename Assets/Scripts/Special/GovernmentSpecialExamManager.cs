@@ -27,6 +27,8 @@ public partial class GovernmentSpecialExamManager : MonoBehaviour
 
     [Header("Cấu hình tương tác")]
     [SerializeField] private Key interactKey = Key.F;
+    [Header("Debug")]
+    [SerializeField] private bool debugTestSpecialQuest;
 
     [Header("Cấu hình đưa NPC về điểm khám")]
     [SerializeField] private float npcReturnSpeed = 2.5f;
@@ -47,7 +49,16 @@ public partial class GovernmentSpecialExamManager : MonoBehaviour
 
         FindPlayer();
         FindSceneReferences();
-        TryUnlockSpecialQuest();
+
+        if (debugTestSpecialQuest)
+        {
+            StartDebugSpecialQuest();
+        }
+        else
+        {
+            TryUnlockSpecialQuest();
+        }
+
         SetupNpcBySpecialQuestState();
     }
 
@@ -215,5 +226,34 @@ public partial class GovernmentSpecialExamManager : MonoBehaviour
         }
 
         isNpcReturningToExamPoint = false;
+    }
+    private void StartDebugSpecialQuest()
+    {
+        if (specialDiseaseCase == null)
+        {
+            Debug.LogWarning(
+                "DEBUG Quan Huyện: Không tìm thấy SpecialDiseaseCase."
+            );
+            return;
+        }
+
+        // Bỏ qua cấp bậc và mở trực tiếp ca bệnh để test.
+        specialDiseaseCase.UnlockQuest();
+
+        if (SpecialQuestMailBridge.Instance == null)
+        {
+            Debug.LogWarning(
+                "DEBUG Quan Huyện: Không tìm thấy SpecialQuestMailBridge để gửi mail."
+            );
+            return;
+        }
+
+        // Xóa cờ đã gửi để mỗi lần chạy test đều nhận được một mail mới.
+        SpecialQuestMailBridge.Instance.ResetQuanHuyenQuestMail();
+        SpecialQuestMailBridge.Instance.SendQuanHuyenQuestMailOnce();
+
+        Debug.Log(
+            "DEBUG Quan Huyện: Đã bỏ qua điều kiện cấp bậc, mở nhiệm vụ và gửi lại mail."
+        );
     }
 }

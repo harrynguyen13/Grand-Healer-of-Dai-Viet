@@ -11,7 +11,8 @@ public partial class GovernmentSpecialExamManager
             return;
         }
 
-        if (PlayerLevelService.GetCurrentStage() < 5)
+        if (!debugTestSpecialQuest &&
+            PlayerLevelService.GetCurrentStage() < 5)
         {
             Debug.Log(
                 "Player chưa đạt Chương 5, Quan Huyện đi lại tự do."

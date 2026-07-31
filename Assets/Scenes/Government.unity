@@ -3585,26 +3585,6 @@ PrefabInstance:
       propertyPath: questUnlocked
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2383077841346885093, guid: f05d34a0815feee428872ca6421089c8, type: 3}
-      propertyPath: hasChosenDiseaseName
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2383077841346885093, guid: f05d34a0815feee428872ca6421089c8, type: 3}
-      propertyPath: 'diseaseNameOptions.Array.data[0]'
-      value: "Th\u1EA5t di\u1EC7t tr\xF9ng \u0111\u1ED9c"
-      objectReference: {fileID: 0}
-    - target: {fileID: 2383077841346885093, guid: f05d34a0815feee428872ca6421089c8, type: 3}
-      propertyPath: 'diseaseNameOptions.Array.data[1]'
-      value: "Ph\u1EBF d\u1ECBch \u0111\u1ED9c nhi\u1EC7t"
-      objectReference: {fileID: 0}
-    - target: {fileID: 2383077841346885093, guid: f05d34a0815feee428872ca6421089c8, type: 3}
-      propertyPath: 'diseaseNameOptions.Array.data[2]'
-      value: "Huy\u1EBFt \u0111\u1ED9c ph\u1EA1m ph\u1EBF"
-      objectReference: {fileID: 0}
-    - target: {fileID: 2383077841346885093, guid: f05d34a0815feee428872ca6421089c8, type: 3}
-      propertyPath: 'diseaseNameOptions.Array.data[3]'
-      value: "\xD4n d\u1ECBch ph\u1EBF suy"
-      objectReference: {fileID: 0}
     - target: {fileID: 7953695598613582794, guid: f05d34a0815feee428872ca6421089c8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -34.86
@@ -4501,6 +4481,7 @@ MonoBehaviour:
   specialDiagnosisUIController: {fileID: 1825429061}
   specialPrescriptionUIController: {fileID: 0}
   interactKey: 20
+  debugTestSpecialQuest: 0
   npcReturnSpeed: 2.5
   npcArriveDistance: 0.05
   lockNpcAtExamPoint: 1

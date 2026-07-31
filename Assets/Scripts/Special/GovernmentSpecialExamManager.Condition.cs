@@ -4,6 +4,10 @@ public partial class GovernmentSpecialExamManager
 {
     private bool CanUnlockSpecialGovernmentQuest()
     {
+        // Chế độ test được phép bỏ qua toàn bộ điều kiện thật.
+        if (debugTestSpecialQuest)
+            return true;
+
         int currentStage = PlayerLevelService.GetCurrentStage();
 
         if (currentStage < 5)
@@ -19,13 +23,17 @@ public partial class GovernmentSpecialExamManager
 
         if (SpecialQuestMailBridge.Instance == null)
         {
-            Debug.LogWarning("Chưa mở nhiệm vụ Quan Huyện: Không tìm thấy SpecialQuestMailBridge.");
+            Debug.LogWarning(
+                "Chưa mở nhiệm vụ Quan Huyện: Không tìm thấy SpecialQuestMailBridge."
+            );
             return false;
         }
 
         if (!SpecialQuestMailBridge.Instance.HasSentMail())
         {
-            Debug.Log("Chưa mở nhiệm vụ Quan Huyện: Thư nhiệm vụ chưa được gửi.");
+            Debug.Log(
+                "Chưa mở nhiệm vụ Quan Huyện: Thư nhiệm vụ chưa được gửi."
+            );
             return false;
         }
 
@@ -37,7 +45,8 @@ public partial class GovernmentSpecialExamManager
         if (specialDiseaseCase == null)
             return;
 
-        if (PlayerLevelService.GetCurrentStage() < 5)
+        if (!debugTestSpecialQuest &&
+            PlayerLevelService.GetCurrentStage() < 5)
         {
             Debug.LogWarning(
                 "Không khám được: Player chưa đạt Chương 5."

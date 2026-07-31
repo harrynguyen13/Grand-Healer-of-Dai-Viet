@@ -210,11 +210,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpecialDiseaseCase
   specialDisease: {fileID: 11400000, guid: d4bfdb4850fe7db40bfbcff066ff7712, type: 2}
-  temporaryDiseaseName: "B\u1EC7nh l\u1EA1 c\u1EE7a Quan Huy\u1EC7n"
+  diseaseNameOptions:
+  - "Th\u1EA5t di\u1EC7t tr\xF9ng \u0111\u1ED9c"
+  - "Ph\u1EBF d\u1ECBch \u0111\u1ED9c nhi\u1EC7t"
+  - "Huy\u1EBFt \u0111\u1ED9c ph\u1EA1m ph\u1EBF"
+  - "\xD4n d\u1ECBch ph\u1EBF suy"
   maxTreatmentAttempts: 3
   questUnlocked: 0
   hasExamined: 0
+  hasChosenDiseaseName: 0
   hasAddedToYThu: 0
-  hasNamedDisease: 0
   isCured: 0
+  isFailed: 0
   treatmentAttemptCount: 0
+  selectedDiseaseName: 
