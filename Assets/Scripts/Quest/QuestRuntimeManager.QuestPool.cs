@@ -72,13 +72,7 @@ public partial class QuestRuntimeManager
 
         if (includeRankQuest)
         {
-            AddQuest(
-                quests,
-                "S1_Rank_100",
-                "Đạt 100 tín nhiệm để lên cấp Lương Y và mở khóa vườn dược liệu",
-                () => reputation,
-                luongYTarget
-            );
+            AddQuest(quests,"S1_Rank_100","Đạt 100 tín nhiệm để lên cấp Lương Y và mở khóa vườn dược liệu",() => reputation,PlayerLevelService.YSinhTarget);
         }
     }
 
@@ -103,7 +97,7 @@ public partial class QuestRuntimeManager
 
         if (includeRankQuest)
         {
-            AddQuest(quests, "S2_Rank_200", "Đạt 200 tín nhiệm để lên cấp Đại Phu", () => reputation, luongYTarget);
+            AddQuest(quests, "S2_Rank_200", "Đạt 200 tín nhiệm để lên cấp Đại Phu", () => reputation, PlayerLevelService.LuongYTarget);
         }
     }
 
@@ -129,7 +123,7 @@ public partial class QuestRuntimeManager
 
         if (includeRankQuest)
         {
-            AddQuest(quests, "S3_Rank_300", "Đạt 300 tín nhiệm để lên cấp Danh Y", () => reputation, daiPhuTarget);
+            AddQuest(quests, "S3_Rank_300", "Đạt 300 tín nhiệm để lên cấp Danh Y", () => reputation, PlayerLevelService.DanhYTarget);
         }
     }
 
@@ -158,7 +152,7 @@ public partial class QuestRuntimeManager
 
         if (includeRankQuest)
         {
-            AddQuest(quests, "S4_Rank_500", "Đạt 500 tín nhiệm để thành Lương Y Đại Việt", () => reputation, danhYTarget);
+            AddQuest(quests, "S4_Rank_500", "Đạt 500 tín nhiệm để thành Lương Y Đại Việt", () => reputation, PlayerLevelService.DanhYTarget);
         }
     }
 
@@ -210,7 +204,7 @@ public partial class QuestRuntimeManager
             quests,
             questId,
             title,
-            () => GetGatheredHerbValueAny(herbTarget.aliases),
+            () => GetGardenHarvestSessionValueAny(herbTarget.aliases),
             target
         );
     }
@@ -285,6 +279,32 @@ public partial class QuestRuntimeManager
                 continue;
 
             int value = GetGatheredHerbValue(herbNames[i]);
+
+            if (value > highestValue)
+                highestValue = value;
+        }
+
+        return highestValue;
+    }
+
+    private int GetGardenHarvestSessionValueAny(params string[] herbNames)
+    {
+        int highestValue = 0;
+
+        if (herbNames == null)
+            return highestValue;
+
+        if (QuestProgressManager.Instance == null)
+            return highestValue;
+
+        for (int i = 0; i < herbNames.Length; i++)
+        {
+            string herbName = herbNames[i];
+
+            if (string.IsNullOrWhiteSpace(herbName))
+                continue;
+
+            int value = QuestProgressManager.Instance.GetGardenHerbHarvestSessionCount(herbName);
 
             if (value > highestValue)
                 highestValue = value;

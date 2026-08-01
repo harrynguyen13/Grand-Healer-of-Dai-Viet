@@ -70,21 +70,12 @@ public class PlayerCurrencyUI : MonoBehaviour
 
     private string GetReputationProgressText(int reputation)
     {
-        int nextTarget = GetNextTargetReputation(reputation);
+        int nextTarget =
+            PlayerLevelService.GetNextTargetReputation(reputation);
 
-        if (nextTarget <= 0)
+        if (reputation >= PlayerLevelService.DanhYTarget)
             return reputation + " / MAX";
 
         return reputation + " / " + nextTarget;
-    }
-
-    private int GetNextTargetReputation(int reputation)
-    {
-        if (reputation < 100) return 100;
-        if (reputation < 200) return 200;
-        if (reputation < 300) return 300;
-        if (reputation < 500) return 500;
-
-        return 0;
     }
 }

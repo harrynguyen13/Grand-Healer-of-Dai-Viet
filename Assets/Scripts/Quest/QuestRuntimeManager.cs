@@ -5,12 +5,6 @@ public partial class QuestRuntimeManager : MonoBehaviour
 {
     public static QuestRuntimeManager Instance { get; private set; }
 
-    [Header("Mốc tín nhiệm theo cấp bậc")]
-    [SerializeField] private int ySinhTarget = 100;
-    [SerializeField] private int luongYTarget = 200;
-    [SerializeField] private int daiPhuTarget = 300;
-    [SerializeField] private int danhYTarget = 500;
-
     [Header("Giữ object này qua scene khác")]
     [SerializeField] private bool dontDestroyOnLoad = true;
 
@@ -93,47 +87,17 @@ public partial class QuestRuntimeManager : MonoBehaviour
 
     public int GetCurrentStage()
     {
-        return GetCurrentStage(GetReputation());
+        return PlayerLevelService.GetCurrentStage();
     }
 
     public int GetCurrentStage(int reputation)
     {
-        if (reputation < ySinhTarget)
-            return 1;
-
-        if (reputation < luongYTarget)
-            return 2;
-
-        if (reputation < daiPhuTarget)
-            return 3;
-
-        if (reputation < danhYTarget)
-            return 4;
-
-        if (!PlayerLevelService.CanBecomeYDaoSuccessor())
-            return 5;
-
-        return 6;
+        return PlayerLevelService.GetStageByReputation(reputation);
     }
 
     public string GetChapterTitle(int stage)
     {
-        if (stage == 1)
-            return "Chương 1 - Y Sinh";
-
-        if (stage == 2)
-            return "Chương 2 - Lương Y";
-
-        if (stage == 3)
-            return "Chương 3 - Đại Phu";
-
-        if (stage == 4)
-            return "Chương 4 - Danh Y";
-
-        if (stage == 5)
-            return "Chương 5 - Phủ Huyện";
-
-        return "Hậu truyện - Truyền Nhân Y Đạo";
+        return PlayerLevelService.GetChapterTitle(stage);
     }
 
     public void ResetQuestRuntimeForNewGame()

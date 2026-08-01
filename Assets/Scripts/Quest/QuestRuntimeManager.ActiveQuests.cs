@@ -161,6 +161,9 @@ public partial class QuestRuntimeManager
 
             if (string.IsNullOrEmpty(questId))
                 continue;
+            
+            if (IsRankQuestId(questId))
+                continue;
 
             QuestDefinition oldQuest = FindQuestById(oldQuestPool, questId);
 

@@ -105,8 +105,11 @@ public static class PlayerLevelService
 
     public static int GetNextTargetReputation()
     {
-        int reputation = GetReputation();
+        return GetNextTargetReputation(GetReputation());
+    }
 
+    public static int GetNextTargetReputation(int reputation)
+    {
         if (reputation < YSinhTarget)
             return YSinhTarget;
 

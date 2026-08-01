@@ -6,10 +6,10 @@ public class PlayerRankUI : MonoBehaviour
     [SerializeField] private TMP_Text rankText;
 
     [Header("Test cấp bậc")]
-    [SerializeField] private bool useTestReputation = true;
+    [SerializeField] private bool useTestReputation = false;
     [SerializeField] private int testReputation = 0;
 
-    private int lastReputation = -1;
+    private int lastStage = -1;
 
     private void Start()
     {
@@ -18,9 +18,9 @@ public class PlayerRankUI : MonoBehaviour
 
     private void Update()
     {
-        int currentReputation = GetCurrentReputation();
+        int currentStage = GetCurrentStage();
 
-        if (currentReputation == lastReputation)
+        if (currentStage == lastStage)
             return;
 
         RefreshRankText();
@@ -31,33 +31,19 @@ public class PlayerRankUI : MonoBehaviour
         if (rankText == null)
             return;
 
-        int reputation = GetCurrentReputation();
+        int stage = GetCurrentStage();
 
-        lastReputation = reputation;
-        rankText.text = GetRankName(reputation);
+        lastStage = stage;
+        rankText.text = PlayerLevelService.GetRankNameByStage(stage);
     }
 
-    private int GetCurrentReputation()
+    private int GetCurrentStage()
     {
         if (useTestReputation)
         {
-            return testReputation;
+            return PlayerLevelService.GetStageByReputation(testReputation);
         }
 
-        if (PlayerEconomy.Instance != null)
-        {
-            return PlayerEconomy.Instance.Reputation;
-        }
-
-        return testReputation;
-    }
-
-    private string GetRankName(int reputation)
-    {
-        if (reputation < 100) return "Y Sinh";
-        if (reputation < 200) return "Lương Y";
-        if (reputation < 300) return "Đại Phu";
-        if (reputation < 500) return "Danh Y";
-        return "Lương Y Đại Việt";
+        return PlayerLevelService.GetCurrentStage();
     }
 }
