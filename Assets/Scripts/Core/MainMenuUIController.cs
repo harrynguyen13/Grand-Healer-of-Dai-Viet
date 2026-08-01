@@ -245,6 +245,7 @@ public class MainMenuUIController : MonoBehaviour
 
         ClearQuestPlayerPrefsSave();
         ClearGardenPlayerPrefsSave();
+        ClearSpecialCasePlayerPrefsSave();
 
         Debug.Log("Đã xóa PlayerPrefs save.");
     }
@@ -365,12 +366,11 @@ public class MainMenuUIController : MonoBehaviour
 
         if (PatientVisitManager.Instance != null)
         {
-            PatientVisitManager.Instance.SendMessage(
-                "ClearAllPatientsForNewGame",
-                SendMessageOptions.DontRequireReceiver
-            );
+            PatientVisitManager.Instance.ClearAllWaitingPatients();
 
-            Debug.Log("Đã gọi reset hàng chờ bệnh nhân nếu PatientVisitManager có hàm ClearAllPatientsForNewGame.");
+            Debug.Log(
+                "Đã reset hàng chờ bệnh nhân và phiên khám dở trong RAM."
+            );
         }
     }
 
@@ -406,5 +406,30 @@ public class MainMenuUIController : MonoBehaviour
     {
         if (messageText != null)
             messageText.text = message;
+    }
+
+    private void ClearSpecialCasePlayerPrefsSave()
+    {
+        PlayerPrefs.DeleteKey("SpecialCase_HasExamined");
+        PlayerPrefs.DeleteKey("SpecialCase_HasChosenDiseaseName");
+        PlayerPrefs.DeleteKey("SpecialCase_HasAddedToYThu");
+        PlayerPrefs.DeleteKey("SpecialCase_TreatmentAttemptCount");
+        PlayerPrefs.DeleteKey("SpecialCase_IsCured");
+        PlayerPrefs.DeleteKey("SpecialCase_IsFailed");
+
+        PlayerPrefs.DeleteKey("SpecialYThu_DiseaseAdded");
+        PlayerPrefs.DeleteKey("SpecialYThu_SelectedDiseaseName");
+        PlayerPrefs.DeleteKey("SpecialYThu_HasCorrectPrescription");
+        PlayerPrefs.DeleteKey("SpecialYThu_CorrectPrescriptionText");
+
+        PlayerPrefs.DeleteKey(
+            "SPECIAL_QUEST_QUAN_HUYEN_START_MAIL_SENT"
+        );
+
+        PlayerPrefs.DeleteKey("OfficialQuestFailed");
+
+        Debug.Log(
+            "Đã xóa trạng thái ca bệnh, Y Thư và mail Quan Huyện."
+        );
     }
 }
