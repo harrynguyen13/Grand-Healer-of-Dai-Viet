@@ -26,8 +26,13 @@ public class AStarGrid2D : MonoBehaviour
 
     public void BuildGrid()
     {
-        gridSizeX = Mathf.CeilToInt((worldMax.x - worldMin.x) / cellSize);
-        gridSizeY = Mathf.CeilToInt((worldMax.y - worldMin.y) / cellSize);
+        gridSizeX = Mathf.CeilToInt(
+            (worldMax.x - worldMin.x) / cellSize
+        );
+
+        gridSizeY = Mathf.CeilToInt(
+            (worldMax.y - worldMin.y) / cellSize
+        );
 
         Grid = new AStarNode[gridSizeX, gridSizeY];
 
@@ -46,17 +51,32 @@ public class AStarGrid2D : MonoBehaviour
                     obstacleLayer
                 ) != null;
 
-                Grid[x, y] = new AStarNode(!blocked, worldPoint, x, y);
+                Grid[x, y] = new AStarNode(
+                    !blocked,
+                    worldPoint,
+                    x,
+                    y
+                );
             }
         }
 
-        Debug.Log("A* Grid đã tạo: " + gridSizeX + " x " + gridSizeY);
+        Debug.Log(
+            $"A* Grid đã tạo: {gridSizeX} x {gridSizeY}"
+        );
     }
 
     public AStarNode NodeFromWorldPoint(Vector2 worldPosition)
     {
-        int x = Mathf.FloorToInt((worldPosition.x - worldMin.x) / cellSize);
-        int y = Mathf.FloorToInt((worldPosition.y - worldMin.y) / cellSize);
+        if (Grid == null)
+            return null;
+
+        int x = Mathf.FloorToInt(
+            (worldPosition.x - worldMin.x) / cellSize
+        );
+
+        int y = Mathf.FloorToInt(
+            (worldPosition.y - worldMin.y) / cellSize
+        );
 
         x = Mathf.Clamp(x, 0, gridSizeX - 1);
         y = Mathf.Clamp(y, 0, gridSizeY - 1);
@@ -64,7 +84,10 @@ public class AStarGrid2D : MonoBehaviour
         return Grid[x, y];
     }
 
-    public AStarNode GetNearestWalkableNode(Vector2 worldPosition, int searchRadius = 10)
+    public AStarNode GetNearestWalkableNode(
+        Vector2 worldPosition,
+        int searchRadius = 10
+    )
     {
         AStarNode centerNode = NodeFromWorldPoint(worldPosition);
 
@@ -86,10 +109,7 @@ public class AStarGrid2D : MonoBehaviour
                     int checkX = centerNode.gridX + x;
                     int checkY = centerNode.gridY + y;
 
-                    if (checkX < 0 || checkX >= gridSizeX)
-                        continue;
-
-                    if (checkY < 0 || checkY >= gridSizeY)
+                    if (!IsInsideGrid(checkX, checkY))
                         continue;
 
                     AStarNode node = Grid[checkX, checkY];
@@ -97,7 +117,8 @@ public class AStarGrid2D : MonoBehaviour
                     if (!node.walkable)
                         continue;
 
-                    int distance = Mathf.Abs(x) + Mathf.Abs(y);
+                    int distance =
+                        Mathf.Abs(x) + Mathf.Abs(y);
 
                     if (distance < nearestDistance)
                     {
@@ -116,25 +137,118 @@ public class AStarGrid2D : MonoBehaviour
 
     public List<AStarNode> GetNeighbours(AStarNode node)
     {
-        List<AStarNode> neighbours = new List<AStarNode>();
+        List<AStarNode> neighbours =
+            new List<AStarNode>(8);
 
-        AddNeighbour(neighbours, node.gridX + 1, node.gridY);
-        AddNeighbour(neighbours, node.gridX - 1, node.gridY);
-        AddNeighbour(neighbours, node.gridX, node.gridY + 1);
-        AddNeighbour(neighbours, node.gridX, node.gridY - 1);
+        int x = node.gridX;
+        int y = node.gridY;
+
+        // 4 hướng ngang và dọc
+        AddNeighbour(neighbours, x + 1, y);
+        AddNeighbour(neighbours, x - 1, y);
+        AddNeighbour(neighbours, x, y + 1);
+        AddNeighbour(neighbours, x, y - 1);
+
+        // 4 hướng chéo
+        AddDiagonalNeighbour(
+            neighbours,
+            x,
+            y,
+            1,
+            1
+        );
+
+        AddDiagonalNeighbour(
+            neighbours,
+            x,
+            y,
+            -1,
+            1
+        );
+
+        AddDiagonalNeighbour(
+            neighbours,
+            x,
+            y,
+            1,
+            -1
+        );
+
+        AddDiagonalNeighbour(
+            neighbours,
+            x,
+            y,
+            -1,
+            -1
+        );
 
         return neighbours;
     }
 
-    private void AddNeighbour(List<AStarNode> neighbours, int x, int y)
+    private void AddNeighbour(
+        List<AStarNode> neighbours,
+        int x,
+        int y
+    )
     {
-        if (x < 0 || x >= gridSizeX)
-            return;
-
-        if (y < 0 || y >= gridSizeY)
+        if (!IsInsideGrid(x, y))
             return;
 
         neighbours.Add(Grid[x, y]);
+    }
+
+    private void AddDiagonalNeighbour(
+        List<AStarNode> neighbours,
+        int currentX,
+        int currentY,
+        int offsetX,
+        int offsetY
+    )
+    {
+        int diagonalX = currentX + offsetX;
+        int diagonalY = currentY + offsetY;
+
+        if (!IsInsideGrid(diagonalX, diagonalY))
+            return;
+
+        int horizontalX = currentX + offsetX;
+        int horizontalY = currentY;
+
+        int verticalX = currentX;
+        int verticalY = currentY + offsetY;
+
+        if (!IsInsideGrid(horizontalX, horizontalY))
+            return;
+
+        if (!IsInsideGrid(verticalX, verticalY))
+            return;
+
+        AStarNode horizontalNode =
+            Grid[horizontalX, horizontalY];
+
+        AStarNode verticalNode =
+            Grid[verticalX, verticalY];
+
+        AStarNode diagonalNode =
+            Grid[diagonalX, diagonalY];
+
+        // Không cho đi chéo xuyên qua góc tường.
+        // Muốn đi chéo thì cả hai ô cạnh bên đều phải đi được.
+        if (!horizontalNode.walkable)
+            return;
+
+        if (!verticalNode.walkable)
+            return;
+
+        neighbours.Add(diagonalNode);
+    }
+
+    private bool IsInsideGrid(int x, int y)
+    {
+        return x >= 0 &&
+               x < gridSizeX &&
+               y >= 0 &&
+               y < gridSizeY;
     }
 
     public void ResetPathData()
@@ -153,9 +267,13 @@ public class AStarGrid2D : MonoBehaviour
         }
     }
 
-    public void BlockArea(Vector2 worldPosition, int radius)
+    public void BlockArea(
+        Vector2 worldPosition,
+        int radius
+    )
     {
-        AStarNode centerNode = NodeFromWorldPoint(worldPosition);
+        AStarNode centerNode =
+            NodeFromWorldPoint(worldPosition);
 
         if (centerNode == null)
             return;
@@ -167,10 +285,7 @@ public class AStarGrid2D : MonoBehaviour
                 int checkX = centerNode.gridX + x;
                 int checkY = centerNode.gridY + y;
 
-                if (checkX < 0 || checkX >= gridSizeX)
-                    continue;
-
-                if (checkY < 0 || checkY >= gridSizeY)
+                if (!IsInsideGrid(checkX, checkY))
                     continue;
 
                 Grid[checkX, checkY].walkable = false;
@@ -178,9 +293,14 @@ public class AStarGrid2D : MonoBehaviour
         }
     }
 
-    public void SetWalkableAroundWorldPoint(Vector2 worldPosition, bool walkable, int radius)
+    public void SetWalkableAroundWorldPoint(
+        Vector2 worldPosition,
+        bool walkable,
+        int radius
+    )
     {
-        AStarNode centerNode = NodeFromWorldPoint(worldPosition);
+        AStarNode centerNode =
+            NodeFromWorldPoint(worldPosition);
 
         if (centerNode == null)
             return;
@@ -192,10 +312,7 @@ public class AStarGrid2D : MonoBehaviour
                 int checkX = centerNode.gridX + x;
                 int checkY = centerNode.gridY + y;
 
-                if (checkX < 0 || checkX >= gridSizeX)
-                    continue;
-
-                if (checkY < 0 || checkY >= gridSizeY)
+                if (!IsInsideGrid(checkX, checkY))
                     continue;
 
                 Grid[checkX, checkY].walkable = walkable;
@@ -207,8 +324,11 @@ public class AStarGrid2D : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
 
-        Vector2 center = (worldMin + worldMax) * 0.5f;
-        Vector2 size = worldMax - worldMin;
+        Vector2 center =
+            (worldMin + worldMax) * 0.5f;
+
+        Vector2 size =
+            worldMax - worldMin;
 
         Gizmos.DrawWireCube(center, size);
     }

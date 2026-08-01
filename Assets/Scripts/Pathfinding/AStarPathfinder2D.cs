@@ -117,11 +117,29 @@ public class AStarPathfinder2D : MonoBehaviour
         return path;
     }
 
-    private int GetDistance(AStarNode nodeA, AStarNode nodeB)
+    private int GetDistance(
+        AStarNode nodeA,
+        AStarNode nodeB
+    )
     {
-        int distanceX = Mathf.Abs(nodeA.gridX - nodeB.gridX);
-        int distanceY = Mathf.Abs(nodeA.gridY - nodeB.gridY);
+        int distanceX = Mathf.Abs(
+            nodeA.gridX - nodeB.gridX
+        );
 
-        return distanceX + distanceY;
+        int distanceY = Mathf.Abs(
+            nodeA.gridY - nodeB.gridY
+        );
+
+        const int straightCost = 10;
+        const int diagonalCost = 14;
+
+        int diagonalSteps =
+            Mathf.Min(distanceX, distanceY);
+
+        int straightSteps =
+            Mathf.Abs(distanceX - distanceY);
+
+        return diagonalSteps * diagonalCost +
+            straightSteps * straightCost;
     }
 }
