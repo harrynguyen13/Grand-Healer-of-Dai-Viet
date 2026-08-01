@@ -123,7 +123,7 @@ public partial class QuestRuntimeManager
 
         if (includeRankQuest)
         {
-            AddQuest(quests, "S3_Rank_300", "Đạt 300 tín nhiệm để lên cấp Danh Y", () => reputation, PlayerLevelService.DanhYTarget);
+            AddQuest(quests, "S3_Rank_300", "Đạt 300 tín nhiệm để lên cấp Danh Y", () => reputation, PlayerLevelService.DaiPhuTarget);
         }
     }
 
@@ -185,28 +185,13 @@ public partial class QuestRuntimeManager
         AddQuest(quests, "E_Buy_30", "Mua thêm 30 dược liệu từ thương nhân", GetBoughtTotalValue, 30);
     }
 
-    private void AddRandomGardenHerbHarvestQuest(
-        List<QuestDefinition> quests,
-        string questId,
-        int target
-    )
+    private void AddRandomGardenHerbHarvestQuest(List<QuestDefinition> quests,string questId,int target)
     {
         GardenHerbQuestTarget herbTarget = GetSavedGardenHerbQuestTarget(questId);
 
-        string title =
-            "Thu hoạch "
-            + target
-            + " lần vị "
-            + herbTarget.displayName
-            + " trong vườn";
+        string title ="Thu hoạch "+ target+ " lần vị " + herbTarget.displayName + " trong vườn";
 
-        AddQuest(
-            quests,
-            questId,
-            title,
-            () => GetGardenHarvestSessionValueAny(herbTarget.aliases),
-            target
-        );
+        AddQuest(quests,questId,title,() => GetGardenHarvestSessionValueAny(herbTarget.aliases),target);
     }
 
     private GardenHerbQuestTarget GetSavedGardenHerbQuestTarget(string questId)
