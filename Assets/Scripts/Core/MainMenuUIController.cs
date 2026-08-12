@@ -242,6 +242,7 @@ public class MainMenuUIController : MonoBehaviour
         PlayerPrefs.DeleteKey(PlayerZKey);
         PlayerPrefs.DeleteKey(HasSeenIntroKey);
         PlayerPrefs.SetInt(LoadFromSaveKey, 0);
+        FirstTimeTutorialManager.ResetTutorialForNewGame();
 
         ClearQuestPlayerPrefsSave();
         ClearGardenPlayerPrefsSave();

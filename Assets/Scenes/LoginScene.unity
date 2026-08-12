@@ -737,10 +737,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52910670f59edf64c8835a227f2743ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QuestRuntimeManager
-  ySinhTarget: 100
-  luongYTarget: 200
-  daiPhuTarget: 300
-  danhYTarget: 500
   dontDestroyOnLoad: 1
 --- !u!114 &541801308
 MonoBehaviour:
@@ -1836,7 +1832,7 @@ MonoBehaviour:
     musicClip: {fileID: 8300000, guid: 0b9dc16753b343846ae14e042e2c309d, type: 3}
   - sceneName: Government
     musicClip: {fileID: 8300000, guid: 0b9dc16753b343846ae14e042e2c309d, type: 3}
-  musicVolume: 0.4
+  musicVolume: 0.2
   fadeDuration: 1
 --- !u!4 &1924762661
 Transform:

@@ -158,9 +158,9 @@ public partial class QuestRuntimeManager
 
     private void AddStage5Quests(List<QuestDefinition> quests)
     {
-        AddQuest(quests, "S5_Official", "Đến khám bệnh cho quan huyện", () => IsOfficialQuestCompleted() ? 1 : 0, 1);
+        AddQuest(quests, "S5_Official", "Nhiệm vụ đặc biệt: Chữa khỏi bệnh cho quan huyện", () => IsOfficialQuestCompleted() ? 1 : 0, 1);
 
-        AddQuest(quests, "S5_ThatDiet", "Chữa khỏi bệnh cho quan huyện", () => GetDiseaseCuredValue("ThatDietTrungDocDich"), 1);
+        // AddQuest(quests, "S5_ThatDiet", "Chữa khỏi bệnh cho quan huyện", () => GetDiseaseCuredValue("ThatDietTrungDocDich"), 1);
 
         AddQuest(quests, "S5_Gather_40", "Thu hoạch 40 dược liệu để dự trữ kho thuốc", GetGatheredTotalValue, 40);
         AddQuest(quests, "S5_Gather_50", "Thu hoạch 50 dược liệu trong vườn dược", GetGatheredTotalValue, 50);

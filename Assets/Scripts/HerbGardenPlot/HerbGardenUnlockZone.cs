@@ -24,6 +24,15 @@ public class HerbGardenUnlockZone : MonoBehaviour
 
     private int lastPlayerUnlockLevel = -999;
 
+    public bool IsUnlocked
+    {
+        get
+        {
+            return PlayerLevelService.GetCurrentUnlockLevel()
+                >= requiredStage;
+        }
+    }
+
     private void Awake()
     {
         if (autoFindPlotsInChildren)
@@ -67,11 +76,9 @@ public class HerbGardenUnlockZone : MonoBehaviour
 
         bool isUnlocked = currentUnlockLevel >= requiredStage;
 
-        // Tất cả khu chưa mở đều phủ xám.
+
         bool shouldShowLockedVisual = !isUnlocked;
 
-        // Nhưng chỉ khu kế tiếp mới hiện chữ.
-        // Ví dụ cấp 1 chỉ hiện chữ ở khu cần cấp 2.
         bool shouldShowUnlockText = !isUnlocked && requiredStage == currentUnlockLevel + 1;
 
         ApplyPlotsUnlockState(isUnlocked);

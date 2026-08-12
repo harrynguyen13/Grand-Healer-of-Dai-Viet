@@ -153,29 +153,35 @@ public partial class QuestRuntimeManager
 
     private void RewardCompletedOldStageQuests(int oldStage, int currentReputation)
     {
-        List<QuestDefinition> oldQuestPool = BuildQuestPool(oldStage, currentReputation);
+        List<QuestDefinition> oldQuestPool =
+            BuildQuestPool(oldStage, currentReputation);
 
         for (int i = 0; i < ActiveQuestCount; i++)
         {
-            string questId = PlayerPrefs.GetString(GetActiveQuestSlotKey(i), "");
+            string questId =
+                PlayerPrefs.GetString(
+                    GetActiveQuestSlotKey(i),"");
 
             if (string.IsNullOrEmpty(questId))
                 continue;
-            
-            if (IsRankQuestId(questId))
-                continue;
 
-            QuestDefinition oldQuest = FindQuestById(oldQuestPool, questId);
+            QuestDefinition oldQuest =
+                FindQuestById(oldQuestPool,questId);
 
             if (oldQuest == null)
                 continue;
 
-            ApplySavedQuestStartValue(i, oldQuest);
+            ApplySavedQuestStartValue(i,oldQuest);
 
             if (!oldQuest.IsCompleted)
                 continue;
 
-            GiveQuestReward(oldQuest, oldStage);
+            if (IsRankQuestId(questId))
+            {
+                MarkCompletedOnceQuest(questId);
+                continue;
+            }
+            GiveQuestReward(oldQuest,oldStage);
         }
     }
 
@@ -251,11 +257,6 @@ public partial class QuestRuntimeManager
         if (quest.Id == "S5_Official")
         {
             return IsOfficialQuestCompleted();
-        }
-
-        if (quest.Id == "S5_ThatDiet")
-        {
-            return quest.RawCurrent >= quest.Target;
         }
 
         return false;
@@ -389,5 +390,25 @@ public partial class QuestRuntimeManager
     private string GetCompletedOnceQuestKey(string questId)
     {
         return CompletedOnceQuestKeyPrefix + questId;
+    }
+
+    public bool IsQuestActive(string questId)
+    {
+        if (string.IsNullOrEmpty(questId))
+            return false;
+
+        for (int i = 0; i < ActiveQuestCount; i++)
+        {
+            string activeQuestId =
+                PlayerPrefs.GetString(
+                    GetActiveQuestSlotKey(i),
+                    ""
+                );
+
+            if (activeQuestId == questId)
+                return true;
+        }
+
+        return false;
     }
 }
